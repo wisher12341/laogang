@@ -1,0 +1,31 @@
+.container{
+    width: 100%!important;
+    height: 100%;
+}
+.label{
+    color: whitesmoke;
+    background-color: #1cc09f;
+    font-size: small;
+}
+#map{
+    width: 99%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    position: absolute;
+}
+#visualTitle{
+    color: white;
+    font-weight: bolder;
+    font-size: 36px;
+}
+.word{
+    color: white;
+    font-weight: bolder;
+    font-size: 24px;
+}
+.num{
+    font-size: 24px;
+    font-weight: bolder;
+    color: red;
+}
