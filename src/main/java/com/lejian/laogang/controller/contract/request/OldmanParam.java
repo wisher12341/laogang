@@ -100,7 +100,7 @@ public class OldmanParam {
             }
         }
 
-        if (this.isZd){
+        if (this.isZd!=null && this.isZd){
             jpaSpecBo.getEqualMap().put("isZd","1");
         }
         return jpaSpecBo;

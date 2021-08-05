@@ -32,17 +32,39 @@ function init3() {
             "age": "60-"
         }, {
             "age": "80-"
-        },{}]),
+        },{"isZd":true}]),
         contentType: "application/json;charset=UTF-8",
         success: function (result) {
             var map = result.map;
             $("#sum").html(map["1"]);
             $("#sixSum").html(map["2"]);
-            createHeightAndWidthFromSourceDoc("b", "oldmanSum", 0.45, 0.6);
-            gauge1("老年人占比",100*map["2"]/map["1"], "oldmanSum", null, null);
-            $("#eightSumSum").html(map["3"]);
+            createHeightAndWidthFromSourceDoc("b", "oldmanSum", 0.9, 0.5);
+            gauge1("老年人占比",100*map["2"]/100000, "oldmanSum", null, null);
+            $("#eightSum").html(map["3"]);
+            createHeightAndWidthFromSourceDoc("b", "zdOldman", 0.9, 0.5);
+            gauge1("重点老人占比",100*map["4"]/map["1"], "zdOldman", null, null);
         }
     });
+
+
+    $.ajax({
+        url: "/oldman/getGroupCount",
+        type: 'post',
+        dataType: 'json',
+        data: JSON.stringify({
+            "fieldNameList": ["area_village"]
+        }),
+        contentType: "application/json;charset=UTF-8",
+        success: function (result) {
+            var map = result.map;
+            for (var key in map) {
+                createHeightAndWidthFromSourceDoc("c", "areaVillage3",1.5, 0.9);
+                bar3(null, map[key], "areaVillage3", null, null)
+            }
+        }
+    });
+
+
 }
 
 
