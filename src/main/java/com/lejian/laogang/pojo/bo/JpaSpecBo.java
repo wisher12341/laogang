@@ -1,8 +1,11 @@
 package com.lejian.laogang.pojo.bo;
 
+import com.lejian.laogang.util.StringUtils;
 import lombok.Getter;
+import org.apache.commons.collections4.MapUtils;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -45,5 +48,27 @@ public class JpaSpecBo {
      * and ( or or or )
      */
     Map<String,Object> orNotEquipMap = new HashMap<>();
+
+
+    public String getSql() {
+        return getSql("");
+    }
+
+    public String getSql(String prex) {
+        StringBuilder whereCase = new StringBuilder();
+        if (MapUtils.isNotEmpty(equalMap)) {
+            Iterator iterator = equalMap.keySet().iterator();
+            String key = (String) iterator.next();
+            String convertKey =  StringUtils.camelToUnderline(key);
+            whereCase.append(prex+convertKey).append("='").append(equalMap.get(key)).append("'");
+            while (iterator.hasNext()) {
+                whereCase.append(" and ");
+                key = (String) iterator.next();
+                convertKey = StringUtils.camelToUnderline(key);
+                whereCase.append(prex+convertKey).append("='").append(equalMap.get(key)).append("'");
+            }
+        }
+        return whereCase.toString();
+    }
 
 }

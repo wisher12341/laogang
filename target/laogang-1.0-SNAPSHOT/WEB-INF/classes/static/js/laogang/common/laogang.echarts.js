@@ -79,6 +79,176 @@ function pie1(title, data, target, callback, customLegend) {
 }
 
 /**
+ * 饼图
+ * @param title
+ * @param data
+ * @param obj
+ * @param callback
+ * @param lengend
+ */
+function pie2(title, data, target, callback, customLegend) {
+    var obj = document.getElementById(target);
+    var legend_data = [];
+    var series_data = [];
+    var i = 0;
+    for (var key in data) {
+        legend_data[i] = key;
+        series_data[i] = {name: key, value: data[key]};
+        i++;
+    }
+    var pie = echarts.init(obj, 'dark');
+    var legend;
+    if (customLegend === null) {
+        legend = {
+            top: '5%',
+            left: 'center'
+        }
+    } else {
+        legend = customLegend;
+        legend.data = legend_data;
+    }
+    var option = {
+                tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+        },
+        series: [
+            {
+                name: '访问来源',
+                type: 'pie',
+                radius: '50%',
+                data: series_data,
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+    if (callback !== null) {
+        pie.off('click');
+        pie.on('click', function (params) {
+            var name = params.name;
+            callback(title, name);
+
+        });
+    }
+
+    pie.setOption(option, true);
+}
+
+/**
+ * 嵌套饼图
+ * @param title
+ * @param data
+ * @param obj
+ * @param callback
+ * @param lengend
+ */
+function pie3(title, data, target, callback, legendData) {
+    var obj = document.getElementById(target);
+    var pie = echarts.init(obj, 'dark');
+    var option = {
+        title : {
+            text:title
+        },
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            data:legendData
+        },
+        series:[
+            {
+                name:'',
+                type:'pie',
+                selectedMode: 'single',
+                radius: [0, '30%'],
+
+                label: {
+                    normal: {
+                        formatter: '{d}%',
+                        position: 'inner',
+                        fontSize : 20,
+                        textStyle: {
+                            color: '#fff',
+                            fontSize:'20'
+                        }
+
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data:data[0]
+            },
+            {
+                name:'',
+                type:'pie',
+                radius: ['40%', '55%'],
+                label: {
+                    normal: {
+                        fontSize : 20,
+                        formatter: '{d}%',
+                        backgroundColor: '#eee',
+                        borderColor: '#aaa',
+                        borderWidth: 1,
+                        borderRadius: 4,
+                        rich: {
+                            a: {
+                                color: '#999',
+                                lineHeight: 22,
+                                align: 'center'
+                            },
+                            hr: {
+                                borderColor: '#aaa',
+                                width: '100%',
+                                borderWidth: 0.5,
+                                height: 0
+                            },
+                            b: {
+                                fontSize: 20,
+                                lineHeight: 33
+                            },
+                            per: {
+                                color: '#eee',
+                                backgroundColor: '#334455',
+                                padding: [2, 4],
+                                borderRadius: 2
+                            }
+                        },
+                        textStyle: {
+                            color: '#fff',
+                            fontSize:'20'
+                        }
+                    }
+                },
+                data:data[1]
+            }
+        ]
+    };
+    console.info(JSON.stringify(option));
+    if (callback !== null) {
+        pie.off('click');
+        pie.on('click', function (params) {
+            var name = params.name;
+            callback(title, name);
+
+        });
+    }
+
+    pie.setOption(option, true);
+}
+
+/**
  * 仪表盘
  * @param title
  * @param data

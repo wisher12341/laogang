@@ -1,11 +1,12 @@
 package com.lejian.laogang.service;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.lejian.laogang.controller.contract.request.OldmanParam;
 import com.lejian.laogang.controller.contract.request.PageParam;
 import com.lejian.laogang.enums.BusinessEnum;
+import com.lejian.laogang.enums.OldmanAttrEnum;
 import com.lejian.laogang.enums.label.LabelEnum;
+import com.lejian.laogang.pojo.bo.JpaSpecBo;
 import com.lejian.laogang.pojo.bo.LocationBo;
 import com.lejian.laogang.pojo.bo.OldmanBo;
 import com.lejian.laogang.pojo.vo.LocationVo;
@@ -13,7 +14,6 @@ import com.lejian.laogang.pojo.vo.OldmanVo;
 import com.lejian.laogang.repository.LocationRepository;
 import com.lejian.laogang.repository.OldmanAttrRepository;
 import com.lejian.laogang.repository.OldmanRepository;
-import com.lejian.laogang.repository.WhereBo;
 import com.lejian.laogang.repository.entity.OldmanEntity;
 import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,14 +35,16 @@ public class OldmanService {
 
 
     public Map<String, Object> getGroupCount(List<String> fieldNameList, List<String> labelIdList) {
-        WhereBo whereBo = LabelEnum.generateWhere(labelIdList);
+        JpaSpecBo jpaSpecBo = LabelEnum.generateJpaSpecBo(labelIdList);
         Map<String, Object> map = Maps.newHashMap();
         fieldNameList.forEach(fieldName -> {
             Map<String, Long> result;
             if (OldmanEntity.haveField(fieldName)) {
-                result = oldmanRepository.getGroupCount(fieldName, whereBo);
+                result = oldmanRepository.getGroupCount(fieldName, jpaSpecBo);
             } else {
-                result = oldmanAttrRepository.getGroupCount(fieldName, whereBo);
+                Map<String,String> attrWhere = OldmanAttrEnum.generateAttrWhere(fieldName);
+                jpaSpecBo.getEqualMap().putAll(attrWhere);
+                result = oldmanAttrRepository.getGroupCount("value", jpaSpecBo);
             }
             Map<String, Long> voResult = Maps.newHashMap();
             result.forEach((k, v) -> {
@@ -80,7 +82,7 @@ public class OldmanService {
     }
 
     public List<LocationVo> getAllLocation(OldmanParam oldmanParam) {
-        Map<String,Long> locationMap= oldmanRepository.getGroupCount("location_id",oldmanParam.getWhereBo());
+        Map<String,Long> locationMap= oldmanRepository.getGroupCount("location_id",oldmanParam.convert());
         List<LocationBo> locationBoList = locationRepository.getByPkIds(locationMap.keySet().stream().map(Integer::valueOf).collect(Collectors.toList()));
         return locationBoList.stream().map(item->item.convertVo(locationMap)).collect(Collectors.toList());
     }
@@ -91,5 +93,14 @@ public class OldmanService {
             map.put(i+"",oldmanRepository.countWithSpec(request.get(i-1).convert()));
         }
         return map;
+    }
+
+    public Map<String, Object> getZdFinish(String group, OldmanParam oldmanParam) {
+        Map<String, Long> zdTotal = oldmanRepository.getGroupCount(group, oldmanParam.convert());
+        Map<String, Long> zdFinish = oldmanRepository.getZdFinishGroupCount(group,oldmanParam.convert());
+
+        Map<String,Object> result = Maps.newHashMap();
+        zdTotal.forEach((k,v)-> result.put(k,Double.valueOf(zdFinish.get(k))/Double.valueOf(v)));
+        return result;
     }
 }

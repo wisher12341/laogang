@@ -34,7 +34,6 @@ function initMap() {
                 {lng: "121.843581", lat: "31.0468", count: "10"},
                 {lng: "121.847318", lat: "31.045253", count: "10"}
                 ];
-            console.info(JSON.stringify(points));
             heatmapOverlay = new BMapLib.HeatmapOverlay({"radius":20,"visible":true});
             map.addOverlay(heatmapOverlay);
             heatmapOverlay.setDataSet({data:points,max:20});

@@ -2,12 +2,8 @@ package com.lejian.laogang.enums.label;
 
 
 import com.google.common.collect.Maps;
-import com.lejian.laogang.enums.BusinessEnum;
-import com.lejian.laogang.enums.OldmanEnum;
+import com.lejian.laogang.pojo.bo.JpaSpecBo;
 import com.lejian.laogang.pojo.bo.LabelBo;
-import com.lejian.laogang.repository.WhereBo;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.assertj.core.util.Lists;
@@ -62,10 +58,10 @@ public interface LabelEnum {
      * @param labelIdList
      * @return
      */
-    static WhereBo generateWhere(List<String> labelIdList) {
-        WhereBo whereBo = new WhereBo();
+    static JpaSpecBo generateJpaSpecBo(List<String> labelIdList) {
+        JpaSpecBo jpaSpecBo = new JpaSpecBo();
         if (CollectionUtils.isEmpty(labelIdList)){
-            return whereBo;
+            return jpaSpecBo;
         }
         Map<String,String> map = Maps.newHashMap();
         labelIdList.forEach(id->{
@@ -78,14 +74,14 @@ public interface LabelEnum {
         });
         for (CustomLabel customLabel : CustomLabel.values()){
             if (map.containsKey(String.valueOf(customLabel.getId()))){
-                customLabel.setWhereCase(whereBo);
+                customLabel.setWhereCase(jpaSpecBo);
             }
         }
         for (EnumLabel enumLabel : EnumLabel.values()){
             if (map.containsKey(String.valueOf(enumLabel.getId()))){
-                whereBo.getEqualMap().put(enumLabel.name().toLowerCase(),map.get(String.valueOf(enumLabel.getId())));
+                jpaSpecBo.getEqualMap().put(enumLabel.name().toLowerCase(),map.get(String.valueOf(enumLabel.getId())));
             }
         }
-        return whereBo;
+        return jpaSpecBo;
     }
 }

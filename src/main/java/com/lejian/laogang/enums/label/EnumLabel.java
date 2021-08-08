@@ -15,8 +15,13 @@ import java.util.stream.Collectors;
 public enum EnumLabel implements LabelEnum {
 
 
-    MALE(2, 1, 999, OldmanEnum.Male.values()),
-    FAMILY_TYPE(3, 3, 999, OldmanEnum.FamilyType.values());
+    /**
+     * 命名跟数据库字段一致
+     */
+    MALE(4, 1, 999, OldmanEnum.Male.values()),
+    FAMILY_TYPE(5, 3, 999, OldmanEnum.FamilyType.values()),
+    IS_ZD(6, 1, 999, OldmanEnum.IS_ZD.values())
+    ;
 
     private Integer id;
     private Integer parent;

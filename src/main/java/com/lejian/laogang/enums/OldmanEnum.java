@@ -54,4 +54,16 @@ public interface OldmanEnum extends BusinessEnum{
         private String desc;
     }
 
+    /**
+     * 重点老人 枚举名 同数据库字段一致
+     */
+    @Getter
+    @AllArgsConstructor
+    enum IS_ZD implements OldmanEnum{
+        ZD(1,"重点老人"),
+        ;
+        private Integer value;
+        private String desc;
+    }
+
 }

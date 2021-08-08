@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.lejian.laogang.pojo.bo.BaseBo;
+import com.lejian.laogang.pojo.bo.JpaSpecBo;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -225,12 +226,12 @@ public abstract class AbstractRepository<Bo extends BaseBo,Entity> {
         }
     }
 
-    public Map<String,Long> getGroupCount(String field, WhereBo where) {
+    public Map<String,Long> getGroupCount(String field, JpaSpecBo jpaSpecBo) {
         try {
             String table = getTableName();
             Map<String,Long> map= Maps.newHashMap();
-            StringBuilder whereCase=new StringBuilder("where status=0 ");
-            String whereSql = where.getSql();
+            StringBuilder whereCase=new StringBuilder("where 1=1 ");
+            String whereSql = jpaSpecBo.getSql();
             if(StringUtils.isNotEmpty(whereSql)){
                 whereCase.append("and ").append(whereSql);
             }

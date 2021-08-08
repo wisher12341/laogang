@@ -1,16 +1,13 @@
 package com.lejian.laogang.controller.contract.request;
 
-import com.google.common.collect.Maps;
 import com.lejian.laogang.enums.BusinessEnum;
 import com.lejian.laogang.enums.OldmanEnum;
 import com.lejian.laogang.pojo.bo.JpaSpecBo;
-import com.lejian.laogang.repository.WhereBo;
 import lombok.Data;
 import org.apache.commons.lang.StringUtils;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Map;
 
 @Data
 public class OldmanParam {
@@ -40,11 +37,6 @@ public class OldmanParam {
 
 
 
-    public WhereBo getWhereBo(){
-        WhereBo whereBo = new WhereBo();
-        whereBo.getEqualMap().put("status","0");
-        return whereBo;
-    }
 
     public JpaSpecBo convert() {
         JpaSpecBo jpaSpecBo = new JpaSpecBo();

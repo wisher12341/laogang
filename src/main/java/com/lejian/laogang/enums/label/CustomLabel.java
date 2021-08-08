@@ -1,8 +1,8 @@
 package com.lejian.laogang.enums.label;
 
 
+import com.lejian.laogang.pojo.bo.JpaSpecBo;
 import com.lejian.laogang.pojo.bo.LabelBo;
-import com.lejian.laogang.repository.WhereBo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.assertj.core.util.Lists;
@@ -17,21 +17,21 @@ import java.util.List;
 public enum CustomLabel implements LabelEnum {
     AGE_60_69(1, 1, 1, "60_69") {
         @Override
-        public String setWhereCase(WhereBo whereBo) {
+        public String setWhereCase(JpaSpecBo jpaSpecBo) {
 
             return "";
         }
     },
-    AGE_70_79(1, 1, 1, "70_79") {
+    AGE_70_79(2, 1, 1, "70_79") {
         @Override
-        public String setWhereCase(WhereBo whereBo) {
+        public String setWhereCase(JpaSpecBo jpaSpecBo) {
 
             return "";
         }
     },
-    AGE_80_89(1, 1, 1, "80_89") {
+    AGE_80_89(3, 1, 1, "80_89") {
         @Override
-        public String setWhereCase(WhereBo whereBo) {
+        public String setWhereCase(JpaSpecBo jpaSpecBo) {
 
             return "";
         }
@@ -43,7 +43,7 @@ public enum CustomLabel implements LabelEnum {
     private Integer sort;
     private String desc;
 
-    public abstract String setWhereCase(WhereBo whereBo);
+    public abstract String setWhereCase(JpaSpecBo jpaSpecBo);
 
 
     @Override

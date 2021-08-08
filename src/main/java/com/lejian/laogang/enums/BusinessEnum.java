@@ -60,7 +60,14 @@ public interface BusinessEnum {
                 return find(value,OldmanEnum.Male.class);
             case "huji":
                 return find(value,OldmanEnum.Huji.class);
-
+            case "FamilyType":
+                return find(value,OldmanAttrEnum.FamilyType.class);
+            case "Health":
+                return find(value,OldmanAttrEnum.Health.class);
+            case "Economic":
+                return find(value,OldmanAttrEnum.Economic.class);
+            case "ServiceStatus":
+                return find(value,OldmanAttrEnum.ServiceStatus.class);
         }
         return null;
     }

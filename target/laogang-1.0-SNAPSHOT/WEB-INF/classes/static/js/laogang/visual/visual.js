@@ -1,10 +1,74 @@
 var map;
-
+var totalOldmanCount;
 $(document).ready(function () {
     init1();
     init2();
     init3();
+    init4();
+    initFinish();
 });
+
+function initFinish() {
+    $.ajax({
+        url: "/oldman/getZdFinish",
+        type: 'post',
+        dataType: 'json',
+        data: JSON.stringify({
+            "group": "area_village",
+            "oldmanParam":{}
+        }),
+        contentType: "application/json;charset=UTF-8",
+        success: function (result) {
+            var map = result.map;
+
+            createHeightAndWidthFromSourceDoc("d", "completeness1", 0.3, 0.5);
+            bar4(null, map, "completeness1", null, null)
+        }
+    });
+
+    $.ajax({
+        url: "/oldman/getZdFinish",
+        type: 'post',
+        dataType: 'json',
+        data: JSON.stringify({
+            "group": "area_custom_one",
+            "oldmanParam":{
+                "areaVillage":"大河村"
+            }
+        }),
+        contentType: "application/json;charset=UTF-8",
+        success: function (result) {
+            var map = result.map;
+
+            createHeightAndWidthFromSourceDoc("d", "completeness2", 0.3, 0.5);
+            bar4(null, map, "completeness2", null, null)
+        }
+    });
+}
+
+function init4() {
+    $.ajax({
+        url: "/oldman/getGroupCount",
+        type: 'post',
+        dataType: 'json',
+        data: JSON.stringify({
+            "fieldNameList": ["area_village", "FamilyType", "Health", "Economic"]
+        }),
+        contentType: "application/json;charset=UTF-8",
+        success: function (result) {
+            var map = result.map;
+            for (var key in map) {
+                if (key === "area_village") {
+                    createHeightAndWidthFromSourceDoc("c", "areaVillage3", 0.3, 0.9);
+                    bar3(null, map["area_village"], "areaVillage3", null, null)
+                } else {
+                    createHeightAndWidthFromSourceDoc("c", key, 0.2, 0.5);
+                    pie2(null, map[key], key, null, null)
+                }
+            }
+        }
+    });
+}
 
 /**
  * 初始化 第一块
@@ -32,41 +96,86 @@ function init3() {
             "age": "60-"
         }, {
             "age": "80-"
-        },{"isZd":true}]),
+        }, {"isZd": true}]),
         contentType: "application/json;charset=UTF-8",
         success: function (result) {
             var map = result.map;
+            totalOldmanCount=map["1"];
             $("#sum").html(map["1"]);
             $("#sixSum").html(map["2"]);
-            createHeightAndWidthFromSourceDoc("b", "oldmanSum", 0.9, 0.5);
-            gauge1("老年人占比",100*map["2"]/100000, "oldmanSum", null, null);
+            createHeightAndWidthFromSourceDoc("b", "oldmanSum", 0.2, 0.5);
+            gauge1("老年人占比", 100 * map["2"] / 100000, "oldmanSum", null, null);
             $("#eightSum").html(map["3"]);
-            createHeightAndWidthFromSourceDoc("b", "zdOldman", 0.9, 0.5);
-            gauge1("重点老人占比",100*map["4"]/map["1"], "zdOldman", null, null);
+            createHeightAndWidthFromSourceDoc("b", "zdOldman", 0.2, 0.5);
+            gauge1("重点老人占比", 100 * map["4"] / map["1"], "zdOldman", null, null);
+
+            createHeightAndWidthFromSourceDoc("b", "eightSum2", 0.2, 0.5);
+
+            var m = {"80以上": map["3"], "80以下": map["1"] - map["3"]};
+            pie1(null, m, "eightSum2", null, null);
+
+            init31();
         }
     });
 
 
+    var organ = {"养老院1":300,"养老院2":200,"养老院1":100};
+    createHeightAndWidthFromSourceDoc("b", "organ", 0.2, 0.3);
+    pie2(null, organ, "organ", null, null);
+    var community = {"长者照护之家":300,"日照中心":200,"助餐点":100};
+    createHeightAndWidthFromSourceDoc("b", "community", 0.2, 0.3);
+    pie2(null, community, "community", null, null);
+
+    $.ajax({
+        url: "/home/getCount",
+        type: 'post',
+        dataType: 'json',
+        data: JSON.stringify(),
+        contentType: "application/json;charset=UTF-8",
+        success: function (result) {
+            var map = result.map;
+            createHeightAndWidthFromSourceDoc("b", "home", 0.2, 0.3);
+            pie2(null, map, "home", null, null);
+        }
+    });
+}
+
+function init31() {
     $.ajax({
         url: "/oldman/getGroupCount",
         type: 'post',
         dataType: 'json',
         data: JSON.stringify({
-            "fieldNameList": ["area_village"]
+            "fieldNameList": ["area_village", "FamilyType", "Health", "Economic", "ServiceStatus"]
         }),
         contentType: "application/json;charset=UTF-8",
         success: function (result) {
             var map = result.map;
             for (var key in map) {
-                createHeightAndWidthFromSourceDoc("c", "areaVillage3",1.5, 0.9);
-                bar3(null, map[key], "areaVillage3", null, null)
+                if (key === "area_village") {
+                    createHeightAndWidthFromSourceDoc("b", "areaVillage3", 0.3, 0.9);
+                    bar3(null, map["area_village"], "areaVillage3", null, null)
+                } else if (key === "ServiceStatus") {
+                    createHeightAndWidthFromSourceDoc("b", "ServiceStatus", 0.3, 0.5);
+                    pie2(null, map[key], "ServiceStatus", null, null);
+
+                    var map = [[{name: "机构养老", value:map["ServiceStatus"]["机构养老"]},
+                        {value:map["ServiceStatus"]["社区养老"]+map["ServiceStatus"]["居家养老"], name: '社区居家养老', selected: 'true'},
+                        {value:totalOldmanCount-map["ServiceStatus"]["机构养老"]-map["ServiceStatus"]["社区养老"]-map["ServiceStatus"]["居家养老"], name: '其它'}],
+                        [{name: "社区养老", value:map["ServiceStatus"]["社区养老"]},
+                            {value:map["ServiceStatus"]["居家养老"], name: '居家养老'}]];
+                    createHeightAndWidthFromSourceDoc("b", "ServiceStatusCoverage", 0.3, 0.5);
+                    var legendData=['社区居家养老',"机构养老","社区养老","居家养老","其他"];
+                    pie3("养老服务覆盖率", map, "ServiceStatusCoverage", null, legendData);
+
+                } else {
+                    createHeightAndWidthFromSourceDoc("b", key, 0.2, 0.5);
+                    pie2(null, map[key], key, null, null);
+                }
             }
         }
     });
-
-
 }
-
 
 /**
  * 初始化老人列表

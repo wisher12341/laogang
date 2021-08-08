@@ -1,6 +1,7 @@
 package com.lejian.laogang.repository.entity;
 
 
+import com.google.common.collect.Lists;
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -8,6 +9,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.List;
 
 @DynamicInsert
 @DynamicUpdate
@@ -82,7 +84,9 @@ public class OldmanEntity {
     @Column(name = "is_zd")
     private Integer isZd;
 
+    private static final List<String> fieldList = Lists.newArrayList("male","huji","area_village");
+
     public static boolean haveField(String fieldName) {
-        return true;
+        return fieldList.contains(fieldName);
     }
 }

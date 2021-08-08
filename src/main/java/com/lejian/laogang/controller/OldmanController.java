@@ -3,6 +3,7 @@ package com.lejian.laogang.controller;
 
 import com.lejian.laogang.controller.contract.request.GetGroupCountRequest;
 import com.lejian.laogang.controller.contract.request.GetOldmanRequest;
+import com.lejian.laogang.controller.contract.request.GetZdFinishRequest;
 import com.lejian.laogang.controller.contract.request.OldmanParam;
 import com.lejian.laogang.controller.contract.response.GetLocationResponse;
 import com.lejian.laogang.controller.contract.response.GetOldmanResponse;
@@ -82,6 +83,19 @@ public class OldmanController {
     public MapResponse getCount(@RequestBody List<OldmanParam> request){
         MapResponse response = new MapResponse();
         response.setMap(service.getCount(request));
+        return response;
+    }
+
+    /**
+     * 获取重点老人完成度
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/getZdFinish")
+    public MapResponse getZdFinish(@RequestBody GetZdFinishRequest request){
+        MapResponse response = new MapResponse();
+        response.setMap(service.getZdFinish(request.getGroup(),request.getOldmanParam()));
         return response;
     }
 }
