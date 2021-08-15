@@ -19,21 +19,21 @@ function initMap() {
         }),
         success: function (result) {
             var points =result.voList;
-            points = [{lng: "121.856373", lat: "31.044634", count: "10"},
-                {lng: "121.847893", lat: "31.045871", count: "10"},
-                {lng: "121.844947", lat: "31.045005", count: "10"},
-                {lng: "121.856373", lat: "31.044634", count: "10"},
-                {lng: "121.845881", lat: "31.044139", count: "10"},
-                {lng: "121.846168", lat: "31.043644", count: "10"},
-                {lng: "121.844731", lat: "31.045438", count: "10"},
-                {lng: "121.847749", lat: "31.043644", count: "10"},
-                {lng: "121.84854", lat: "31.046428", count: "10"},
-                {lng: "121.84315", lat: "31.04581", count: "10"},
-                {lng: "121.846312", lat: "31.046243", count: "10"},
-                {lng: "121.847174", lat: "31.042654", count: "10"},
-                {lng: "121.843581", lat: "31.0468", count: "10"},
-                {lng: "121.847318", lat: "31.045253", count: "10"}
-                ];
+            // points = [{lng: "121.856373", lat: "31.044634", count: "10"},
+            //     {lng: "121.847893", lat: "31.045871", count: "10"},
+            //     {lng: "121.844947", lat: "31.045005", count: "10"},
+            //     {lng: "121.856373", lat: "31.044634", count: "10"},
+            //     {lng: "121.845881", lat: "31.044139", count: "10"},
+            //     {lng: "121.846168", lat: "31.043644", count: "10"},
+            //     {lng: "121.844731", lat: "31.045438", count: "10"},
+            //     {lng: "121.847749", lat: "31.043644", count: "10"},
+            //     {lng: "121.84854", lat: "31.046428", count: "10"},
+            //     {lng: "121.84315", lat: "31.04581", count: "10"},
+            //     {lng: "121.846312", lat: "31.046243", count: "10"},
+            //     {lng: "121.847174", lat: "31.042654", count: "10"},
+            //     {lng: "121.843581", lat: "31.0468", count: "10"},
+            //     {lng: "121.847318", lat: "31.045253", count: "10"}
+            //     ];
             heatmapOverlay = new BMapLib.HeatmapOverlay({"radius":20,"visible":true});
             map.addOverlay(heatmapOverlay);
             heatmapOverlay.setDataSet({data:points,max:20});

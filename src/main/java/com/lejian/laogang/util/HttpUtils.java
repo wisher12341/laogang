@@ -1,9 +1,9 @@
-package com.lejian.oldman.utils;
+package com.lejian.laogang.util;
 
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import static com.lejian.oldman.common.ComponentRespCode.REMOTE_ERROR;
+import static com.lejian.laogang.common.ComponentRespCode.REMOTE_ERROR;
 
 public class HttpUtils {
 

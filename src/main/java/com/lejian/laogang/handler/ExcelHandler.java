@@ -1,8 +1,6 @@
-package com.lejian.oldman.handler;
+package com.lejian.laogang.handler;
 
 import com.google.common.collect.Lists;
-import com.lejian.oldman.bo.ExportOldmanBo;
-import com.lejian.oldman.exception.BizException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -13,22 +11,19 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.lejian.oldman.common.ComponentRespCode.PARSE_DATA_ERROR;
-import static com.lejian.oldman.common.ComponentRespCode.UN_KNOWN;
+import static com.lejian.laogang.common.ComponentRespCode.PARSE_DATA_ERROR;
+import static com.lejian.laogang.common.ComponentRespCode.UN_KNOWN;
 
 @Slf4j
 @Component

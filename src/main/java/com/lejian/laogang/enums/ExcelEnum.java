@@ -1,20 +1,23 @@
-package com.lejian.oldman.enums;
+package com.lejian.laogang.enums;
 
-import static com.lejian.oldman.common.ComponentRespCode.UN_KNOW_COLUMN;
+
+import com.lejian.laogang.pojo.bo.BaseBo;
+
+import static com.lejian.laogang.common.ComponentRespCode.UN_KNOW_COLUMN;
 
 public interface ExcelEnum {
 
     String getColumnName();
     String getFieldName();
+    Class getEnumType();
 
     static ExcelEnum findFieldName(String columnName, Class<? extends ExcelEnum> enumClass){
-        columnName = columnName.split("【")[0].trim();
+        columnName = columnName.split("、")[0].trim();
         for(ExcelEnum excelEnum: enumClass.getEnumConstants()){
             if(excelEnum.getColumnName().equals(columnName)){
                 return excelEnum;
             }
         }
-        UN_KNOW_COLUMN.doThrowException();
         return null;
     }
 
@@ -29,10 +32,8 @@ public interface ExcelEnum {
     }
 
     /**
-     * 获取 枚举值类型
+     * 特殊处理
      * @return
      */
-    default Class<? extends BusinessEnum> getEnumType(){
-        return null;
-    }
+    default void handle(Object bo,Object value){ }
 }

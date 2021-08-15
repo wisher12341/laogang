@@ -1,6 +1,7 @@
 package com.lejian.laogang.enums.label;
 
 import com.lejian.laogang.enums.BusinessEnum;
+import com.lejian.laogang.enums.OldmanAttrEnum;
 import com.lejian.laogang.enums.OldmanEnum;
 import com.lejian.laogang.pojo.bo.LabelBo;
 import lombok.AllArgsConstructor;
@@ -19,7 +20,7 @@ public enum EnumLabel implements LabelEnum {
      * 命名跟数据库字段一致
      */
     MALE(4, 1, 999, OldmanEnum.Male.values()),
-    FAMILY_TYPE(5, 3, 999, OldmanEnum.FamilyType.values()),
+    FAMILY_TYPE(5, 3, 999, OldmanAttrEnum.FamilyType.values()),
     IS_ZD(6, 1, 999, OldmanEnum.IS_ZD.values())
     ;
 

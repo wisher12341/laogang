@@ -1,13 +1,13 @@
-package com.lejian.oldman.check.checker;
+package com.lejian.laogang.check.checker;
 
-import com.lejian.oldman.check.annotation.CheckAnno;
-import com.lejian.oldman.check.bo.CheckFieldBo;
+import com.lejian.laogang.check.bo.CheckFieldBo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
 
-import static com.lejian.oldman.common.ComponentRespCode.NULL_CHECK;
+import static com.lejian.laogang.common.ComponentRespCode.NULL_CHECK;
+
 
 /**
  * null值， 空值校验

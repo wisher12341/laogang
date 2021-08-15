@@ -64,9 +64,9 @@ public class OldmanEntity {
     @Column
     private String vaccine;
     @Column(name = "vaccine_first")
-    private LocalDate vaccineFirst;
+    private String vaccineFirst;
     @Column(name = "vaccine_sec")
-    private LocalDate vaccineSec;
+    private String vaccineSec;
     @Column(name = "commercial_insurance")
     private String commercialInsurance;
     @Column
@@ -83,10 +83,10 @@ public class OldmanEntity {
     private Timestamp createTime;
     @Column(name = "is_zd")
     private Integer isZd;
-
-    private static final List<String> fieldList = Lists.newArrayList("male","huji","area_village");
+    @Column
+    private String war;
 
     public static boolean haveField(String fieldName) {
-        return fieldList.contains(fieldName);
+        return Lists.newArrayList("male","huji","area_village").contains(fieldName);
     }
 }

@@ -1,19 +1,21 @@
 package com.lejian.laogang.controller;
 
 
-import com.lejian.laogang.controller.contract.request.GetGroupCountRequest;
-import com.lejian.laogang.controller.contract.request.GetOldmanRequest;
-import com.lejian.laogang.controller.contract.request.GetZdFinishRequest;
-import com.lejian.laogang.controller.contract.request.OldmanParam;
+import com.google.common.collect.Lists;
+import com.lejian.laogang.check.bo.CheckResultBo;
+import com.lejian.laogang.controller.contract.request.*;
 import com.lejian.laogang.controller.contract.response.GetLocationResponse;
 import com.lejian.laogang.controller.contract.response.GetOldmanResponse;
 import com.lejian.laogang.controller.contract.response.MapResponse;
+import com.lejian.laogang.handler.ExcelHandler;
 import com.lejian.laogang.service.OldmanService;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -23,6 +25,8 @@ public class OldmanController {
 
     @Autowired
     private OldmanService service;
+    @Autowired
+    private ExcelHandler excelHandler;
 
     /**
      * 获取老人 某数据的 值的数量分布
@@ -96,6 +100,40 @@ public class OldmanController {
     public MapResponse getZdFinish(@RequestBody GetZdFinishRequest request){
         MapResponse response = new MapResponse();
         response.setMap(service.getZdFinish(request.getGroup(),request.getOldmanParam()));
+        return response;
+    }
+
+
+    /**
+     * excel导入
+     * 没有的添加  有的更新
+     * @param file
+     * @return
+     */
+    //todo 限制  数量限制 一次1000？ 参数限制
+    @RequestMapping(value = "/importExcel",method = RequestMethod.POST)
+    public ModelAndView importExcel(@RequestParam MultipartFile file) {
+        Pair<List<String>,List<List<String>>> excelData=excelHandler.parse(file,1);
+        List<CheckResultBo> checkResultBoList= Lists.newArrayList();
+        if(CollectionUtils.isNotEmpty(excelData.getSecond())) {
+            checkResultBoList=service.addOldmanByExcel(excelData);
+        }
+        ModelAndView mv=new ModelAndView("/oldman");
+        mv.addObject("check",checkResultBoList);
+        return mv;
+    }
+
+
+    /**
+     * 获取老人多属性表 type的数量
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/attr/getTypeCount")
+    public MapResponse getTypeCount(@RequestBody GetTypeCountRequest request){
+        MapResponse response = new MapResponse();
+        response.setMap(service.getTypeCount(request.getTypeList()));
         return response;
     }
 }

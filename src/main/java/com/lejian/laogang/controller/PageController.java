@@ -11,7 +11,7 @@ public class PageController {
     @GetMapping("/")
     public ModelAndView index(){
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/login");
+        mv.setViewName("/index");
         return mv;
     }
 
@@ -19,6 +19,13 @@ public class PageController {
     public ModelAndView visual(){
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/visual");
+        return mv;
+    }
+
+    @GetMapping("/oldman")
+    public ModelAndView oldman(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/oldman");
         return mv;
     }
 

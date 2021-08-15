@@ -1,12 +1,11 @@
-package com.lejian.oldman.check.bo;
+package com.lejian.laogang.check.bo;
 
 import com.google.common.collect.Lists;
-import com.lejian.oldman.check.annotation.EnumCheck;
-import com.lejian.oldman.check.annotation.NullCheck;
-import com.lejian.oldman.enums.ExcelEnum;
-import com.lejian.oldman.enums.OldmanEnum;
-import com.lejian.oldman.enums.OldmanExcelEnum;
-import com.lejian.oldman.utils.LjReflectionUtils;
+import com.lejian.laogang.check.annotation.EnumCheck;
+import com.lejian.laogang.check.annotation.NullCheck;
+import com.lejian.laogang.enums.ExcelEnum;
+import com.lejian.laogang.enums.OldmanExcelEnum;
+import com.lejian.laogang.util.LjReflectionUtils;
 import lombok.Data;
 import org.springframework.data.util.Pair;
 
@@ -15,15 +14,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 
-import static com.lejian.oldman.common.ComponentRespCode.UN_KNOWN;
+import static com.lejian.laogang.common.ComponentRespCode.UN_KNOWN;
+
 
 @Data
 public class OldmanImportCheckBo extends AbstractCheckBo {
 
-    @NullCheck
-    @EnumCheck(OldmanEnum.Sex.class)
-
-    private String sex;
     @NullCheck
 //    @LengthCheck(maxLength=10)
     private String name;
@@ -44,14 +40,6 @@ public class OldmanImportCheckBo extends AbstractCheckBo {
     @NullCheck
     private String areaVillage;
 
-    @EnumCheck(OldmanEnum.FamilyType.class)
-    private String family;
-
-    @EnumCheck(OldmanEnum.HouseholdType.class)
-    private String householdType;
-
-    @EnumCheck(OldmanEnum.ServiceType.class)
-    private String serviceType;
 
     private String lng;
     private String lat;

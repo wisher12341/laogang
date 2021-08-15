@@ -15,7 +15,9 @@ import javax.persistence.Column;
 import javax.persistence.Query;
 import javax.persistence.Table;
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.lejian.laogang.common.ComponentRespCode.REPOSITORY_ERROR;
 
@@ -60,5 +62,9 @@ public class OldmanRepository extends AbstractSpecificationRepository<OldmanBo,O
             REPOSITORY_ERROR.doThrowException("getZdFinishGroupCount",e);
         }
         return Maps.newHashMap();
+    }
+
+    public List<OldmanBo> getByIdCards(List<String> idCardList) {
+        return oldmanDao.findByIdCardIn(idCardList).stream().map(OldmanBo::convert).collect(Collectors.toList());
     }
 }

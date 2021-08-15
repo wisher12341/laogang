@@ -116,9 +116,9 @@ public abstract class AbstractSpecificationRepository<Bo extends BaseBo,Entity> 
         });
         jpaSpecBo.getInMap().forEach((k,v)->{
             if (CollectionUtils.isNotEmpty(v)){
-                CriteriaBuilder.In<Integer> in = criteriaBuilder.in(root.get(k));
+                CriteriaBuilder.In<String> in = criteriaBuilder.in(root.get(k));
                 for (Object item : v) {
-                    in.value((int)item);
+                    in.value((String)item);
                 }
                 predicateList.add(in);
             }

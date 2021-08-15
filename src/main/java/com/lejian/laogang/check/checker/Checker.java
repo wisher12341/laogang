@@ -1,7 +1,7 @@
-package com.lejian.oldman.check.checker;
+package com.lejian.laogang.check.checker;
 
-import com.lejian.oldman.check.annotation.CheckAnno;
-import com.lejian.oldman.check.bo.CheckFieldBo;
+
+import com.lejian.laogang.check.bo.CheckFieldBo;
 
 import java.lang.annotation.Annotation;
 

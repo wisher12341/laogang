@@ -12,8 +12,7 @@ public class OldmanAttrMap {
     static {
         INDEX_MAP.put("FamilyType",2);
         INDEX_MAP.put("ServiceStatus",13);
-        INDEX_MAP.put("Health",18);
-        INDEX_MAP.put("Economic",19);
+        INDEX_MAP.put("Income",4);
 
     }
 

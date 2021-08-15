@@ -1,4 +1,4 @@
-package com.lejian.oldman.check.bo;
+package com.lejian.laogang.check.bo;
 
 import lombok.Data;
 

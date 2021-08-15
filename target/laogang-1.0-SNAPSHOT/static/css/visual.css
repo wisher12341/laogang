@@ -29,3 +29,35 @@
     font-weight: bolder;
     color: red;
 }
+.mengceng{
+    box-shadow: inset 0px 0px 2px 0px rgb(4, 17, 25);
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    height: -webkit-fill-available;
+}
+.label{
+    margin-left: 2px;
+    margin-top: 2px;
+    font-size: 8;
+    padding: 5px !important;
+    width:15%!important;
+}
+.labelFirst{
+    background-color:lightcoral!important;
+}
+#DataTables_Table_0_processing,#DataTables_Table_0_length{
+    display: none;
+}
+thead th{
+    background-color: rgba(255, 255, 255, 0.1)!important;
+    color: white;
+}
+.paginate_button{
+    display: none!important;
+}
+.previous,.next,.first,.last{
+    display:inline!important;
+}
+.wl{
+    padding: 15px !important;
+}

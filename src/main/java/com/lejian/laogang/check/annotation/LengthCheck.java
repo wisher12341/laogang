@@ -1,6 +1,7 @@
-package com.lejian.oldman.check.annotation;
+package com.lejian.laogang.check.annotation;
 
-import com.lejian.oldman.check.checker.EnumChecker;
+
+import com.lejian.laogang.check.checker.EnumChecker;
 
 import java.lang.annotation.*;
 

@@ -1,12 +1,12 @@
-package com.lejian.oldman.check;
+package com.lejian.laogang.check;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.lejian.oldman.check.annotation.CheckAnno;
-import com.lejian.oldman.check.bo.AbstractCheckBo;
-import com.lejian.oldman.check.bo.CheckFieldBo;
-import com.lejian.oldman.check.bo.CheckResultBo;
-import com.lejian.oldman.check.checker.Checker;
+import com.lejian.laogang.check.annotation.CheckAnno;
+import com.lejian.laogang.check.bo.AbstractCheckBo;
+import com.lejian.laogang.check.bo.CheckFieldBo;
+import com.lejian.laogang.check.bo.CheckResultBo;
+import com.lejian.laogang.check.checker.Checker;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
@@ -19,7 +19,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import static com.lejian.oldman.common.ComponentRespCode.UN_KNOWN;
+import static com.lejian.laogang.common.ComponentRespCode.UN_KNOWN;
+
 
 @Component
 public class CheckProcessor implements ApplicationListener<ContextRefreshedEvent>{

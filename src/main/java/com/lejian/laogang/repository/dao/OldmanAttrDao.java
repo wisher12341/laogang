@@ -1,6 +1,7 @@
 package com.lejian.laogang.repository.dao;
 
 
+import com.lejian.laogang.repository.entity.OldmanAttrEntity;
 import com.lejian.laogang.repository.entity.OldmanEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -10,7 +11,6 @@ import java.util.List;
 
 
 @Repository
-public interface OldmanDao extends JpaRepository<OldmanEntity, Long>,JpaSpecificationExecutor<OldmanEntity> {
+public interface OldmanAttrDao extends JpaRepository<OldmanAttrEntity, Long>,JpaSpecificationExecutor<OldmanAttrEntity> {
 
-    List<OldmanEntity> findByIdCardIn(List<String> idCardList);
 }

@@ -68,6 +68,36 @@ public class JpaSpecBo {
                 whereCase.append(prex+convertKey).append("='").append(equalMap.get(key)).append("'");
             }
         }
+        if (MapUtils.isNotEmpty(lessEMap)) {
+            Iterator iterator = lessEMap.keySet().iterator();
+            String key = (String) iterator.next();
+            String convertKey =  StringUtils.camelToUnderline(key);
+            if (whereCase.length()>0){
+                whereCase.append(" and ");
+            }
+            whereCase.append(prex+convertKey).append("<='").append(lessEMap.get(key)).append("'");
+            while (iterator.hasNext()) {
+                whereCase.append(" and ");
+                key = (String) iterator.next();
+                convertKey = StringUtils.camelToUnderline(key);
+                whereCase.append(prex+convertKey).append("<='").append(lessEMap.get(key)).append("'");
+            }
+        }
+        if (MapUtils.isNotEmpty(greatEMap)) {
+            Iterator iterator = greatEMap.keySet().iterator();
+            String key = (String) iterator.next();
+            String convertKey =  StringUtils.camelToUnderline(key);
+            if (whereCase.length()>0){
+                whereCase.append(" and ");
+            }
+            whereCase.append(prex+convertKey).append(">='").append(greatEMap.get(key)).append("'");
+            while (iterator.hasNext()) {
+                whereCase.append(" and ");
+                key = (String) iterator.next();
+                convertKey = StringUtils.camelToUnderline(key);
+                whereCase.append(prex+convertKey).append(">='").append(greatEMap.get(key)).append("'");
+            }
+        }
         return whereCase.toString();
     }
 

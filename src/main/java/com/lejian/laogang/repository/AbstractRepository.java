@@ -25,6 +25,24 @@ public abstract class AbstractRepository<Bo extends BaseBo,Entity> {
     @PersistenceContext
     protected EntityManager entityManager;
 
+    /**
+     * 批量插入
+     *
+     * @param boList 实体类集合
+     */
+    public void batchInsert(List<Bo> boList) {
+        List<Entity> entityList = boList.stream().map(item->(Entity)item.convert()).collect(Collectors.toList());
+        for (int i = 0; i < entityList.size(); i++) {
+            entityManager.persist(entityList.get(i));
+            if (i % 50 == 0) {
+                entityManager.flush();
+                entityManager.clear();
+            }
+        }
+        entityManager.flush();
+        entityManager.clear();
+    }
+
 
     public List<Bo> getAll() {
         List<Entity> entityList = getDao().findAll();
