@@ -20,6 +20,7 @@ import com.lejian.laogang.repository.entity.OldmanEntity;
 import com.lejian.laogang.util.DateUtils;
 import com.lejian.laogang.util.LjReflectionUtils;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.logging.log4j.util.Strings;
@@ -32,6 +33,7 @@ import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -63,6 +65,7 @@ public class OldmanService {
             } else {
                 Map<String, String> attrWhere = OldmanAttrEnum.generateAttrWhere(fieldName);
                 jpaSpecBo.getEqualMap().putAll(attrWhere);
+                //不用对老人去重
                 result = oldmanAttrRepository.getGroupCount("value", jpaSpecBo);
             }
             Map<String, Long> voResult = Maps.newHashMap();
@@ -94,21 +97,21 @@ public class OldmanService {
 
         jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(60).toLocalDate());
         jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(69).toLocalDate());
-        map.put("60-69",oldmanRepository.getGroupCount("male",jpaSpecBo));
+        map.put("60-69", oldmanRepository.getGroupCount("male", jpaSpecBo));
 
         jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(70).toLocalDate());
         jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(79).toLocalDate());
-        map.put("70-79",oldmanRepository.getGroupCount("male",jpaSpecBo));
+        map.put("70-79", oldmanRepository.getGroupCount("male", jpaSpecBo));
 
         jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(80).toLocalDate());
         jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(89).toLocalDate());
-        map.put("80-89",oldmanRepository.getGroupCount("male",jpaSpecBo));
+        map.put("80-89", oldmanRepository.getGroupCount("male", jpaSpecBo));
         return map;
     }
 
     public List<LocationVo> getAllLocation(OldmanParam oldmanParam) {
         Map<String, Long> locationMap = oldmanRepository.getGroupCount("location_id", oldmanParam.convert());
-        List<LocationBo> locationBoList = locationRepository.getByPkIds(locationMap.keySet().stream().map(Integer::valueOf).collect(Collectors.toList()));
+        List<LocationBo> locationBoList = locationRepository.getByPkIds(locationMap.keySet().stream().filter(item -> !item.equals("null")).map(Integer::valueOf).collect(Collectors.toList()));
         return locationBoList.stream().map(item -> item.convertVo(locationMap)).collect(Collectors.toList());
     }
 
@@ -125,11 +128,11 @@ public class OldmanService {
         Map<String, Long> zdFinish = oldmanRepository.getZdFinishGroupCount(group, oldmanParam.convert());
 
         Map<String, Object> result = Maps.newHashMap();
-        zdTotal.forEach((k, v) ->{
+        zdTotal.forEach((k, v) -> {
             if (zdFinish.containsKey(k)) {
                 result.put(k, Double.valueOf(zdFinish.get(k)) / Double.valueOf(v));
-            }else{
-                result.put(k,0);
+            } else {
+                result.put(k, 0);
             }
         });
         return result;
@@ -139,13 +142,32 @@ public class OldmanService {
     public List<CheckResultBo> addOldmanByExcel(Pair<List<String>, List<List<String>>> excelData) {
         List<String> titleList = excelData.getFirst();
         List<List<String>> valueList = excelData.getSecond();
+
 //        List<CheckResultBo> checkResultBoList=checkOldmanImport(excelData);
 //        if(CollectionUtils.isNotEmpty(checkResultBoList)){
 //            return checkResultBoList;
 //        }
-        addOldmanBaseInfo(titleList, valueList);
 
-        addOldmanAttr(titleList,valueList);
+
+        //todo 临时去重 身份证
+        List<List<String>> newList = Lists.newArrayList();
+        List<String> idCardList = Lists.newArrayList();
+        for (int i = 0; i < valueList.size(); i++) {
+            if (idCardList.contains(valueList.get(i).get(7))) {
+                continue;
+            } else {
+                newList.add(valueList.get(i));
+                idCardList.add(valueList.get(i).get(7));
+            }
+        }
+
+
+        List<List<List<String>>> partList = Lists.partition(newList, 500);
+        partList.forEach(list -> {
+            addOldmanBaseInfo(titleList, list);
+            addOldmanAttr(titleList, list);
+        });
+
         return Lists.newArrayList();
     }
 
@@ -156,15 +178,15 @@ public class OldmanService {
 
         try {
             for (int i = 0; i < valueList.size(); i++) {
-                String idCard="";
-                for (int j =0; j<titleList.size();j++){
+                String idCard = "";
+                for (int j = 0; j < titleList.size(); j++) {
                     ExcelEnum oldmanExcelEnum = ExcelEnum.findFieldName(titleList.get(j), OldmanAttrExcelEnum.class);
                     if (oldmanExcelEnum == OldmanAttrExcelEnum.ID_CARD) {
                         idCard = valueList.get(i).get(j);
                         break;
                     }
                 }
-                for (int j =0; j<titleList.size();j++){
+                for (int j = 0; j < titleList.size(); j++) {
                     ExcelEnum oldmanExcelEnum = ExcelEnum.findFieldName(titleList.get(j), OldmanAttrExcelEnum.class);
                     if (oldmanExcelEnum == null || oldmanExcelEnum == OldmanAttrExcelEnum.ID_CARD) {
                         continue;
@@ -173,22 +195,25 @@ public class OldmanService {
                     if (IMPORT_RESET.contains(String.valueOf(value))) {
                         continue;
                     }
-                    if (oldmanExcelEnum.getEnumType()==null){
+                    if (oldmanExcelEnum.getEnumType() == null) {
                         OldmanAttrBo attrBo = new OldmanAttrBo();
                         attrBo.setIdCard(idCard);
-                        oldmanExcelEnum.handle(attrBo,value);
+                        oldmanExcelEnum.handle(attrBo, value);
                         oldmanAttrBoList.add(attrBo);
-                    }else{
+                    } else {
                         String enumValue = value.toString().split("〖")[0];
-                        String ext = value.toString().split("〖").length==2?value.toString().split("〖")[1].replaceAll("〗",""): Strings.EMPTY;
+                        String ext = value.toString().split("〖").length == 2 ? value.toString().split("〖")[1].replaceAll("〗", "") : Strings.EMPTY;
                         String[] arr = enumValue.split("┋");
-                        for(String v :arr) {
-                            OldmanAttrBo attrBo = new OldmanAttrBo();
-                            attrBo.setIdCard(idCard);
-                            attrBo.setType(BusinessEnum.find(Integer.valueOf(oldmanExcelEnum.getFieldName()), OldmanAttrEnum.OldmanAttrType.class));
-                            attrBo.setValue(BusinessEnum.find(v, oldmanExcelEnum.getEnumType()));
-                            attrBo.setExt(ext);
-                            oldmanAttrBoList.add(attrBo);
+                        for (String v : arr) {
+                            BusinessEnum val = BusinessEnum.find(v, oldmanExcelEnum.getEnumType());
+                            if (val != BusinessEnum.DefaultValue.NULL) {
+                                OldmanAttrBo attrBo = new OldmanAttrBo();
+                                attrBo.setIdCard(idCard);
+                                attrBo.setType(BusinessEnum.find(Integer.valueOf(oldmanExcelEnum.getFieldName()), OldmanAttrEnum.OldmanAttrType.class));
+                                attrBo.setValue(val);
+                                attrBo.setExt(ext);
+                                oldmanAttrBoList.add(attrBo);
+                            }
                         }
                     }
                 }
@@ -200,9 +225,9 @@ public class OldmanService {
         }
 
         JpaSpecBo jpaSpecBo = new JpaSpecBo();
-        jpaSpecBo.getInMap().put("idCard",oldmanAttrBoList.stream().map(OldmanAttrBo::getIdCard).distinct().collect(Collectors.toList()));
-        Map<String,Integer> idMap = oldmanRepository.findWithSpec(jpaSpecBo).stream().collect(Collectors.toMap(OldmanBo::getIdCard,OldmanBo::getId));
-        oldmanAttrBoList.forEach(bo-> bo.setOldmanId(idMap.get(bo.getIdCard())));
+        jpaSpecBo.getInMap().put("idCard", oldmanAttrBoList.stream().map(OldmanAttrBo::getIdCard).distinct().collect(Collectors.toList()));
+        Map<String, Integer> idMap = oldmanRepository.findWithSpec(jpaSpecBo).stream().collect(Collectors.toMap(OldmanBo::getIdCard, OldmanBo::getId));
+        oldmanAttrBoList.forEach(bo -> bo.setOldmanId(idMap.get(bo.getIdCard())));
         oldmanAttrRepository.batchInsert(oldmanAttrBoList);
         return Lists.newArrayList();
     }
@@ -225,13 +250,12 @@ public class OldmanService {
                 }
                 Field field = fieldMap.get(oldmanExcelEnum.getFieldName());
 
-                if (field == null){
+                if (field == null) {
                     for (int j = 0; j < valueList.size(); j++) {
                         Object value = valueList.get(j).get(i);
                         oldmanExcelEnum.handle(oldmanBoList.get(j), value);
                     }
-                }
-                else {
+                } else {
                     field.setAccessible(true);
                     //纵向 遍历每个对象，一个属性一个属性 纵向赋值
                     for (int j = 0; j < valueList.size(); j++) {
@@ -247,15 +271,21 @@ public class OldmanService {
                                 //转换成枚举值
                                 Class<? extends BusinessEnum> enumClass = oldmanExcelEnum.getEnumType();
                                 if (enumClass != null) {
+                                    boolean find = false;
                                     //需要 枚举转换
                                     for (BusinessEnum businessEnum : enumClass.getEnumConstants()) {
                                         if (businessEnum.getDesc().equals(value)) {
+                                            find = true;
                                             value = businessEnum;
                                             break;
                                         }
                                     }
+                                    if (find) {
+                                        field.set(oldmanBoList.get(j), value);
+                                    }
+                                } else {
+                                    field.set(oldmanBoList.get(j), value);
                                 }
-                                field.set(oldmanBoList.get(j), value);
                             }
                         }
                     }
@@ -330,11 +360,23 @@ public class OldmanService {
 
     public Map<String, Object> getTypeCount(List<Integer> typeList) {
         Map<String, Object> map = Maps.newHashMap();
-        typeList.forEach(type->{
+        typeList.forEach(type -> {
             JpaSpecBo jpaSpecBo = new JpaSpecBo();
-            jpaSpecBo.getEqualMap().put("type",type);
-            map.put(BusinessEnum.find(type,OldmanAttrEnum.OldmanAttrType.class).getDesc(),oldmanAttrRepository.typeCount(jpaSpecBo));
+            jpaSpecBo.getEqualMap().put("type", type);
+            map.put(BusinessEnum.find(type, OldmanAttrEnum.OldmanAttrType.class).getDesc(), oldmanAttrRepository.typeCount(jpaSpecBo));
         });
+        return map;
+    }
+
+    public Map<String, Object> getExtGroup(Integer type, Integer value) {
+        Map<String, Object> map = Maps.newHashMap();
+        map.putAll(oldmanAttrRepository.getExtGroup(type, value));
+        return map;
+    }
+
+    public Map<String, Object> getOldmanBaseGroupByAttr(List<String> fieldNameList, List<Integer> typeList) {
+        Map<String, Object> map = Maps.newHashMap();
+        fieldNameList.forEach(item -> map.put(item, oldmanRepository.getOldmanBaseGroupByAttr(item, typeList)));
         return map;
     }
 }

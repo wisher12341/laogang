@@ -105,7 +105,7 @@ public abstract class AbstractRepository<Bo extends BaseBo,Entity> {
                     }
                 }
             }
-                updateStr.deleteCharAt(updateStr.length()-1);
+            updateStr.deleteCharAt(updateStr.length()-1);
 
 
             REPOSITORY_ERROR.checkNotNull(searchValue,
@@ -125,6 +125,8 @@ public abstract class AbstractRepository<Bo extends BaseBo,Entity> {
             REPOSITORY_ERROR.doThrowException("dynamicUpdate,"+this.getClass().getSimpleName(),e);
         }
     }
+
+
 
     public List<Bo> getByPkIds(List<Integer> pkIds) {
         List<Entity> entityList =getDao().findAllById(pkIds);
@@ -258,7 +260,10 @@ public abstract class AbstractRepository<Bo extends BaseBo,Entity> {
             Query query =entityManager.createNativeQuery(sql);
             query.getResultList().forEach(object->{
                 Object[] cells = (Object[]) object;
-                map.put(String.valueOf(cells[0]),Long.valueOf(String.valueOf(cells[1])));
+                String key = String.valueOf(cells[0]);
+                if (StringUtils.isNotBlank(key)) {
+                    map.put(key, Long.valueOf(String.valueOf(cells[1])));
+                }
             });
             return map;
         }catch (Exception e){

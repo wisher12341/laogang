@@ -1,14 +1,30 @@
 function getTitle(title) {
-    return {
-        text: title,
-        textStyle: {
-            color: '#fff',
-            fontSize: 14,
-            fontWeight: 'normal'
-        },
-        x: '0%',
-        y: '0%'
-    };
+    var a;
+    if (title.constructor === Object){
+        a= {
+            text: title.text,
+            link:title.link,
+            textStyle: {
+                color: '#fff',
+                fontSize: 14,
+                fontWeight: 'normal'
+            },
+            x: '0%',
+            y: '0%'
+        };
+    }else{
+        a= {
+            text: title,
+            textStyle: {
+                color: '#fff',
+                fontSize: 14,
+                fontWeight: 'normal'
+            },
+            x: '0%',
+            y: '0%'
+        };
+    }
+    return a;
 }
 
 function getLegend(data) {

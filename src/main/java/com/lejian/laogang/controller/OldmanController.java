@@ -42,6 +42,21 @@ public class OldmanController {
     }
 
     /**
+     * 获取老人 基本信息的数量分布
+     * where条件是oldman_attr
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/getOldmanBaseGroupByAttr")
+    public MapResponse getOldmanBaseGroupByAttr(@RequestBody GetGroupCountRequest request){
+        MapResponse response = new MapResponse();
+        response.setMap(service.getOldmanBaseGroupByAttr(request.getFieldNameList(),request.getTypeList()));
+        return response;
+    }
+
+
+    /**
      * 获取老人年龄数量分布，带男女
      * @param request
      * @return
@@ -134,6 +149,20 @@ public class OldmanController {
     public MapResponse getTypeCount(@RequestBody GetTypeCountRequest request){
         MapResponse response = new MapResponse();
         response.setMap(service.getTypeCount(request.getTypeList()));
+        return response;
+    }
+
+
+    /**
+     * 获取 多属性表 type,value下  ext 的分组统计
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/attr/getExtGroup")
+    public MapResponse getExtGroup(@RequestBody GetExtGroupRequest request){
+        MapResponse response = new MapResponse();
+        response.setMap(service.getExtGroup(request.getType(),request.getValue()));
         return response;
     }
 }

@@ -1,6 +1,7 @@
 package com.lejian.laogang.repository;
 
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Maps;
 import com.lejian.laogang.pojo.bo.JpaSpecBo;
 import com.lejian.laogang.pojo.bo.OldmanBo;
@@ -66,5 +67,25 @@ public class OldmanRepository extends AbstractSpecificationRepository<OldmanBo,O
 
     public List<OldmanBo> getByIdCards(List<String> idCardList) {
         return oldmanDao.findByIdCardIn(idCardList).stream().map(OldmanBo::convert).collect(Collectors.toList());
+    }
+
+    public Map<String,Long> getOldmanBaseGroupByAttr(String field, List<Integer> typeList) {
+        try {
+            Map<String,Long> map= Maps.newHashMap();
+            String a= Joiner.on(",").join(typeList); ;
+            String sql = "select "+field+",count(1) from ("+
+                    "select distinct o.id_card,o."+field+" from oldman o left join oldman_attr oa on o.id=oa.oldman_id"+
+                    "where oa.type in ("+a+")"+
+            ") a group by "+field;
+            Query query =entityManager.createNativeQuery(sql);
+            query.getResultList().forEach(object->{
+                Object[] cells = (Object[]) object;
+                map.put(String.valueOf(cells[0]),Long.valueOf(String.valueOf(cells[1])));
+            });
+            return map;
+        }catch (Exception e){
+            REPOSITORY_ERROR.doThrowException("getZdFinishGroupCount",e);
+        }
+        return Maps.newHashMap();
     }
 }

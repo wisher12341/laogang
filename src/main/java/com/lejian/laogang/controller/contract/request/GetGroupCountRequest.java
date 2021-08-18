@@ -12,4 +12,5 @@ public class GetGroupCountRequest {
      */
     private List<String> fieldNameList;
     private List<String> labelIdList;
+    private List<Integer> typeList;
 }

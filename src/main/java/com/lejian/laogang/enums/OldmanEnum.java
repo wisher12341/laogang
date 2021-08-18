@@ -104,7 +104,6 @@ public interface OldmanEnum extends BusinessEnum{
         D(4,"大学专科"),
         E(5,"大学本科"),
         F(6,"硕士研究生及以上"),
-        G(7,"无")
         ;
         private Integer value;
         private String desc;

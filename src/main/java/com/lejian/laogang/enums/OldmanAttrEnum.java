@@ -79,7 +79,6 @@ public interface OldmanAttrEnum extends BusinessEnum {
         JG(1, "机构养老"),
         SQ(2, "社区养老"),
         JJ(3, "居家养老"),
-        W(4, "无"),
         ;
         private Integer value;
         private String desc;
@@ -92,7 +91,6 @@ public interface OldmanAttrEnum extends BusinessEnum {
     @Getter
     @AllArgsConstructor
     enum WorkStatus implements OldmanAttrEnum {
-        A(1, "无"),
         B(2, "退休"),
         C(3, "在职"),
         D(4,"返聘"),
@@ -109,15 +107,14 @@ public interface OldmanAttrEnum extends BusinessEnum {
     @Getter
     @AllArgsConstructor
     enum CommunityWork implements OldmanAttrEnum {
-        A(1, "无"),
         B(2, "楼组长"),
         C(3, "业务会成员"),
         D(4,"村/居委"),
         E(5,"队/组"),
         F(6,"睦邻点负责人"),
-        G(5,"睦邻点指导员"),
-        H(5,"志愿者"),
-        I(5,"其他"),
+        G(7,"睦邻点指导员"),
+        H(8,"志愿者"),
+        I(9,"其他"),
         ;
         private Integer value;
         private String desc;
@@ -172,7 +169,6 @@ public interface OldmanAttrEnum extends BusinessEnum {
         A(1, "城镇医保"),
         B(2, "农保"),
         C(3, "非上海医保"),
-        D(4,"无"),
         ;
         private Integer value;
         private String desc;
@@ -222,9 +218,6 @@ public interface OldmanAttrEnum extends BusinessEnum {
     @AllArgsConstructor
     enum YWGM implements OldmanAttrEnum {
         A(1, "青霉素过敏"),
-        B(2, "其他"),
-        C(3, "无"),
-        D(4,"军属"),
         ;
         private Integer value;
         private String desc;
@@ -253,7 +246,6 @@ public interface OldmanAttrEnum extends BusinessEnum {
         N(14,"消化道疾病"),
         P(15,"阿兹海默症"),
         Q(16,"免疫系统疾病(类风湿性关节炎、红斑狼疮)"),
-        R(17,"无")
         ;
         private Integer value;
         private String desc;
@@ -268,7 +260,6 @@ public interface OldmanAttrEnum extends BusinessEnum {
     enum ZL implements OldmanAttrEnum {
         A(1, "良性肿瘤"),
         B(2, "恶性肿瘤"),
-        C(3, "无")
         ;
         private Integer value;
         private String desc;
@@ -289,7 +280,6 @@ public interface OldmanAttrEnum extends BusinessEnum {
         F(6,"搭桥"),
         G(7,"其他"),
         H(8,"做过何种手术"),
-        I(0,"无")
         ;
         private Integer value;
         private String desc;

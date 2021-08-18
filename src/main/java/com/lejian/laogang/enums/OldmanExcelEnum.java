@@ -212,7 +212,15 @@ public enum OldmanExcelEnum implements ExcelEnum{
         @Override
         public void handle(Object bo, Object value) {
             OldmanBo oldmanBo = (OldmanBo) bo;
-            String[] gps = String.valueOf(value).split("\\[")[1].split(",");
+            String str = (String) value;
+            String[] gps;
+            if (str.contains(",")) {
+                //英文
+                gps = String.valueOf(value).split("\\[")[1].split(",");
+            }else {
+                //中文
+                gps = String.valueOf(value).split("\\[")[1].split("，");
+            }
             String desc = String.valueOf(value).split("\\[")[0];
             if (desc.equals("上海市浦东新区")){
                 return;

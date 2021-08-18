@@ -1,6 +1,7 @@
 package com.lejian.laogang.repository;
 
 
+import com.google.common.collect.Maps;
 import com.lejian.laogang.pojo.bo.JpaSpecBo;
 import com.lejian.laogang.pojo.bo.OldmanAttrBo;
 import com.lejian.laogang.pojo.bo.OldmanBo;
@@ -52,5 +53,22 @@ public class OldmanAttrRepository extends AbstractSpecificationRepository<Oldman
             REPOSITORY_ERROR.doThrowException("typeCount",e);
         }
         return 0L;
+    }
+
+    public Map<String, Long> getExtGroup(Integer type, Integer value) {
+        Map<String, Long> map = Maps.newHashMap();
+        try {
+            String sql = String.format("select ext,count(1) from oldman_attr where type='%s' and value='%s' group by ext",type,value);
+
+            Query query =entityManager.createNativeQuery(sql);
+            query.getResultList().forEach(object->{
+                Object[] cells = (Object[]) object;
+                map.put(String.valueOf(cells[0]),Long.valueOf(String.valueOf(cells[1])));
+            });
+
+        }catch (Exception e){
+            REPOSITORY_ERROR.doThrowException("getExtGroup",e);
+        }
+        return map;
     }
 }
