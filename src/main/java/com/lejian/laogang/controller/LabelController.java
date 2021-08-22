@@ -6,6 +6,7 @@ import com.lejian.laogang.controller.contract.response.GetLabelResponse;
 import com.lejian.laogang.service.LabelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,7 +20,7 @@ public class LabelController {
 
     @ResponseBody
     @RequestMapping("/getLabel")
-    public GetLabelResponse getLabel(GetLabelRequest request){
+    public GetLabelResponse getLabel(@RequestBody GetLabelRequest request){
         GetLabelResponse response = new GetLabelResponse();
         response.setVoList(service.getLabel(request));
         return response;

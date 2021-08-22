@@ -69,13 +69,17 @@ public class OldmanRepository extends AbstractSpecificationRepository<OldmanBo,O
         return oldmanDao.findByIdCardIn(idCardList).stream().map(OldmanBo::convert).collect(Collectors.toList());
     }
 
-    public Map<String,Long> getOldmanBaseGroupByAttr(String field, List<Integer> typeList) {
+    public Map<String,Long> getOldmanBaseGroupByAttr(String field, List<Integer> typeList,JpaSpecBo jpaSpecBo) {
         try {
+            String where = "";
+            if (jpaSpecBo!=null){
+                where = " and "+jpaSpecBo.getSql("o.");
+            }
             Map<String,Long> map= Maps.newHashMap();
             String a= Joiner.on(",").join(typeList); ;
             String sql = "select "+field+",count(1) from ("+
                     "select distinct o.id_card,o."+field+" from oldman o left join oldman_attr oa on o.id=oa.oldman_id"+
-                    "where oa.type in ("+a+")"+
+                    " where oa.type in ("+a+") "+where+
             ") a group by "+field;
             Query query =entityManager.createNativeQuery(sql);
             query.getResultList().forEach(object->{
@@ -84,7 +88,34 @@ public class OldmanRepository extends AbstractSpecificationRepository<OldmanBo,O
             });
             return map;
         }catch (Exception e){
-            REPOSITORY_ERROR.doThrowException("getZdFinishGroupCount",e);
+            REPOSITORY_ERROR.doThrowException("getOldmanBaseGroupByAttr",e);
+        }
+        return Maps.newHashMap();
+    }
+
+    public Map<String, Long> getOldmanGroupCount(String field, JpaSpecBo jpaSpecBo) {
+        try {
+            String table = getTableName();
+            Map<String,Long> map= Maps.newHashMap();
+            StringBuilder whereCase=new StringBuilder("where 1=1 ");
+            String whereSql = jpaSpecBo.getSql();
+            if(StringUtils.isNotEmpty(whereSql)){
+                whereCase.append("and ").append(whereSql);
+            }
+            String sql = String.format("select %s,count(%s) from oldman o left join oldman_attr oa on o.id=oa.oldman_id  " +
+                            " %s group by %s",
+                    field,field,table,whereCase,field);
+            Query query =entityManager.createNativeQuery(sql);
+            query.getResultList().forEach(object->{
+                Object[] cells = (Object[]) object;
+                String key = String.valueOf(cells[0]);
+                if (StringUtils.isNotBlank(key)) {
+                    map.put(key, Long.valueOf(String.valueOf(cells[1])));
+                }
+            });
+            return map;
+        }catch (Exception e){
+            REPOSITORY_ERROR.doThrowException("getGroupCount",e);
         }
         return Maps.newHashMap();
     }

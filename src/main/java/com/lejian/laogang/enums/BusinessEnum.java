@@ -61,11 +61,15 @@ public interface BusinessEnum {
             case "huji":
                 return find(value,OldmanEnum.Huji.class);
             case "FamilyType":
+            case  "2":
                 return find(value,OldmanAttrEnum.FamilyType.class);
             case "Income":
+            case  "4":
                 return find(value,OldmanAttrEnum.Income.class);
             case "ServiceStatus":
                 return find(value,OldmanAttrEnum.ServiceStatus.class);
+            case "999":
+                return find(value,OldmanAttrEnum.OldmanAttrType.class);
         }
         return null;
     }

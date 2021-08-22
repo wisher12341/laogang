@@ -17,11 +17,12 @@ public interface OldmanEnum extends BusinessEnum{
      */
     @Getter
     @AllArgsConstructor
-    enum Male implements OldmanEnum{
-        MAN(1,"男"),
-        WOMAN(2,"女");
+    enum Male implements OldmanAttrEnum.labelEnum {
+        MAN(1,"男",true),
+        WOMAN(2,"女",true);
         private Integer value;
         private String desc;
+        private Boolean display;
     }
 
     /**
@@ -29,11 +30,12 @@ public interface OldmanEnum extends BusinessEnum{
      */
     @Getter
     @AllArgsConstructor
-    enum Huji implements OldmanEnum{
-        LOCAL(1,"本镇户籍"),
-        WOMAN(2,"非本镇户籍");
+    enum Huji implements OldmanAttrEnum.labelEnum {
+        LOCAL(1,"本镇户籍",true),
+        WOMAN(2,"非本镇户籍",true);
         private Integer value;
         private String desc;
+        private Boolean display;
     }
 
 
@@ -42,11 +44,12 @@ public interface OldmanEnum extends BusinessEnum{
      */
     @Getter
     @AllArgsConstructor
-    enum IS_ZD implements OldmanEnum{
-        ZD(1,"重点老人"),
+    enum IS_ZD implements OldmanAttrEnum.labelEnum{
+        ZD(1,"重点老人",true),
         ;
         private Integer value;
         private String desc;
+        private Boolean display;
     }
 
     /**
@@ -83,13 +86,14 @@ public interface OldmanEnum extends BusinessEnum{
      */
     @Getter
     @AllArgsConstructor
-    enum politics implements OldmanEnum{
-        A(1,"群众"),
-        B(2,"中共党员"),
-        C(3,"民主党派"),
+    enum politics implements OldmanAttrEnum.labelEnum{
+        A(1,"群众",true),
+        B(2,"中共党员",true),
+        C(3,"民主党派",true),
         ;
         private Integer value;
         private String desc;
+        private Boolean display;
     }
 
     /**
@@ -129,13 +133,19 @@ public interface OldmanEnum extends BusinessEnum{
      */
     @Getter
     @AllArgsConstructor
-    enum eyesight implements OldmanEnum{
-        A(1,"失明"),
-        B(2,"弱视"),
-        C(3,"正常"),
+    enum eyesight implements OldmanAttrEnum.labelEnum{
+        A(1,"失明",true),
+        B(2,"弱视",true),
+        C(3,"正常",true){
+            @Override
+            public String getName() {
+                return "视力正常";
+            }
+        },
         ;
         private Integer value;
         private String desc;
+        private Boolean display;
     }
 
     /**
@@ -143,12 +153,18 @@ public interface OldmanEnum extends BusinessEnum{
      */
     @Getter
     @AllArgsConstructor
-    enum psychosis implements OldmanEnum{
-        A(1,"正常"),
-        B(2,"痴呆"),
-        C(3,"智障"),
+    enum psychosis implements  OldmanAttrEnum.labelEnum{
+        A(1,"正常",true){
+            @Override
+            public String getName() {
+                return "精神正常";
+            }
+        },
+        B(2,"痴呆",true),
+        C(3,"智障",true),
         ;
         private Integer value;
         private String desc;
+        private Boolean display;
     }
 }

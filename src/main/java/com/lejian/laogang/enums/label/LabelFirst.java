@@ -20,7 +20,9 @@ import java.util.stream.Collectors;
 public enum LabelFirst implements BusinessEnum {
     BASIC(1, "基础信息", 1),
     HEALTH(2, "健康档案", 2),
-    FAMILY(3, "家庭结构", 3),;
+    FAMILY(3, "家庭结构", 3),
+    ECONOMIC(4, "经济条件", 4),
+    YL(5, "养老状态", 5),;
     private Integer value;
     private String desc;
     private Integer sort;

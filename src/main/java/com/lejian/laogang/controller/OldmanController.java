@@ -165,4 +165,17 @@ public class OldmanController {
         response.setMap(service.getExtGroup(request.getType(),request.getValue()));
         return response;
     }
+
+    /**
+     * 获取 趋势数据
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/getTrend")
+    public MapResponse getTrend(@RequestBody GetTrendRequest request){
+        MapResponse response = new MapResponse();
+        response.setMap(service.getTrend(request.getType()));
+        return response;
+    }
 }

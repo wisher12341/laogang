@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 /**
  * 标签枚举
  */
-public interface LabelEnum {
+public interface LabelBaseEnum {
 
     /**
      * 标识
@@ -42,10 +42,16 @@ public interface LabelEnum {
      * @param parent
      * @return
      */
-    static List<LabelEnum> findByParent(Integer parent) {
-        List<LabelEnum> list = Lists.newArrayList();
+    static List<LabelBaseEnum> findByParent(Integer parent) {
+        List<LabelBaseEnum> list = Lists.newArrayList();
         list.addAll(Arrays.stream(CustomLabel.values())
                 .filter(item -> parent==null || item.getParent().intValue() == parent)
+                .filter(item-> {
+                    if (parent == null){
+                        return item.getDisplay();
+                    }
+                    return true;
+                })
                 .collect(Collectors.toList()));
         list.addAll(Arrays.stream(EnumLabel.values())
                 .filter(item -> parent==null ||item.getParent().intValue() == parent)
@@ -79,6 +85,7 @@ public interface LabelEnum {
         }
         for (EnumLabel enumLabel : EnumLabel.values()){
             if (map.containsKey(String.valueOf(enumLabel.getId()))){
+//                if (enumLabel == )
                 jpaSpecBo.getEqualMap().put(enumLabel.name().toLowerCase(),map.get(String.valueOf(enumLabel.getId())));
             }
         }

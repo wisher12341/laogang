@@ -11,6 +11,22 @@ import java.util.Map;
  */
 public interface OldmanAttrEnum extends BusinessEnum {
 
+    interface labelEnum extends OldmanAttrEnum{
+        /**
+         * 是否在一开始展示
+         * @return
+         */
+        Boolean getDisplay();
+
+        /**
+         * 展示名称
+         * @return
+         */
+        default String getName(){
+            return null;
+        };
+    }
+
     /**
      * 医保信息
      */
@@ -55,17 +71,23 @@ public interface OldmanAttrEnum extends BusinessEnum {
      */
     @Getter
     @AllArgsConstructor
-    enum FamilyType implements OldmanAttrEnum {
-        CHUNLAO(1, "纯老"),
-        DUJU(2, "独居"),
-        SHUDU(3, "失独"),
-        GULAO(4, "孤老"),
-        YLYYL(5, "一老养一老"),
-        SZRY(6, "三支人员"),
-        OTHER(0, "其他"),
-        A(7,"三峽移民");
+    enum FamilyType implements labelEnum {
+        CHUNLAO(1, "纯老",true),
+        DUJU(2, "独居",true),
+        SHUDU(3, "失独",true),
+        GULAO(4, "孤老",true),
+        YLYYL(5, "一老养一老",true),
+        SZRY(6, "三支人员",true),
+        OTHER(0, "其他",false){
+            @Override
+            public String getName() {
+                return "家庭结构-其他";
+            }
+        },
+        A(7,"三峽移民",true);
         private Integer value;
         private String desc;
+        private Boolean display;
 
     }
 
@@ -75,13 +97,14 @@ public interface OldmanAttrEnum extends BusinessEnum {
      */
     @Getter
     @AllArgsConstructor
-    enum ServiceStatus implements OldmanAttrEnum {
-        JG(1, "机构养老"),
-        SQ(2, "社区养老"),
-        JJ(3, "居家养老"),
+    enum ServiceStatus implements labelEnum {
+        JG(1, "机构养老",true),
+        SQ(2, "社区养老",true),
+        JJ(3, "居家养老",true),
         ;
         private Integer value;
         private String desc;
+        private Boolean display;
 
     }
 
@@ -128,16 +151,22 @@ public interface OldmanAttrEnum extends BusinessEnum {
      */
     @Getter
     @AllArgsConstructor
-    enum Faimly implements OldmanAttrEnum {
-        A(1, "独生子女家庭"),
-        B(2, "退伍军人"),
-        C(3, "烈士家属"),
-        D(4,"军属"),
-        E(5,"侨属"),
-        F(6,"其他")
+    enum Faimly implements labelEnum {
+        A(1, "独生子女家庭",true),
+        B(2, "退伍军人",true),
+        C(3, "烈士家属",true),
+        D(4,"军属",true),
+        E(5,"侨属",true),
+        F(6,"其他",false){
+            @Override
+            public String getName() {
+                return "家庭属性-其他";
+            }
+        }
         ;
         private Integer value;
         private String desc;
+        private Boolean display;
 
     }
 
@@ -147,16 +176,17 @@ public interface OldmanAttrEnum extends BusinessEnum {
      */
     @Getter
     @AllArgsConstructor
-    enum Income implements OldmanAttrEnum {
-        A(1, "子女赡养"),
-        B(2, "低收入"),
-        C(3, "低保"),
-        D(4,"帮困"),
-        E(5,"退休金"),
-        F(6,"其他")
+    enum Income implements labelEnum {
+        A(1, "子女赡养",true),
+        B(2, "低收入",true),
+        C(3, "低保",true),
+        D(4,"帮困",true),
+        E(5,"退休金",true),
+        F(6,"其他",false)
         ;
         private Integer value;
         private String desc;
+        private Boolean display;
 
     }
 

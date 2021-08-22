@@ -4,6 +4,7 @@ package com.lejian.laogang.enums;
 import com.lejian.laogang.pojo.bo.OldmanBo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.apache.commons.lang.StringUtils;
 
 import static com.lejian.laogang.common.Constant.IMPORT_RESET;
 
@@ -213,6 +214,9 @@ public enum OldmanExcelEnum implements ExcelEnum{
         public void handle(Object bo, Object value) {
             OldmanBo oldmanBo = (OldmanBo) bo;
             String str = (String) value;
+            if (StringUtils.isBlank(str)){
+                return;
+            }
             String[] gps;
             if (str.contains(",")) {
                 //英文

@@ -1,30 +1,14 @@
 function getTitle(title) {
-    var a;
-    if (title.constructor === Object){
-        a= {
-            text: title.text,
-            link:title.link,
-            textStyle: {
-                color: '#fff',
-                fontSize: 14,
-                fontWeight: 'normal'
-            },
-            x: '0%',
-            y: '0%'
-        };
-    }else{
-        a= {
-            text: title,
-            textStyle: {
-                color: '#fff',
-                fontSize: 14,
-                fontWeight: 'normal'
-            },
-            x: '0%',
-            y: '0%'
-        };
-    }
-    return a;
+    return {
+        text: title,
+        textStyle: {
+            color: '#fff',
+            fontSize: 14,
+            fontWeight: 'normal'
+        },
+        x: '0%',
+        y: '0%'
+    };
 }
 
 function getLegend(data) {
@@ -146,14 +130,14 @@ function pie2(title, data, target, callback, customLegend) {
     if (customLegend === null) {
         legend = getLegend(legend_data)
     } else {
-        legend =customLegend
+        legend = customLegend
     }
     var option = {
         title: getTitle(title),
         tooltip: {
             trigger: 'item'
         },
-        legend:legend,
+        legend: legend,
         series: [
             {
                 center: ['43%', '60%'],
@@ -164,7 +148,7 @@ function pie2(title, data, target, callback, customLegend) {
                 label: {
                     normal: {
                         position: 'inner',
-                        show : false
+                        show: false
                     }
                 },
                 emphasis: {
@@ -210,7 +194,7 @@ function bar4(title, data, target, callback, customLegend) {
     }
     var bar = echarts.init(obj);
     var option = {
-        title:getTitle(title),
+        title: getTitle(title),
         angleAxis: {
             type: 'category',
             data: xAxisData,
@@ -310,7 +294,7 @@ function pie3(title, data, target, callback, legendData) {
                 label: {
                     normal: {
                         position: 'inner',
-                        show : false
+                        show: false
                     }
                 },
                 data: data[1]
@@ -660,4 +644,86 @@ function bar2(title, data, target, callback) {
         });
     }
     bar.setOption(option, true);
+}
+
+
+/**
+ * 折线图形图
+ * @param title
+ * @param data
+ * @param obj
+ * @param callback
+ * @param lengend
+ */
+function    line1(title, data, target, callback, customLegend) {
+    var obj = document.getElementById(target);
+    var legend_data = [];
+    var series_data = [];
+    var xdata =[];
+    var i = 0;
+    for (var key in data) {
+        if (key !=="xdata"){
+            legend_data[i] = key;
+            series_data[i] = {name: key, value: data[key]};
+            i++;
+        }else{
+            xdata = data[key];
+        }
+    }
+    var line = echarts.init(obj);
+    var legend;
+    if (customLegend === null) {
+        legend =  {
+            data: legend_data
+        }
+    } else {
+        legend = customLegend;
+        legend.data = legend_data;
+    }
+    var series = [];
+    for (var k = 0; k < series_data.length; k++) {
+        series[k] = {
+            name: legend_data[k],
+            type: 'line',
+            data: series_data[k].value
+        }
+    }
+
+    var option = {
+        title: getTitle(title),
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: legend,
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        toolbox: {
+            feature: {
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: xdata
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: series
+    };
+    if (callback !== null) {
+        line.off('click');
+        line.on('click', function (params) {
+            var name = params.name;
+            callback(title, name);
+
+        });
+    }
+    console.info(JSON.stringify(option));
+    line.setOption(option, true);
 }

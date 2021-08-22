@@ -1,7 +1,7 @@
 package com.lejian.laogang.service;
 
 import com.lejian.laogang.controller.contract.request.GetLabelRequest;
-import com.lejian.laogang.enums.label.LabelEnum;
+import com.lejian.laogang.enums.label.LabelBaseEnum;
 import com.lejian.laogang.enums.label.LabelFirst;
 import com.lejian.laogang.pojo.bo.LabelBo;
 import com.lejian.laogang.pojo.vo.LabelVo;
@@ -16,9 +16,15 @@ import java.util.stream.Collectors;
 public class LabelService {
 
     public List<LabelVo> getLabel(GetLabelRequest request){
-        return LabelEnum.findByParent(request.getParent()).stream()
-                .map(LabelEnum::label)
+        return LabelBaseEnum.findByParent(request.getParent()).stream()
+                .map(LabelBaseEnum::label)
                 .flatMap(Collection::stream)
+                .filter(item->{
+                    if (request.getParent()==null){
+                        return item.getDisplay();
+                    }
+                    return true;
+                })
                 .sorted(Comparator.comparing(LabelBo::getSort))
                 .map(LabelBo::convert)
                 .collect(Collectors.toList());

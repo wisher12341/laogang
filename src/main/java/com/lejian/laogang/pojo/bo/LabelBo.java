@@ -9,6 +9,7 @@ public class LabelBo {
     private Integer parent;
     private String label;
     private Integer sort;
+    private Boolean display;
 
     public LabelVo convert() {
         LabelVo labelVo = new LabelVo();
