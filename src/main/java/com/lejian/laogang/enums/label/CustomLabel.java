@@ -22,8 +22,8 @@ public enum CustomLabel implements LabelBaseEnum {
         public void setWhereCase(JpaSpecBo jpaSpecBo) {
             String start=getDesc().split("-")[0];
             String end=getDesc().split("-")[1];
-            jpaSpecBo.getLessEMap().put("o.birthday", LocalDateTime.now().minusYears(Integer.valueOf(start)).toLocalDate());
-            jpaSpecBo.getGreatEMap().put("o.birthday", LocalDateTime.now().minusYears(Integer.valueOf(end)).toLocalDate());
+            jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(Integer.valueOf(start)).toLocalDate());
+            jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(Integer.valueOf(end)).toLocalDate());
         }
     },
     AGE_70_79(2, 1, 1, "70-79",true) {
@@ -31,8 +31,8 @@ public enum CustomLabel implements LabelBaseEnum {
         public void setWhereCase(JpaSpecBo jpaSpecBo) {
             String start=getDesc().split("-")[0];
             String end=getDesc().split("-")[1];
-            jpaSpecBo.getLessEMap().put("o.birthday", LocalDateTime.now().minusYears(Integer.valueOf(start)).toLocalDate());
-            jpaSpecBo.getGreatEMap().put("o.birthday", LocalDateTime.now().minusYears(Integer.valueOf(end)).toLocalDate());
+            jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(Integer.valueOf(start)).toLocalDate());
+            jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(Integer.valueOf(end)).toLocalDate());
         }
     },
     AGE_80_89(3, 1, 1, "80-89",true) {
@@ -40,38 +40,38 @@ public enum CustomLabel implements LabelBaseEnum {
         public void setWhereCase(JpaSpecBo jpaSpecBo) {
             String start=getDesc().split("-")[0];
             String end=getDesc().split("-")[1];
-            jpaSpecBo.getLessEMap().put("o.birthday", LocalDateTime.now().minusYears(Integer.valueOf(start)).toLocalDate());
-            jpaSpecBo.getGreatEMap().put("o.birthday", LocalDateTime.now().minusYears(Integer.valueOf(end)).toLocalDate());
+            jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(Integer.valueOf(start)).toLocalDate());
+            jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(Integer.valueOf(end)).toLocalDate());
         }
     },
     A21(9, 2, 1, "有慢病",true) {
         @Override
         public void setWhereCase(JpaSpecBo jpaSpecBo) {
-            jpaSpecBo.getEqualMap().put("oa.type","10");
+            jpaSpecBo.getLikeMap().put("oa.type","10");
         }
     },
     A22(10, 2, 1, "有失能情况",true) {
         @Override
         public void setWhereCase(JpaSpecBo jpaSpecBo) {
-            jpaSpecBo.getEqualMap().put("oa.type","8");
+            jpaSpecBo.getLikeMap().put("oa.type","8");
         }
     },
     A23(11, 2, 1, "有药物过敏",true) {
         @Override
         public void setWhereCase(JpaSpecBo jpaSpecBo) {
-            jpaSpecBo.getEqualMap().put("oa.type","9");
+            jpaSpecBo.getLikeMap().put("oa.type","9");
         }
     },
     A24(12, 2, 1, "有肿瘤史",true) {
         @Override
         public void setWhereCase(JpaSpecBo jpaSpecBo) {
-            jpaSpecBo.getEqualMap().put("oa.type","11");
+            jpaSpecBo.getLikeMap().put("oa.type","11");
         }
     },
     A25(13, 2, 1, "有病情既往史",true) {
         @Override
         public void setWhereCase(JpaSpecBo jpaSpecBo) {
-            jpaSpecBo.getEqualMap().put("oa.type","12");
+            jpaSpecBo.getLikeMap().put("oa.type","12");
         }
     },
     ;

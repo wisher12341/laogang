@@ -95,16 +95,19 @@ public class OldmanRepository extends AbstractSpecificationRepository<OldmanBo,O
 
     public Map<String, Long> getOldmanGroupCount(String field, JpaSpecBo jpaSpecBo) {
         try {
-            String table = getTableName();
+
             Map<String,Long> map= Maps.newHashMap();
             StringBuilder whereCase=new StringBuilder("where 1=1 ");
             String whereSql = jpaSpecBo.getSql();
             if(StringUtils.isNotEmpty(whereSql)){
                 whereCase.append("and ").append(whereSql);
             }
-            String sql = String.format("select %s,count(%s) from oldman o left join oldman_attr oa on o.id=oa.oldman_id  " +
-                            " %s group by %s",
-                    field,field,table,whereCase,field);
+            //todo
+            String sql = String.format("select o.male,count(1) from oldman o left join(                             \n" +
+                            "select a.id,GROUP_CONCAT(b.type SEPARATOR ',') AS types \n" +
+                            "from oldman a left join oldman_attr b on a.id=b.oldman_id\n" +
+                            "group by a.id) oa on o.id=oa.id where oa.types like \"%11%\" group by o.male",
+                    field,field,whereCase,field);
             Query query =entityManager.createNativeQuery(sql);
             query.getResultList().forEach(object->{
                 Object[] cells = (Object[]) object;

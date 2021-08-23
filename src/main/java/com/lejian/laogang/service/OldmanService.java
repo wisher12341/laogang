@@ -18,6 +18,7 @@ import com.lejian.laogang.repository.entity.OldmanEntity;
 import com.lejian.laogang.util.DateUtils;
 import com.lejian.laogang.util.LjReflectionUtils;
 import com.lejian.laogang.util.TrendUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.logging.log4j.util.Strings;
@@ -62,9 +63,21 @@ public class OldmanService {
         fieldNameList.forEach(fieldName -> {
             Map<String, Long> result;
             if (OldmanEntity.haveField(fieldName)) {
-                result = oldmanRepository.getOldmanGroupCount("o."+fieldName, jpaSpecBo);
+                //支持可视化标签筛选 labelIdList
+                if (CollectionUtils.isEmpty(labelIdList)){
+                    result = oldmanRepository.getGroupCount(fieldName, jpaSpecBo);
+                }else {
+                    List<String> attrLabel = Lists.newArrayList(labelIdList);
+                    attrLabel.removeAll(LabelBaseEnum.getBaseLabelId());
+                    if (CollectionUtils.isNotEmpty(attrLabel)) {
+                        //标签中包含 oldman_attr中的属性
+                        result = oldmanRepository.getOldmanGroupCount("o." + fieldName, jpaSpecBo);
+                    } else {
+                        result = oldmanRepository.getGroupCount(fieldName, jpaSpecBo);
+                    }
+                }
             } else {
-                //不支持标签
+                //不支持可视化标签筛选 labelIdList
                 Map<String, String> attrWhere = OldmanAttrEnum.generateAttrWhere(fieldName);
                 jpaSpecBo.getEqualMap().putAll(attrWhere);
                 //不用对老人去重

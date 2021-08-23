@@ -85,10 +85,15 @@ public interface LabelBaseEnum {
         }
         for (EnumLabel enumLabel : EnumLabel.values()){
             if (map.containsKey(String.valueOf(enumLabel.getId()))){
+                //todo
 //                if (enumLabel == )
                 jpaSpecBo.getEqualMap().put(enumLabel.name().toLowerCase(),map.get(String.valueOf(enumLabel.getId())));
             }
         }
         return jpaSpecBo;
+    }
+
+    static List<String> getBaseLabelId(){
+        return Lists.newArrayList("1","2","3","4","6","7","8","14","15");
     }
 }
