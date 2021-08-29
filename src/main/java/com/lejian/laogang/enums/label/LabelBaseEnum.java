@@ -69,13 +69,16 @@ public interface LabelBaseEnum {
         if (CollectionUtils.isEmpty(labelIdList)){
             return jpaSpecBo;
         }
-        Map<String,String> map = Maps.newHashMap();
+        Map<String,List<String>> map = Maps.newHashMap();
         labelIdList.forEach(id->{
             if (id.contains("_")){
                 String[] arr = id.split("_");
-                map.put(arr[0],arr[1]);
+                if (!map.containsKey(arr[0])){
+                    map.put(arr[0], Lists.newArrayList());
+                }
+                map.get(arr[0]).add(arr[1]);
             }else{
-                map.put(id, StringUtils.EMPTY);
+                map.put(id, Lists.newArrayList());
             }
         });
         for (CustomLabel customLabel : CustomLabel.values()){
@@ -85,9 +88,7 @@ public interface LabelBaseEnum {
         }
         for (EnumLabel enumLabel : EnumLabel.values()){
             if (map.containsKey(String.valueOf(enumLabel.getId()))){
-                //todo
-//                if (enumLabel == )
-                jpaSpecBo.getEqualMap().put(enumLabel.name().toLowerCase(),map.get(String.valueOf(enumLabel.getId())));
+                enumLabel.setWhereCase(jpaSpecBo,map.get(String.valueOf(enumLabel.getId())));
             }
         }
         return jpaSpecBo;
@@ -96,4 +97,5 @@ public interface LabelBaseEnum {
     static List<String> getBaseLabelId(){
         return Lists.newArrayList("1","2","3","4","6","7","8","14","15");
     }
+
 }

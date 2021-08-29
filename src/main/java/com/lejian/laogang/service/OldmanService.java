@@ -10,10 +10,7 @@ import com.lejian.laogang.enums.label.LabelBaseEnum;
 import com.lejian.laogang.pojo.bo.*;
 import com.lejian.laogang.pojo.vo.LocationVo;
 import com.lejian.laogang.pojo.vo.OldmanVo;
-import com.lejian.laogang.repository.HistoryRepository;
-import com.lejian.laogang.repository.LocationRepository;
-import com.lejian.laogang.repository.OldmanAttrRepository;
-import com.lejian.laogang.repository.OldmanRepository;
+import com.lejian.laogang.repository.*;
 import com.lejian.laogang.repository.entity.OldmanEntity;
 import com.lejian.laogang.util.DateUtils;
 import com.lejian.laogang.util.LjReflectionUtils;
@@ -55,6 +52,8 @@ public class OldmanService {
     private LocationRepository locationRepository;
     @Autowired
     private HistoryRepository historyRepository;
+    @Autowired
+    private OldmanViewRepository oldmanViewRepository;
 
 
     public Map<String, Object> getGroupCount(List<String> fieldNameList, List<String> labelIdList) {
@@ -63,19 +62,7 @@ public class OldmanService {
         fieldNameList.forEach(fieldName -> {
             Map<String, Long> result;
             if (OldmanEntity.haveField(fieldName)) {
-                //支持可视化标签筛选 labelIdList
-                if (CollectionUtils.isEmpty(labelIdList)){
-                    result = oldmanRepository.getGroupCount(fieldName, jpaSpecBo);
-                }else {
-                    List<String> attrLabel = Lists.newArrayList(labelIdList);
-                    attrLabel.removeAll(LabelBaseEnum.getBaseLabelId());
-                    if (CollectionUtils.isNotEmpty(attrLabel)) {
-                        //标签中包含 oldman_attr中的属性
-                        result = oldmanRepository.getOldmanGroupCount("o." + fieldName, jpaSpecBo);
-                    } else {
-                        result = oldmanRepository.getGroupCount(fieldName, jpaSpecBo);
-                    }
-                }
+                result = oldmanViewRepository.getGroupCount(fieldName,jpaSpecBo);
             } else {
                 //不支持可视化标签筛选 labelIdList
                 Map<String, String> attrWhere = OldmanAttrEnum.generateAttrWhere(fieldName);
@@ -102,7 +89,14 @@ public class OldmanService {
     }
 
     public List<OldmanVo> getByPage(OldmanParam oldmanParam, PageParam pageParam) {
-        List<OldmanBo> oldmanBoList = oldmanRepository.findByPageWithSpec(pageParam.getPageNo(), pageParam.getPageSize(), oldmanParam.convert());
+        List<OldmanBo> oldmanBoList;
+        if (oldmanParam.getIsView()) {
+            JpaSpecBo jpaSpecBo = oldmanParam.convert();
+            oldmanBoList = oldmanViewRepository.findByPageWithSpec(pageParam.getPageNo(), pageParam.getPageSize(),jpaSpecBo );
+        }else{
+            oldmanBoList = oldmanRepository.findByPageWithSpec(pageParam.getPageNo(), pageParam.getPageSize(), oldmanParam.convert());
+
+        }
         return oldmanBoList.stream().map(OldmanBo::convertVo).collect(Collectors.toList());
     }
 
@@ -112,22 +106,38 @@ public class OldmanService {
 
         jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(60).toLocalDate());
         jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(69).toLocalDate());
-        map.put("60-69", oldmanRepository.getGroupCount("male", jpaSpecBo));
+        map.put("60-69", oldmanViewRepository.getGroupCount("male", jpaSpecBo));
 
         jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(70).toLocalDate());
         jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(79).toLocalDate());
-        map.put("70-79", oldmanRepository.getGroupCount("male", jpaSpecBo));
+        map.put("70-79", oldmanViewRepository.getGroupCount("male", jpaSpecBo));
 
         jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(80).toLocalDate());
         jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(89).toLocalDate());
-        map.put("80-89", oldmanRepository.getGroupCount("male", jpaSpecBo));
+        map.put("80-89", oldmanViewRepository.getGroupCount("male", jpaSpecBo));
         return map;
     }
 
-    public List<LocationVo> getAllLocation(OldmanParam oldmanParam) {
-        Map<String, Long> locationMap = oldmanRepository.getGroupCount("location_id", oldmanParam.convert());
-        List<LocationBo> locationBoList = locationRepository.getByPkIds(locationMap.keySet().stream().filter(item -> !item.equals("null")).map(Integer::valueOf).collect(Collectors.toList()));
-        return locationBoList.stream().map(item -> item.convertVo(locationMap)).collect(Collectors.toList());
+    public List<LocationVo> getLocation(OldmanParam oldmanParam) {
+        if (oldmanParam.getIsView()){
+            List<LocationVo> locationVoList = Lists.newArrayList();
+            Map<String, Long> locationMap = oldmanViewRepository.getGroupCount("location", oldmanParam.convert());
+            locationMap.forEach((k,v)->{
+                String[] arr = k.split("_");
+                if (arr.length==2) {
+                    LocationVo vo = new LocationVo();
+                    vo.setCount(v + "");
+                    vo.setLng(arr[0]);
+                    vo.setLat(arr[1]);
+                    locationVoList.add(vo);
+                }
+            });
+            return locationVoList;
+        }else {
+            Map<String, Long> locationMap =oldmanRepository.getGroupCount("location_id", oldmanParam.convert());
+            List<LocationBo> locationBoList = locationRepository.getByPkIds(locationMap.keySet().stream().filter(item -> !item.equals("null")).map(Integer::valueOf).collect(Collectors.toList()));
+            return locationBoList.stream().map(item -> item.convertVo(locationMap)).collect(Collectors.toList());
+        }
     }
 
     public Map<String, Object> getCount(List<OldmanParam> request) {

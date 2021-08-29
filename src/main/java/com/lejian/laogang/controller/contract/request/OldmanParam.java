@@ -2,16 +2,18 @@ package com.lejian.laogang.controller.contract.request;
 
 import com.lejian.laogang.enums.BusinessEnum;
 import com.lejian.laogang.enums.OldmanEnum;
+import com.lejian.laogang.enums.label.LabelBaseEnum;
 import com.lejian.laogang.pojo.bo.JpaSpecBo;
 import lombok.Data;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class OldmanParam {
-
     private String name;
     private String idCard;
     private Integer serviceStatus;
@@ -36,12 +38,18 @@ public class OldmanParam {
     private Boolean isZd;
 
 
+    private List<String> labelIdList;
 
+    private Boolean isView = false;
 
     public JpaSpecBo convert() {
         JpaSpecBo jpaSpecBo = new JpaSpecBo();
-        jpaSpecBo.getEqualMap().put("status",0);
-
+        if (CollectionUtils.isNotEmpty(labelIdList)){
+            jpaSpecBo = LabelBaseEnum.generateJpaSpecBo(labelIdList);
+        }
+        if (!isView){
+            jpaSpecBo.getEqualMap().put("status", 0);
+        }
 
         if(StringUtils.isNotBlank(this.getAreaCustomOne())){
             jpaSpecBo.getEqualMap().put("areaCustomOne", this.getAreaCustomOne());
@@ -97,4 +105,5 @@ public class OldmanParam {
         }
         return jpaSpecBo;
     }
+
 }

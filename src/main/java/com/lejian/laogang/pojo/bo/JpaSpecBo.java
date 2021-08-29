@@ -98,6 +98,21 @@ public class JpaSpecBo {
                 whereCase.append(prex+convertKey).append(">='").append(greatEMap.get(key)).append("'");
             }
         }
+        if (MapUtils.isNotEmpty(likeMap)) {
+            Iterator iterator = likeMap.keySet().iterator();
+            String key = (String) iterator.next();
+            String convertKey =  StringUtils.camelToUnderline(key);
+            if (whereCase.length()>0){
+                whereCase.append(" and ");
+            }
+            whereCase.append(prex+convertKey).append(" like '%").append(likeMap.get(key)).append("%'");
+            while (iterator.hasNext()) {
+                whereCase.append(" and ");
+                key = (String) iterator.next();
+                convertKey = StringUtils.camelToUnderline(key);
+                whereCase.append(prex+convertKey).append(" like '%").append(likeMap.get(key)).append("%'");
+            }
+        }
         return whereCase.toString();
     }
 

@@ -26,7 +26,7 @@ public enum CustomLabel implements LabelBaseEnum {
             jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(Integer.valueOf(end)).toLocalDate());
         }
     },
-    AGE_70_79(2, 1, 1, "70-79",true) {
+    AGE_70_79(5, 1, 1, "70-79",true) {
         @Override
         public void setWhereCase(JpaSpecBo jpaSpecBo) {
             String start=getDesc().split("-")[0];
@@ -35,7 +35,7 @@ public enum CustomLabel implements LabelBaseEnum {
             jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(Integer.valueOf(end)).toLocalDate());
         }
     },
-    AGE_80_89(3, 1, 1, "80-89",true) {
+    AGE_80_89(19, 1, 1, "80-89",true) {
         @Override
         public void setWhereCase(JpaSpecBo jpaSpecBo) {
             String start=getDesc().split("-")[0];
@@ -44,34 +44,34 @@ public enum CustomLabel implements LabelBaseEnum {
             jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(Integer.valueOf(end)).toLocalDate());
         }
     },
-    A21(9, 2, 1, "有慢病",true) {
+    A21(10, 2, 1, "有慢病",true) {
         @Override
         public void setWhereCase(JpaSpecBo jpaSpecBo) {
-            jpaSpecBo.getLikeMap().put("oa.type","10");
+            jpaSpecBo.getLikeMap().put("label","%10_%");
         }
     },
-    A22(10, 2, 1, "有失能情况",true) {
+    A22(8, 2, 1, "有失能情况",true) {
         @Override
         public void setWhereCase(JpaSpecBo jpaSpecBo) {
-            jpaSpecBo.getLikeMap().put("oa.type","8");
+            jpaSpecBo.getLikeMap().put("label","%8_%");
         }
     },
-    A23(11, 2, 1, "有药物过敏",true) {
+    A23(9, 2, 1, "有药物过敏",true) {
         @Override
         public void setWhereCase(JpaSpecBo jpaSpecBo) {
-            jpaSpecBo.getLikeMap().put("oa.type","9");
+            jpaSpecBo.getLikeMap().put("label","%9_%");
         }
     },
-    A24(12, 2, 1, "有肿瘤史",true) {
+    A24(11, 2, 1, "有肿瘤史",true) {
         @Override
         public void setWhereCase(JpaSpecBo jpaSpecBo) {
-            jpaSpecBo.getLikeMap().put("oa.type","11");
+            jpaSpecBo.getLikeMap().put("label","%11_%");
         }
     },
-    A25(13, 2, 1, "有病情既往史",true) {
+    A25(12, 2, 1, "有病情既往史",true) {
         @Override
         public void setWhereCase(JpaSpecBo jpaSpecBo) {
-            jpaSpecBo.getLikeMap().put("oa.type","12");
+            jpaSpecBo.getLikeMap().put("label","%12_%");
         }
     },
     ;

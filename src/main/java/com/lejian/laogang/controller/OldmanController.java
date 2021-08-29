@@ -84,10 +84,10 @@ public class OldmanController {
      * @return
      */
     @ResponseBody
-    @RequestMapping("/getAllLocation")
-    public GetLocationResponse getAllLocation(@RequestBody OldmanParam request){
+    @RequestMapping("/getLocation")
+    public GetLocationResponse getLocation(@RequestBody OldmanParam request){
         GetLocationResponse response = new GetLocationResponse();
-        response.setVoList(service.getAllLocation(request));
+        response.setVoList(service.getLocation(request));
         return response;
     }
 

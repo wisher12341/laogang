@@ -4,6 +4,7 @@ import com.lejian.laogang.enums.BusinessEnum;
 import com.lejian.laogang.enums.OldmanEnum;
 import com.lejian.laogang.pojo.vo.OldmanVo;
 import com.lejian.laogang.repository.entity.OldmanEntity;
+import com.lejian.laogang.repository.entity.OldmanViewEntity;
 import com.lejian.laogang.util.DateUtils;
 import lombok.Data;
 import org.apache.commons.lang.StringUtils;
@@ -57,6 +58,13 @@ public class OldmanBo extends BaseBo {
     private String gpsDesc;
 
     public static OldmanBo convert(OldmanEntity entity) {
+        OldmanBo oldmanBo = new OldmanBo();
+        BeanUtils.copyProperties(entity,oldmanBo);
+        oldmanBo.setMale(BusinessEnum.find(entity.getMale(), OldmanEnum.Male.class));
+        return oldmanBo;
+    }
+
+    public static OldmanBo convert(OldmanViewEntity entity) {
         OldmanBo oldmanBo = new OldmanBo();
         BeanUtils.copyProperties(entity,oldmanBo);
         oldmanBo.setMale(BusinessEnum.find(entity.getMale(), OldmanEnum.Male.class));

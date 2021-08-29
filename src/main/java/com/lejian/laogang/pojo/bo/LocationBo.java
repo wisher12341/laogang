@@ -52,7 +52,7 @@ public class LocationBo extends BaseBo{
         LocationVo vo = new LocationVo();
         vo.setLat(this.lat);
         vo.setLng(this.lng);
-        vo.setCount(String.valueOf(locationMap.get(String.valueOf(this.id))*10));
+        vo.setCount(String.valueOf(locationMap.get(String.valueOf(this.id))));
         return vo;
     }
 }

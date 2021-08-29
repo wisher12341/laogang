@@ -102,12 +102,12 @@ public class OldmanRepository extends AbstractSpecificationRepository<OldmanBo,O
             if(StringUtils.isNotEmpty(whereSql)){
                 whereCase.append("and ").append(whereSql);
             }
-            //todo
-            String sql = String.format("select o.male,count(1) from oldman o left join(                             \n" +
-                            "select a.id,GROUP_CONCAT(b.type SEPARATOR ',') AS types \n" +
-                            "from oldman a left join oldman_attr b on a.id=b.oldman_id\n" +
-                            "group by a.id) oa on o.id=oa.id where oa.types like \"%11%\" group by o.male",
-                    field,field,whereCase,field);
+            String sql = String.format("select %s,count(1) from oldman o left join(                             \n" +
+                            "select a.id,GROUP_CONCAT(b.type SEPARATOR ',') AS types " +
+                            "from oldman a left join oldman_attr b on a.id=b.oldman_id " +
+                            "group by a.id) oa on o.id=oa.id " +
+                            " %s group by %s",
+                    field,whereCase,field);
             Query query =entityManager.createNativeQuery(sql);
             query.getResultList().forEach(object->{
                 Object[] cells = (Object[]) object;

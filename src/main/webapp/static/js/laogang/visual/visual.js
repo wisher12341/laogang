@@ -2,6 +2,7 @@ var map;
 var totalOldmanCount;
 var healthData, incomeData, familyTypeData;
 var selectLabelId=[];
+var table
 $(document).ready(function () {
     init1();
     init2();
@@ -301,7 +302,7 @@ function change(title, type, trend) {
  * @constructor
  */
 function initOldman() {
-    var table = $(".dataTables-example").dataTable(
+    table = $(".dataTables-example").dataTable(
         {
             "sPaginationType": "full_numbers",
             "bPaginite": true,
@@ -323,9 +324,9 @@ function initOldman() {
                 data: "idCard"
             }
             ],
-            "iDisplayLength": 3,
+            "iDisplayLength": 4,
             "createdRow": function (row, data, dataIndex) {
-                $(row).css("background-color", "rgba(255, 255, 255, 0.1)");
+                $(row).css("background-color", "#1e3746");
                 $(row).css("color", "white");
             },
             "sAjaxSource": "/oldman/getByPage",//这个是请求的地址
@@ -333,7 +334,7 @@ function initOldman() {
         });
 
     function retrieveData(url, aoData, fnCallback) {
-        aoData.iDisplayLength = 4;
+        aoData.iDisplayLength = 5;
         $.ajax({
             url: url,//这个就是请求地址对应sAjaxSource
             data: JSON.stringify({
@@ -341,7 +342,10 @@ function initOldman() {
                     "pageNo": aoData.iDisplayStart / aoData.iDisplayLength,
                     "pageSize": aoData.iDisplayLength
                 },
-                "oldmanParam": {}
+                "oldmanParam": {
+                    "labelIdList":selectLabelId,
+                    "isView":true
+                },
             }),
             type: 'post',
             dataType: 'json',
@@ -422,11 +426,21 @@ function getLabel(parent) {
 }
 
 function labelClick(label,id) {
-    selectLabelId[selectLabelId.length]=id;
-    var div = $("<div class='label labelC'>" + label + "</div>");
-    $("#selectLabel").append(div);
-    initStatistics();
-    initOldman();
+    var f = true;
+    for(var i=0;i<selectLabelId.length;i++){
+       if (selectLabelId[i] === id){
+           f = false;
+           break;
+       }
+    }
+    if (f){
+        selectLabelId[selectLabelId.length]=id;
+        var div = $("<div class='label labelC'>" + label + "</div>");
+        $("#selectLabel").append(div);
+        initStatistics();
+        table.fnFilter();
+        heatmap();
+    }
 }
 
 /**
@@ -468,7 +482,9 @@ function initStatistics() {
         url: "/oldman/getAgeGroupCount",
         type: 'post',
         dataType: 'json',
-        data: JSON.stringify({}),
+        data: JSON.stringify({
+            "labelIdList":selectLabelId
+        }),
         contentType: "application/json;charset=UTF-8",
         success: function (result) {
             var map = result.map;
@@ -478,4 +494,11 @@ function initStatistics() {
     });
 }
 
-
+function clearLabel() {
+    selectLabelId=[];
+    $("#selectLabel").html("");
+    getLabel(0);
+    initStatistics();
+    heatmap();
+    table.fnFilter();
+}
