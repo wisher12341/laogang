@@ -2,61 +2,26 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="laogang:war" />
+      <artifact name="laogang:war exploded" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0ea2ff2-7299-4f96-bf83-2ea0c7d8bf2e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/OldmanViewRepository.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/dao/OldmanViewDao.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/entity/OldmanViewEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/lejian/laogang/controller/OldmanController.class" afterPath="$PROJECT_DIR$/target/classes/com/lejian/laogang/controller/OldmanController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/lejian/laogang/controller/contract/request/OldmanParam.class" afterPath="$PROJECT_DIR$/target/classes/com/lejian/laogang/controller/contract/request/OldmanParam.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/lejian/laogang/enums/label/CustomLabel.class" afterPath="$PROJECT_DIR$/target/classes/com/lejian/laogang/enums/label/CustomLabel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/lejian/laogang/enums/label/EnumLabel.class" afterPath="$PROJECT_DIR$/target/classes/com/lejian/laogang/enums/label/EnumLabel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/lejian/laogang/pojo/bo/JpaSpecBo.class" afterPath="$PROJECT_DIR$/target/classes/com/lejian/laogang/pojo/bo/JpaSpecBo.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/lejian/laogang/pojo/bo/LocationBo.class" afterPath="$PROJECT_DIR$/target/classes/com/lejian/laogang/pojo/bo/LocationBo.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/lejian/laogang/pojo/bo/OldmanBo.class" afterPath="$PROJECT_DIR$/target/classes/com/lejian/laogang/pojo/bo/OldmanBo.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/lejian/laogang/repository/OldmanRepository.class" afterPath="$PROJECT_DIR$/target/classes/com/lejian/laogang/repository/OldmanRepository.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/controller/OldmanController.class" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/controller/OldmanController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/controller/contract/request/OldmanParam.class" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/controller/contract/request/OldmanParam.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/enums/label/CustomLabel.class" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/enums/label/CustomLabel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/enums/label/EnumLabel.class" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/enums/label/EnumLabel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/pojo/bo/JpaSpecBo.class" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/pojo/bo/JpaSpecBo.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/pojo/bo/LocationBo.class" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/pojo/bo/LocationBo.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/pojo/bo/OldmanBo.class" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/pojo/bo/OldmanBo.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/repository/OldmanRepository.class" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/repository/OldmanRepository.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/service/OldmanService.class" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/service/OldmanService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/OrganController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/GetOrganRequest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/OrganParam.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/OrganBo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/entity/OrganEntity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/OldmanController.java" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/OldmanController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/OldmanParam.java" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/OldmanParam.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/enums/label/CustomLabel.java" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/enums/label/CustomLabel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/enums/label/EnumLabel.java" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/enums/label/EnumLabel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/enums/label/LabelBaseEnum.java" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/enums/label/LabelBaseEnum.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/JpaSpecBo.java" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/JpaSpecBo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/LocationBo.java" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/LocationBo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/OldmanBo.java" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/OldmanBo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/OldmanRepository.java" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/OldmanRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/service/OldmanService.java" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/service/OldmanService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/visual.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/visual.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/static/css/visual.css" afterPath="$PROJECT_DIR$/src/main/webapp/static/css/visual.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/static/js/laogang/visual/map.js" afterPath="$PROJECT_DIR$/src/main/webapp/static/js/laogang/visual/map.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/static/js/laogang/visual/visual.js" afterPath="$PROJECT_DIR$/src/main/webapp/static/js/laogang/visual/visual.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/static/WEB-INF/page/visual.html" afterPath="$PROJECT_DIR$/target/classes/static/WEB-INF/page/visual.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/static/static/css/visual.css" afterPath="$PROJECT_DIR$/target/classes/static/static/css/visual.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/static/static/js/laogang/visual/map.js" afterPath="$PROJECT_DIR$/target/classes/static/static/js/laogang/visual/map.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/static/static/js/laogang/visual/visual.js" afterPath="$PROJECT_DIR$/target/classes/static/static/js/laogang/visual/visual.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/WEB-INF/page/visual.html" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/WEB-INF/page/visual.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/static/WEB-INF/page/visual.html" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/static/WEB-INF/page/visual.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/static/css/visual.css" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/static/css/visual.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/static/js/laogang/visual/map.js" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/static/js/laogang/visual/map.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/static/js/laogang/visual/visual.js" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/static/js/laogang/visual/visual.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/static/static/css/visual.css" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/static/static/css/visual.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/static/static/js/laogang/visual/map.js" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/static/static/js/laogang/visual/map.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/static/static/js/laogang/visual/visual.js" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/static/static/js/laogang/visual/visual.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/page/visual.html" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/page/visual.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/static/css/visual.css" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/static/css/visual.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/static/js/laogang/visual/map.js" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/static/js/laogang/visual/map.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/static/js/laogang/visual/visual.js" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/static/js/laogang/visual/visual.js" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -70,117 +35,110 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="OldmanService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/service/OldmanService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AbstractSpecificationRepository.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/AbstractSpecificationRepository.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="57" column="20" lean-forward="false" selection-start-line="57" selection-start-column="20" selection-end-line="57" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OldmanViewEntity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/entity/OldmanViewEntity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="49" column="27" lean-forward="false" selection-start-line="49" selection-start-column="27" selection-end-line="49" selection-end-column="27" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="visual.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/page/visual.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="8" column="33" lean-forward="false" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
+            <state relative-caret-position="616">
+              <caret line="179" column="49" lean-forward="false" selection-start-line="179" selection-start-column="49" selection-end-line="179" selection-end-column="49" />
               <folding>
                 <element signature="n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#div#0;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#div#1;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#div#2;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#div#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#div#0;n#div#0;n#div#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#div#1;n#div#0;n#div#0;n#div#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#style#0;n#div#1;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#3;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#div#0;n#div#0;n#div#1;n#div#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#div#1;n#div#0;n#div#1;n#div#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#style#0;n#div#2;n#div#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="visual.css" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/static/css/visual.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="409">
-              <caret line="51" column="41" lean-forward="false" selection-start-line="51" selection-start-column="41" selection-end-line="51" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LocationVo.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/vo/LocationVo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="8" column="18" lean-forward="false" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LocationBo.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/LocationBo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="50" column="50" lean-forward="false" selection-start-line="50" selection-start-column="50" selection-end-line="50" selection-end-column="50" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="map.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/laogang/visual/map.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="28" column="13" lean-forward="true" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MethodProxy.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/5.2.7.RELEASE/spring-core-5.2.7.RELEASE.jar!/org/springframework/cglib/proxy/MethodProxy.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="105" column="0" lean-forward="false" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="visual.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="visual.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/laogang/visual/visual.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="328" column="55" lean-forward="false" selection-start-line="328" selection-start-column="49" selection-end-line="328" selection-end-column="55" />
+            <state relative-caret-position="4075">
+              <caret line="182" column="39" lean-forward="false" selection-start-line="182" selection-start-column="39" selection-end-line="182" selection-end-column="39" />
               <folding>
                 <element signature="e#7784#8774#0" expanded="false" />
                 <element signature="n#!!block;n#labelFirstClick#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GetOrganRequest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/GetOrganRequest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="175">
+              <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="common.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/laogang/common/common.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="8" column="9" lean-forward="false" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OldmanParam.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/OldmanParam.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="125">
+              <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OrganParam.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/OrganParam.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="6" column="25" lean-forward="false" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OrganEntity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/entity/OrganEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="13" column="20" lean-forward="false" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OrganBo.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/OrganBo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="22" column="11" lean-forward="false" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OldmanEntity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/entity/OldmanEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1825">
+              <caret line="81" column="4" lean-forward="false" selection-start-line="81" selection-start-column="4" selection-end-line="82" selection-end-column="33" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -198,8 +156,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>areaVillage3</find>
-      <find>FamilyType</find>
       <find>eightSum2</find>
       <find>pie2</find>
       <find>Health</find>
@@ -228,6 +184,8 @@
       <find>&quot;isView&quot;:</find>
       <find>getLocation</find>
       <find>getB</find>
+      <find>areaVillage3</find>
+      <find>人口</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -251,11 +209,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/entity/OldmanAttrEntity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/dao/OldmanAttrDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/AbstractSpecificationRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/enums/OldmanAttrExcelEnum.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/OldmanAttrBo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/GetTypeCountRequest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/enums/OldmanAttrMap.java" />
@@ -288,20 +241,25 @@
         <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/OldmanViewRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/OldmanBo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/enums/label/LabelBaseEnum.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/visual.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/JpaSpecBo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/enums/label/EnumLabel.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/enums/label/CustomLabel.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/OldmanController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/GetOldmanRequest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/OldmanParam.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/static/js/laogang/visual/visual.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/static/js/laogang/visual/map.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/vo/LocationVo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/LocationBo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/entity/OldmanViewEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/service/OldmanService.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/static/css/visual.css" />
+        <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/OrganController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/GetOrganRequest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/OrganParam.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/entity/OrganEntity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/OrganBo.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/static/js/laogang/visual/visual.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/visual.html" />
       </list>
     </option>
   </component>
@@ -342,7 +300,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -384,6 +343,27 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="laogang" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="laogang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="laogang" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="laogang" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+              <item name="contract" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="laogang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="laogang" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="laogang" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+              <item name="contract" type="462c0819:PsiDirectoryNode" />
+              <item name="request" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="laogang" type="b2602c69:ProjectViewProjectNode" />
@@ -538,9 +518,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
       <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -562,11 +541,11 @@
       <recent name="C:\sp\gitProject\laogang\src\main\webapp\WEB-INF\page" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.lejian.laogang.repository.dao" />
-      <recent name="com.lejian.laogang.repository" />
       <recent name="com.lejian.laogang.pojo.bo" />
       <recent name="com.lejian.laogang.repository.entity" />
-      <recent name="com.lejian.laogang.enums" />
+      <recent name="com.lejian.laogang.controller.contract.request" />
+      <recent name="com.lejian.laogang.controller" />
+      <recent name="com.lejian.laogang.repository.dao" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\sp\gitProject\laogang\src\main\webapp\static\js\laogang\visual" />
@@ -594,9 +573,10 @@
       <envs />
     </configuration>
     <configuration name="Unnamed" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.59" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="UPDATING_POLICY" value="restart-server" />
+      <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
       <deployment>
-        <artifact name="laogang:war">
+        <artifact name="laogang:war exploded">
           <settings>
             <option name="CONTEXT_PATH" value="/" />
           </settings>
@@ -661,7 +641,7 @@
       </ConfigurationWrapper>
       <method>
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="laogang:war" />
+          <artifact name="laogang:war exploded" />
         </option>
       </method>
     </configuration>
@@ -768,12 +748,13 @@
       <workItem from="1628424632397" duration="59000" />
       <workItem from="1628426464798" duration="14733000" />
       <workItem from="1628945365448" duration="79769000" />
-      <workItem from="1629556624081" duration="68599000" />
+      <workItem from="1629556624081" duration="75975000" />
+      <workItem from="1630755178431" duration="755000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="363176000" />
+    <option name="totallyTimeSpent" value="371307000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -786,36 +767,37 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40449437" sideWeight="0.50214595" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921347" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40449437" sideWeight="0.49785408" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921347" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4258427" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40449437" sideWeight="0.50214595" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921347" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921347" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921347" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33707866" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2333691" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23658799" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40449437" sideWeight="0.49785408" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4258427" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921347" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -843,79 +825,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/dao/HistoryDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/HistoryBo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="7" column="22" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#361#362#0" expanded="false" />
-            <element signature="e#388#389#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/HistoryRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="22" column="23" lean-forward="false" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/common/IRespCode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="118" column="0" lean-forward="false" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
-          <folding>
-            <element signature="e#2847#2848#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_144/src.zip!/java/util/function/Consumer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="48" column="9" lean-forward="false" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/plugins/echarts/echarts-all.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120875">
-          <caret line="15" column="19849" lean-forward="false" selection-start-line="15" selection-start-column="19849" selection-end-line="15" selection-end-column="19849" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/laogang/common/common.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="8" column="9" lean-forward="false" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/laogang/common/laogang.echarts.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="686" column="25" lean-forward="false" selection-start-line="686" selection-start-column="25" selection-end-line="686" selection-end-column="25" />
-          <folding>
-            <element signature="n#!!block;n#pie1#0" expanded="false" />
-            <element signature="e#6139#6822#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/enums/BusinessEnum.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-100">
@@ -949,7 +858,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="9" column="21" lean-forward="true" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -957,7 +865,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
           <caret line="7" column="26" lean-forward="false" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1005,7 +912,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="167">
           <caret line="1248" column="0" lean-forward="false" selection-start-line="1248" selection-start-column="0" selection-end-line="1248" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1027,14 +933,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/OldmanViewBo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="625">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/OldmanViewBo.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/dao/OldmanViewDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
@@ -1055,7 +954,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
           <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1074,7 +972,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="167">
           <caret line="477" column="0" lean-forward="false" selection-start-line="477" selection-start-column="0" selection-end-line="477" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1082,7 +979,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="158">
           <caret line="211" column="6" lean-forward="false" selection-start-line="211" selection-start-column="6" selection-end-line="211" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1098,7 +994,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="13" column="275" lean-forward="false" selection-start-line="13" selection-start-column="275" selection-end-line="13" selection-end-column="275" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1194,14 +1089,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/OldmanParam.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="45" column="17" lean-forward="false" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/OldmanController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
@@ -1214,7 +1101,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="8" column="18" lean-forward="false" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1222,7 +1108,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="173">
           <caret line="105" column="0" lean-forward="false" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1266,42 +1151,119 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
           <caret line="28" column="13" lean-forward="true" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/laogang/visual/visual.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="328" column="55" lean-forward="false" selection-start-line="328" selection-start-column="49" selection-end-line="328" selection-end-column="55" />
-          <folding>
-            <element signature="e#7784#8774#0" expanded="false" />
-            <element signature="n#!!block;n#labelFirstClick#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/page/visual.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="8" column="33" lean-forward="false" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
-          <folding>
-            <element signature="n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#2;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#0;n#div#0;n#div#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#div#0;n#div#0;n#div#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/static/css/visual.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="51" column="41" lean-forward="false" selection-start-line="51" selection-start-column="41" selection-end-line="51" selection-end-column="41" />
+        <state relative-caret-position="209">
+          <caret line="43" column="1" lean-forward="true" selection-start-line="42" selection-start-column="24" selection-end-line="43" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/HomeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/OrganController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="23" column="22" lean-forward="false" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/GetOrganRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/OldmanParam.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/OrganParam.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="6" column="25" lean-forward="false" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/entity/OldmanEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1825">
+          <caret line="81" column="4" lean-forward="false" selection-start-line="81" selection-start-column="4" selection-end-line="82" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/entity/OrganEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="13" column="20" lean-forward="false" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/OrganBo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="22" column="11" lean-forward="false" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/laogang/common/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="8" column="9" lean-forward="false" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/page/visual.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="616">
+          <caret line="179" column="49" lean-forward="false" selection-start-line="179" selection-start-column="49" selection-end-line="179" selection-end-column="49" />
+          <folding>
+            <element signature="n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#0;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#1;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#3;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#0;n#div#0;n#div#1;n#div#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#div#0;n#div#1;n#div#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#2;n#div#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/laogang/visual/visual.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4075">
+          <caret line="182" column="39" lean-forward="false" selection-start-line="182" selection-start-column="39" selection-end-line="182" selection-end-column="39" />
+          <folding>
+            <element signature="e#7784#8774#0" expanded="false" />
+            <element signature="n#!!block;n#labelFirstClick#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

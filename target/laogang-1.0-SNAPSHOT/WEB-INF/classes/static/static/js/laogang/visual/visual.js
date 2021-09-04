@@ -171,7 +171,7 @@ function init31() {
             var map = result.map;
             for (var key in map) {
                 if (key === "area_village") {
-                    createHeightAndWidthFromSourceDoc("b", "areaVillage3", 1.2, 1);
+                    createHeightAndWidthFromSourceDoc("b", "areaVillage3", 1, 1.1);
                     bar3("片区老年人口分布", map["area_village"], "areaVillage3", null, null)
                 } else if (key === "ServiceStatus") {
                     createHeightAndWidthFromSourceDoc("c", "ServiceStatus", 0.5, 0.5);
