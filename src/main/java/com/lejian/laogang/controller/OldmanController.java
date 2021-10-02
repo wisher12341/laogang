@@ -37,7 +37,7 @@ public class OldmanController {
     @RequestMapping("/getGroupCount")
     public MapResponse getGroupCount(@RequestBody GetGroupCountRequest request){
         MapResponse response = new MapResponse();
-        response.setMap(service.getGroupCount(request.getFieldNameList(),request.getLabelIdList()));
+        response.setMap(service.getGroupCount(request.getFieldNameList(),request.getOldmanParam()));
         return response;
     }
 
@@ -51,7 +51,7 @@ public class OldmanController {
     @RequestMapping("/getOldmanBaseGroupByAttr")
     public MapResponse getOldmanBaseGroupByAttr(@RequestBody GetGroupCountRequest request){
         MapResponse response = new MapResponse();
-        response.setMap(service.getOldmanBaseGroupByAttr(request.getFieldNameList(),request.getTypeList()));
+        response.setMap(service.getOldmanBaseGroupByAttr(request.getFieldNameList(),request.getTypeList(),request.getOldmanParam()));
         return response;
     }
 
@@ -65,7 +65,7 @@ public class OldmanController {
     @RequestMapping("/getAgeGroupCount")
     public MapResponse getAgeGroupCount(@RequestBody GetGroupCountRequest request){
         MapResponse response = new MapResponse();
-        response.setMap(service.getAgeGroupCount(request.getLabelIdList()));
+        response.setMap(service.getAgeGroupCount(request.getOldmanParam()));
         return response;
     }
 
@@ -74,9 +74,11 @@ public class OldmanController {
     public GetOldmanResponse getByPage(@RequestBody GetOldmanRequest request){
         GetOldmanResponse response = new GetOldmanResponse();
         response.setOldmanVoList(service.getByPage(request.getOldmanParam(),request.getPageParam()));
+        response.setCount(service.getOldmanCount(request.getOldmanParam()));
         return response;
     }
 
+    //todo location 表合到oldman  location_key
 
     /**
      * 获取老人全部坐标
@@ -148,7 +150,7 @@ public class OldmanController {
     @RequestMapping("/attr/getTypeCount")
     public MapResponse getTypeCount(@RequestBody GetTypeCountRequest request){
         MapResponse response = new MapResponse();
-        response.setMap(service.getTypeCount(request.getTypeList()));
+        response.setMap(service.getTypeCount(request.getTypeList(),request.getOldmanParam()));
         return response;
     }
 
@@ -162,7 +164,7 @@ public class OldmanController {
     @RequestMapping("/attr/getExtGroup")
     public MapResponse getExtGroup(@RequestBody GetExtGroupRequest request){
         MapResponse response = new MapResponse();
-        response.setMap(service.getExtGroup(request.getType(),request.getValue()));
+        response.setMap(service.getExtGroup(request.getType(),request.getValue(),request.getOldmanParam()));
         return response;
     }
 
@@ -175,7 +177,7 @@ public class OldmanController {
     @RequestMapping("/getTrend")
     public MapResponse getTrend(@RequestBody GetTrendRequest request){
         MapResponse response = new MapResponse();
-        response.setMap(service.getTrend(request.getType()));
+        response.setMap(service.getTrend(request.getTypes()));
         return response;
     }
 }

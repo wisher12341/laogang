@@ -51,7 +51,7 @@ public class OldmanRepository extends AbstractSpecificationRepository<OldmanBo,O
             Map<String,Long> map= Maps.newHashMap();
             String whereSql = jpaSpecBo.getSql("o.");
             String sql = "select o."+group+",count(o."+group+") from oldman o left join oldman_attr oa on o.id=oa.oldman_id " +
-                            "where oa.type=13 and o.is_zd=1 and " + whereSql +
+                            "where oa.type=13 and o.is_zd=1 "+ (StringUtils.isNotBlank(whereSql)?" and " + whereSql:"") +
                             " group by o."+group;
             Query query =entityManager.createNativeQuery(sql);
             query.getResultList().forEach(object->{
@@ -73,7 +73,10 @@ public class OldmanRepository extends AbstractSpecificationRepository<OldmanBo,O
         try {
             String where = "";
             if (jpaSpecBo!=null){
-                where = " and "+jpaSpecBo.getSql("o.");
+                String s =jpaSpecBo.getSql("o.");
+                if (StringUtils.isNotBlank(s)){
+                    where = " and "+s;
+                }
             }
             Map<String,Long> map= Maps.newHashMap();
             String a= Joiner.on(",").join(typeList); ;

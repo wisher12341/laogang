@@ -11,4 +11,5 @@ document.write('<script src="/static/js/plugins/jeditable/jquery.jeditable.js"><
 document.write('<script src="/static/js/plugins/dataTables/jquery.dataTables.js"></script>');
 document.write('<script src="/static/js/plugins/dataTables/dataTables.bootstrap.js"></script>');
 document.write('<script src="/static/js/content.min.js?v=1.0.0"></script>');
+document.write('<script src="/static/js/laogang/common/common.js"></script>');
 document.write('<script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>\n');

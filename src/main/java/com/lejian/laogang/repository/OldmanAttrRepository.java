@@ -2,6 +2,7 @@ package com.lejian.laogang.repository;
 
 
 import com.google.common.collect.Maps;
+import com.lejian.laogang.controller.contract.request.OldmanParam;
 import com.lejian.laogang.pojo.bo.JpaSpecBo;
 import com.lejian.laogang.pojo.bo.OldmanAttrBo;
 import com.lejian.laogang.pojo.bo.OldmanBo;
@@ -9,6 +10,7 @@ import com.lejian.laogang.repository.dao.OldmanAttrDao;
 import com.lejian.laogang.repository.dao.OldmanDao;
 import com.lejian.laogang.repository.entity.OldmanAttrEntity;
 import com.lejian.laogang.repository.entity.OldmanEntity;
+import com.lejian.laogang.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -41,10 +43,17 @@ public class OldmanAttrRepository extends AbstractSpecificationRepository<Oldman
         return "oldman_attr";
     }
 
-    public Long typeCount(JpaSpecBo jpaSpecBo) {
+    public Long typeCount(JpaSpecBo jpaSpecBo, OldmanParam oldmanParam) {
         try {
-            String where = jpaSpecBo.getSql();
-            String sql = "select count(distinct oldman_id) from oldman_attr where "+where;
+            String where = jpaSpecBo.getSql("a.");
+            String sql;
+            String oldmanWhere = oldmanParam.convert().getSql("o.");
+            if (StringUtils.isBlank(oldmanWhere)){
+                sql = "select count(distinct a.oldman_id) from oldman_attr a where "+where;
+            }else{
+                sql = "select count(distinct a.oldman_id) from oldman_attr a" +
+                        " left join oldman o on o.id=a.oldman_id  where "+where +" and "+oldmanWhere;
+            }
 
             Query query =entityManager.createNativeQuery(sql);
             return Long.valueOf(String.valueOf(query.getResultList().get(0)));
@@ -55,10 +64,11 @@ public class OldmanAttrRepository extends AbstractSpecificationRepository<Oldman
         return 0L;
     }
 
-    public Map<String, Long> getExtGroup(Integer type, Integer value) {
+    public Map<String, Long> getExtGroup(Integer type, Integer value,String where) {
         Map<String, Long> map = Maps.newHashMap();
         try {
-            String sql = String.format("select ext,count(1) from oldman_attr where type='%s' and value='%s' group by ext",type,value);
+            String sql = String.format("select a.ext,count(1) from oldman_attr a " +
+                    " left join oldman o on o.id=a.oldman_id where a.type='%s' and a.value='%s' %s group by ext",type,value, StringUtils.isNotBlank(where)?" and "+where:"");
 
             Query query =entityManager.createNativeQuery(sql);
             query.getResultList().forEach(object->{
@@ -70,5 +80,27 @@ public class OldmanAttrRepository extends AbstractSpecificationRepository<Oldman
             REPOSITORY_ERROR.doThrowException("getExtGroup",e);
         }
         return map;
+    }
+
+    public Map<String, Long> getGroupCountWithOldman(String oldmanWhere, String type) {
+        try {
+            Map<String,Long> map= Maps.newHashMap();
+            String sql = String.format("select a.value,count(1) from oldman_attr a " +
+                            " left join oldman o on o.id= a.oldman_id " +
+                    "where %s and a.type=%s group by a.value",oldmanWhere,type);
+            Query query =entityManager.createNativeQuery(sql);
+            query.getResultList().forEach(object->{
+                Object[] cells = (Object[]) object;
+                String key = String.valueOf(cells[0]);
+                if (org.apache.commons.lang.StringUtils.isNotBlank(key)) {
+                    map.put(key, Long.valueOf(String.valueOf(cells[1])));
+                }
+            });
+            return map;
+        }catch (Exception e){
+            REPOSITORY_ERROR.doThrowException("getGroupCount",e);
+        }
+        return Maps.newHashMap();
+
     }
 }

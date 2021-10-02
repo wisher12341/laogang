@@ -17,10 +17,6 @@ public class OrganEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
-    private String lng;
-    @Column
-    private String lat;
-    @Column
     private String name;
     @Column
     private String desc;
@@ -48,6 +44,8 @@ public class OrganEntity {
 
     @Column
     private Integer type;
+    private String gps;
     @Column(name = "create_time")
     private Timestamp createTime;
+    private Integer status;
 }

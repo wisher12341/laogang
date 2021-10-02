@@ -6,4 +6,5 @@ import lombok.Data;
 public class GetExtGroupRequest {
     private Integer type;
     private Integer value;
+    private OldmanParam oldmanParam;
 }

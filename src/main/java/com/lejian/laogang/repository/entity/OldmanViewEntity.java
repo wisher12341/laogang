@@ -52,5 +52,4 @@ public class OldmanViewEntity{
     private Integer isZd;
     @Column
     private String label;
-
 }

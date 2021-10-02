@@ -37,6 +37,94 @@ function getLegend(data) {
  * @param callback
  * @param lengend
  */
+function labelTree(data, target, callback) {
+    var obj = document.getElementById(target);
+    var tree = echarts.init(obj);
+
+    var option =  {
+        tooltip: {
+            trigger: 'item',
+            triggerOn: 'mousemove'
+        },
+        series:[
+            {
+                type: 'tree',
+
+                data: [data],
+
+                left: '2%',
+                right: '2%',
+                top: '20%',
+                bottom: '40%',
+
+                symbol: 'emptyCircle',
+
+                orient: 'vertical',
+
+                expandAndCollapse: true,
+
+                label: {
+                    position: [5,-20],
+                    rotate: 0,
+                    verticalAlign: 'middle',
+                    align: 'middle',
+                    fontSize: 28,
+                    color:"#fff",
+                    fontWeight:800,
+                    padding:5,
+                    borderRadius:2,
+                    backgroundColor:"rgb(252,132,82,1)"
+                },
+
+                leaves: {
+                    label: {
+                        position: [5,65],
+                        rotate: 0,
+                        verticalAlign: 'middle',
+                        align: 'middle',
+                        formatter:function(value){
+                            var str = value.name;
+                            if (str.indexOf("-")>0){
+                                return str.split("-")[0]+"\n"+"-"+"\n"+str.split("-")[1];
+                            }else{
+                                return str.split("").join("\n");
+                            }
+                        },
+                        fontSize: 18,
+                        color:"#fff",
+                        fontWeight:500,
+                        padding:5,
+                        borderRadius:2,
+                        backgroundColor:"rgb(28,192,159,1)",
+                        height:90
+                    }
+                },
+
+                animationDurationUpdate: 750
+            }
+        ]
+    };
+    tree.off('click');
+    if (callback !== null) {
+        tree.on('click', function (params) {
+            if (params.event.target.culling === false){
+                callback(params.data.name,params.data.id);
+            }
+
+        });
+    }
+
+    tree.setOption(option, true);
+}
+
+/**
+ * 圆角环形图
+ * @param title
+ * @param data
+ * @param obj
+ * @param callback
+ * @param lengend
+ */
 function pie1(title, data, target, callback, customLegend) {
     var obj = document.getElementById(target);
     var legend_data = [];
@@ -328,6 +416,7 @@ function gauge1(title, data, target, callback, customLegend) {
     var option = {
         title: getTitle(title),
         series: [{
+            center: ['43%', '60%'],
             type: 'gauge',
             progress: {
                 show: true,
@@ -541,15 +630,12 @@ function bar3(title, data, target, callback) {
         ]
     };
 
-
     if (callback !== null) {
         bar.off('click');
-        bar.on('click', function (params) {
-            if (params.componentType == "yAxis" || params.componentType == "xAxis") {
-                var name = params.value;
-                callback(name);
-            }
 
+        bar.on('click', function (params) {
+            var name = params.name;
+            callback(name);
         });
     }
     bar.setOption(option, true);

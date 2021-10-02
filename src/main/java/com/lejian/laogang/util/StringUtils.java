@@ -1,6 +1,6 @@
 package com.lejian.laogang.util;
 
-public final class StringUtils extends org.springframework.util.StringUtils{
+public final class StringUtils extends org.apache.commons.lang.StringUtils{
 
     /**
      * 驼峰转下划线
@@ -23,6 +23,21 @@ public final class StringUtils extends org.springframework.util.StringUtils{
             } else {
                 sb.append(c);
             }
+        }
+        return sb.toString();
+    }
+
+
+    public static String nameMask(String name){
+        if(name ==null)return name;
+        if(name.length()<=1) return name+"*";
+        return name.replaceAll("([\\u4e00-\\u9fa5]{1})(.*)", "$1"+createAsterisk(name.length()-1));
+    }
+
+    private static String createAsterisk(int len) {
+        StringBuffer sb = new StringBuffer();
+        for(int i=0;i<len;i++){
+            sb.append("*");
         }
         return sb.toString();
     }

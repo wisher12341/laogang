@@ -7,4 +7,5 @@ import java.util.List;
 @Data
 public class GetTypeCountRequest {
     private List<Integer> typeList;
+    private OldmanParam oldmanParam;
 }

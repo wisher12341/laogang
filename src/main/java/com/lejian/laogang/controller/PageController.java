@@ -22,6 +22,27 @@ public class PageController {
         return mv;
     }
 
+    @GetMapping("/home")
+    public ModelAndView home(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/home");
+        return mv;
+    }
+
+    @GetMapping("/home/query")
+    public ModelAndView home_query(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/home/query");
+        return mv;
+    }
+
+    @GetMapping("/monitor")
+    public ModelAndView monitor(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/monitor");
+        return mv;
+    }
+
     @GetMapping("/oldman")
     public ModelAndView oldman(){
         ModelAndView mv = new ModelAndView();

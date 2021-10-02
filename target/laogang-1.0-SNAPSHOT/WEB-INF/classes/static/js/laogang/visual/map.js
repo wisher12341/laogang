@@ -17,7 +17,8 @@ function heatmap() {
         contentType: "application/json;charset=UTF-8",
         data: JSON.stringify({
             "labelIdList": selectLabelId,
-            "isView": true
+            "isView": true,
+            "areaVillage":village
         }),
         success: function (result) {
             var allOverlay = map.getOverlays();
@@ -84,18 +85,17 @@ function initArea() {
             "lat": "31.012919"
         }];
     for (var i = 0; i < data.length; i++) {
-        var myIcon = new BMap.Icon("/static/img/danwei.png", new BMap.Size(32, 32));
-        var marker = new BMap.Marker(new BMap.Point(data[i].lng, data[i].lat), {
-            icon: myIcon
-        });
+        // var myIcon = new BMap.Icon("/static/img/danwei.png", new BMap.Size(32, 32));
+        var marker = new BMap.Marker(new BMap.Point(data[i].lng, data[i].lat));
         marker.setTitle(data[i].name);
         var label = new BMap.Label(data[i].name, {offset: new BMap.Size(20, -10)});
         label.setStyle({
-            color: "red",
-            font: "16px/1.5 Tahoma,Helvetica,Arial,'宋体',sans-serif;",
-            backgroundColor: "white",
+            color: "white",
+            fontSize: "20px",
+            border:0,
+            backgroundColor: "rgb(f,f,f,0.5)",
             fontWeight: "bold",
-            padding: "4px 40px",
+            padding: "4px 10px",
             position: "relative"
         });
         marker.type="area";

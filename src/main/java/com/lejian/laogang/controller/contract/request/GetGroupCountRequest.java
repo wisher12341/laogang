@@ -11,6 +11,9 @@ public class GetGroupCountRequest {
      * value table
      */
     private List<String> fieldNameList;
-    private List<String> labelIdList;
+    /**
+     * attr表的 type属性
+     */
     private List<Integer> typeList;
+    private OldmanParam oldmanParam;
 }

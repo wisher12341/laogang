@@ -5,6 +5,7 @@ import com.lejian.laogang.enums.label.LabelBaseEnum;
 import com.lejian.laogang.enums.label.LabelFirst;
 import com.lejian.laogang.pojo.bo.LabelBo;
 import com.lejian.laogang.pojo.vo.LabelVo;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -19,12 +20,7 @@ public class LabelService {
         return LabelBaseEnum.findByParent(request.getParent()).stream()
                 .map(LabelBaseEnum::label)
                 .flatMap(Collection::stream)
-                .filter(item->{
-                    if (request.getParent()==null){
-                        return item.getDisplay();
-                    }
-                    return true;
-                })
+                .filter(LabelBo::getDisplay)
                 .sorted(Comparator.comparing(LabelBo::getSort))
                 .map(LabelBo::convert)
                 .collect(Collectors.toList());

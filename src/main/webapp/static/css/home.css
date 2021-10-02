@@ -1,0 +1,16 @@
+.thumbnail{
+    height: 160px;
+    text-align: center;
+}
+.thumbnail span{
+    position: relative;
+    top: 50px;
+}
+
+body{
+    background-color: #dff0d8 !important;
+}
+
+.no-role{
+  background-color: #f0f0f0;
+}

@@ -47,9 +47,6 @@ public class OldmanParam {
         if (CollectionUtils.isNotEmpty(labelIdList)){
             jpaSpecBo = LabelBaseEnum.generateJpaSpecBo(labelIdList);
         }
-        if (!isView){
-            jpaSpecBo.getEqualMap().put("status", 0);
-        }
 
         if(StringUtils.isNotBlank(this.getAreaCustomOne())){
             jpaSpecBo.getEqualMap().put("areaCustomOne", this.getAreaCustomOne());

@@ -14,9 +14,9 @@ import com.lejian.laogang.repository.*;
 import com.lejian.laogang.repository.entity.OldmanEntity;
 import com.lejian.laogang.util.DateUtils;
 import com.lejian.laogang.util.LjReflectionUtils;
+import com.lejian.laogang.util.StringUtils;
 import com.lejian.laogang.util.TrendUtils;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +37,7 @@ import java.util.stream.IntStream;
 
 import static com.lejian.laogang.common.ComponentRespCode.REFLECTION_ERROR;
 import static com.lejian.laogang.common.Constant.IMPORT_RESET;
+import static com.lejian.laogang.enums.BusinessEnum.DefaultValue.NULL;
 import static com.lejian.laogang.util.DateUtils.YYMMDD;
 
 @Service
@@ -56,26 +57,39 @@ public class OldmanService {
     private OldmanViewRepository oldmanViewRepository;
 
 
-    public Map<String, Object> getGroupCount(List<String> fieldNameList, List<String> labelIdList) {
-        JpaSpecBo jpaSpecBo = LabelBaseEnum.generateJpaSpecBo(labelIdList);
+    public Map<String, Object> getGroupCount(List<String> fieldNameList, OldmanParam oldmanParam) {
         Map<String, Object> map = Maps.newHashMap();
         fieldNameList.forEach(fieldName -> {
+            JpaSpecBo jpaSpecBo;
+            if (oldmanParam==null){
+                jpaSpecBo = new JpaSpecBo();
+            }else{
+                jpaSpecBo = oldmanParam.convert();
+            }
             Map<String, Long> result;
             if (OldmanEntity.haveField(fieldName)) {
-                result = oldmanViewRepository.getGroupCount(fieldName,jpaSpecBo);
+                result = oldmanViewRepository.getGroupCount(fieldName, jpaSpecBo);
             } else {
-                //不支持可视化标签筛选 labelIdList
+                String oldmanWhere = jpaSpecBo.getSql("o.");
                 Map<String, String> attrWhere = OldmanAttrEnum.generateAttrWhere(fieldName);
-                jpaSpecBo.getEqualMap().putAll(attrWhere);
-                //不用对老人去重
-                result = oldmanAttrRepository.getGroupCount("value", jpaSpecBo);
+                if (StringUtils.isBlank(oldmanWhere)) {
+                    //不支持可视化标签筛选 labelIdList
+                    jpaSpecBo.getEqualMap().putAll(attrWhere);
+                    //不用对老人去重
+                    result = oldmanAttrRepository.getGroupCount("value", jpaSpecBo);
+                }else{
+                    //有oldman表筛选属性
+                    result = oldmanAttrRepository.getGroupCountWithOldman(oldmanWhere,attrWhere.get("type"));
+                }
             }
             Map<String, Long> voResult = Maps.newHashMap();
             result.forEach((k, v) -> {
                 if (NumberUtils.isNumber(k)) {
                     BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), fieldName);
                     if (businessEnum != null) {
-                        voResult.put(businessEnum.getDesc(), v);
+                        if (businessEnum != NULL) {
+                            voResult.put(businessEnum.getDesc(), v);
+                        }
                     } else {
                         voResult.put(k, v);
                     }
@@ -92,39 +106,77 @@ public class OldmanService {
         List<OldmanBo> oldmanBoList;
         if (oldmanParam.getIsView()) {
             JpaSpecBo jpaSpecBo = oldmanParam.convert();
-            oldmanBoList = oldmanViewRepository.findByPageWithSpec(pageParam.getPageNo(), pageParam.getPageSize(),jpaSpecBo );
-        }else{
+            oldmanBoList = oldmanViewRepository.findByPageWithSpec(pageParam.getPageNo(), pageParam.getPageSize(), jpaSpecBo);
+        } else {
             oldmanBoList = oldmanRepository.findByPageWithSpec(pageParam.getPageNo(), pageParam.getPageSize(), oldmanParam.convert());
 
         }
-        return oldmanBoList.stream().map(OldmanBo::convertVo).collect(Collectors.toList());
+        //数字6和4代表前后几位数字不被替换
+        String regex = "(\\w{6})(\\w+)(\\w{4})";
+        List<OldmanVo> voList = oldmanBoList.stream().map(OldmanBo::convertVo).collect(Collectors.toList());
+        if (oldmanParam.getIsView()) {
+            voList.forEach(vo -> {
+                vo.setName(StringUtils.nameMask(vo.getName()));
+                vo.setIdCard(vo.getIdCard().replaceAll(regex, "$1****$3"));
+            });
+        }
+        return voList;
     }
 
-    public Map<String, Object> getAgeGroupCount(List<String> labelIdList) {
+    public Map<String, Object> getAgeGroupCount(OldmanParam oldmanParam) {
         Map<String, Object> map = Maps.newHashMap();
-        JpaSpecBo jpaSpecBo = LabelBaseEnum.generateJpaSpecBo(labelIdList);
+        JpaSpecBo jpaSpecBo = oldmanParam.convert();
 
         jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(60).toLocalDate());
         jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(69).toLocalDate());
-        map.put("60-69", oldmanViewRepository.getGroupCount("male", jpaSpecBo));
+
+        Map<String,Long> result = oldmanViewRepository.getGroupCount("male", jpaSpecBo);
+
+        Map<String, Long> voResult = Maps.newHashMap();
+        result.forEach((k, v) -> {
+            BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
+            if (BusinessEnum.DefaultValue.NULL!=businessEnum){
+                voResult.put(businessEnum.getDesc(),v);
+            }
+        });
+        map.put("60-69", voResult);
+
 
         jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(70).toLocalDate());
         jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(79).toLocalDate());
-        map.put("70-79", oldmanViewRepository.getGroupCount("male", jpaSpecBo));
+
+
+        Map<String,Long> result2 = oldmanViewRepository.getGroupCount("male", jpaSpecBo);
+        Map<String, Long> voResult2 = Maps.newHashMap();
+        result2.forEach((k, v) -> {
+            BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
+            if (BusinessEnum.DefaultValue.NULL!=businessEnum){
+                voResult2.put(businessEnum.getDesc(),v);
+            }
+        });
+        map.put("70-79", voResult2);
 
         jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(80).toLocalDate());
         jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(89).toLocalDate());
-        map.put("80-89", oldmanViewRepository.getGroupCount("male", jpaSpecBo));
+        Map<String,Long> result3 = oldmanViewRepository.getGroupCount("male", jpaSpecBo);
+        Map<String, Long> voResult3 = Maps.newHashMap();
+        result3.forEach((k, v) -> {
+            BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
+            if (BusinessEnum.DefaultValue.NULL!=businessEnum){
+                voResult3.put(businessEnum.getDesc(),v);
+            }
+        });
+        map.put("80-89", voResult3);
         return map;
     }
 
     public List<LocationVo> getLocation(OldmanParam oldmanParam) {
-        if (oldmanParam.getIsView()){
+        if (oldmanParam.getIsView()) {
             List<LocationVo> locationVoList = Lists.newArrayList();
             Map<String, Long> locationMap = oldmanViewRepository.getGroupCount("location", oldmanParam.convert());
-            locationMap.forEach((k,v)->{
+            locationMap.forEach((k, v) -> {
                 String[] arr = k.split("_");
-                if (arr.length==2) {
+                if (arr.length == 2) {
                     LocationVo vo = new LocationVo();
                     vo.setCount(v + "");
                     vo.setLng(arr[0]);
@@ -133,8 +185,8 @@ public class OldmanService {
                 }
             });
             return locationVoList;
-        }else {
-            Map<String, Long> locationMap =oldmanRepository.getGroupCount("location_id", oldmanParam.convert());
+        } else {
+            Map<String, Long> locationMap = oldmanRepository.getGroupCount("location_id", oldmanParam.convert());
             List<LocationBo> locationBoList = locationRepository.getByPkIds(locationMap.keySet().stream().filter(item -> !item.equals("null")).map(Integer::valueOf).collect(Collectors.toList()));
             return locationBoList.stream().map(item -> item.convertVo(locationMap)).collect(Collectors.toList());
         }
@@ -231,7 +283,7 @@ public class OldmanService {
                         String[] arr = enumValue.split("┋");
                         for (String v : arr) {
                             BusinessEnum val = BusinessEnum.find(v, oldmanExcelEnum.getEnumType());
-                            if (val != BusinessEnum.DefaultValue.NULL) {
+                            if (val != NULL) {
                                 OldmanAttrBo attrBo = new OldmanAttrBo();
                                 attrBo.setIdCard(idCard);
                                 attrBo.setType(BusinessEnum.find(Integer.valueOf(oldmanExcelEnum.getFieldName()), OldmanAttrEnum.OldmanAttrType.class));
@@ -370,7 +422,7 @@ public class OldmanService {
         List<List<OldmanBo>> parts = Lists.partition(oldmanBoList, PART_NUM);
         parts.forEach(item -> {
             List<String> idCardList = item.stream().map(OldmanBo::getIdCard).collect(Collectors.toList());
-            Map<String, OldmanBo> existOldmanMap = oldmanRepository.getByIdCards(idCardList).stream().collect(Collectors.toMap(a->a.getIdCard().toLowerCase(), Function.identity()));
+            Map<String, OldmanBo> existOldmanMap = oldmanRepository.getByIdCards(idCardList).stream().collect(Collectors.toMap(a -> a.getIdCard().toLowerCase(), Function.identity()));
             item.forEach(oldman -> {
                 if (existOldmanMap.containsKey(oldman.getIdCard().toLowerCase())) {
                     oldman.setId(existOldmanMap.get(oldman.getIdCard().toLowerCase()).getId());
@@ -384,43 +436,67 @@ public class OldmanService {
         return Pair.of(addList, updateList);
     }
 
-    public Map<String, Object> getTypeCount(List<Integer> typeList) {
+    public Map<String, Object> getTypeCount(List<Integer> typeList,OldmanParam oldmanParam) {
         Map<String, Object> map = Maps.newHashMap();
         typeList.forEach(type -> {
             JpaSpecBo jpaSpecBo = new JpaSpecBo();
             jpaSpecBo.getEqualMap().put("type", type);
-            map.put(BusinessEnum.find(type, OldmanAttrEnum.OldmanAttrType.class).getDesc(), oldmanAttrRepository.typeCount(jpaSpecBo));
+            map.put(BusinessEnum.find(type, OldmanAttrEnum.OldmanAttrType.class).getDesc(), oldmanAttrRepository.typeCount(jpaSpecBo,oldmanParam));
         });
         return map;
     }
 
-    public Map<String, Object> getExtGroup(Integer type, Integer value) {
+    public Map<String, Object> getExtGroup(Integer type, Integer value, OldmanParam oldmanParam) {
+        String where = oldmanParam.convert().getSql("o.");
         Map<String, Object> map = Maps.newHashMap();
-        map.putAll(oldmanAttrRepository.getExtGroup(type, value));
+        map.putAll(oldmanAttrRepository.getExtGroup(type, value, where));
         return map;
     }
 
-    public Map<String, Object> getOldmanBaseGroupByAttr(List<String> fieldNameList, List<Integer> typeList) {
+    public Map<String, Object> getOldmanBaseGroupByAttr(List<String> fieldNameList, List<Integer> typeList,OldmanParam oldmanParam) {
         Map<String, Object> map = Maps.newHashMap();
         fieldNameList.forEach(item -> {
-            if (item.equals("age")){
-                Map<String,Object> res = Maps.newHashMap();
-                JpaSpecBo jpaSpecBo = new JpaSpecBo();
-
+            if (item.equals("age")) {
+                Map<String, Object> res = Maps.newHashMap();
+                JpaSpecBo jpaSpecBo = oldmanParam.convert();
                 jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(60).toLocalDate());
                 jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(69).toLocalDate());
-                res.put("60-69", oldmanRepository.getOldmanBaseGroupByAttr("male", typeList,jpaSpecBo));
+                Map<String,Long> result1 = oldmanRepository.getOldmanBaseGroupByAttr("male", typeList, jpaSpecBo);
+                Map<String, Long> voResult1 = Maps.newHashMap();
+                result1.forEach((k, v) -> {
+                    BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
+                    if (BusinessEnum.DefaultValue.NULL!=businessEnum){
+                        voResult1.put(businessEnum.getDesc(),v);
+                    }
+                });
+                res.put("60-69", voResult1);
 
                 jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(70).toLocalDate());
                 jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(79).toLocalDate());
-                res.put("70-79", oldmanRepository.getOldmanBaseGroupByAttr("male", typeList,jpaSpecBo));
-
+                Map<String,Long> result2 = oldmanRepository.getOldmanBaseGroupByAttr("male", typeList, jpaSpecBo);
+                Map<String, Long> voResult2 = Maps.newHashMap();
+                result2.forEach((k, v) -> {
+                    BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
+                    if (BusinessEnum.DefaultValue.NULL!=businessEnum){
+                        voResult2.put(businessEnum.getDesc(),v);
+                    }
+                });
+                res.put("70-79", voResult2);
                 jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(80).toLocalDate());
                 jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(89).toLocalDate());
-                res.put("80-89", oldmanRepository.getOldmanBaseGroupByAttr("male", typeList,jpaSpecBo));
-                map.put("age",res);
-            }else {
-                Map<String, Long> a = oldmanRepository.getOldmanBaseGroupByAttr(item, typeList,null);
+                Map<String,Long> result3 = oldmanRepository.getOldmanBaseGroupByAttr("male", typeList, jpaSpecBo);
+                Map<String, Long> voResult3 = Maps.newHashMap();
+                result3.forEach((k, v) -> {
+                    BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
+                    if (BusinessEnum.DefaultValue.NULL!=businessEnum){
+                        voResult3.put(businessEnum.getDesc(),v);
+                    }
+                });
+                res.put("80-89", voResult3);
+                map.put("age", res);
+            } else {
+                JpaSpecBo jpaSpecBo = oldmanParam.convert();
+                Map<String, Long> a = oldmanRepository.getOldmanBaseGroupByAttr(item, typeList, jpaSpecBo);
                 Map<String, Long> res = Maps.newHashMap();
                 a.forEach((k, v) -> {
                     BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), item);
@@ -436,27 +512,35 @@ public class OldmanService {
         return map;
     }
 
-    public Map<String, Object> getTrend(Integer type) {
-        Map<String, Object> map  = Maps.newHashMap();
-        JpaSpecBo jpaSpecBo = new JpaSpecBo();
-        jpaSpecBo.getEqualMap().put("type",type);
-        jpaSpecBo.getGreatEMap().put("time",LocalDate.now().minusMonths(2).format(DateTimeFormatter.ofPattern("yyyy-MM")));
-        jpaSpecBo.getLessEMap().put("time",LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM")));
+    public Map<String, Object> getTrend(List<Integer> types) {
+        Map<String, Object> result = Maps.newHashMap();
+        types.forEach(type -> {
+            Map<String, Object> map = Maps.newHashMap();
+            JpaSpecBo jpaSpecBo = new JpaSpecBo();
+            jpaSpecBo.getEqualMap().put("type", type);
+            jpaSpecBo.getGreatEMap().put("time", LocalDate.now().minusMonths(2).format(DateTimeFormatter.ofPattern("yyyy-MM")));
+            jpaSpecBo.getLessEMap().put("time", LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM")));
 
-        Map<Integer, List<HistoryBo>> boMap = historyRepository.findWithSpec(jpaSpecBo).stream().collect(Collectors.groupingBy(HistoryBo::getValue));
+            Map<Integer, List<HistoryBo>> boMap = historyRepository.findWithSpec(jpaSpecBo).stream().collect(Collectors.groupingBy(HistoryBo::getValue));
 
-        boMap.forEach((k,v)->{
-            List<Long> list = v.stream().sorted(Comparator.comparing(HistoryBo::getTime)).map(HistoryBo::getCount).collect(Collectors.toList());
-            list.add(TrendUtils.getTrendData(list.get(list.size()-1)));
-            list.add(TrendUtils.getTrendData(list.get(list.size()-1)));
-            map.put(BusinessEnum.find(Integer.valueOf(k), String.valueOf(type)).getDesc(),list);
+            boMap.forEach((k, v) -> {
+                List<Long> list = v.stream().sorted(Comparator.comparing(HistoryBo::getTime)).map(HistoryBo::getCount).collect(Collectors.toList());
+                list.add(TrendUtils.getTrendData(list.get(list.size() - 1)));
+                list.add(TrendUtils.getTrendData(list.get(list.size() - 1)));
+                map.put(BusinessEnum.find(Integer.valueOf(k), String.valueOf(type)).getDesc(), list);
+            });
+            List<String> xdataList = Lists.newArrayList(LocalDate.now().minusMonths(2).format(DateTimeFormatter.ofPattern("yyyy-MM")),
+                    LocalDate.now().minusMonths(1).format(DateTimeFormatter.ofPattern("yyyy-MM")),
+                    LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM")),
+                    LocalDate.now().plusMonths(1).format(DateTimeFormatter.ofPattern("yyyy-MM")),
+                    LocalDate.now().plusMonths(2).format(DateTimeFormatter.ofPattern("yyyy-MM")));
+            map.put("xdata", xdataList);
+            result.put(type + "", map);
         });
-        List<String> xdataList = Lists.newArrayList(LocalDate.now().minusMonths(2).format(DateTimeFormatter.ofPattern("yyyy-MM")),
-                LocalDate.now().minusMonths(1).format(DateTimeFormatter.ofPattern("yyyy-MM")),
-                LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM")),
-                LocalDate.now().plusMonths(1).format(DateTimeFormatter.ofPattern("yyyy-MM")),
-                LocalDate.now().plusMonths(2).format(DateTimeFormatter.ofPattern("yyyy-MM")));
-        map.put("xdata",xdataList);
-        return map;
+        return result;
+    }
+
+    public Long getOldmanCount(OldmanParam oldmanParam) {
+        return oldmanViewRepository.countWithSpec(oldmanParam.convert());
     }
 }

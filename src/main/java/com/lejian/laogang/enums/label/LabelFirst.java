@@ -36,4 +36,13 @@ public enum LabelFirst implements BusinessEnum {
             return labelBo;
         }).sorted(Comparator.comparing(LabelBo::getSort)).collect(Collectors.toList());
     }
+
+    public static Integer find(String parentName) {
+        for(LabelFirst labelFirst :LabelFirst.values()){
+            if (labelFirst.getDesc().equals(parentName)){
+                return labelFirst.getValue();
+            }
+        }
+        return null;
+    }
 }

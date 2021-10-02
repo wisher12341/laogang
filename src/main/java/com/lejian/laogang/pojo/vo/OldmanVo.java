@@ -9,7 +9,7 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class OldmanVo extends BaseBo {
+public class OldmanVo {
     private Integer id;
     private String male;
     private String name;
@@ -42,12 +42,4 @@ public class OldmanVo extends BaseBo {
     private String psychosis;
     private LocationBo locationBo;
 
-    public static OldmanVo convert(OldmanEntity entity) {
-        return null;
-    }
-
-    @Override
-    public <Entity> Entity convert() {
-        return null;
-    }
 }

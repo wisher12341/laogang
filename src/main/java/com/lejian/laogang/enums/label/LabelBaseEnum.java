@@ -46,12 +46,7 @@ public interface LabelBaseEnum {
         List<LabelBaseEnum> list = Lists.newArrayList();
         list.addAll(Arrays.stream(CustomLabel.values())
                 .filter(item -> parent==null || item.getParent().intValue() == parent)
-                .filter(item-> {
-                    if (parent == null){
-                        return item.getDisplay();
-                    }
-                    return true;
-                })
+                .filter(CustomLabel::getDisplay)
                 .collect(Collectors.toList()));
         list.addAll(Arrays.stream(EnumLabel.values())
                 .filter(item -> parent==null ||item.getParent().intValue() == parent)
