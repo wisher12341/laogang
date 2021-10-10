@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * 政策属性 枚举
+ * 消息属性 枚举
  */
-public interface PolicyEnum extends BusinessEnum{
+public interface MessageEnum extends BusinessEnum{
 
 
     /**
@@ -14,11 +14,8 @@ public interface PolicyEnum extends BusinessEnum{
      */
     @Getter
     @AllArgsConstructor
-    enum Type implements PolicyEnum{
-        A1(1,"小区职位"),
-        A2(2,"养老补贴"),
-        A3(3,"关爱服务"),
-        A4(4,"走访帮困"),
+    enum Type implements MessageEnum {
+        A1(1,"政策信息"),
         ;
         private Integer value;
         private String desc;

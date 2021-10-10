@@ -1,28 +1,32 @@
 $(document).ready(function(){
-    var oid=getQueryVariable("oid");
-    var contact=getQueryVariable("contact");
-    loadOldmanInfo(oid);
-    if(contact=="no"){
-        $("#contact").css("display","none");
-    }else{
-        loadContactPeople();
+    var id=getQueryVariable("id");
+    var view=getQueryVariable("view");
+    loadOldmanInfo(id);
+    if(view==="true"){
+        $(".navbar").css("display","none");
     }
 });
 
-function loadOldmanInfo(oid) {
+function loadOldmanInfo(id) {
     $.ajax({
-        url: "/oldman/getOldmanByOid",
+        url: "/oldman/getById",
         data :JSON.stringify({
-            "oid":oid
+            "id":id
         }),
         type: 'post',
         dataType: 'json',
         contentType: "application/json;charset=UTF-8",
         success: function (result) {
-            var data = result.oldmanVo;
-            $("[oldmanField]").each(function () {
-                var field = $(this).attr("oldmanField");
+            var data = result;
+            $("[name]").each(function () {
+                var field = $(this).attr("name");
                 var value =eval("data."+field);
+                $(this).text(value);
+            });
+            var type = data.typeMap;
+            $("[type]").each(function () {
+                var field = $(this).attr("type");
+                var value =eval("type["+field+"]");
                 $(this).text(value);
             });
         }
@@ -76,4 +80,16 @@ function retrieveData(url, aoData, fnCallback) {
             // alert("status:"+XMLHttpRequest.status+",readyState:"+XMLHttpRequest.readyState+",textStatus:"+textStatus);
         }
     });
+}
+
+
+function getQueryVariable(variable)
+{
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i=0;i<vars.length;i++) {
+        var pair = vars[i].split("=");
+        if(pair[0] == variable){return pair[1];}
+    }
+    return null;
 }

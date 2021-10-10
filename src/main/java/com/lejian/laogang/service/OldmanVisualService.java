@@ -41,9 +41,8 @@ import static com.lejian.laogang.enums.BusinessEnum.DefaultValue.NULL;
 import static com.lejian.laogang.util.DateUtils.YYMMDD;
 
 @Service
-public class OldmanService {
+public class OldmanVisualService {
 
-    private static final int PART_NUM = 100;
 
     @Autowired
     private OldmanRepository oldmanRepository;
@@ -123,50 +122,60 @@ public class OldmanService {
         return voList;
     }
 
+    public Long getOldmanCount(OldmanParam oldmanParam) {
+        return oldmanViewRepository.countWithSpec(oldmanParam.convert());
+    }
+
     public Map<String, Object> getAgeGroupCount(OldmanParam oldmanParam) {
         Map<String, Object> map = Maps.newHashMap();
         JpaSpecBo jpaSpecBo = oldmanParam.convert();
+        if (oldmanParam.getLabelIdList().contains("1")
+                ||(!oldmanParam.getLabelIdList().contains("5") && !oldmanParam.getLabelIdList().contains("19"))) {
+            jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(60).toLocalDate());
+            jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(69).toLocalDate());
 
-        jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(60).toLocalDate());
-        jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(69).toLocalDate());
+            Map<String, Long> result = oldmanViewRepository.getGroupCount("male", jpaSpecBo);
 
-        Map<String,Long> result = oldmanViewRepository.getGroupCount("male", jpaSpecBo);
+            Map<String, Long> voResult = Maps.newHashMap();
+            result.forEach((k, v) -> {
+                BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
+                if (BusinessEnum.DefaultValue.NULL != businessEnum) {
+                    voResult.put(businessEnum.getDesc(), v);
+                }
+            });
+            map.put("60-69", voResult);
+        }
 
-        Map<String, Long> voResult = Maps.newHashMap();
-        result.forEach((k, v) -> {
-            BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
-            if (BusinessEnum.DefaultValue.NULL!=businessEnum){
-                voResult.put(businessEnum.getDesc(),v);
-            }
-        });
-        map.put("60-69", voResult);
+        if (oldmanParam.getLabelIdList().contains("5")
+                ||(!oldmanParam.getLabelIdList().contains("1") && !oldmanParam.getLabelIdList().contains("19"))) {
+            jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(70).toLocalDate());
+            jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(79).toLocalDate());
 
 
-        jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(70).toLocalDate());
-        jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(79).toLocalDate());
-
-
-        Map<String,Long> result2 = oldmanViewRepository.getGroupCount("male", jpaSpecBo);
-        Map<String, Long> voResult2 = Maps.newHashMap();
-        result2.forEach((k, v) -> {
-            BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
-            if (BusinessEnum.DefaultValue.NULL!=businessEnum){
-                voResult2.put(businessEnum.getDesc(),v);
-            }
-        });
-        map.put("70-79", voResult2);
-
-        jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(80).toLocalDate());
-        jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(89).toLocalDate());
-        Map<String,Long> result3 = oldmanViewRepository.getGroupCount("male", jpaSpecBo);
-        Map<String, Long> voResult3 = Maps.newHashMap();
-        result3.forEach((k, v) -> {
-            BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
-            if (BusinessEnum.DefaultValue.NULL!=businessEnum){
-                voResult3.put(businessEnum.getDesc(),v);
-            }
-        });
-        map.put("80-89", voResult3);
+            Map<String, Long> result2 = oldmanViewRepository.getGroupCount("male", jpaSpecBo);
+            Map<String, Long> voResult2 = Maps.newHashMap();
+            result2.forEach((k, v) -> {
+                BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
+                if (BusinessEnum.DefaultValue.NULL != businessEnum) {
+                    voResult2.put(businessEnum.getDesc(), v);
+                }
+            });
+            map.put("70-79", voResult2);
+        }
+        if (oldmanParam.getLabelIdList().contains("19")
+                ||(!oldmanParam.getLabelIdList().contains("5") && !oldmanParam.getLabelIdList().contains("1"))) {
+            jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(80).toLocalDate());
+            jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(89).toLocalDate());
+            Map<String, Long> result3 = oldmanViewRepository.getGroupCount("male", jpaSpecBo);
+            Map<String, Long> voResult3 = Maps.newHashMap();
+            result3.forEach((k, v) -> {
+                BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
+                if (BusinessEnum.DefaultValue.NULL != businessEnum) {
+                    voResult3.put(businessEnum.getDesc(), v);
+                }
+            });
+            map.put("80-89", voResult3);
+        }
         return map;
     }
 
@@ -215,226 +224,6 @@ public class OldmanService {
         return result;
     }
 
-    @Transactional
-    public List<CheckResultBo> addOldmanByExcel(Pair<List<String>, List<List<String>>> excelData) {
-        List<String> titleList = excelData.getFirst();
-        List<List<String>> valueList = excelData.getSecond();
-
-//        List<CheckResultBo> checkResultBoList=checkOldmanImport(excelData);
-//        if(CollectionUtils.isNotEmpty(checkResultBoList)){
-//            return checkResultBoList;
-//        }
-
-
-        //todo 临时去重 身份证
-        List<List<String>> newList = Lists.newArrayList();
-        List<String> idCardList = Lists.newArrayList();
-        for (int i = 0; i < valueList.size(); i++) {
-            if (idCardList.contains(valueList.get(i).get(7).toLowerCase())) {
-                continue;
-            } else {
-                newList.add(valueList.get(i));
-                idCardList.add(valueList.get(i).get(7).toLowerCase());
-            }
-        }
-
-
-        List<List<List<String>>> partList = Lists.partition(newList, 500);
-        partList.forEach(list -> {
-            addOldmanBaseInfo(titleList, list);
-            addOldmanAttr(titleList, list);
-        });
-
-        return Lists.newArrayList();
-    }
-
-    private List<CheckResultBo> addOldmanAttr(List<String> titleList, List<List<String>> valueList) {
-        //todo
-//        clearOldmanAttr(oldmanIdList);
-        List<OldmanAttrBo> oldmanAttrBoList = Lists.newArrayList();
-
-        try {
-            for (int i = 0; i < valueList.size(); i++) {
-                String idCard = "";
-                for (int j = 0; j < titleList.size(); j++) {
-                    ExcelEnum oldmanExcelEnum = ExcelEnum.findFieldName(titleList.get(j), OldmanAttrExcelEnum.class);
-                    if (oldmanExcelEnum == OldmanAttrExcelEnum.ID_CARD) {
-                        idCard = valueList.get(i).get(j);
-                        break;
-                    }
-                }
-                for (int j = 0; j < titleList.size(); j++) {
-                    ExcelEnum oldmanExcelEnum = ExcelEnum.findFieldName(titleList.get(j), OldmanAttrExcelEnum.class);
-                    if (oldmanExcelEnum == null || oldmanExcelEnum == OldmanAttrExcelEnum.ID_CARD) {
-                        continue;
-                    }
-                    Object value = valueList.get(i).get(j);
-                    if (IMPORT_RESET.contains(String.valueOf(value))) {
-                        continue;
-                    }
-                    if (oldmanExcelEnum.getEnumType() == null) {
-                        OldmanAttrBo attrBo = new OldmanAttrBo();
-                        attrBo.setIdCard(idCard);
-                        oldmanExcelEnum.handle(attrBo, value);
-                        oldmanAttrBoList.add(attrBo);
-                    } else {
-                        String enumValue = value.toString().split("〖")[0];
-                        String ext = value.toString().split("〖").length == 2 ? value.toString().split("〖")[1].replaceAll("〗", "") : Strings.EMPTY;
-                        String[] arr = enumValue.split("┋");
-                        for (String v : arr) {
-                            BusinessEnum val = BusinessEnum.find(v, oldmanExcelEnum.getEnumType());
-                            if (val != NULL) {
-                                OldmanAttrBo attrBo = new OldmanAttrBo();
-                                attrBo.setIdCard(idCard);
-                                attrBo.setType(BusinessEnum.find(Integer.valueOf(oldmanExcelEnum.getFieldName()), OldmanAttrEnum.OldmanAttrType.class));
-                                attrBo.setValue(val);
-                                attrBo.setExt(ext);
-                                oldmanAttrBoList.add(attrBo);
-                            }
-                        }
-                    }
-                }
-
-
-            }
-        } catch (Exception e) {
-            REFLECTION_ERROR.doThrowException("fail to addOldmanAttr", e);
-        }
-
-        JpaSpecBo jpaSpecBo = new JpaSpecBo();
-        jpaSpecBo.getInMap().put("idCard", oldmanAttrBoList.stream().map(OldmanAttrBo::getIdCard).distinct().collect(Collectors.toList()));
-        Map<String, Integer> idMap = oldmanRepository.findWithSpec(jpaSpecBo).stream().collect(Collectors.toMap(OldmanBo::getIdCard, OldmanBo::getId));
-        oldmanAttrBoList.forEach(bo -> bo.setOldmanId(idMap.get(bo.getIdCard())));
-        oldmanAttrRepository.batchInsert(oldmanAttrBoList);
-        return Lists.newArrayList();
-    }
-
-    private List<CheckResultBo> addOldmanBaseInfo(List<String> titleList, List<List<String>> valueList) {
-        List<OldmanBo> oldmanBoList = Lists.newArrayList();
-
-        IntStream.range(0, valueList.size()).forEach(item -> {
-            OldmanBo oldmanBo = new OldmanBo();
-            oldmanBoList.add(oldmanBo);
-        });
-
-        Map<String, Field> fieldMap = LjReflectionUtils.getFieldToMap(OldmanBo.class);
-
-        try {
-            for (int i = 0; i < titleList.size(); i++) {
-                ExcelEnum oldmanExcelEnum = ExcelEnum.findFieldName(titleList.get(i), OldmanExcelEnum.class);
-                if (oldmanExcelEnum == null) {
-                    continue;
-                }
-                Field field = fieldMap.get(oldmanExcelEnum.getFieldName());
-
-                if (field == null) {
-                    for (int j = 0; j < valueList.size(); j++) {
-                        Object value = valueList.get(j).get(i);
-                        oldmanExcelEnum.handle(oldmanBoList.get(j), value);
-                    }
-                } else {
-                    field.setAccessible(true);
-                    //纵向 遍历每个对象，一个属性一个属性 纵向赋值
-                    for (int j = 0; j < valueList.size(); j++) {
-                        Object value = valueList.get(j).get(i);
-                        if (StringUtils.isNotBlank(String.valueOf(value))) {
-                            if (IMPORT_RESET.contains(String.valueOf(value))) {
-                                if (field.getType() == Integer.class) {
-                                    field.set(oldmanBoList.get(j), 0);
-                                } else if (field.getType() == String.class) {
-                                    field.set(oldmanBoList.get(j), StringUtils.EMPTY);
-                                }
-                            } else {
-                                //转换成枚举值
-                                Class<? extends BusinessEnum> enumClass = oldmanExcelEnum.getEnumType();
-                                if (enumClass != null) {
-                                    boolean find = false;
-                                    //需要 枚举转换
-                                    for (BusinessEnum businessEnum : enumClass.getEnumConstants()) {
-                                        if (businessEnum.getDesc().equals(value)) {
-                                            find = true;
-                                            value = businessEnum;
-                                            break;
-                                        }
-                                    }
-                                    if (find) {
-                                        field.set(oldmanBoList.get(j), value);
-                                    }
-                                } else {
-                                    field.set(oldmanBoList.get(j), value);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        } catch (IllegalArgumentException | IllegalAccessException e) {
-            REFLECTION_ERROR.doThrowException("fail to addOldmanByExcel", e);
-        }
-
-        supplement(oldmanBoList);
-
-        // left 添加 right更新
-        Pair<List<OldmanBo>, List<OldmanBo>> pair = classifyDbType(oldmanBoList);
-        //todo 并非真正的 batch
-        oldmanRepository.batchInsert(pair.getFirst());
-        oldmanRepository.batchUpdate(pair.getSecond());
-        return Lists.newArrayList();
-    }
-
-
-    /**
-     * 补全数据
-     */
-    private void supplement(List<OldmanBo> oldmanBoList) {
-        /**
-         * key 坐标 lng+lat
-         */
-        List<LocationBo> locationBoList = oldmanBoList.stream()
-                .filter(bo -> StringUtils.isNotBlank(bo.getGpsDesc()))
-                .map(bo -> {
-                    LocationBo locationBo = new LocationBo();
-                    locationBo.setLng(bo.getLng());
-                    locationBo.setLat(bo.getLat());
-                    locationBo.setDesc(bo.getGpsDesc());
-                    return locationBo;
-                }).collect(Collectors.toList());
-
-        Map<String, Integer> locationMap = locationRepository.getBatchByDescOrCreate(locationBoList);
-
-        oldmanBoList.forEach(oldmanBo -> {
-            oldmanBo.setBirthday(DateUtils.stringToLocalDate(oldmanBo.getIdCard().substring(6, 14), YYMMDD));
-            oldmanBo.setLocationId(locationMap.get(oldmanBo.getLng() + "_" + oldmanBo.getLat()));
-            oldmanBo.setIdCard(oldmanBo.getIdCard().toUpperCase());
-        });
-    }
-
-    /**
-     * 区分 哪些老人 添加 哪些老人更新
-     *
-     * @param oldmanBoList
-     * @return
-     */
-    private Pair<List<OldmanBo>, List<OldmanBo>> classifyDbType(List<OldmanBo> oldmanBoList) {
-        List<OldmanBo> addList = Lists.newArrayList();
-        List<OldmanBo> updateList = Lists.newArrayList();
-
-        List<List<OldmanBo>> parts = Lists.partition(oldmanBoList, PART_NUM);
-        parts.forEach(item -> {
-            List<String> idCardList = item.stream().map(OldmanBo::getIdCard).collect(Collectors.toList());
-            Map<String, OldmanBo> existOldmanMap = oldmanRepository.getByIdCards(idCardList).stream().collect(Collectors.toMap(a -> a.getIdCard().toLowerCase(), Function.identity()));
-            item.forEach(oldman -> {
-                if (existOldmanMap.containsKey(oldman.getIdCard().toLowerCase())) {
-                    oldman.setId(existOldmanMap.get(oldman.getIdCard().toLowerCase()).getId());
-                    oldman.setStatus(0);
-                    updateList.add(oldman);
-                } else {
-                    addList.add(oldman);
-                }
-            });
-        });
-        return Pair.of(addList, updateList);
-    }
 
     public Map<String, Object> getTypeCount(List<Integer> typeList,OldmanParam oldmanParam) {
         Map<String, Object> map = Maps.newHashMap();
@@ -540,7 +329,4 @@ public class OldmanService {
         return result;
     }
 
-    public Long getOldmanCount(OldmanParam oldmanParam) {
-        return oldmanViewRepository.countWithSpec(oldmanParam.convert());
-    }
 }

@@ -203,7 +203,7 @@ function pie1(title, data, target, callback, customLegend) {
  * @param callback
  * @param lengend
  */
-function pie2(title, data, target, callback, customLegend) {
+function pie2(title, data, target, callback, customLegend,legendCallback) {
     var obj = document.getElementById(target);
     var legend_data = [];
     var series_data = [];
@@ -257,7 +257,16 @@ function pie2(title, data, target, callback, customLegend) {
 
         });
     }
-
+    if (legendCallback !== null) {
+        pie.off('legendselectchanged');
+        pie.on('legendselectchanged', function (params) {
+            pie.setOption({
+                legend:{selected:{[params.name]:true}}
+            })
+            var name = params.name;
+            legendCallback(name);
+        });
+    }
     pie.setOption(option, true);
 }
 
@@ -322,11 +331,8 @@ function bar4(title, data, target, callback, customLegend) {
     if (callback !== null) {
         bar.off('click');
         bar.on('click', function (params) {
-            if (params.componentType == "yAxis" || params.componentType == "xAxis") {
-                var name = params.value;
-                callback(name);
-            }
-
+            var name = params.value;
+            callback(name);
         });
     }
     bar.setOption(option, true);
@@ -410,7 +416,7 @@ function pie3(title, data, target, callback, legendData) {
  * @param callback
  * @param customLegend
  */
-function gauge1(title, data, target, callback, customLegend) {
+function gauge1(title, data, target, callback, customLegend,axisLabelSize) {
     var obj = document.getElementById(target);
     var gauge = echarts.init(obj);
     var option = {
@@ -440,7 +446,7 @@ function gauge1(title, data, target, callback, customLegend) {
             axisLabel: {
                 distance: 25,
                 color: '#fff',
-                fontSize: 12
+                fontSize: axisLabelSize
             },
             anchor: {
                 show: true,
@@ -494,6 +500,8 @@ function bar1(title, data, target, callback) {
             type: 'category',
             data: xAxisData,
             axisLabel: {
+                interval:0,
+                rotate:45,
                 textStyle: {
                     color: '#fff',
                     fontSize: '10',
@@ -568,6 +576,7 @@ function bar3(title, data, target, callback) {
         xAxis: {
             data: xAxisData,
             axisLabel: {
+                interval:0,
                 inside: true,
                 textStyle: {
                     color: '#fff'
@@ -590,7 +599,7 @@ function bar3(title, data, target, callback) {
             },
             axisLabel: {
                 textStyle: {
-                    color: '#999'
+                    color: '#fff'
                 }
             }
         },
@@ -702,7 +711,15 @@ function bar2(title, data, target, callback) {
             containLabel: true
         },
         xAxis: {
-            type: 'value'
+            type: 'value',
+            axisLabel: {
+                textStyle: {
+                    color: '#fff',
+                    fontSize: '14',
+                    itemSize: ''
+
+                }
+            }
         },
         yAxis: {
             type: 'category',

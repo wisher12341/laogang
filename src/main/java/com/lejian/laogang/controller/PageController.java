@@ -29,10 +29,38 @@ public class PageController {
         return mv;
     }
 
-    @GetMapping("/home/query")
+    @GetMapping("/home/oldman")
     public ModelAndView home_query(){
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/home/query");
+        mv.setViewName("/home/oldman");
+        return mv;
+    }
+
+    @GetMapping("/home/message")
+    public ModelAndView home_message(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/home/message");
+        return mv;
+    }
+
+    @GetMapping("/home/oldman/detail")
+    public ModelAndView home_query_detail(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/home/oldman_detail");
+        return mv;
+    }
+
+    @GetMapping("/home/organ/detail")
+    public ModelAndView home_organ_detail(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/home/organ_detail");
+        return mv;
+    }
+
+    @GetMapping("/home/policy")
+    public ModelAndView home_policy(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/home/policy");
         return mv;
     }
 

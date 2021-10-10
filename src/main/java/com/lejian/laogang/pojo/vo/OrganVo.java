@@ -18,4 +18,5 @@ public class OrganVo {
     private Integer type;
     private String lng;
     private String lat;
+    private Integer id;
 }

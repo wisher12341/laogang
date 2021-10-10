@@ -1,12 +1,12 @@
 package com.lejian.laogang.repository;
 
 
-import com.lejian.laogang.pojo.bo.OrganBo;
 import com.lejian.laogang.pojo.bo.PolicyBo;
-import com.lejian.laogang.repository.dao.OrganDao;
+import com.lejian.laogang.pojo.bo.PolicyOldmanBo;
 import com.lejian.laogang.repository.dao.PolicyDao;
-import com.lejian.laogang.repository.entity.OrganEntity;
+import com.lejian.laogang.repository.dao.PolicyOldmanDao;
 import com.lejian.laogang.repository.entity.PolicyEntity;
+import com.lejian.laogang.repository.entity.PolicyOldmanEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,14 +14,14 @@ import org.springframework.stereotype.Repository;
 
 @Slf4j
 @Repository
-public class PolicyRepository extends AbstractSpecificationRepository<PolicyBo, PolicyEntity> {
+public class PolicyOldmanRepository extends AbstractSpecificationRepository<PolicyOldmanBo, PolicyOldmanEntity> {
 
     @Autowired
-    private PolicyDao dao;
+    private PolicyOldmanDao dao;
 
     @Override
-    protected PolicyBo convert(PolicyEntity policyEntity) {
-        return PolicyBo.convert(policyEntity);
+    protected PolicyOldmanBo convert(PolicyOldmanEntity policyOldmanEntity) {
+        return PolicyOldmanBo.convert(policyOldmanEntity);
     }
 
     @Override
@@ -31,6 +31,6 @@ public class PolicyRepository extends AbstractSpecificationRepository<PolicyBo, 
 
     @Override
     protected String getTableName() {
-        return "policy";
+        return "policy_oldman";
     }
 }

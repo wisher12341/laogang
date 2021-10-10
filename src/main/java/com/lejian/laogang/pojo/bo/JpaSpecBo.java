@@ -1,13 +1,13 @@
 package com.lejian.laogang.pojo.bo;
 
+import com.google.common.collect.Lists;
 import com.lejian.laogang.util.StringUtils;
 import lombok.Getter;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 用于JPA 复杂查询， 归类where子句的各式条件
@@ -49,6 +49,7 @@ public class JpaSpecBo {
      */
     Map<String,Object> orNotEquipMap = new HashMap<>();
 
+    List<String> viewLabelLike = Lists.newArrayList();
 
     public String getSql() {
         return getSql("");
@@ -111,6 +112,29 @@ public class JpaSpecBo {
                 key = (String) iterator.next();
                 convertKey = StringUtils.camelToUnderline(key);
                 whereCase.append(prex+convertKey).append(" like '%").append(likeMap.get(key)).append("%'");
+            }
+        }
+        if (MapUtils.isNotEmpty(inMap)) {
+            Iterator iterator = inMap.keySet().iterator();
+            String key = (String) iterator.next();
+            String convertKey =  StringUtils.camelToUnderline(key);
+            whereCase.append(prex+convertKey).append(" in (").append(inMap.get(key).stream().map(item -> "'" + item + "'").collect(Collectors.joining(","))).append(")");
+            while (iterator.hasNext()) {
+                whereCase.append(" and ");
+                key = (String) iterator.next();
+                convertKey = StringUtils.camelToUnderline(key);
+                whereCase.append(prex+convertKey).append(" in'").append(inMap.get(key).stream().map(item -> "'" + item + "'").collect(Collectors.joining(","))).append("'");
+            }
+        }
+        if(CollectionUtils.isNotEmpty(viewLabelLike)){
+            Iterator iterator = viewLabelLike.iterator();
+            if (whereCase.length()>0){
+                whereCase.append(" and ");
+            }
+            whereCase.append(prex+"label").append(" like '").append(iterator.next()).append("'");
+            while (iterator.hasNext()) {
+                whereCase.append(" and ");
+                whereCase.append(prex+"label").append(" like '").append(iterator.next()).append("'");
             }
         }
         return whereCase.toString();

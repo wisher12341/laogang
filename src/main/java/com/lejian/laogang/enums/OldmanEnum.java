@@ -46,6 +46,7 @@ public interface OldmanEnum extends BusinessEnum{
     @AllArgsConstructor
     enum IS_ZD implements OldmanAttrEnum.labelEnum{
         ZD(1,"重点老人",true),
+        NOZD(2,"非重点老人",false)
         ;
         private Integer value;
         private String desc;

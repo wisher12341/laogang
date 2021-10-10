@@ -13,7 +13,9 @@
     <script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
 </head>
 <body style="overflow: hidden;background-color: #052031">
-<div class="container" style="margin-left: 10px">
+<iframe id="organInfo"></iframe>
+<iframe id="oldmanInfo"></iframe>
+<div class="container" style="margin-left: 10px" onclick='$("#oldmanInfo").css("display","none");$("#organInfo").css("display","none")'>
     <div class="row" style="height: 99%;margin-top: 0.5%;width: 100%;margin-left: -0.1%">
         <div class="col-xs-2" style="height: 100%;width: 22%!important;" id="l1">
             <div class="row mengceng" id="a" style="height: 35%;margin-top: 0px!important;">
@@ -47,7 +49,7 @@
                 </div>
             </div>
             <div class="row mengceng" style="height: 25.4%">
-                <table style="margin-top: 1%!important;" class="table table-striped table-bordered table-hover dataTables-example">
+                <table style="margin-top: 1%!important;font-size: 18px;width:100%" class="table table-striped table-bordered table-hover dataTables-example">
                     <thead>
                     <tr>
                         <th>姓名</th>
@@ -70,17 +72,17 @@
             </div>
             <div class="row"
                  style="height:4%;margin-left: 2px;margin-top: 12px;border-radius: 3px;width: 101%">
-                <div class="col-xs-2 wl mengceng2" onclick="getOrgan(1)">
-                    老 有 所 依
+                <div class="col-xs-2 wl mengceng2" onclick="getOrgan(4)">
+                    老 有 所 养
                 </div>
-                <div class="col-xs-2 wl mengceng2" onclick="getOrgan(2)">
-                    老 有 所 学
+                <div class="col-xs-2 wl mengceng2" onclick="getOrgan(1)">
+                    老 有 所 医
                 </div>
                 <div class="col-xs-2 wl mengceng2" onclick="getOrgan(3)">
                     老 有 所 乐
                 </div>
-                <div class="col-xs-2 wl mengceng2" onclick="getOrgan(4)">
-                    老 有 所 养
+                <div class="col-xs-2 wl mengceng2" onclick="getOrgan(2)">
+                    老 有 所 学
                 </div>
                 <div class="col-xs-2 wl mengceng2" style="margin-right: 0px!important;" onclick="getOrgan(5)">
                     老 有 所 为
@@ -219,7 +221,12 @@
             </div>
             <div class="row mengceng" style="height: 46%;display: none" id="m">
                 <div class="col-xs-12">
-                    <div class="row" style="height: 50%">
+                    <div class="row" style="height: 5%" onclick='$("#m").hide(); $("#c").show();'>
+                        <div class="col-xs-12" style="text-align: center">
+                            <span style="color: white;font-size: 18px">老港敬老院</span>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 30%">
                         <div class="col-xs-3">
                             <div id="m11"></div>
                         </div>
@@ -233,7 +240,12 @@
                             <div id="m14"></div>
                         </div>
                     </div>
-                    <div class="row" style="height: 50%">
+                    <div class="row" style="height: 5%">
+                        <div class="col-xs-12" style="text-align: center">
+                            <span style="color: white;font-size: 18px">龙港养护院</span>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 30%">
                         <div class="col-xs-3">
                             <div id="m21"></div>
                         </div>
@@ -249,11 +261,122 @@
                     </div>
                 </div>
             </div>
+            <div class="row mengceng" style="height: 46%;display: none" id="m2">
+                <div class="col-xs-12">
+                    <div class="row" style="height: 5%" onclick='$("#m2").hide(); $("#c").show();'>
+                        <div class="col-xs-12" style="text-align: center">
+                            <span style="color: white;font-size: 18px">上海老港滨海社区长者照护之家</span>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 60%;margin-top: 8%">
+                        <div class="col-xs-3">
+                            <div id="m211"></div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div id="m212"></div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div id="m213"></div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div id="m214"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mengceng" style="height: 46%;display: none" id="m3">
+                <div class="col-xs-12">
+                    <div class="row" style="height: 5%" onclick='$("#m3").hide(); $("#c").show();'>
+                        <div class="col-xs-12" style="text-align: center">
+                            <span style="color: white;font-size: 18px">滨海老年人日间照护中心</span>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 25%">
+                        <div class="col-xs-4">
+                            <div id="m311"></div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div id="m312"></div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div id="m313"></div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="row" style="height: 5%" >
+                        <div class="col-xs-12" style="text-align: center">
+                            <span style="color: white;font-size: 18px">社区老年人日间照护中心</span>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 25%;">
+                        <div class="col-xs-4">
+                            <div id="m314"></div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div id="m315"></div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div id="m316"></div>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 5%" onclick='$("#m2").hide(); $("#c").show();'>
+                        <div class="col-xs-12" style="text-align: center">
+                            <span style="color: white;font-size: 18px">大河村综合为老服务中心</span>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 25%">
+                        <div class="col-xs-4">
+                            <div id="m317"></div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div id="m318"></div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div id="m319"></div>
+                        </div>
+                        </div>
+                    </div>
+            <div class="row mengceng" style="height: 46%;display: none" id="m4">
+                <div class="col-xs-12">
+                    <div class="row" style="height: 5%" onclick='$("#m4").hide(); $("#c").show();'>
+                        <div class="col-xs-12" style="text-align: center">
+                            <span style="color: white;font-size: 18px">综合型老年人社区长者食堂</span>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 30%">
+                        <div class="col-xs-4">
+                            <div id="m411"></div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div id="m412"></div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div id="m413"></div>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 5%">
+                        <div class="col-xs-12" style="text-align: center">
+                            <span style="color: white;font-size: 18px">滨海老年人综合型社区长者食堂</span>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 30%">
+                        <div class="col-xs-4">
+                            <div id="m421"></div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div id="m422"></div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div id="m423"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row mengceng" style="height: 24.5%" id="d">
-                <div class="col-xs-6" style="margin-top: 20px">
+                <div class="col-xs-6" style="margin-top: 5px">
                     <div id="completeness1"></div>
                 </div>
-                <div class="col-xs-6" style="margin-top: 20px">
+                <div class="col-xs-6" style="margin-top: 5px">
                     <div id="completeness2"></div>
                 </div>
             </div>

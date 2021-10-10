@@ -148,3 +148,21 @@ th,td{
     margin-left: 5% !important;
     color: white;
 }
+#oldmanInfo{
+    display: none;
+    position:absolute;
+    height: 80%;
+    width: 60%;
+    margin-left: 20%;
+    margin-top: 2%;
+    z-index: 9999;
+}
+#organInfo{
+    display: none;
+    position:absolute;
+    height: 90%;
+    width: 30%;
+    margin-left: 30%;
+    margin-top: 2%;
+    z-index: 9999;
+}

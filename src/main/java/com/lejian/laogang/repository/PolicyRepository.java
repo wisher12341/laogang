@@ -1,42 +1,36 @@
 package com.lejian.laogang.repository;
 
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.lejian.laogang.pojo.bo.LocationBo;
 import com.lejian.laogang.pojo.bo.OrganBo;
-import com.lejian.laogang.repository.dao.LocationDao;
+import com.lejian.laogang.pojo.bo.PolicyBo;
 import com.lejian.laogang.repository.dao.OrganDao;
-import com.lejian.laogang.repository.entity.LocationEntity;
+import com.lejian.laogang.repository.dao.PolicyDao;
 import com.lejian.laogang.repository.entity.OrganEntity;
+import com.lejian.laogang.repository.entity.PolicyEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 @Slf4j
 @Repository
-public class OrganRepository extends AbstractSpecificationRepository<OrganBo, OrganEntity> {
+public class PolicyRepository extends AbstractSpecificationRepository<PolicyBo, PolicyEntity> {
 
     @Autowired
-    private OrganDao organDao;
+    private PolicyDao dao;
 
     @Override
-    protected OrganBo convert(OrganEntity organEntity) {
-        return OrganBo.convert(organEntity);
+    protected PolicyBo convert(PolicyEntity policyEntity) {
+        return PolicyBo.convert(policyEntity);
     }
 
     @Override
     protected JpaRepository getDao() {
-        return organDao;
+        return dao;
     }
 
     @Override
     protected String getTableName() {
-        return "organ";
+        return "policy";
     }
 }

@@ -33,25 +33,35 @@ public interface OldmanAttrEnum extends BusinessEnum {
     @Getter
     @AllArgsConstructor
     enum OldmanAttrType implements OldmanAttrEnum {
-        A1(1, "从事社区工作"),
-        A2(2, "家庭结构"),
-        A3(3, "家庭属性"),
-        A4(4,"生活来源"),
-        A5(5,"医保"),
-        A6(6,"工作状态"),
-        A7(7,"恶习"),
-        A8(8,"失能情况"),
-        A9(9,"药物过敏"),
-        A10(10,"慢病"),
-        A11(11,"肿瘤史"),
-        A12(12,"病情既往史"),
-        A13(13,"养老状态"),
-        A14(14,"居家养老项目"),
-        A15(15,"社区养老扩展信息"),
-        A16(16,"助餐点"),
+        A1(1, "从事社区工作",CommunityWork.class),
+        A2(2, "家庭结构",FamilyType.class),
+        A3(3, "家庭属性",Faimly.class),
+        A4(4,"生活来源",Income.class),
+        A5(5,"医保",YB.class),
+        A6(6,"工作状态",WorkStatus.class),
+        A7(7,"恶习",EX.class),
+        A8(8,"失能情况",SN.class),
+        A9(9,"药物过敏",YWGM.class),
+        A10(10,"慢病",MB.class),
+        A11(11,"肿瘤史",ZL.class),
+        A12(12,"病情既往史",BQJWS.class),
+        A13(13,"养老状态",ServiceStatus.class),
+        A14(14,"居家养老项目",JJYLXM.class),
+        A15(15,"社区养老扩展信息",SQYL.class),
+        A16(16,"助餐点",ZCD.class),
         ;
         private Integer value;
         private String desc;
+        private Class enumClass;
+
+        public static Class findEnumClass(Integer type){
+            for (OldmanAttrType item:OldmanAttrType.values()){
+                if (item.getValue()==type.intValue()){
+                    return item.getEnumClass();
+                }
+            }
+            return null;
+        }
 
     }
 
@@ -152,7 +162,7 @@ public interface OldmanAttrEnum extends BusinessEnum {
     @Getter
     @AllArgsConstructor
     enum Faimly implements labelEnum {
-        A(1, "独生子女家庭",true),
+        A(1, "独生子女",true),
         B(2, "退伍军人",true),
         C(3, "烈士家属",true),
         D(4,"军属",true),
@@ -255,7 +265,7 @@ public interface OldmanAttrEnum extends BusinessEnum {
     }
 
     /**
-     * 失能情况
+     * 慢病
      */
     @Getter
     @AllArgsConstructor

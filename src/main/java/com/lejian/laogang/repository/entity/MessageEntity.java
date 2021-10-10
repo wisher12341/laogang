@@ -6,20 +6,25 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 
 @DynamicInsert
 @DynamicUpdate
 @Data
 @Entity
-@Table(name = "policy_oldman")
-public class PolicyOldmanEntity {
+@Table(name = "message")
+public class MessageEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "oldman_id")
-    private String oldmanId;
-    @Column(name = "policy_id")
-    private String policyId;
-
+    private String content;
+    @Column(name = "user_id")
+    private String userId;
+    @Column(name = "role_id")
+    private Integer roleId;
+    @Column
+    private String sender;
+    @Column
+    private Integer type;
+    @Column(name = "create_time")
+    private Timestamp createTime;
 }

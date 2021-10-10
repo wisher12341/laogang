@@ -1,6 +1,7 @@
 package com.lejian.laogang.pojo.bo;
 
 import com.lejian.laogang.enums.BusinessEnum;
+import com.lejian.laogang.enums.OldmanAttrEnum;
 import com.lejian.laogang.pojo.vo.LocationVo;
 import com.lejian.laogang.repository.entity.LocationEntity;
 import com.lejian.laogang.repository.entity.OldmanAttrEntity;
@@ -30,7 +31,8 @@ public class OldmanAttrBo extends BaseBo{
 
     public static OldmanAttrBo convert(OldmanAttrEntity entity) {
         OldmanAttrBo bo = new OldmanAttrBo();
-
+        bo.setType(BusinessEnum.find(entity.getType(), OldmanAttrEnum.OldmanAttrType.class));
+        bo.setValue(BusinessEnum.find(entity.getValue(), OldmanAttrEnum.OldmanAttrType.findEnumClass(bo.getType().getValue())));
         return bo;
     }
 

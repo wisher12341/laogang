@@ -30,13 +30,13 @@ public enum EnumLabel implements LabelBaseEnum {
     FAMILY_TYPE(2, 3, 999, OldmanAttrEnum.FamilyType.values()) {
         @Override
         public void setWhereCase(JpaSpecBo jpaSpecBo, List<String> values) {
-            jpaSpecBo.getLikeMap().put("label","%"+getId()+"_"+values.get(0)+"%");
+            jpaSpecBo.getViewLabelLike().add("%@"+getId()+"_"+values.get(0)+"%");
         }
     },
     FAMILY(3, 3, 999, OldmanAttrEnum.Faimly.values()) {
         @Override
         public void setWhereCase(JpaSpecBo jpaSpecBo, List<String> values) {
-            jpaSpecBo.getLikeMap().put("label","%"+getId()+"_"+values.get(0)+"%");
+            jpaSpecBo.getViewLabelLike().add("%@"+getId()+"_"+values.get(0)+"%");
         }
     },
     IS_ZD(6, 1, 999, OldmanEnum.IS_ZD.values()) {
@@ -72,13 +72,13 @@ public enum EnumLabel implements LabelBaseEnum {
     A31(4,4,999,OldmanAttrEnum.Income.values()) {
         @Override
         public void setWhereCase(JpaSpecBo jpaSpecBo, List<String> values) {
-            jpaSpecBo.getLikeMap().put("label","%"+getId()+"_"+values.get(0)+"%");
+            jpaSpecBo.getViewLabelLike().add("%@"+getId()+"_"+values.get(0)+"%");
         }
     },
     A51(13,5,999,OldmanAttrEnum.ServiceStatus.values()) {
         @Override
         public void setWhereCase(JpaSpecBo jpaSpecBo, List<String> values) {
-            jpaSpecBo.getLikeMap().put("label","%"+getId()+"_"+values.get(0)+"%");
+            jpaSpecBo.getViewLabelLike().add("%@"+getId()+"_"+values.get(0)+"%");
         }
     };
 

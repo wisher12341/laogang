@@ -21,4 +21,8 @@ public class OrganService {
     public List<OrganVo> getByPage(OrganParam organParam, PageParam pageParam) {
         return organRepository.findByPageWithSpec(pageParam.getPageNo(),pageParam.getPageSize(),organParam.convert()).stream().map(OrganBo::convertVo).collect(Collectors.toList());
     }
+
+    public OrganVo getBYId(Integer id) {
+        return organRepository.getByPkId(id).convertVo();
+    }
 }

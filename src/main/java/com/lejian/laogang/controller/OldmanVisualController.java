@@ -8,7 +8,7 @@ import com.lejian.laogang.controller.contract.response.GetLocationResponse;
 import com.lejian.laogang.controller.contract.response.GetOldmanResponse;
 import com.lejian.laogang.controller.contract.response.MapResponse;
 import com.lejian.laogang.handler.ExcelHandler;
-import com.lejian.laogang.service.OldmanService;
+import com.lejian.laogang.service.OldmanVisualService;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
@@ -20,13 +20,12 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping("/oldman")
-public class OldmanController {
+@RequestMapping("/oldman/visual")
+public class OldmanVisualController {
 
     @Autowired
-    private OldmanService service;
-    @Autowired
-    private ExcelHandler excelHandler;
+    private OldmanVisualService service;
+
 
     /**
      * 获取老人 某数据的 值的数量分布
@@ -121,24 +120,6 @@ public class OldmanController {
     }
 
 
-    /**
-     * excel导入
-     * 没有的添加  有的更新
-     * @param file
-     * @return
-     */
-    //todo 限制  数量限制 一次1000？ 参数限制
-    @RequestMapping(value = "/importExcel",method = RequestMethod.POST)
-    public ModelAndView importExcel(@RequestParam MultipartFile file) {
-        Pair<List<String>,List<List<String>>> excelData=excelHandler.parse(file,1);
-        List<CheckResultBo> checkResultBoList= Lists.newArrayList();
-        if(CollectionUtils.isNotEmpty(excelData.getSecond())) {
-            checkResultBoList=service.addOldmanByExcel(excelData);
-        }
-        ModelAndView mv=new ModelAndView("/oldman");
-        mv.addObject("check",checkResultBoList);
-        return mv;
-    }
 
 
     /**

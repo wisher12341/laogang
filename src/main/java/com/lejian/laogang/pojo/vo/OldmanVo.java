@@ -7,13 +7,15 @@ import com.lejian.laogang.repository.entity.OldmanEntity;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 @Data
 public class OldmanVo {
     private Integer id;
     private String male;
     private String name;
-    private BusinessEnum huji;
+    private String idName;
+    private String huji;
     private String residence;
     private String hujiAddress;
     private String homeowner;
@@ -28,7 +30,7 @@ public class OldmanVo {
     private String areaTown;
     private String areaVillage;
     private String areaCustomOne;
-    private Integer politics;
+    private String politics;
     private String householdType;
     private String education;
     private String landlineNumber;
@@ -41,5 +43,6 @@ public class OldmanVo {
     private String eyesight;
     private String psychosis;
     private LocationBo locationBo;
-
+    private String birthday;
+    private Map<String,String> typeMap;
 }

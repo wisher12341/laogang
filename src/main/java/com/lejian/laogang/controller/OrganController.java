@@ -1,9 +1,12 @@
 package com.lejian.laogang.controller;
 
 
+import com.lejian.laogang.controller.contract.request.GetByIdRequest;
 import com.lejian.laogang.controller.contract.request.GetOrganRequest;
 import com.lejian.laogang.controller.contract.response.GetOrganResponse;
 import com.lejian.laogang.controller.contract.response.MapResponse;
+import com.lejian.laogang.pojo.vo.OldmanVo;
+import com.lejian.laogang.pojo.vo.OrganVo;
 import com.lejian.laogang.service.HomeService;
 import com.lejian.laogang.service.OrganService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +34,10 @@ public class OrganController {
         return response;
     }
 
+    @ResponseBody
+    @RequestMapping("/getById")
+    public OrganVo getById(@RequestBody GetByIdRequest request){
+        return service.getBYId(request.getId());
+    }
 
 }

@@ -17,7 +17,8 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "oldman_view")
 public class OldmanViewEntity{
-
+    @Column
+    private Integer id;
     @Column
     private Integer male;
     @Column

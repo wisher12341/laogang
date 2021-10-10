@@ -20,7 +20,7 @@ $(document).ready(function () {
 
 function initFinish() {
     $.ajax({
-        url: "/oldman/getZdFinish",
+        url: "/oldman/visual/getZdFinish",
         type: 'post',
         dataType: 'json',
         data: JSON.stringify({
@@ -30,9 +30,9 @@ function initFinish() {
         contentType: "application/json;charset=UTF-8",
         success: function (result) {
             var map = result.map;
-            map = {"大河村": 30, "牛肚村": 20, "居委1": 20, "居委2": 15}
+            map = {"东河村": 30, "中港村": 20, "大河村": 20, "宏港苑居委": 15,"建港村": 25,"成日村": 15,"欣河村": 5,"滨海居委": 10,"牛肚村": 15,"老港居委": 35}
             createHeightAndWidthFromSourceDoc("d", "completeness1", 0.9, 0.5);
-            bar4("各地区完成度", map, "completeness1", null, null)
+            bar4("各地区完成度", map, "completeness1", finish, null)
         }
     });
 
@@ -41,7 +41,7 @@ function initFinish() {
         a=village
     }
     $.ajax({
-        url: "/oldman/getZdFinish",
+        url: "/oldman/visual/getZdFinish",
         type: 'post',
         dataType: 'json',
         data: JSON.stringify({
@@ -73,9 +73,38 @@ function initFinish() {
     });
 }
 
+function finish(name) {
+    $.ajax({
+        url: "/oldman/visual/getZdFinish",
+        type: 'post',
+        dataType: 'json',
+        data: JSON.stringify({
+            "group": "area_custom_one",
+            "oldmanParam": {
+                "areaVillage": name
+            }
+        }),
+        contentType: "application/json;charset=UTF-8",
+        success: function (result) {
+            var map = result.map;
+            map = {
+                "1组": Math.random()*100,
+                "2组": Math.random()*100,
+                "3组": Math.random()*100,
+                "4组": Math.random()*100,
+                "5组": Math.random()*100,
+                "6组": Math.random()*100,
+                "7组": Math.random()*100
+            }
+            createHeightAndWidthFromSourceDoc("d", "completeness2", 0.9, 0.5);
+            bar4(name+"完成度", map, "completeness2", null, null)
+        }
+    });
+}
+
 function init4() {
     $.ajax({
-        url: "/oldman/attr/getExtGroup",
+        url: "/oldman/visual/attr/getExtGroup",
         type: 'post',
         dataType: 'json',
         data: JSON.stringify({
@@ -88,13 +117,13 @@ function init4() {
         contentType: "application/json;charset=UTF-8",
         success: function (result) {
             var map = result.map;
-            createHeightAndWidthFromSourceDoc("c", "organ", 0.5, 0.3);
+            createHeightAndWidthFromSourceDoc("c", "organ", 0.48, 0.3);
             pie2("机构养老", map, "organ", null, null);
         }
     });
 
     $.ajax({
-        url: "/oldman/attr/getExtGroup",
+        url: "/oldman/visual/attr/getExtGroup",
         type: 'post',
         dataType: 'json',
         data: JSON.stringify({
@@ -107,8 +136,9 @@ function init4() {
         contentType: "application/json;charset=UTF-8",
         success: function (result) {
             var map = result.map;
-            createHeightAndWidthFromSourceDoc("c", "community", 0.5, 0.3);
-            pie2("社区养老", map, "community", null, null);
+            createHeightAndWidthFromSourceDoc("c", "community", 0.48, 0.3);
+            var m={"长者照护之家":map["长者照护之家"],"日间照料中心":map["日间照料中心"],"助餐点":map["助餐点"]};
+            pie2("社区养老", m, "community", null, null,sqyl);
         }
     });
 
@@ -125,12 +155,63 @@ function init4() {
         contentType: "application/json;charset=UTF-8",
         success: function (result) {
             var map = result.map;
-            createHeightAndWidthFromSourceDoc("c", "home", 0.5, 0.3);
+            createHeightAndWidthFromSourceDoc("c", "home", 0.48, 0.3);
             pie2("居家养老", map, "home", null, null);
         }
     });
 }
-
+function sqyl(name) {
+    if (name === "长者照护之家"){
+        $("#c").hide(); $("#m2").show();
+        createHeightAndWidthFromSourceDoc("m2", "m211", 0.6, 0.25);
+        gauge1("席位数", 74, "m211", null, null,6);
+        createHeightAndWidthFromSourceDoc("m2", "m212", 0.6, 0.23);
+        pie1("性别", male, "m212", null, null);
+        createHeightAndWidthFromSourceDoc("m2", "m213", 0.6, 0.23);
+        bar2("年龄", age, "m213", null, null);
+        createHeightAndWidthFromSourceDoc("m2", "m214", 0.6, 0.23);
+        pie2("健康状态", {"正常":1,"失能":1,"半失能":1}, "m214", null, null);
+    }
+    if (name === "日间照料中心"){
+        var w=0.22;
+        var w2=0.26;
+        var h=0.33
+        $("#c").hide(); $("#m3").show();
+        createHeightAndWidthFromSourceDoc("m3", "m311", w, h);
+        gauge1("席位数", 74, "m311", null, null,6);
+        createHeightAndWidthFromSourceDoc("m3", "m312", w, h);
+        pie1("性别", male, "m312", null, null);
+        createHeightAndWidthFromSourceDoc("m3", "m313", w2, h);
+        bar2("年龄", age, "m313", null, null);
+        createHeightAndWidthFromSourceDoc("m3", "m314", w, h);
+        gauge1("席位数", 74, "m314", null, null,6);
+        createHeightAndWidthFromSourceDoc("m3", "m315", w, h);
+        pie1("性别", male, "m315", null, null);
+        createHeightAndWidthFromSourceDoc("m3", "m316", w2, h);
+        bar2("年龄", age, "m316", null, null);
+        createHeightAndWidthFromSourceDoc("m3", "m317", w, h);
+        gauge1("席位数", 74, "m317", null, null,6);
+        createHeightAndWidthFromSourceDoc("m3", "m318", w, h);
+        pie1("性别", male, "m318", null, null);
+        createHeightAndWidthFromSourceDoc("m3", "m319", w2, h);
+        bar2("年龄", age, "m319", null, null);
+    }
+    if (name === "助餐点"){
+        $("#c").hide(); $("#m4").show();
+        createHeightAndWidthFromSourceDoc("m4", "m411", 0.41, 0.33);
+        gauge1("席位数", 74, "m411", null, null,6);
+        createHeightAndWidthFromSourceDoc("m4", "m412", 0.41, 0.33);
+        pie1("性别", male, "m412", null, null);
+        createHeightAndWidthFromSourceDoc("m4", "m413", 0.41, 0.33);
+        bar2("年龄", age, "m413", null, null);
+        createHeightAndWidthFromSourceDoc("m4", "m421", 0.41, 0.33);
+        gauge1("席位数", 74, "m421", null, null,6);
+        createHeightAndWidthFromSourceDoc("m4", "m422", 0.41, 0.33);
+        pie1("性别", male, "m422", null, null);
+        createHeightAndWidthFromSourceDoc("m4", "m423", 0.41, 0.33);
+        bar2("年龄", age, "m423", null, null);
+    }
+}
 /**
  * 初始化 第一块
  */
@@ -150,7 +231,7 @@ function init2() {
 
 function init3() {
     $.ajax({
-        url: "/oldman/getCount",
+        url: "/oldman/visual/getCount",
         type: 'post',
         dataType: 'json',
         data: JSON.stringify([{"areaVillage":village}, {
@@ -165,16 +246,16 @@ function init3() {
             $("#sum").html(map["1"]);
             $("#sixSum").html(map["2"]);
             createHeightAndWidthFromSourceDoc("b", "oldmanSum", 0.95, 0.48);
-            gauge1("老年人占比", 70, "oldmanSum", null, null);
+            gauge1("老年人占比", 70, "oldmanSum", null, null,12);
             oldsum=70;
 
             $("#eightSum").html(map["3"]);
             createHeightAndWidthFromSourceDoc("b", "zdOldman", 0.95, 0.48);
-            gauge1("重点老人占比", 10, "zdOldman", null, null);
+            gauge1("重点老人占比", 10, "zdOldman", null, null,12);
 
             createHeightAndWidthFromSourceDoc("f", "eightSum2", 0.5, 0.45);
-            var m = {"80以上": map["3"], "80以下": map["1"] - map["3"]};
-            pie1("80岁以上老人占比", m, "eightSum2", null, null);
+            var m = {"80以上": map["3"], "79以下": map["1"] - map["3"]};
+            pie1("80岁以上老人占比", m, "eightSum2", null, null,12);
 
             init31();
         }
@@ -183,7 +264,7 @@ function init3() {
 
 function init31() {
     $.ajax({
-        url: "/oldman/getGroupCount",
+        url: "/oldman/visual/getGroupCount",
         type: 'post',
         dataType: 'json',
         data: JSON.stringify({
@@ -198,6 +279,7 @@ function init31() {
             for (var key in map) {
                 if (key === "ServiceStatus") {
                     createHeightAndWidthFromSourceDoc("c", "ServiceStatus", 0.5, 0.5);
+                    var ServiceStatusData = {"机构养老":map[key]["机构养老"],"社区养老":map[key]["社区养老"],"居家养老":map[key]["居家养老"]};
                     pie2("养老状态", map[key], "ServiceStatus", null, null);
 
                     var m = [[{name: "机构养老", value: map["ServiceStatus"]["机构养老"]},
@@ -208,7 +290,7 @@ function init31() {
                         },
                         {
                             value: totalOldmanCount - map["ServiceStatus"]["机构养老"] - map["ServiceStatus"]["社区养老"] - map["ServiceStatus"]["居家养老"],
-                            name: '其它'
+                            name: '其他'
                         }],
                         [{name: "社区养老", value: map["ServiceStatus"]["社区养老"]},
                             {value: map["ServiceStatus"]["居家养老"], name: '居家养老'}]];
@@ -234,7 +316,7 @@ function init31() {
     });
 
     $.ajax({
-        url: "/oldman/getGroupCount",
+        url: "/oldman/visual/getGroupCount",
         type: 'post',
         dataType: 'json',
         data: JSON.stringify({
@@ -244,15 +326,15 @@ function init31() {
         success: function (result) {
             var map = result.map;
             for (var key in map) {
-                createHeightAndWidthFromSourceDoc("b", "areaVillage3", 1.1, 1.2);
-                bar3("片区老年人口分布", map["area_village"], "areaVillage3", selectVillage)
+                createHeightAndWidthFromSourceDoc("b", "areaVillage3", 1, 1.2);
+                bar3("老年人口分布", map["area_village"], "areaVillage3", selectVillage)
             }
         }
     });
 
 
     $.ajax({
-        url: "/oldman/attr/getTypeCount",
+        url: "/oldman/visual/attr/getTypeCount",
         type: 'post',
         dataType: 'json',
         data: JSON.stringify({
@@ -273,7 +355,7 @@ function init31() {
 
 function selectVillage(param) {
     village=param;
-    init2();
+    heatmap();
     init3();
     init4();
     initFinish();
@@ -296,7 +378,7 @@ function change(title, type, trend) {
     pie2(title, map, "g1", null, null);
 
     $.ajax({
-        url: "/oldman/getOldmanBaseGroupByAttr",
+        url: "/oldman/visual/getOldmanBaseGroupByAttr",
         type: 'post',
         dataType: 'json',
         data: JSON.stringify({
@@ -328,7 +410,7 @@ function change(title, type, trend) {
 
 //todo 区分areaVillage
     $.ajax({
-        url: "/oldman/getTrend",
+        url: "/oldman/visual/getTrend",
         type: 'post',
         dataType: 'json',
         data: JSON.stringify({
@@ -360,9 +442,7 @@ function initOldman() {
             "bStateSave": true,
             "bProcessing": true, //加载数据时显示正在加载信息
             "bServerSide": true, //指定从服务器端获取数据
-            "columns": [{
-                data: "name"
-            }, {
+            "columns": [{}, {
                 data: "areaVillage"
             }, {
                 data: "male"
@@ -372,17 +452,27 @@ function initOldman() {
                 data: "idCard"
             }
             ],
-            "iDisplayLength": 4,
+            "columnDefs": [
+                // 列样式
+                {
+                    "targets": [0], // 目标列位置，下标从0开始
+                    "data": "idName", // 数据列名
+                    "render": function(data, type, full) { // 返回自定义内容
+                        return"<span onclick='oldmanInfo("+data.split("_")[0]+")'>"+data.split("_")[1]+"</span>";
+                    }
+                }
+            ],
+            "iDisplayLength": 7,
             "createdRow": function (row, data, dataIndex) {
                 // $(row).css("background-color", "#052031");
                 $(row).css("color", "white");
             },
-            "sAjaxSource": "/oldman/getByPage",//这个是请求的地址
+            "sAjaxSource": "/oldman/visual/getByPage",//这个是请求的地址
             "fnServerData": retrieveData
         });
 
     function retrieveData(url, aoData, fnCallback) {
-        aoData.iDisplayLength = 6;
+        aoData.iDisplayLength = 7;
         $.ajax({
             url: url,//这个就是请求地址对应sAjaxSource
             data: JSON.stringify({
@@ -413,6 +503,14 @@ function initOldman() {
     }
 }
 
+function oldmanInfo(id) {
+    $("#oldmanInfo").hide();
+    $("#oldmanInfo").attr("src", "/home/oldman/detail?id=" + id + "&view=true");
+    $("#oldmanInfo").load(function () {                             //  等iframe加载完毕
+        $("#oldmanInfo").show();
+    });
+}
+
 /**
  * 初始化标签
  */
@@ -424,7 +522,7 @@ function initLabel() {
         contentType: "application/json;charset=UTF-8",
         success: function (result) {
             var list = result.voList;
-            var data = {name: "标签", id: 0, children: []};
+            var data = {name: "身份标签", id: 0, children: []};
             for (var i = 0; i < list.length; i++) {
                 var label = {name: list[i].label, id: list[i].id}
                 data.children[i] = label;
@@ -436,7 +534,7 @@ function initLabel() {
 
 
 function getLabel(parentName, parentId) {
-    if (parentName === "标签") {
+    if (parentName === "身份标签") {
         clearLabel();
     } else {
         var param = JSON.stringify({});
@@ -477,8 +575,9 @@ function labelClick(label, id) {
             }
         }
         if (f) {
-            selectLabelId[selectLabelId.length] = id;
-            var div = $("<div class='label labelC'>" + label + "</div>");
+            var index = selectLabelId.length;
+            selectLabelId[index] = id;
+            var div = $("<div class='label labelC' onclick='cancalSelectLabel("+index+",this)'>" + label + "</div>");
             $("#selectLabel").append(div);
             initStatistics();
             table.fnFilter();
@@ -486,13 +585,19 @@ function labelClick(label, id) {
         }
     }
 }
-
+function cancalSelectLabel(index,obj) {
+    $(obj).hide();
+    selectLabelId[index]="0";
+    initStatistics();
+    table.fnFilter();
+    heatmap();
+}
 /**
  * 初始化老人统计数据
  */
 function initStatistics() {
     $.ajax({
-        url: "/oldman/getGroupCount",
+        url: "/oldman/visual/getGroupCount",
         type: 'post',
         dataType: 'json',
         data: JSON.stringify({
@@ -509,7 +614,7 @@ function initStatistics() {
                     createHeightAndWidthFromSourceDoc("a", key, 0.5, 0.5);
                     var title;
                     if (key === "male") {
-                        title = "男女";
+                        title = "性别";
                         if (male===null || male===undefined) {
                             male = map[key]
                         }
@@ -531,7 +636,7 @@ function initStatistics() {
 
 
     $.ajax({
-        url: "/oldman/getAgeGroupCount",
+        url: "/oldman/visual/getAgeGroupCount",
         type: 'post',
         dataType: 'json',
         data: JSON.stringify({
@@ -555,7 +660,9 @@ function clearLabel() {
     selectLabelId = [];
     $("#selectLabel").html("");
     initLabel();
+    village="";
     initStatistics();
+    map.panTo(new BMap.Point(121.875277,31.040663));
     heatmap();
     table.fnFilter();
 }
@@ -587,24 +694,35 @@ function getOrgan(type) {
             var positions = [];
             var data = result.organVoList;
             for (var i = 0; i < data.length; i++) {
-                var myIcon = new BMap.Icon("/static/img/organ" + type + ".png", new BMap.Size(32, 32));
-                var marker = new BMap.Marker(new BMap.Point(data[i].lng, data[i].lat), {
-                    icon: myIcon
-                });
-                marker.setTitle(data[i].name);
-                var label = new BMap.Label(data[i].name, {offset: new BMap.Size(20, -10)});
-                label.setStyle({
-                    color: "green",
-                    fontSize: "20px",
-                    border:0,
-                    fontWeight: "bold",
-                    padding: "5px 10px",
-                    position: "relative"
-                });
-                marker.type = "organ";
-                marker.setLabel(label);
-                map.addOverlay(marker);
-                positions[i] = marker.getPosition();
+                if(data[i].lng!==null){
+                    var myIcon = new BMap.Icon("/static/img/organ" + type + ".png", new BMap.Size(32, 32));
+                    var marker = new BMap.Marker(new BMap.Point(data[i].lng, data[i].lat), {
+                        icon: myIcon
+                    });
+                    marker.setTitle(data[i].name);
+                    var label = new BMap.Label(data[i].name, {offset: new BMap.Size(20, -10)});
+                    label.setStyle({
+                        color: "green",
+                        fontSize: "20px",
+                        border:0,
+                        backgroundColor: "transparent",
+                        fontWeight: "bold",
+                        position: "relative"
+                    });
+                    marker.setZIndex(999);
+                    marker.type = "organ";
+                    marker.setLabel(label);
+                    marker.id= data[i].id;
+                    marker.addEventListener('click', function () {
+                        $("#organInfo").hide();
+                        $("#organInfo").attr("src", "/home/organ/detail?id=" + this.id +"&view=true");
+                        $("#organInfo").load(function () {                             //  等iframe加载完毕
+                            $("#organInfo").show();
+                        });
+                    });
+                    map.addOverlay(marker);
+                    positions[i] = marker.getPosition();
+                }
             }
             map.panTo(map.getViewport(positions).center);
         }
@@ -630,7 +748,7 @@ function change2() {
         bar2("年龄分布", age, "h7", null, null);
 
         $.ajax({
-            url: "/oldman/getTrend",
+            url: "/oldman/visual/getTrend",
             type: 'post',
             dataType: 'json',
             data: JSON.stringify({
@@ -654,22 +772,22 @@ function change2() {
 function organClick() {
     $("#c").hide();
     $("#m").show();
-    createHeightAndWidthFromSourceDoc("m", "m11", 0.5, 0.25);
-    gauge1("床位数", 100, "m11", null, null);
-    createHeightAndWidthFromSourceDoc("m", "m12", 0.5, 0.23);
+    createHeightAndWidthFromSourceDoc("m", "m11", 0.41, 0.25);
+    gauge1("床位数", 74, "m11", null, null,6);
+    createHeightAndWidthFromSourceDoc("m", "m12", 0.41, 0.23);
     pie1("性别", male, "m12", null, null);
-    createHeightAndWidthFromSourceDoc("m", "m13", 0.5, 0.23);
+    createHeightAndWidthFromSourceDoc("m", "m13", 0.41, 0.23);
     bar2("年龄", age, "m13", null, null);
-    createHeightAndWidthFromSourceDoc("m", "m14", 0.5, 0.23);
+    createHeightAndWidthFromSourceDoc("m", "m14", 0.41, 0.23);
     pie2("健康状态", {"正常":1,"失能":1,"半失能":1}, "m14", null, null);
 
-    createHeightAndWidthFromSourceDoc("m", "m21", 0.5, 0.23);
-    gauge1("床位数", 100, "m21", null, null);
-    createHeightAndWidthFromSourceDoc("m", "m22", 0.5, 0.23);
+    createHeightAndWidthFromSourceDoc("m", "m21", 0.41, 0.23);
+    gauge1("床位数", 61, "m21", null, null,6);
+    createHeightAndWidthFromSourceDoc("m", "m22", 0.41, 0.23);
     pie1("性别", male, "m22", null, null);
-    createHeightAndWidthFromSourceDoc("m", "m23", 0.5, 0.23);
+    createHeightAndWidthFromSourceDoc("m", "m23", 0.41, 0.23);
     bar2("年龄", age, "m23", null, null);
-    createHeightAndWidthFromSourceDoc("m", "m24", 0.5, 0.23);
+    createHeightAndWidthFromSourceDoc("m", "m24", 0.41, 0.23);
     pie2("健康状态", {"正常":1,"失能":1,"半失能":1}, "m24", null, null);
     //     }
     // });

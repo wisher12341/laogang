@@ -12,25 +12,14 @@ import java.time.LocalDate;
 @DynamicUpdate
 @Data
 @Entity
-@Table(name = "policy")
-public class PolicyEntity {
+@Table(name = "policy_oldman")
+public class PolicyOldmanEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column
-    private String name;
-    @Column
-    private String content;
+    @Column(name = "oldman_id")
+    private Integer oldmanId;
+    @Column(name = "policy_id")
+    private Integer policyId;
 
-    @Column
-    private String wh;
-
-    @Column(name = "start_time")
-    private LocalDate startTime;
-    @Column(name = "end_time")
-    private LocalDate endTime;
-
-    @Column(name = "create_time")
-    private Timestamp createTime;
-    private Integer status;
 }

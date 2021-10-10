@@ -16,6 +16,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import static com.lejian.laogang.util.DateUtils.YYMMDDHHMMSS;
+import static com.lejian.laogang.util.DateUtils.YY_MM_DD;
+
 @Data
 public class OldmanBo extends BaseBo {
     private Integer id;
@@ -92,7 +95,18 @@ public class OldmanBo extends BaseBo {
         OldmanVo vo = new OldmanVo();
         BeanUtils.copyProperties(this,vo);
         vo.setAge(DateUtils.birthdayToAge(this.getBirthday()));
-        vo.setMale(this.male.getDesc());
+        vo.setBirthday(this.getBirthday().format(YY_MM_DD));
+        vo.setIdName(id+"_"+name);
+        if (male!=null) vo.setMale(male.getDesc());
+        if (huji!=null) vo.setHuji(huji.getDesc());
+        if (homeowner!=null) vo.setHomeowner(homeowner.getDesc());
+        if (houseType!=null) vo.setHouseType(houseType.getDesc());
+        if (eyesight!=null) vo.setEyesight(eyesight.getDesc());
+        if (StringUtils.isNotBlank(floor)) vo.setFloor(Integer.valueOf(floor));
+        if (politics!=null) vo.setPolitics(politics.getDesc());
+        if (education!=null) vo.setEducation(education.getDesc());
+        if (income!=null) vo.setIncome(income.getDesc());
+        if (psychosis!=null) vo.setPsychosis(psychosis.getDesc());
         return vo;
     }
 }

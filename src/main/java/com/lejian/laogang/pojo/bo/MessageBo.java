@@ -1,48 +1,48 @@
 package com.lejian.laogang.pojo.bo;
 
 import com.lejian.laogang.controller.contract.request.PolicyParam;
-import com.lejian.laogang.repository.entity.OrganEntity;
+import com.lejian.laogang.enums.BusinessEnum;
+import com.lejian.laogang.enums.MessageEnum;
+import com.lejian.laogang.pojo.vo.MessageVo;
+import com.lejian.laogang.repository.entity.MessageEntity;
 import com.lejian.laogang.repository.entity.PolicyEntity;
 import lombok.Data;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.beans.BeanUtils;
 
-import javax.persistence.*;
-import java.sql.Timestamp;
+import javax.persistence.Column;
 import java.time.LocalDate;
 
 @Data
-public class PolicyBo extends BaseBo{
+public class MessageBo extends BaseBo{
     private Integer id;
 
-    private String name;
 
     private String content;
 
 
-    private String wh;
+    private Integer userId;
 
-
-    private LocalDate startTime;
-    private LocalDate endTime;
+    private Integer roleId;
+    private String sender;
+    private Integer type;
 
     @Override
-    public PolicyEntity convert() {
-        PolicyEntity policyEntity = new PolicyEntity();
-        BeanUtils.copyProperties(this,policyEntity);
-        return policyEntity;
+    public MessageEntity convert() {
+        MessageEntity messageEntity = new MessageEntity();
+        BeanUtils.copyProperties(this,messageEntity);
+        return messageEntity;
     }
 
-    public static PolicyBo convert(PolicyEntity policyEntity) {
-        PolicyBo policyBo = new PolicyBo();
-        BeanUtils.copyProperties(policyEntity,policyBo);
-        return policyBo;
+    public static MessageBo convert(MessageEntity messageEntity) {
+        MessageBo messageBo = new MessageBo();
+        BeanUtils.copyProperties(messageEntity,messageBo);
+        return messageBo;
     }
 
-    public static PolicyBo convert(PolicyParam policyParam) {
-        PolicyBo policyBo = new PolicyBo();
-        BeanUtils.copyProperties(policyParam,policyBo);
-        return policyBo;
+    public MessageVo convertVo(){
+        MessageVo vo = new MessageVo();
+        BeanUtils.copyProperties(this,vo);
+        vo.setType(BusinessEnum.find(this.type, MessageEnum.Type.class).getDesc());
+        return vo;
     }
 }

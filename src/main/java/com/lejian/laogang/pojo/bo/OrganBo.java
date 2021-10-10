@@ -6,7 +6,7 @@ import lombok.Data;
 import org.springframework.beans.BeanUtils;
 
 @Data
-public class OrganBo  extends BaseBo {
+public class OrganBo extends BaseBo {
     private String name;
     private String desc;
     private String service;
@@ -20,6 +20,7 @@ public class OrganBo  extends BaseBo {
     private Integer bedNumber;
     private Integer type;
     private String gps;
+    private Integer id;
 
     @Override
     public OrganEntity convert() {
@@ -37,9 +38,11 @@ public class OrganBo  extends BaseBo {
     public OrganVo convertVo(){
         OrganVo vo = new OrganVo();
         BeanUtils.copyProperties(this,vo);
-        String[] arr = this.gps.split(",");
-        vo.setLng(arr[0]);
-        vo.setLat(arr[1]);
+        if (this.gps.contains(",")) {
+            String[] arr = this.gps.split(",");
+            vo.setLng(arr[0]);
+            vo.setLat(arr[1]);
+        }
         return vo;
     }
 }

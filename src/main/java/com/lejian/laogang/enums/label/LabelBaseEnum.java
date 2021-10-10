@@ -65,7 +65,7 @@ public interface LabelBaseEnum {
             return jpaSpecBo;
         }
         Map<String,List<String>> map = Maps.newHashMap();
-        labelIdList.forEach(id->{
+        labelIdList.stream().filter(id->!id.equals("0")).forEach(id->{
             if (id.contains("_")){
                 String[] arr = id.split("_");
                 if (!map.containsKey(arr[0])){
@@ -89,8 +89,5 @@ public interface LabelBaseEnum {
         return jpaSpecBo;
     }
 
-    static List<String> getBaseLabelId(){
-        return Lists.newArrayList("1","2","3","4","6","7","8","14","15");
-    }
 
 }

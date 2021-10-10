@@ -1,11 +1,11 @@
 package com.lejian.laogang.repository;
 
 
-import com.lejian.laogang.pojo.bo.OrganBo;
+import com.lejian.laogang.pojo.bo.MessageBo;
 import com.lejian.laogang.pojo.bo.PolicyBo;
-import com.lejian.laogang.repository.dao.OrganDao;
+import com.lejian.laogang.repository.dao.MessageDao;
 import com.lejian.laogang.repository.dao.PolicyDao;
-import com.lejian.laogang.repository.entity.OrganEntity;
+import com.lejian.laogang.repository.entity.MessageEntity;
 import com.lejian.laogang.repository.entity.PolicyEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +14,14 @@ import org.springframework.stereotype.Repository;
 
 @Slf4j
 @Repository
-public class PolicyRepository extends AbstractSpecificationRepository<PolicyBo, PolicyEntity> {
+public class MessageRepository extends AbstractSpecificationRepository<MessageBo, MessageEntity> {
 
     @Autowired
-    private PolicyDao dao;
+    private MessageDao dao;
 
     @Override
-    protected PolicyBo convert(PolicyEntity policyEntity) {
-        return PolicyBo.convert(policyEntity);
+    protected MessageBo convert(MessageEntity messageEntity) {
+        return MessageBo.convert(messageEntity);
     }
 
     @Override
@@ -31,6 +31,6 @@ public class PolicyRepository extends AbstractSpecificationRepository<PolicyBo, 
 
     @Override
     protected String getTableName() {
-        return "policy";
+        return "message";
     }
 }

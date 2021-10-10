@@ -103,9 +103,10 @@ thead th,thead tr{
 
 .pagination>li>a, .pagination>li>span {
     padding: 0!important;
-    background-color: #1e3746!important;
+    background-color: transparent!important;
     border-color: #1e3746!important;
     color: white!important;
+    border: none;
 }
 #monitor{
     display: none;
@@ -147,4 +148,28 @@ th,td{
 #DataTables_Table_0_info{
     margin-left: 5% !important;
     color: white;
+}
+#oldmanInfo{
+    display: none;
+    position:absolute;
+    height: 80%;
+    width: 31.2%;
+    margin-left: 22.65%;
+    margin-top: 2%;
+    z-index: 9999;
+}
+#organInfo{
+    display: none;
+    position:absolute;
+    height: 80%;
+    width: 31.2%;
+    margin-left: 22.65%;
+    margin-top: 2%;
+    z-index: 9999;
+}
+.table-hover>tbody>tr:hover {
+    background-color: transparent!important;
+}
+#DataTables_Table_0_paginate,#DataTables_Table_0_info{
+    margin-top: 10px;
 }
