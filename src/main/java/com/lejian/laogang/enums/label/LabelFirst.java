@@ -22,7 +22,9 @@ public enum LabelFirst implements BusinessEnum {
     HEALTH(2, "健康档案", 2),
     FAMILY(3, "家庭结构", 3),
     ECONOMIC(4, "经济条件", 4),
-    YL(5, "养老状态", 5),;
+    YL(5, "养老状态", 5),
+    AREA(6, "村居委", 6),
+    ;
     private Integer value;
     private String desc;
     private Integer sort;

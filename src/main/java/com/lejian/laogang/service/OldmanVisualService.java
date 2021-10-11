@@ -116,6 +116,7 @@ public class OldmanVisualService {
         if (oldmanParam.getIsView()) {
             voList.forEach(vo -> {
                 vo.setName(StringUtils.nameMask(vo.getName()));
+                vo.setIdName(vo.getId()+"_"+vo.getName());
                 vo.setIdCard(vo.getIdCard().replaceAll(regex, "$1****$3"));
             });
         }

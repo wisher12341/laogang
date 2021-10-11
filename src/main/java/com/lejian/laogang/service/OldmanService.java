@@ -286,7 +286,7 @@ public class OldmanService {
         Map<String,String> typeMap = Maps.newHashMap();
         oldmanAttrBoList.forEach(item->{
             if (typeMap.containsKey(item.getType().getValue().toString())){
-                typeMap.put(item.getType().getValue().toString(),typeMap.get(item.getType().toString())+","+item.getValue().getDesc()+(StringUtils.isNotBlank(item.getExt())?"_"+item.getExt():""));
+                typeMap.put(item.getType().getValue().toString(),typeMap.get(item.getType().getValue().toString())+","+item.getValue().getDesc()+(StringUtils.isNotBlank(item.getExt())?"_"+item.getExt():""));
             }else{
                 typeMap.put(item.getType().getValue().toString(),item.getValue().getDesc()+(StringUtils.isNotBlank(item.getExt())?"_"+item.getExt():""));
             }

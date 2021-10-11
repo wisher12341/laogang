@@ -28,7 +28,7 @@ public class HomeController {
     @RequestMapping("/getCount")
     public MapResponse getCount(@RequestBody OldmanParam oldmanParam){
         MapResponse response = new MapResponse();
-        response.setMap(service.geCount());
+        response.setMap(service.geCount(oldmanParam));
         return response;
     }
 

@@ -29,9 +29,13 @@ public final class StringUtils extends org.apache.commons.lang.StringUtils{
 
 
     public static String nameMask(String name){
-        if(name ==null)return name;
-        if(name.length()<=1) return name+"*";
-        return name.replaceAll("([\\u4e00-\\u9fa5]{1})(.*)", "$1"+createAsterisk(name.length()-1));
+        if (name.length()==2){
+            return name.substring(0,1)+"*";
+        }
+        if (name.length()>=3){
+            return name.substring(0,1)+"*"+name.substring(2);
+        }
+        return name;
     }
 
     private static String createAsterisk(int len) {

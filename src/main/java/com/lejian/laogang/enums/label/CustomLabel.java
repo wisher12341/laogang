@@ -68,10 +68,64 @@ public enum CustomLabel implements LabelBaseEnum {
             jpaSpecBo.getViewLabelLike().add("%@11_%");
         }
     },
-    A25(12, 2, 1, "有病情既往史",true) {
+    A31(31, 6, 1, "牛肚村",true) {
         @Override
         public void setWhereCase(JpaSpecBo jpaSpecBo) {
-            jpaSpecBo.getViewLabelLike().add("%@12_%");
+            jpaSpecBo.getEqualMap().put("areaVillage",getDesc());
+        }
+    },
+    A32(32, 6, 1, "中港村",true) {
+        @Override
+        public void setWhereCase(JpaSpecBo jpaSpecBo) {
+            jpaSpecBo.getEqualMap().put("areaVillage",getDesc());
+        }
+    },
+    A33(33, 6, 1, "成日村",true) {
+        @Override
+        public void setWhereCase(JpaSpecBo jpaSpecBo) {
+            jpaSpecBo.getEqualMap().put("areaVillage",getDesc());
+        }
+    },
+    A34(34, 6, 1, "建港村",true) {
+        @Override
+        public void setWhereCase(JpaSpecBo jpaSpecBo) {
+            jpaSpecBo.getEqualMap().put("areaVillage",getDesc());
+        }
+    },
+    A35(35, 6, 1, "东河村",true) {
+        @Override
+        public void setWhereCase(JpaSpecBo jpaSpecBo) {
+            jpaSpecBo.getEqualMap().put("areaVillage",getDesc());
+        }
+    },
+    A36(36, 6, 1, "大河村",true) {
+        @Override
+        public void setWhereCase(JpaSpecBo jpaSpecBo) {
+            jpaSpecBo.getEqualMap().put("areaVillage",getDesc());
+        }
+    },
+    A37(37, 6, 1, "欣河村",true) {
+        @Override
+        public void setWhereCase(JpaSpecBo jpaSpecBo) {
+            jpaSpecBo.getEqualMap().put("areaVillage",getDesc());
+        }
+    },
+    A38(38, 6, 1, "老港居委",true) {
+        @Override
+        public void setWhereCase(JpaSpecBo jpaSpecBo) {
+            jpaSpecBo.getEqualMap().put("areaVillage",getDesc());
+        }
+    },
+    A39(39, 6, 1, "滨海居委",true) {
+        @Override
+        public void setWhereCase(JpaSpecBo jpaSpecBo) {
+            jpaSpecBo.getEqualMap().put("areaVillage",getDesc());
+        }
+    },
+    A310(310,6, 1, "宏港苑居委",true) {
+        @Override
+        public void setWhereCase(JpaSpecBo jpaSpecBo) {
+            jpaSpecBo.getEqualMap().put("areaVillage",getDesc());
         }
     },
     ;

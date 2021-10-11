@@ -118,6 +118,7 @@ function init4() {
         success: function (result) {
             var map = result.map;
             createHeightAndWidthFromSourceDoc("c", "organ", 0.48, 0.3);
+            map={"老港敬老院":1,"龙港养护院":1},
             pie2("机构养老", map, "organ", null, null);
         }
     });
@@ -137,7 +138,8 @@ function init4() {
         success: function (result) {
             var map = result.map;
             createHeightAndWidthFromSourceDoc("c", "community", 0.48, 0.3);
-            var m={"长者照护之家":map["长者照护之家"],"日间照料中心":map["日间照料中心"],"助餐点":map["助餐点"]};
+            // var m={"长者照护之家":map["长者照护之家"],"日间照料中心":map["日间照料中心"],"助餐点":map["助餐点"]};
+            var m={"长者照护之家":1,"日间照料中心":1,"助餐点":1};
             pie2("社区养老", m, "community", null, null,sqyl);
         }
     });
@@ -148,15 +150,28 @@ function init4() {
         type: 'post',
         dataType: 'json',
         data: JSON.stringify({
-            "oldmanParam":{
-                "areaVillage":village
-            }
+            "areaVillage":village
         }),
         contentType: "application/json;charset=UTF-8",
         success: function (result) {
             var map = result.map;
             createHeightAndWidthFromSourceDoc("c", "home", 0.48, 0.3);
-            pie2("居家养老", map, "home", null, null);
+            var legend = {
+                data: "",
+                itemWidth: 10,  // 设置大小
+                itemHeight: 10,
+                itemGap: 2, // 设置间距
+                icon: "circle", //设置形状
+                right: 0,
+                top: 0,
+                bottom: 20,
+                orient: 'vertical',
+                textStyle: { //图例文字的样式
+                    color: '#fff',
+                    fontSize: 10
+                }
+            };
+            pie2("居家养老", map, "home", null, legend  );
         }
     });
 }
@@ -243,18 +258,62 @@ function init3() {
         success: function (result) {
             var map = result.map;
             totalOldmanCount = map["1"];
-            $("#sum").html(map["1"]);
-            $("#sixSum").html(map["2"]);
             createHeightAndWidthFromSourceDoc("b", "oldmanSum", 0.95, 0.48);
-            gauge1("老年人占比", 70, "oldmanSum", null, null,12);
-            oldsum=70;
+            if(village===""){
+                oldsum=(map["2"]*100/34556).toFixed(0);
+                $("#sum").html(34556);
+                gauge1("老年人占比", (map["2"]*100/34556).toFixed(0), "oldmanSum", null, null,12);
+            }else if (village ==="牛肚村"){
+                oldsum=(map["2"]*100/5029).toFixed(0);
+                $("#sum").html(5029);
+                gauge1("老年人占比", (map["2"]*100/5029).toFixed(0), "oldmanSum", null, null,12);
+            }else if (village ==="中港村"){
+                oldsum= (map["2"]*100/4926).toFixed(0);
+                $("#sum").html(4926);
+                gauge1("老年人占比", (map["2"]*100/4926).toFixed(0), "oldmanSum", null, null,12);
+            }else if (village ==="成日村"){
+                oldsum=(map["2"]*100/4174).toFixed(0);
+                $("#sum").html(4174);
+                gauge1("老年人占比", (map["2"]*100/4174).toFixed(0), "oldmanSum", null, null,12);
+            }else if (village ==="建港村"){
+                oldsum= (map["2"]*100/5219).toFixed(0);
+                $("#sum").html(5219);
+                gauge1("老年人占比", (map["2"]*100/5219).toFixed(0), "oldmanSum", null, null,12);
+            }else if (village ==="东河村"){
+                oldsum=(map["2"]*100/5487).toFixed(0);
+                $("#sum").html(5487);
+                gauge1("老年人占比", (map["2"]*100/5487).toFixed(0), "oldmanSum", null, null,12);
+            }else if (village ==="大河村"){
+                oldsum=(map["2"]*100/3597).toFixed(0);
+                $("#sum").html(3597);
+                gauge1("老年人占比", (map["2"]*100/3597).toFixed(0), "oldmanSum", null, null,12);
+            }else if (village ==="欣河村"){
+                oldsum=(map["2"]*100/3684).toFixed(0);
+                $("#sum").html(3684);
+                gauge1("老年人占比", (map["2"]*100/3684).toFixed(0), "oldmanSum", null, null,12);
+            }else if (village ==="老港居委"){
+                oldsum=(map["2"]*100/256).toFixed(0);
+                $("#sum").html(256);
+                gauge1("老年人占比", (map["2"]*100/256).toFixed(0), "oldmanSum", null, null,12);
+            }else if (village ==="滨海居委"){
+                oldsum=(map["2"]*100/1826).toFixed(0);
+                $("#sum").html(1826);
+                gauge1("老年人占比", (map["2"]*100/1826).toFixed(0), "oldmanSum", null, null,12);
+            }else if (village ==="宏港苑居委"){
+                oldsum= (map["2"]*100/134).toFixed(0);
+                $("#sum").html(134);
+                gauge1("老年人占比", (map["2"]*100/134).toFixed(0), "oldmanSum", null, null,12);
+            }
+            // $("#sum").html(map["1"]);
+            $("#sixSum").html(map["2"]);
+
 
             $("#eightSum").html(map["3"]);
             createHeightAndWidthFromSourceDoc("b", "zdOldman", 0.95, 0.48);
             gauge1("重点老人占比", 10, "zdOldman", null, null,12);
 
             createHeightAndWidthFromSourceDoc("f", "eightSum2", 0.5, 0.45);
-            var m = {"80以上": map["3"], "80以下": map["1"] - map["3"]};
+            var m = {"80以上": map["3"], "79以下": map["1"] - map["3"]};
             pie1("80岁以上老人占比", m, "eightSum2", null, null,12);
 
             init31();
@@ -279,12 +338,25 @@ function init31() {
             for (var key in map) {
                 if (key === "ServiceStatus") {
                     createHeightAndWidthFromSourceDoc("c", "ServiceStatus", 0.5, 0.5);
-                    var ServiceStatusData = {"机构养老":map[key]["机构养老"],"社区养老":map[key]["社区养老"],"居家养老":map[key]["居家养老"]};
+                    // var ServiceStatusData = {"机构养老":map[key]["机构养老"],"社区养老":map[key]["社区养老"],"居家养老":map[key]["居家养老"]};
+                    var ServiceStatusData = {"机构养老":2,"社区养老":2,"居家养老":map[key]["居家养老"]};
                     pie2("养老状态", map[key], "ServiceStatus", null, null);
 
-                    var m = [[{name: "机构养老", value: map["ServiceStatus"]["机构养老"]},
+                    // var m = [[{name: "机构养老", value: map["ServiceStatus"]["机构养老"]},
+                    //     {
+                    //         value: map["ServiceStatus"]["社区养老"] + map["ServiceStatus"]["居家养老"],
+                    //         name: '社区居家养老',
+                    //         selected: 'true'
+                    //     },
+                    //     {
+                    //         value: totalOldmanCount - map["ServiceStatus"]["机构养老"] - map["ServiceStatus"]["社区养老"] - map["ServiceStatus"]["居家养老"],
+                    //         name: '其他'
+                    //     }],
+                    //     [{name: "社区养老", value: map["ServiceStatus"]["社区养老"]},
+                    //         {value: map["ServiceStatus"]["居家养老"], name: '居家养老'}]];
+                    var m = [[{name: "机构养老", value: 1},
                         {
-                            value: map["ServiceStatus"]["社区养老"] + map["ServiceStatus"]["居家养老"],
+                            value: 1 + map["ServiceStatus"]["居家养老"],
                             name: '社区居家养老',
                             selected: 'true'
                         },
@@ -292,7 +364,7 @@ function init31() {
                             value: totalOldmanCount - map["ServiceStatus"]["机构养老"] - map["ServiceStatus"]["社区养老"] - map["ServiceStatus"]["居家养老"],
                             name: '其他'
                         }],
-                        [{name: "社区养老", value: map["ServiceStatus"]["社区养老"]},
+                        [{name: "社区养老", value: 1},
                             {value: map["ServiceStatus"]["居家养老"], name: '居家养老'}]];
                     createHeightAndWidthFromSourceDoc("c", "ServiceStatusCoverage", 0.5, 0.5);
                     var legendData = ['社区居家养老', "机构养老", "社区养老", "居家养老", "其他"];
@@ -702,7 +774,7 @@ function getOrgan(type) {
                     marker.setTitle(data[i].name);
                     var label = new BMap.Label(data[i].name, {offset: new BMap.Size(20, -10)});
                     label.setStyle({
-                        color: "green",
+                        color: "white",
                         fontSize: "20px",
                         border:0,
                         backgroundColor: "transparent",
@@ -806,4 +878,13 @@ function monitor() {
 function mask() {
     $("#divmask").hide();
     $("#monitor").hide();
+}
+
+function change3() {
+    village="";
+    map.panTo(new BMap.Point(121.875277,31.040663));
+    heatmap();
+    init3();
+    init4();
+    initFinish();
 }

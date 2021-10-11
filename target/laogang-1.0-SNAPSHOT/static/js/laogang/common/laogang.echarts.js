@@ -3,7 +3,7 @@ function getTitle(title) {
         text: title,
         textStyle: {
             color: '#fff',
-            fontSize: 14,
+            fontSize: 24,
             fontWeight: 'normal'
         },
         x: '0%',
@@ -24,7 +24,7 @@ function getLegend(data) {
         orient: 'vertical',
         textStyle: { //图例文字的样式
             color: '#fff',
-            fontSize: 10
+            fontSize: 16
         }
     };
 }
@@ -41,12 +41,12 @@ function labelTree(data, target, callback) {
     var obj = document.getElementById(target);
     var tree = echarts.init(obj);
 
-    var option =  {
+    var option = {
         tooltip: {
             trigger: 'item',
             triggerOn: 'mousemove'
         },
-        series:[
+        series: [
             {
                 type: 'tree',
 
@@ -64,39 +64,39 @@ function labelTree(data, target, callback) {
                 expandAndCollapse: true,
 
                 label: {
-                    position: [5,-20],
+                    position: [5, -20],
                     rotate: 0,
                     verticalAlign: 'middle',
                     align: 'middle',
                     fontSize: 28,
-                    color:"#fff",
-                    fontWeight:800,
-                    padding:5,
-                    borderRadius:2,
-                    backgroundColor:"rgb(252,132,82,1)"
+                    color: "#fff",
+                    fontWeight: 800,
+                    padding: 5,
+                    borderRadius: 2,
+                    backgroundColor: "rgb(252,132,82,1)"
                 },
 
                 leaves: {
                     label: {
-                        position: [5,65],
+                        position: [5, 65],
                         rotate: 0,
                         verticalAlign: 'middle',
                         align: 'middle',
-                        formatter:function(value){
+                        formatter: function (value) {
                             var str = value.name;
-                            if (str.indexOf("-")>0){
-                                return str.split("-")[0]+"\n"+"-"+"\n"+str.split("-")[1];
-                            }else{
+                            if (str.indexOf("-") > 0) {
+                                return str.split("-")[0] + "\n" + "-" + "\n" + str.split("-")[1];
+                            } else {
                                 return str.split("").join("\n");
                             }
                         },
                         fontSize: 18,
-                        color:"#fff",
-                        fontWeight:500,
-                        padding:5,
-                        borderRadius:2,
-                        backgroundColor:"rgb(28,192,159,1)",
-                        height:90
+                        color: "#fff",
+                        fontWeight: 500,
+                        padding: 5,
+                        borderRadius: 2,
+                        backgroundColor: "rgb(28,192,159,1)",
+                        height: 90
                     }
                 },
 
@@ -107,8 +107,8 @@ function labelTree(data, target, callback) {
     tree.off('click');
     if (callback !== null) {
         tree.on('click', function (params) {
-            if (params.event.target.culling === false){
-                callback(params.data.name,params.data.id);
+            if (params.event.target.culling === false) {
+                callback(params.data.name, params.data.id);
             }
 
         });
@@ -165,10 +165,14 @@ function pie1(title, data, target, callback, customLegend) {
                 data: series_data,
                 //去掉指示线
                 label: {
-                    normal: {
-                        position: 'inner',
-                        show: false
-                    }
+                    show: false
+                    // normal : {
+                    //     formatter: '{c}',
+                    //     textStyle : {
+                    //         fontWeight : 'normal',
+                    //         fontSize : 8
+                    //     }
+                    // }
                 },
                 labelLine: {
                     show: false
@@ -203,7 +207,7 @@ function pie1(title, data, target, callback, customLegend) {
  * @param callback
  * @param lengend
  */
-function pie2(title, data, target, callback, customLegend,legendCallback) {
+function pie2(title, data, target, callback, customLegend, legendCallback) {
     var obj = document.getElementById(target);
     var legend_data = [];
     var series_data = [];
@@ -218,7 +222,8 @@ function pie2(title, data, target, callback, customLegend,legendCallback) {
     if (customLegend === null) {
         legend = getLegend(legend_data)
     } else {
-        legend = customLegend
+        legend = customLegend;
+        legend.data = legend_data;
     }
     var option = {
         title: getTitle(title),
@@ -257,16 +262,17 @@ function pie2(title, data, target, callback, customLegend,legendCallback) {
 
         });
     }
-    if (legendCallback !== null) {
-        pie.off('legendselectchanged');
-        pie.on('legendselectchanged', function (params) {
-            pie.setOption({
-                legend:{selected:{[params.name]:true}}
-            })
-            var name = params.name;
+    pie.off('legendselectchanged');
+    pie.on('legendselectchanged', function (params) {
+        pie.setOption({
+            legend: {selected: {[params.name]: true}}
+        })
+        var name = params.name;
+        if (legendCallback !== null) {
             legendCallback(name);
-        });
-    }
+        }
+    });
+
     pie.setOption(option, true);
 }
 
@@ -404,7 +410,16 @@ function pie3(title, data, target, callback, legendData) {
 
         });
     }
-
+    pie.off('legendselectchanged');
+    pie.on('legendselectchanged', function (params) {
+        pie.setOption({
+            legend: {selected: {[params.name]: true}}
+        })
+        var name = params.name;
+        if (legendCallback !== null) {
+            legendCallback(name);
+        }
+    });
     pie.setOption(option, true);
 }
 
@@ -416,7 +431,7 @@ function pie3(title, data, target, callback, legendData) {
  * @param callback
  * @param customLegend
  */
-function gauge1(title, data, target, callback, customLegend,axisLabelSize) {
+function gauge1(title, data, target, callback, customLegend, axisLabelSize) {
     var obj = document.getElementById(target);
     var gauge = echarts.init(obj);
     var option = {
@@ -500,8 +515,8 @@ function bar1(title, data, target, callback) {
             type: 'category',
             data: xAxisData,
             axisLabel: {
-                interval:0,
-                rotate:45,
+                interval: 0,
+                rotate: 45,
                 textStyle: {
                     color: '#fff',
                     fontSize: '10',
@@ -535,7 +550,16 @@ function bar1(title, data, target, callback) {
         },
         series: {
             data: series_data,
-            type: 'bar'
+            type: 'bar',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top',
+                    color: "#fff",
+                    fontSize: 10
+                }
+            }
+
         }
     };
 
@@ -576,7 +600,7 @@ function bar3(title, data, target, callback) {
         xAxis: {
             data: xAxisData,
             axisLabel: {
-                interval:0,
+                interval: 0,
                 inside: true,
                 textStyle: {
                     color: '#fff'
@@ -634,7 +658,15 @@ function bar3(title, data, target, callback) {
                         )
                     }
                 },
-                data: series_data
+                data: series_data,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                        color: "#fff",
+                        fontSize: 10
+                    }
+                }
             }
         ]
     };
@@ -758,25 +790,25 @@ function bar2(title, data, target, callback) {
  * @param callback
  * @param lengend
  */
-function    line1(title, data, target, callback, customLegend) {
+function line1(title, data, target, callback, customLegend) {
     var obj = document.getElementById(target);
     var legend_data = [];
     var series_data = [];
-    var xdata =[];
+    var xdata = [];
     var i = 0;
     for (var key in data) {
-        if (key !=="xdata"){
+        if (key !== "xdata") {
             legend_data[i] = key;
             series_data[i] = {name: key, value: data[key]};
             i++;
-        }else{
+        } else {
             xdata = data[key];
         }
     }
     var line = echarts.init(obj);
     var legend;
     if (customLegend === null) {
-        legend =  {
+        legend = {
             data: legend_data
         }
     } else {

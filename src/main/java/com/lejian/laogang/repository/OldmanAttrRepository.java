@@ -85,6 +85,9 @@ public class OldmanAttrRepository extends AbstractSpecificationRepository<Oldman
     public Map<String, Long> getGroupCountWithOldman(String oldmanWhere, String type) {
         try {
             Map<String,Long> map= Maps.newHashMap();
+            if (StringUtils.isEmpty(oldmanWhere)){
+                oldmanWhere= "1=1";
+            }
             String sql = String.format("select a.value,count(1) from oldman_attr a " +
                             " left join oldman o on o.id= a.oldman_id " +
                     "where %s and a.type=%s group by a.value",oldmanWhere,type);
