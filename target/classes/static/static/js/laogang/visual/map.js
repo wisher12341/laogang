@@ -41,7 +41,7 @@ function initMap() {
     map.setMapStyle({style: 'midnight'});
     map.enableScrollWheelZoom(true);
     map.enablePinchToZoom(true);
-    var opts = {anchor: BMAP_ANCHOR_BOTTOM_RIGHT};
+    var opts = {anchor: BMAP_ANCHOR_TOP_RIGHT};
     map.addControl(new BMap.NavigationControl(opts));
 
     heatmap();
@@ -104,8 +104,8 @@ function initArea() {
         "lat": "31.047318"
     }, {
         "name": "东河村",
-        "lng": "121.860352",
-        "lat": "31.022495"
+        "lng": "121.865957",
+        "lat": "31.023423"
     }, {
         "name": "欣河村",
         "lng": "121.833767",

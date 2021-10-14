@@ -92,7 +92,7 @@ public class OldmanVisualService {
                     } else {
                         voResult.put(k, v);
                     }
-                } else {
+                } else if (!k.equals("null")){
                     voResult.put(k, v);
                 }
             });
@@ -139,9 +139,11 @@ public class OldmanVisualService {
 
             Map<String, Long> voResult = Maps.newHashMap();
             result.forEach((k, v) -> {
-                BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
-                if (BusinessEnum.DefaultValue.NULL != businessEnum) {
-                    voResult.put(businessEnum.getDesc(), v);
+                if (NumberUtils.isNumber(k)) {
+                    BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
+                    if (BusinessEnum.DefaultValue.NULL != businessEnum) {
+                        voResult.put(businessEnum.getDesc(), v);
+                    }
                 }
             });
             map.put("60-69", voResult);
@@ -156,9 +158,11 @@ public class OldmanVisualService {
             Map<String, Long> result2 = oldmanViewRepository.getGroupCount("male", jpaSpecBo);
             Map<String, Long> voResult2 = Maps.newHashMap();
             result2.forEach((k, v) -> {
-                BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
-                if (BusinessEnum.DefaultValue.NULL != businessEnum) {
-                    voResult2.put(businessEnum.getDesc(), v);
+                if (NumberUtils.isNumber(k)) {
+                    BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
+                    if (BusinessEnum.DefaultValue.NULL != businessEnum) {
+                        voResult2.put(businessEnum.getDesc(), v);
+                    }
                 }
             });
             map.put("70-79", voResult2);
@@ -170,9 +174,11 @@ public class OldmanVisualService {
             Map<String, Long> result3 = oldmanViewRepository.getGroupCount("male", jpaSpecBo);
             Map<String, Long> voResult3 = Maps.newHashMap();
             result3.forEach((k, v) -> {
-                BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
-                if (BusinessEnum.DefaultValue.NULL != businessEnum) {
-                    voResult3.put(businessEnum.getDesc(), v);
+                if (NumberUtils.isNumber(k)) {
+                    BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
+                    if (BusinessEnum.DefaultValue.NULL != businessEnum) {
+                        voResult3.put(businessEnum.getDesc(), v);
+                    }
                 }
             });
             map.put("80-89", voResult3);

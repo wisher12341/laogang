@@ -199,6 +199,80 @@ function pie1(title, data, target, callback, customLegend) {
     pie.setOption(option, true);
 }
 
+function pie10(title, data, target, callback, customLegend) {
+    var obj = document.getElementById(target);
+    var legend_data = [];
+    var series_data = [];
+    var i = 0;
+    for (var key in data) {
+        legend_data[i] = key;
+        series_data[i] = {name: key, value: data[key]};
+        i++;
+    }
+    var pie = echarts.init(obj);
+    var legend;
+    if (customLegend === null) {
+        legend = getLegend(legend_data)
+    } else {
+        legend = customLegend;
+        legend.data = legend_data;
+    }
+    var option = {
+        title: getTitle(title),
+        tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b} : {c} ({d}%)'
+        },
+        legend: legend,
+        series: [
+            {
+                name: '人数',
+                type: 'pie',
+                radius: ['40%', '65%'],
+                center: ['43%', '65%'],
+                avoidLabelOverlap: false,
+                itemStyle: {
+                    borderRadius: 5,
+                    borderColor: 'rgb(30,55,70)',
+                    borderWidth: 1
+                },
+                data: series_data,
+                //去掉指示线
+                label: {
+                    show: false
+                    // normal : {
+                    //     formatter: '{c}',
+                    //     textStyle : {
+                    //         fontWeight : 'normal',
+                    //         fontSize : 8
+                    //     }
+                    // }
+                },
+                labelLine: {
+                    show: false
+                },
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+    if (callback !== null) {
+        pie.off('click');
+        pie.on('click', function (params) {
+            var name = params.name;
+            callback(title, name);
+
+        });
+    }
+
+    pie.setOption(option, true);
+}
+
 /**
  * 饼图
  * @param title
@@ -275,7 +349,88 @@ function pie2(title, data, target, callback, customLegend, legendCallback) {
 
     pie.setOption(option, true);
 }
+function pie20(title, data, target, callback, customLegend, legendCallback) {
+    var obj = document.getElementById(target);
+    var legend_data = [];
+    var series_data = [];
+    var i = 0;
+    for (var key in data) {
+        legend_data[i] = key;
+        series_data[i] = {name: key, value: data[key]};
+        i++;
+    }
+    var pie = echarts.init(obj);
+    var legend;
+    if (customLegend === null) {
+        legend = getLegend(legend_data)
+    } else {
+        legend = customLegend;
+        legend.data = legend_data;
+    }
+    var option = {
+        title: getTitle(title),
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            data: legend_data,
+            itemWidth: 10,  // 设置大小
+            itemHeight: 10,
+            itemGap: 5, // 设置间距
+            icon: "circle", //设置形状
+            right: 10,
+            top: 3,
+            bottom: 20,
+            orient: 'vertical',
+            textStyle: { //图例文字的样式
+                color: '#fff',
+                fontSize: 16
+            }
+        },
+        series: [
+            {
+                center: ['53%', '56%'],
+                name: '访问来源',
+                type: 'pie',
+                radius: '60%',
+                data: series_data,
+                label: {
+                    normal: {
+                        position: 'inner',
+                        show: false
+                    }
+                },
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+    if (callback !== null) {
+        pie.off('click');
+        pie.on('click', function (params) {
+            var name = params.name;
+            callback(title, name);
 
+        });
+    }
+    pie.off('legendselectchanged');
+    pie.on('legendselectchanged', function (params) {
+        pie.setOption({
+            legend: {selected: {[params.name]: true}}
+        })
+        var name = params.name;
+        if (legendCallback !== null) {
+            legendCallback(name);
+        }
+    });
+
+    pie.setOption(option, true);
+}
 
 /**
  * 极坐标柱图
@@ -360,9 +515,24 @@ function pie3(title, data, target, callback, legendData) {
         tooltip: {
             trigger: 'item'
         },
-        legend: getLegend(legendData),
+        legend: {
+            data: legendData,
+            itemWidth: 10,  // 设置大小
+            itemHeight: 10,
+            itemGap: 5, // 设置间距
+            icon: "circle", //设置形状
+            right: 30,
+            top: 3,
+            bottom: 20,
+            orient: 'vertical',
+            textStyle: { //图例文字的样式
+                color: '#fff',
+                fontSize: 16
+            }
+        },
         series: [
             {
+                center: ['30%', '50%'],
                 name: '',
                 type: 'pie',
                 selectedMode: 'single',
@@ -372,10 +542,10 @@ function pie3(title, data, target, callback, legendData) {
                     normal: {
                         formatter: '{d}%',
                         position: 'inner',
-                        fontSize: 20,
+                        fontSize: 12,
                         textStyle: {
                             color: '#fff',
-                            fontSize: '20'
+                            fontSize: '12'
                         }
 
                     }
@@ -388,6 +558,7 @@ function pie3(title, data, target, callback, legendData) {
                 data: data[0]
             },
             {
+                center: ['30%', '50%'],
                 name: '',
                 type: 'pie',
                 radius: ['40%', '55%'],
@@ -747,7 +918,7 @@ function bar2(title, data, target, callback) {
             axisLabel: {
                 textStyle: {
                     color: '#fff',
-                    fontSize: '14',
+                    fontSize: '10',
                     itemSize: ''
 
                 }

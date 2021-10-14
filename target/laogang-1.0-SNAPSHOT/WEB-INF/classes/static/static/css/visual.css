@@ -98,7 +98,6 @@ thead th,thead tr{
     text-align: center;
     padding-top: 1%;
     border-radius: 10%;
-    right: 0;
 }
 
 .pagination>li>a, .pagination>li>span {

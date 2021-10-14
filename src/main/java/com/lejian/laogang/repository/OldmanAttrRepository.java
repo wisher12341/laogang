@@ -16,7 +16,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.lejian.laogang.common.ComponentRespCode.REPOSITORY_ERROR;
 
@@ -105,5 +107,16 @@ public class OldmanAttrRepository extends AbstractSpecificationRepository<Oldman
         }
         return Maps.newHashMap();
 
+    }
+
+    public void deleteByOldmanId(List<Integer> oldmanIdList) {
+        try {
+            String where = StringUtils.join(oldmanIdList.stream().map(item->"'"+item+"'").collect(Collectors.toList()).toArray(),",");
+            String sql = String.format("delete from oldman_attr where oldman_id in (%s)",where);
+            Query query =entityManager.createNativeQuery(sql);
+            query.executeUpdate();
+        }catch (Exception e){
+            REPOSITORY_ERROR.doThrowException("deleteByOldmanId",e);
+        }
     }
 }

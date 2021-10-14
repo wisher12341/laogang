@@ -64,6 +64,15 @@ public class OldmanBo extends BaseBo {
         OldmanBo oldmanBo = new OldmanBo();
         BeanUtils.copyProperties(entity,oldmanBo);
         oldmanBo.setMale(BusinessEnum.find(entity.getMale(), OldmanEnum.Male.class));
+        if (entity.getHuji()!=null) oldmanBo.setHuji(BusinessEnum.find(entity.getHuji(), OldmanEnum.Huji.class));
+        if (entity.getHomeowner()!=null) oldmanBo.setHomeowner(BusinessEnum.find(entity.getHomeowner(), OldmanEnum.HOMEOWNER.class));
+        if (entity.getHouseType()!=null) oldmanBo.setHouseType(BusinessEnum.find(entity.getHouseType(), OldmanEnum.HOSE_TYPE.class));
+        if (entity.getEyesight()!=null) oldmanBo.setEyesight(BusinessEnum.find(entity.getEyesight(), OldmanEnum.eyesight.class));
+        if (entity.getFloor()!=null) oldmanBo.setFloor(entity.getFloor().toString());
+        if (entity.getPolitics()!=null) oldmanBo.setPolitics(BusinessEnum.find(entity.getPolitics(), OldmanEnum.politics.class));
+        if (entity.getEducation()!=null) oldmanBo.setEducation(BusinessEnum.find(entity.getEducation(), OldmanEnum.education.class));
+        if (entity.getIncome()!=null) oldmanBo.setIncome(BusinessEnum.find(entity.getIncome(), OldmanEnum.income.class));
+        if (entity.getPsychosis()!=null) oldmanBo.setPsychosis(BusinessEnum.find(entity.getPsychosis(), OldmanEnum.psychosis.class));
         return oldmanBo;
     }
 

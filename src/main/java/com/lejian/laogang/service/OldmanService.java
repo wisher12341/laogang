@@ -21,11 +21,13 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import javax.transaction.Transactional;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -81,8 +83,7 @@ public class OldmanService {
     }
 
     private List<CheckResultBo> addOldmanAttr(List<String> titleList, List<List<String>> valueList) {
-        //todo
-//        clearOldmanAttr(oldmanIdList);
+
         List<OldmanAttrBo> oldmanAttrBoList = Lists.newArrayList();
 
         try {
@@ -137,8 +138,14 @@ public class OldmanService {
         jpaSpecBo.getInMap().put("idCard", oldmanAttrBoList.stream().map(OldmanAttrBo::getIdCard).distinct().collect(Collectors.toList()));
         Map<String, Integer> idMap = oldmanRepository.findWithSpec(jpaSpecBo).stream().collect(Collectors.toMap(OldmanBo::getIdCard, OldmanBo::getId));
         oldmanAttrBoList.forEach(bo -> bo.setOldmanId(idMap.get(bo.getIdCard())));
+        clearOldmanAttr(oldmanAttrBoList.stream().map(OldmanAttrBo::getOldmanId).filter(Objects::nonNull).distinct().collect(Collectors.toList()));
         oldmanAttrRepository.batchInsert(oldmanAttrBoList);
         return Lists.newArrayList();
+    }
+
+    private void clearOldmanAttr(List<Integer> oldmanIdList) {
+        List<List<Integer>> group = Lists.partition(oldmanIdList,150);
+        group.forEach(list->oldmanAttrRepository.deleteByOldmanId(list));
     }
 
     private List<CheckResultBo> addOldmanBaseInfo(List<String> titleList, List<List<String>> valueList) {

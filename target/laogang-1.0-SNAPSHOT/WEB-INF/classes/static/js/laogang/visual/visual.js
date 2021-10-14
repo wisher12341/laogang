@@ -2,12 +2,22 @@ var map;
 var totalOldmanCount;
 var healthData, incomeData, familyTypeData;
 var selectLabelId = [];
-var table
+var table=null;
 var interval;
 var time;
 //todo
 var age,male,huji,oldsum;
 var village="";
+function reset() {
+    village="";
+    selectLabelId=[];
+    init1();
+    map.panTo(new BMap.Point(121.875277,31.040663));
+    heatmap();
+    init3();
+    init4();
+    initFinish();
+}
 $(document).ready(function () {
     init1();
     init2();
@@ -262,59 +272,79 @@ function init3() {
             if(village===""){
                 oldsum=(map["2"]*100/34556).toFixed(0);
                 $("#sum").html(34556);
-                gauge1("老年人占比", (map["2"]*100/34556).toFixed(0), "oldmanSum", null, null,12);
+                $("#sixSum").html(11280);
+                $("#eightSum").html(1876);
+                gauge1("老年人占比", (11280*100/34556).toFixed(0), "oldmanSum", null, null,12);
             }else if (village ==="牛肚村"){
                 oldsum=(map["2"]*100/5029).toFixed(0);
                 $("#sum").html(5029);
-                gauge1("老年人占比", (map["2"]*100/5029).toFixed(0), "oldmanSum", null, null,12);
+                $("#sixSum").html(1614);
+                $("#eightSum").html(283);
+                gauge1("老年人占比", (1614*100/5029).toFixed(0), "oldmanSum", null, null,12);
             }else if (village ==="中港村"){
                 oldsum= (map["2"]*100/4926).toFixed(0);
                 $("#sum").html(4926);
-                gauge1("老年人占比", (map["2"]*100/4926).toFixed(0), "oldmanSum", null, null,12);
+                $("#sixSum").html(1621);
+                $("#eightSum").html(240);
+                gauge1("老年人占比", (1621*100/4926).toFixed(0), "oldmanSum", null, null,12);
             }else if (village ==="成日村"){
                 oldsum=(map["2"]*100/4174).toFixed(0);
                 $("#sum").html(4174);
-                gauge1("老年人占比", (map["2"]*100/4174).toFixed(0), "oldmanSum", null, null,12);
+                $("#sixSum").html(1388);
+                $("#eightSum").html(252);
+                gauge1("老年人占比", (1388*100/4174).toFixed(0), "oldmanSum", null, null,12);
             }else if (village ==="建港村"){
                 oldsum= (map["2"]*100/5219).toFixed(0);
                 $("#sum").html(5219);
-                gauge1("老年人占比", (map["2"]*100/5219).toFixed(0), "oldmanSum", null, null,12);
+                $("#sixSum").html(1692);
+                $("#eightSum").html(267);
+                gauge1("老年人占比", (1692*100/5219).toFixed(0), "oldmanSum", null, null,12);
             }else if (village ==="东河村"){
                 oldsum=(map["2"]*100/5487).toFixed(0);
                 $("#sum").html(5487);
-                gauge1("老年人占比", (map["2"]*100/5487).toFixed(0), "oldmanSum", null, null,12);
+                $("#sixSum").html(1596);
+                $("#eightSum").html(280);
+                gauge1("老年人占比", (1596*100/5487).toFixed(0), "oldmanSum", null, null,12);
             }else if (village ==="大河村"){
                 oldsum=(map["2"]*100/3597).toFixed(0);
                 $("#sum").html(3597);
-                gauge1("老年人占比", (map["2"]*100/3597).toFixed(0), "oldmanSum", null, null,12);
+                $("#sixSum").html(1221);
+                $("#eightSum").html(238);
+                gauge1("老年人占比", (1221*100/3597).toFixed(0), "oldmanSum", null, null,12);
             }else if (village ==="欣河村"){
                 oldsum=(map["2"]*100/3684).toFixed(0);
                 $("#sum").html(3684);
-                gauge1("老年人占比", (map["2"]*100/3684).toFixed(0), "oldmanSum", null, null,12);
+                $("#sixSum").html(1326);
+                $("#eightSum").html(241);
+                gauge1("老年人占比", (1326*100/3684).toFixed(0), "oldmanSum", null, null,12);
             }else if (village ==="老港居委"){
                 oldsum=(map["2"]*100/256).toFixed(0);
                 $("#sum").html(256);
-                gauge1("老年人占比", (map["2"]*100/256).toFixed(0), "oldmanSum", null, null,12);
+                $("#sixSum").html(147);
+                $("#eightSum").html(23);
+                gauge1("老年人占比", (147*100/256).toFixed(0), "oldmanSum", null, null,12);
             }else if (village ==="滨海居委"){
                 oldsum=(map["2"]*100/1826).toFixed(0);
                 $("#sum").html(1826);
-                gauge1("老年人占比", (map["2"]*100/1826).toFixed(0), "oldmanSum", null, null,12);
+                $("#sixSum").html(637);
+                $("#eightSum").html(46);
+                gauge1("老年人占比", (637*100/1826).toFixed(0), "oldmanSum", null, null,12);
             }else if (village ==="宏港苑居委"){
                 oldsum= (map["2"]*100/134).toFixed(0);
                 $("#sum").html(134);
-                gauge1("老年人占比", (map["2"]*100/134).toFixed(0), "oldmanSum", null, null,12);
+                $("#sixSum").html(38);
+                $("#eightSum").html(6);
+                gauge1("老年人占比", (38*100/134).toFixed(0), "oldmanSum", null, null,12);
             }
             // $("#sum").html(map["1"]);
-            $("#sixSum").html(map["2"]);
-
-
-            $("#eightSum").html(map["3"]);
+            // $("#sixSum").html(map["2"]);
+            // $("#eightSum").html(map["3"]);
             createHeightAndWidthFromSourceDoc("b", "zdOldman", 0.95, 0.48);
             gauge1("重点老人占比", 10, "zdOldman", null, null,12);
 
             createHeightAndWidthFromSourceDoc("f", "eightSum2", 0.5, 0.45);
             var m = {"80以上": map["3"], "79以下": map["1"] - map["3"]};
-            pie1("80岁以上老人占比", m, "eightSum2", null, null,12);
+            pie10("80岁以上老人", m, "eightSum2", null, null);
 
             init31();
         }
@@ -337,10 +367,10 @@ function init31() {
             var map = result.map;
             for (var key in map) {
                 if (key === "ServiceStatus") {
-                    createHeightAndWidthFromSourceDoc("c", "ServiceStatus", 0.5, 0.5);
+                    createHeightAndWidthFromSourceDoc("c", "ServiceStatus",0.45, 0.5);
                     // var ServiceStatusData = {"机构养老":map[key]["机构养老"],"社区养老":map[key]["社区养老"],"居家养老":map[key]["居家养老"]};
                     var ServiceStatusData = {"机构养老":2,"社区养老":2,"居家养老":map[key]["居家养老"]};
-                    pie2("养老状态", map[key], "ServiceStatus", null, null);
+                    pie20("养老状态", ServiceStatusData, "ServiceStatus", null, null);
 
                     // var m = [[{name: "机构养老", value: map["ServiceStatus"]["机构养老"]},
                     //     {
@@ -361,7 +391,7 @@ function init31() {
                             selected: 'true'
                         },
                         {
-                            value: totalOldmanCount - map["ServiceStatus"]["机构养老"] - map["ServiceStatus"]["社区养老"] - map["ServiceStatus"]["居家养老"],
+                            value: 400,
                             name: '其他'
                         }],
                         [{name: "社区养老", value: 1},
@@ -504,44 +534,49 @@ function change(title, type, trend) {
  * @constructor
  */
 function initOldman() {
-    table = $(".dataTables-example").dataTable(
-        {
-            "sPaginationType": "full_numbers",
-            "bPaginite": true,
-            "bInfo": true,
-            "bSort": false,
-            "bFilter": false, //搜索栏
-            "bStateSave": true,
-            "bProcessing": true, //加载数据时显示正在加载信息
-            "bServerSide": true, //指定从服务器端获取数据
-            "columns": [{}, {
-                data: "areaVillage"
-            }, {
-                data: "male"
-            }, {
-                data: "age"
-            }, {
-                data: "idCard"
-            }
-            ],
-            "columnDefs": [
-                // 列样式
-                {
-                    "targets": [0], // 目标列位置，下标从0开始
-                    "data": "idName", // 数据列名
-                    "render": function(data, type, full) { // 返回自定义内容
-                        return"<span onclick='oldmanInfo("+data.split("_")[0]+")'>"+data.split("_")[1]+"</span>";
-                    }
+    if (table===null){
+        table = $(".dataTables-example").dataTable(
+            {
+                "sPaginationType": "full_numbers",
+                "bPaginite": true,
+                "bInfo": true,
+                "bSort": false,
+                "bFilter": false, //搜索栏
+                "bStateSave": true,
+                "bProcessing": true, //加载数据时显示正在加载信息
+                "bServerSide": true, //指定从服务器端获取数据
+                "columns": [{}, {
+                    data: "areaVillage"
+                }, {
+                    data: "male"
+                }, {
+                    data: "age"
+                }, {
+                    data: "idCard"
                 }
-            ],
-            "iDisplayLength": 7,
-            "createdRow": function (row, data, dataIndex) {
-                // $(row).css("background-color", "#052031");
-                $(row).css("color", "white");
-            },
-            "sAjaxSource": "/oldman/visual/getByPage",//这个是请求的地址
-            "fnServerData": retrieveData
-        });
+                ],
+                "columnDefs": [
+                    // 列样式
+                    {
+                        "targets": [0], // 目标列位置，下标从0开始
+                        "data": "idName", // 数据列名
+                        "render": function(data, type, full) { // 返回自定义内容
+                            return"<span onclick='oldmanInfo("+data.split("_")[0]+")'>"+data.split("_")[1]+"</span>";
+                        }
+                    }
+                ],
+                "iDisplayLength": 7,
+                "createdRow": function (row, data, dataIndex) {
+                    // $(row).css("background-color", "#052031");
+                    $(row).css("color", "white");
+                },
+                "sAjaxSource": "/oldman/visual/getByPage",//这个是请求的地址
+                "fnServerData": retrieveData
+            });
+    }else{
+        table.fnFilter();
+    }
+
 
     function retrieveData(url, aoData, fnCallback) {
         aoData.iDisplayLength = 7;
