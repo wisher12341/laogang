@@ -62,7 +62,7 @@ $(document).ready(function(){
                     "targets": [6], // 目标列位置，下标从0开始
                     "data": "id", // 数据列名
                     "render": function(data, type, full) { // 返回自定义内容
-                        return "<button class='btn btn-success' style='padding: 2px 4px;font-size: 10px' onclick=window.open('/home/oldman/detail?id="+data+"')>查看</button>";
+                        return "<button class='btn btn-success' style='padding: 2px 4px;font-size: 10px' onclick=window.open('/home/oldman/info?id="+data+"')>查看</button>";
                     }
                 }
             ],

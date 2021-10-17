@@ -50,6 +50,13 @@ public class PageController {
         return mv;
     }
 
+    @GetMapping("/home/oldman/info")
+    public ModelAndView home_query_info(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/home/oldman_info");
+        return mv;
+    }
+
     @GetMapping("/home/organ/detail")
     public ModelAndView home_organ_detail(){
         ModelAndView mv = new ModelAndView();
