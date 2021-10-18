@@ -67,7 +67,7 @@ function submit() {
     param.id=id;
     var map={};
     $("[map]").each(function () {
-        if ($(this).is(":disabled")===false && $(this).val()!== null && $(this).val().length>0) {
+        if ($(this).is(":disabled")===false) {
             var condition = "map.type" + $(this).attr("map") + "='" + $(this).val()+"'";
             eval(condition);
         }
