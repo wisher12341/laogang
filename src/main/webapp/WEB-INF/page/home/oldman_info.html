@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>Tables</title>
@@ -43,7 +43,7 @@
                 <ul class="nav pull-right">
                     <li class="dropdown">
                         <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i
-                                class="icon-user"></i> 大河村 <i class="caret"></i>
+                                class="icon-user"></i> <span id="username"></span> <i class="caret"></i>
 
                         </a>
                         <ul class="dropdown-menu">
@@ -52,7 +52,7 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a tabindex="-1" href="login.html">Logout</a>
+                                <a tabindex="-1" href="/logout">Logout</a>
                             </li>
                         </ul>
                     </li>
@@ -105,7 +105,7 @@
         <!-- block -->
         <div class="block">
             <div class="navbar navbar-inner block-header">
-                <div class="muted pull-left">老人信息</div>
+                <div class="muted pull-left"></div>
             </div>
             <div class="block-content collapse in">
                 <div class="span12">
@@ -114,16 +114,16 @@
                             <div class="navbar-inner">
                                 <div class="container">
                                     <ul>
-                                        <li><a href="#tab1" data-toggle="tab">基本信息</a></li>
-                                        <li><a href="#tab2" data-toggle="tab">社区信息</a></li>
-                                        <li><a href="#tab3" data-toggle="tab">疫苗信息</a></li>
-                                        <li><a href="#tab4" data-toggle="tab">健康信息</a></li>
+                                        <li id="a1"><a href="#tab1" data-toggle="tab">基本信息</a></li>
+                                        <li id="a2"><a href="#tab2" data-toggle="tab" >社区信息</a></li>
+                                        <li id="a3"><a href="#tab3" data-toggle="tab">疫苗信息</a></li>
+                                        <li id="a4"><a href="#tab4" data-toggle="tab" >健康信息</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="tab-content">
-                            <div class="tab-pane" id="tab1">
+                            <div class="tab-pane" id="tab1" role="2">
                                 <form class="form-horizontal">
                                     <fieldset>
                                         <div class="control-group">
@@ -148,8 +148,8 @@
                                                 <div class="controls">
                                                     <select class="chzn-select" name="male" >
                                                         <option value=""></option>
-                                                        <option>男</option>
-                                                        <option>女</option>
+                                                        <option value="1">男</option>
+                                                        <option value="2">女</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -167,8 +167,8 @@
                                                 <div class="controls">
                                                     <select class="chzn-select" name="country">
                                                         <option value=""></option>
-                                                        <option>中国</option>
-                                                        <option>中国台湾</option>
+                                                        <option value="1">中国</option>
+                                                        <option value="2">中国台湾</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -361,7 +361,7 @@
                                                 <div class="controls">
                                                     <select map="7" class="selectpicker bla bla bli" multiple data-live-search="true">
                                                         <option value="1">喝酒</option>
-                                                        <option value="2">吸烟</option>
+                                                        <option value="2">抽烟</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -407,7 +407,7 @@
                                     </fieldset>
                                 </form>
                             </div>
-                            <div class="tab-pane" id="tab2">
+                            <div class="tab-pane" id="tab2" role="3">
                                 <form class="form-horizontal">
                                     <fieldset>
                                         <div class="control-group">
@@ -438,7 +438,7 @@
                                     </fieldset>
                                 </form>
                             </div>
-                            <div class="tab-pane" id="tab3">
+                            <div class="tab-pane" id="tab3" role="4">
                                 <form class="form-horizontal">
                                     <fieldset>
                                         <div class="control-group">
@@ -471,7 +471,7 @@
                                     </fieldset>
                                 </form>
                             </div>
-                            <div class="tab-pane" id="tab4">
+                            <div class="tab-pane" id="tab4" role="5">
                                 <form class="form-horizontal">
                                     <fieldset>
                                         <div class="control-group">
@@ -589,6 +589,9 @@
                                 </form>
                             </div>
                         </div>
+                        <div class="control-group">
+                            <button onclick="submit()" class="btn btn-success" style="margin-left: 20%">保存</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -600,7 +603,66 @@
 <!--/.fluid-container-->
 
 <script src="/static/home/vendors/wizard/jquery.bootstrap.wizard.min.js"></script>
-
+<script>
+    $("#username").html("[[${username}]]([[${roleDesc}]])");
+    var role = [[${role}]];
+    if(role===2){
+        $("#tab2 input").attr("disabled","disabled");
+        $("#tab2 select").attr("disabled","disabled");
+        $("#tab3 input").attr("disabled","disabled");
+        $("#tab3 select").attr("disabled","disabled");
+        $("#tab4 input").attr("disabled","disabled");
+        $("#tab4 select").attr("disabled","disabled");
+    }
+    if(role===3){
+        $("#tab1 input").attr("disabled","disabled");
+        $("#tab1 select").attr("disabled","disabled");
+        $("#tab3 input").attr("disabled","disabled");
+        $("#tab3 select").attr("disabled","disabled");
+        $("#tab4 input").attr("disabled","disabled");
+        $("#tab4 select").attr("disabled","disabled");
+        $("#a2").addClass("active");
+        $("#tab2").show();
+        $("#tab1").hide();
+        $("#a1").hide();
+        $("#tab3").hide();
+        $("#tab4").hide();
+        $("#a3").hide();
+        $("#a4").hide();
+    }
+    if(role===4){
+        $("#tab2 input").attr("disabled","disabled");
+        $("#tab2 select").attr("disabled","disabled");
+        $("#tab1 input").attr("disabled","disabled");
+        $("#tab1 select").attr("disabled","disabled");
+        $("#tab4 input").attr("disabled","disabled");
+        $("#tab4 select").attr("disabled","disabled");
+        $("#a3").addClass("active");
+        $("#tab3").show();
+        $("#tab1").hide();
+        $("#a1").hide();
+        $("#tab2").hide();
+        $("#tab4").hide();
+        $("#a2").hide();
+        $("#a4").hide();
+    }
+    if(role===5){
+        $("#tab2 input").attr("disabled","disabled");
+        $("#tab2 select").attr("disabled","disabled");
+        $("#tab3 input").attr("disabled","disabled");
+        $("#tab3 select").attr("disabled","disabled");
+        $("#tab1 input").attr("disabled","disabled");
+        $("#tab1 select").attr("disabled","disabled");
+        $("#a4").addClass("active");
+        $("#tab4").show();
+        $("#tab1").hide();
+        $("#a1").hide();
+        $("#tab2").hide();
+        $("#tab3").hide();
+        $("#a2").hide();
+        $("#a3").hide();
+    }
+</script>
 <script type="text/javascript" src="/static/js/laogang/home/oldman_info.js" charset="UTF-8"></script>
 
 <script src="/static/home/assets/scripts.js"></script>

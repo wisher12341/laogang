@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js">
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>Admin Home Page</title>
@@ -29,8 +29,8 @@
             <div class="nav-collapse collapse">
                 <ul class="nav pull-right">
                     <li class="dropdown">
-                        <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i
-                                class="icon-user"></i> 大河村 <i class="caret"></i>
+                        <i class="icon-user"></i><span id="username"></span>
+                        <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="caret"></i>
 
                         </a>
                         <ul class="dropdown-menu">
@@ -102,60 +102,29 @@
                     <div class="block-content collapse in">
                         <div class="row-fluid padd-bottom">
                             <div class="span3">
-                                <a href="#" class="thumbnail no-role">
+                                <a href="#" class="thumbnail no-role" role="1" data="/home/oldman">
                                     <span>管理员</span>
                                 </a>
                             </div>
                             <div class="span3">
-                                <a href="/home/oldman" class="thumbnail">
+                                <a href="#" class="thumbnail no-role" role="2" data="/home/oldman">
                                     <span>村/居委</span>
                                 </a>
                             </div>
                             <div class="span3">
-                                <a href="#" class="thumbnail no-role">
-                                    <span>敬老院</span> </a>
+                                <a href="#" class="thumbnail no-role" role="3" data="/home/oldman">
+                                    <span>社区事务受理中心</span> </a>
                             </div>
                             <div class="span3">
-                                <a href="#" class="thumbnail no-role">
-                                    <span>长者账户中心</span> </a>
-                            </div>
-                        </div>
-
-                        <div class="row-fluid padd-bottom">
-                            <div class="span3">
-                                <a href="#" class="thumbnail no-role">
-                                    <span>村/居委</span> </a>
-                            </div>
-                            <div class="span3">
-                                <a href="#" class="thumbnail no-role">
-                                    <span>村/居委</span> </a>
-                            </div>
-                            <div class="span3">
-                                <a href="#" class="thumbnail no-role">
-                                    <span>村/居委</span> </a>
-                            </div>
-                            <div class="span3">
-                                <a href="#" class="thumbnail no-role">
-                                    <span>村/居委</span> </a>
+                                <a href="#" class="thumbnail no-role" role="4" data="/home/oldman">
+                                    <span>社建办</span> </a>
                             </div>
                         </div>
 
                         <div class="row-fluid padd-bottom">
                             <div class="span3">
-                                <a href="#" class="thumbnail no-role">
-                                    <span>村/居委</span> </a>
-                            </div>
-                            <div class="span3">
-                                <a href="#" class="thumbnail no-role">
-                                    <span>村/居委</span> </a>
-                            </div>
-                            <div class="span3">
-                                <a href="#" class="thumbnail no-role">
-                                    <span>村/居委</span> </a>
-                            </div>
-                            <div class="span3">
-                                <a href="#" class="thumbnail no-role">
-                                    <span>村/居委</span> </a>
+                                <a href="#" class="thumbnail no-role" role="5" data="/home/oldman">
+                                    <span>卫生院</span> </a>
                             </div>
                         </div>
                     </div>
@@ -164,11 +133,10 @@
             </div>
         </div>
     </div>
-    <hr>
-    <footer>
-        <p>&copy; Vincent Gabriel 2013</p>
-    </footer>
 </div>
+
+
+
 <!--/.fluid-container-->
 <script src="/static/home/vendors/jquery-1.9.1.min.js"></script>
 <script src="/static/home/bootstrap/js/bootstrap.min.js"></script>
@@ -176,8 +144,20 @@
 <script src="/static/home/assets/scripts.js"></script>
 <script>
     $(function () {
-        // Easy pie charts
-        $('.chart').easyPieChart({animate: 1000});
+        var username = "[[${username}]]";
+        if(username!==null && username!==undefined && username!==""){
+            var roleDesc = "[[${roleDesc}]]";
+            var role ="[[${role}]]";
+            $("#username").html(username+"("+roleDesc+")");
+            $(".thumbnail").each(function () {
+                if ($(this).attr("role")===role){
+                    $(this).removeClass("no-role");
+                    $(this).attr("href", $(this).attr("data"));
+                }
+            })
+        }else{
+            $("#username").html($("<a href='/login'>登录</a>"));
+        }
     });
 </script>
 </body>

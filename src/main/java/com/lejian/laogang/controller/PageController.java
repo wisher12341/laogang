@@ -1,6 +1,11 @@
 package com.lejian.laogang.controller;
 
 
+import com.lejian.laogang.pojo.bo.UserBo;
+import com.lejian.laogang.pojo.vo.UserVo;
+import com.lejian.laogang.security.annotation.BackOldmanAuth;
+import com.lejian.laogang.util.UserUtils;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -8,10 +13,17 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class PageController {
 
-    @GetMapping("/")
+    @GetMapping("/index")
     public ModelAndView index(){
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/index");
+        return mv;
+    }
+
+    @GetMapping("/login")
+    public ModelAndView login(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/login");
         return mv;
     }
 
@@ -22,19 +34,31 @@ public class PageController {
         return mv;
     }
 
-    @GetMapping("/home")
+    @GetMapping("/")
     public ModelAndView home(){
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/home");
+        UserBo userBo = UserUtils.getUser();
+        if (userBo!=null) {
+            UserVo userVo = userBo.convertVo();
+            mv.addObject("username",userVo.getUsername());
+            mv.addObject("roleDesc",userVo.getRoleDesc());
+            mv.addObject("role",userVo.getRole());
+        }else{
+            mv.addObject("username","");
+        }
         return mv;
     }
 
+    @BackOldmanAuth
     @GetMapping("/home/oldman")
     public ModelAndView home_query(){
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/home/oldman");
+        mv.addObject("user",UserUtils.getUser().convertVo());
         return mv;
     }
+
 
     @GetMapping("/home/message")
     public ModelAndView home_message(){
@@ -54,6 +78,15 @@ public class PageController {
     public ModelAndView home_query_info(){
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/home/oldman_info");
+        UserBo userBo = UserUtils.getUser();
+        if (userBo!=null) {
+            UserVo userVo = userBo.convertVo();
+            mv.addObject("username",userVo.getUsername());
+            mv.addObject("roleDesc",userVo.getRoleDesc());
+            mv.addObject("role",userVo.getRole());
+        }else{
+            mv.addObject("username","");
+        }
         return mv;
     }
 
