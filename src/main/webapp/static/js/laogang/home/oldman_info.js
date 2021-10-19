@@ -1,40 +1,109 @@
 var id;
-$(document).ready(function(){
+var table;
+$(document).ready(function () {
 
-    id=getQueryVariable("id");
-    $('#rootwizard').bootstrapWizard({onTabShow: function(tab, navigation, index) {
-        var $total = navigation.find('li').length;
-        var $current = index+1;
-        var $percent = ($current/$total) * 100;
-        $('#rootwizard').find('.bar').css({width:$percent+'%'});
-        // If it's the last tab then hide the last button and show the finish instead
-        if($current >= $total) {
-            $('#rootwizard').find('.pager .next').hide();
-            $('#rootwizard').find('.pager .finish').show();
-            $('#rootwizard').find('.pager .finish').removeClass('disabled');
-        } else {
-            $('#rootwizard').find('.pager .next').show();
-            $('#rootwizard').find('.pager .finish').hide();
+    id = getQueryVariable("id");
+    $('#rootwizard').bootstrapWizard({
+        onTabShow: function (tab, navigation, index) {
+            var $total = navigation.find('li').length;
+            var $current = index + 1;
+            var $percent = ($current / $total) * 100;
+            $('#rootwizard').find('.bar').css({width: $percent + '%'});
+            // If it's the last tab then hide the last button and show the finish instead
+            if ($current >= $total) {
+                $('#rootwizard').find('.pager .next').hide();
+                $('#rootwizard').find('.pager .finish').show();
+                $('#rootwizard').find('.pager .finish').removeClass('disabled');
+            } else {
+                $('#rootwizard').find('.pager .next').show();
+                $('#rootwizard').find('.pager .finish').hide();
+            }
         }
-    }});
-    $('#rootwizard .finish').click(function() {
+    });
+    $('#rootwizard .finish').click(function () {
         alert('Finished!, Starting over!');
         $('#rootwizard').find("a[href*='tab1']").trigger('click');
     });
 
 
     $(".selectpicker").selectpicker({
-        noneSelectedText : ''//默认显示内容
+        noneSelectedText: ''//默认显示内容
     });
 
     loadOldmanInfo(id);
+
+
+    table = $(".dataTables-example").dataTable(
+        {
+            "sPaginationType": "full_numbers",
+            "bPaginite": true,
+            "bInfo": true,
+            "bSort": false,
+            "bFilter": false, //搜索栏
+            "bStateSave": true,
+            "bProcessing": true, //加载数据时显示正在加载信息
+            "bServerSide": true, //指定从服务器端获取数据
+            "columns": [{}, {
+                data: "name"
+            }, {
+                data: "idCard"
+            }, {
+                data: "relation"
+            }, {
+                data: "phone"
+            }, {
+                data: "iscall"
+            }
+            ],
+            "columnDefs": [
+                // 列样式
+                {
+                    "targets": [0], // 目标列位置，下标从0开始
+                    "data": "id", // 数据列名
+                    "render": function (data, type, full) { // 返回自定义内容
+                        return "<input type='checkbox' name='id' value='" + data + "'/>";
+                    }
+                }
+            ],
+            "sAjaxSource": "/linkman/getByPage",//这个是请求的地址
+            "fnServerData": retrieveData
+        });
+
+    function retrieveData(url, aoData, fnCallback) {
+        $.ajax({
+            url: url,//这个就是请求地址对应sAjaxSource
+            data: JSON.stringify({
+                "pageParam": {
+                    "pageNo": aoData.iDisplayStart / aoData.iDisplayLength,
+                    "pageSize": aoData.iDisplayLength
+                },
+                "param": {
+                    "oldmanId": id
+                }
+            }),
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json;charset=UTF-8",
+            success: function (result) {
+                var data = {
+                    "iTotalRecords": result.count,
+                    "iTotalDisplayRecords": result.count,
+                    "aaData": result.voList
+                };
+                fnCallback(data);//把返回的数据传给这个方法就可以了,datatable会自动绑定数据的
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                // alert("status:"+XMLHttpRequest.status+",readyState:"+XMLHttpRequest.readyState+",textStatus:"+textStatus);
+            }
+        });
+    }
 });
 
 function loadOldmanInfo(id) {
     $.ajax({
         url: "/oldman/getById",
-        data :JSON.stringify({
-            "id":id
+        data: JSON.stringify({
+            "id": id
         }),
         type: 'post',
         dataType: 'json',
@@ -43,89 +112,77 @@ function loadOldmanInfo(id) {
             var data = result;
             $("[name]").each(function () {
                 var field = $(this).attr("name");
-                var value =eval("data."+field);
-                setOldmanValue(this,value);
+                var value = eval("data." + field);
+                setOldmanValue(this, value);
             });
             var type = data.typeMap;
             $("[map]").each(function () {
                 var field = $(this).attr("map");
-                var value =eval("type["+field+"]");
-                setOldmanValue(this,value);
+                var value = eval("type[" + field + "]");
+                setOldmanValue(this, value);
             });
         }
     });
 }
 
 function submit() {
-    var param={};
+    var param = {};
     $("[name]").each(function () {
-        if ($(this).is(":disabled")===false && $(this).val()!== null && $(this).val().length>0) {
-            var condition = "param." + $(this).attr("name") + "='" + $(this).val()+"'";
+        if ($(this).is(":disabled") === false && $(this).val() !== null && $(this).val().length > 0) {
+            var condition = "param." + $(this).attr("name") + "='" + $(this).val() + "'";
             eval(condition);
         }
     });
-    param.id=id;
-    var map={};
+    param.id = id;
+    var map = {};
     $("[map]").each(function () {
-        if ($(this).is(":disabled")===false) {
-            var condition = "map.type" + $(this).attr("map") + "='" + $(this).val()+"'";
+        if ($(this).is(":disabled") === false) {
+            var condition = "map.type" + $(this).attr("map") + "='" + $(this).val() + "'";
             eval(condition);
         }
     });
-    param.map=map;
+    param.map = map;
     console.log(JSON.stringify(param));
     $.ajax({
-        url: "/oldman/edit",
-        data :JSON.stringify({
-            "oldman":param
-        }),
+        url: "/oldman/editOrAdd",
+        data: JSON.stringify(param),
         type: 'post',
         dataType: 'json',
         contentType: "application/json;charset=UTF-8",
         success: function (result) {
-            var data = result;
-            $("[name]").each(function () {
-                var field = $(this).attr("name");
-                var value =eval("data."+field);
-                setOldmanValue(this,value);
-            });
-            var type = data.typeMap;
-            $("[map]").each(function () {
-                var field = $(this).attr("map");
-                var value =eval("type["+field+"]");
-                setOldmanValue(this,value);
-            });
+            alert("保存成功");
+            location.reload();
         }
     });
 }
 
-function setOldmanValue(obj,value) {
-    if (value==="" || value ===null || value===undefined){
+function setOldmanValue(obj, value) {
+    if (value === "" || value === null || value === undefined) {
         return
     }
-    var tagType=$(obj).prop("tagName");
-    if(tagType==="SPAN"){
+    var tagType = $(obj).prop("tagName");
+    if (tagType === "SPAN") {
         $(obj).text(value);
     }
-    else if(tagType==="INPUT"){
+    else if (tagType === "INPUT") {
         $(obj).val(value);
-    }else if (tagType === "SELECT"){
+    } else if (tagType === "SELECT") {
         var clazz = $(obj).attr("class");
-        if(clazz.indexOf("selectpicker")!=-1){
-            var a=[];
-            var i=0;
+        if (clazz.indexOf("selectpicker") != -1) {
+            var a = [];
+            var i = 0;
             $(obj).children("option").each(function () {
-                if(value.indexOf($(this).text())!=-1){
-                    a[i]=$(this).val();
+                if (value.indexOf($(this).text()) != -1) {
+                    a[i] = $(this).val();
                     i++;
                 }
             });
             $(obj).val(a);
             $(obj).selectpicker("refresh")
-        }else{
+        } else {
             $(obj).children().each(function () {
-                if($(this).text()===value){
-                    $(this).attr("selected","selected");
+                if ($(this).text() === value) {
+                    $(this).attr("selected", "selected");
                 }
             })
         }
@@ -133,13 +190,41 @@ function setOldmanValue(obj,value) {
 }
 
 
-function getQueryVariable(variable)
-{
+function getQueryVariable(variable) {
     var query = window.location.search.substring(1);
     var vars = query.split("&");
-    for (var i=0;i<vars.length;i++) {
+    for (var i = 0; i < vars.length; i++) {
         var pair = vars[i].split("=");
-        if(pair[0] == variable){return pair[1];}
+        if (pair[0] == variable) {
+            return pair[1];
+        }
     }
     return null;
+}
+
+
+function saveLinkMan() {
+    $.ajax({
+        url: "/linkman/add",//这个就是请求地址对应sAjaxSource
+        data: JSON.stringify({
+            "name": $("input[linkman='name']").val(),
+            "phone": $("input[linkman='phone']").val(),
+            "idCard": $("input[linkman='idCard']").val(),
+            "iscall": $("select[linkman='call']").val(),
+            "relation": $("input[linkman='relation']").val(),
+            "oldmanId": id
+
+        }),
+        type: 'post',
+        dataType: 'json',
+        contentType: "application/json;charset=UTF-8",
+        success: function (result) {
+            table.fnFilter();
+            $("#myModal").modal('hide');
+            $("[linkman]").val("")
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            // alert("status:"+XMLHttpRequest.status+",readyState:"+XMLHttpRequest.readyState+",textStatus:"+textStatus);
+        }
+    });
 }

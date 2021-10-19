@@ -11,6 +11,7 @@ import com.lejian.laogang.repository.dao.OldmanDao;
 import com.lejian.laogang.repository.entity.OldmanAttrEntity;
 import com.lejian.laogang.repository.entity.OldmanEntity;
 import com.lejian.laogang.util.StringUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -113,6 +114,20 @@ public class OldmanAttrRepository extends AbstractSpecificationRepository<Oldman
         try {
             String where = StringUtils.join(oldmanIdList.stream().map(item->"'"+item+"'").collect(Collectors.toList()).toArray(),",");
             String sql = String.format("delete from oldman_attr where oldman_id in (%s)",where);
+            Query query =entityManager.createNativeQuery(sql);
+            query.executeUpdate();
+        }catch (Exception e){
+            REPOSITORY_ERROR.doThrowException("deleteByOldmanId",e);
+        }
+    }
+
+    public void deleteByType(Integer id, List<Integer> typeList) {
+        try {
+            if (CollectionUtils.isEmpty(typeList) || id ==null){
+                return;
+            }
+            String where = StringUtils.join(typeList.stream().map(item->"'"+item+"'").collect(Collectors.toList()).toArray(),",");
+            String sql = String.format("delete from oldman_attr where oldman_id ='%s' and type in (%s)",id,where);
             Query query =entityManager.createNativeQuery(sql);
             query.executeUpdate();
         }catch (Exception e){

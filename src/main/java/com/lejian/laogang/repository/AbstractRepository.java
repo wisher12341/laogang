@@ -43,6 +43,18 @@ public abstract class AbstractRepository<Bo extends BaseBo,Entity> {
         entityManager.clear();
     }
 
+    public void batchInsertEntity(List<Entity> entityList) {
+        for (int i = 0; i < entityList.size(); i++) {
+            entityManager.persist(entityList.get(i));
+            if (i % 50 == 0) {
+                entityManager.flush();
+                entityManager.clear();
+            }
+        }
+        entityManager.flush();
+        entityManager.clear();
+    }
+
 
     public List<Bo> getAll() {
         List<Entity> entityList = getDao().findAll();
@@ -67,14 +79,27 @@ public abstract class AbstractRepository<Bo extends BaseBo,Entity> {
         getDao().save(entity);
     }
 
+    public void save(Entity entity) {
+        getDao().save(entity);
+    }
+
     public Bo saveAndReturn(Bo bo) {
         Entity entity = (Entity) bo.convert();
         return convert((Entity) getDao().save(entity));
     }
 
+    public Entity saveAndReturn(Entity entity) {
+        return (Entity) getDao().save(entity);
+    }
+
     @Transactional
     public void dynamicUpdateByPkId(Bo bo){
         dynamicUpdate(bo,"id");
+    }
+
+    @Transactional
+    public void dynamicUpdateByPkId(Entity entity){
+        dynamicUpdate(entity,"id");
     }
 
     /**
@@ -126,7 +151,47 @@ public abstract class AbstractRepository<Bo extends BaseBo,Entity> {
         }
     }
 
+    @Transactional
+    public void dynamicUpdate(Entity entity,String fieldName){
+        try {
+            String sqlFormat = "update %s set %s where %s='%s'";
 
+            StringBuilder updateStr=new StringBuilder();
+            Object searchValue =null;
+            Field[] fields = entity.getClass().getDeclaredFields();
+            for(Field field:fields){
+                field.setAccessible(true);
+                Object fieldValue = field.get(entity);
+                if(fieldValue!=null){
+                    if(field.getName().equals(fieldName)){
+                        searchValue = fieldValue;
+                    }else {
+                        String name = StringUtils.isNotBlank(field.getAnnotation(Column.class).name())? field.getAnnotation(Column.class).name():field.getName();
+                        updateStr.append(name + "='" + fieldValue + "'");
+                        updateStr.append(",");
+                    }
+                }
+            }
+            updateStr.deleteCharAt(updateStr.length()-1);
+
+
+            REPOSITORY_ERROR.checkNotNull(searchValue,
+                    "dynamicUpdate, no searchValue id found,"+this.getClass().getSimpleName());
+
+
+
+            String sql = String.format(sqlFormat,
+                    entity.getClass().getAnnotation(Table.class).name(),
+                    updateStr.toString(),
+                    fieldName,searchValue);
+
+            Query query =entityManager.createNativeQuery(sql);
+            query.executeUpdate();
+
+        }catch (Exception e){
+            REPOSITORY_ERROR.doThrowException("dynamicUpdate,"+this.getClass().getSimpleName(),e);
+        }
+    }
 
     public List<Bo> getByPkIds(List<Integer> pkIds) {
         List<Entity> entityList =getDao().findAllById(pkIds);

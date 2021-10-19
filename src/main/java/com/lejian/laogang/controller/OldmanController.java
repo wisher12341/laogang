@@ -2,9 +2,11 @@ package com.lejian.laogang.controller;
 
 import com.google.common.collect.Lists;
 import com.lejian.laogang.check.bo.CheckResultBo;
+import com.lejian.laogang.controller.contract.request.EditOldmanParam;
 import com.lejian.laogang.controller.contract.request.GetByIdRequest;
 import com.lejian.laogang.controller.contract.request.GetOldmanRequest;
 import com.lejian.laogang.controller.contract.response.GetOldmanResponse;
+import com.lejian.laogang.controller.contract.response.SuccessResponse;
 import com.lejian.laogang.handler.ExcelHandler;
 import com.lejian.laogang.pojo.vo.OldmanVo;
 import com.lejian.laogang.service.OldmanService;
@@ -44,6 +46,14 @@ public class OldmanController {
     @RequestMapping("/getById")
     public OldmanVo getById(@RequestBody GetByIdRequest request){
         return service.getBYId(request.getId());
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/editOrAdd")
+    public SuccessResponse editOrAdd(@RequestBody EditOldmanParam request){
+        service.editOrAdd(request);
+        return new SuccessResponse();
     }
 
     /**

@@ -3,6 +3,7 @@ package com.lejian.laogang.service;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.lejian.laogang.check.bo.CheckResultBo;
+import com.lejian.laogang.controller.contract.request.EditOldmanParam;
 import com.lejian.laogang.controller.contract.request.OldmanParam;
 import com.lejian.laogang.controller.contract.request.PageParam;
 import com.lejian.laogang.enums.*;
@@ -14,6 +15,8 @@ import com.lejian.laogang.pojo.vo.OldmanVo;
 import com.lejian.laogang.repository.LocationRepository;
 import com.lejian.laogang.repository.OldmanAttrRepository;
 import com.lejian.laogang.repository.OldmanRepository;
+import com.lejian.laogang.repository.entity.OldmanAttrEntity;
+import com.lejian.laogang.repository.entity.OldmanEntity;
 import com.lejian.laogang.util.DateUtils;
 import com.lejian.laogang.util.LjReflectionUtils;
 import com.lejian.laogang.util.StringUtils;
@@ -21,6 +24,7 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
 import javax.transaction.Transactional;
@@ -144,8 +148,8 @@ public class OldmanService {
     }
 
     private void clearOldmanAttr(List<Integer> oldmanIdList) {
-        List<List<Integer>> group = Lists.partition(oldmanIdList,150);
-        group.forEach(list->oldmanAttrRepository.deleteByOldmanId(list));
+        List<List<Integer>> group = Lists.partition(oldmanIdList, 150);
+        group.forEach(list -> oldmanAttrRepository.deleteByOldmanId(list));
     }
 
     private List<CheckResultBo> addOldmanBaseInfo(List<String> titleList, List<List<String>> valueList) {
@@ -281,24 +285,47 @@ public class OldmanService {
         List<OldmanVo> voList = oldmanBoList.stream().map(OldmanBo::convertVo).collect(Collectors.toList());
         return voList;
     }
+
     public Long getOldmanCount(OldmanParam oldmanParam) {
         return oldmanRepository.count(oldmanParam.getSql());
     }
 
     public OldmanVo getBYId(Integer id) {
-        OldmanVo oldmanVo =  oldmanRepository.getByPkId(id).convertVo();
-        JpaSpecBo jpaSpecBo =new JpaSpecBo();
-        jpaSpecBo.getEqualMap().put("oldmanId",oldmanVo.getId());
+        OldmanVo oldmanVo = oldmanRepository.getByPkId(id).convertVo();
+        JpaSpecBo jpaSpecBo = new JpaSpecBo();
+        jpaSpecBo.getEqualMap().put("oldmanId", oldmanVo.getId());
         List<OldmanAttrBo> oldmanAttrBoList = oldmanAttrRepository.findWithSpec(jpaSpecBo);
-        Map<String,String> typeMap = Maps.newHashMap();
-        oldmanAttrBoList.forEach(item->{
-            if (typeMap.containsKey(item.getType().getValue().toString())){
-                typeMap.put(item.getType().getValue().toString(),typeMap.get(item.getType().getValue().toString())+","+item.getValue().getDesc()+(StringUtils.isNotBlank(item.getExt())?"_"+item.getExt():""));
-            }else{
-                typeMap.put(item.getType().getValue().toString(),item.getValue().getDesc()+(StringUtils.isNotBlank(item.getExt())?"_"+item.getExt():""));
+        Map<String, String> typeMap = Maps.newHashMap();
+        oldmanAttrBoList.forEach(item -> {
+            if (typeMap.containsKey(item.getType().getValue().toString())) {
+                typeMap.put(item.getType().getValue().toString(), typeMap.get(item.getType().getValue().toString()) + "," + item.getValue().getDesc() + (StringUtils.isNotBlank(item.getExt()) ? "_" + item.getExt() : ""));
+            } else {
+                typeMap.put(item.getType().getValue().toString(), item.getValue().getDesc() + (StringUtils.isNotBlank(item.getExt()) ? "_" + item.getExt() : ""));
             }
         });
         oldmanVo.setTypeMap(typeMap);
         return oldmanVo;
+    }
+
+    @Transactional
+    public void editOrAdd(EditOldmanParam request) {
+        OldmanEntity oldmanEntity = request.convertEntity();
+        List<OldmanAttrEntity> oldmanAttrEntityList = request.convertAttrEntity();
+        List<Integer> allType = oldmanAttrEntityList.stream().map(OldmanAttrEntity::getType).collect(Collectors.toList());
+        oldmanAttrEntityList = oldmanAttrEntityList.stream().filter(item -> item.getValue() != null).collect(Collectors.toList());
+        if (oldmanEntity.getId() != null) {
+            oldmanRepository.dynamicUpdateByPkId(oldmanEntity);
+            oldmanAttrRepository.deleteByType(oldmanEntity.getId(), allType);
+        } else {
+            oldmanEntity = oldmanRepository.saveAndReturn(oldmanEntity);
+            for (OldmanAttrEntity item : oldmanAttrEntityList) {
+                item.setOldmanId(oldmanEntity.getId());
+                item.setIdCard(oldmanEntity.getIdCard());
+            }
+        }
+
+        if (!CollectionUtils.isEmpty(oldmanAttrEntityList)) {
+            oldmanAttrRepository.batchInsertEntity(oldmanAttrEntityList);
+        }
     }
 }

@@ -55,7 +55,15 @@ public class PageController {
     public ModelAndView home_query(){
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/home/oldman");
-        mv.addObject("user",UserUtils.getUser().convertVo());
+        UserBo userBo = UserUtils.getUser();
+        if (userBo!=null) {
+            UserVo userVo = userBo.convertVo();
+            mv.addObject("username",userVo.getUsername());
+            mv.addObject("roleDesc",userVo.getRoleDesc());
+            mv.addObject("role",userVo.getRole());
+        }else{
+            mv.addObject("username","");
+        }
         return mv;
     }
 

@@ -36,8 +36,8 @@ public class OldmanVo {
     private String landlineNumber;
     private String income;
     private String vaccine;
-    private LocalDate vaccineFirst;
-    private LocalDate vaccineSec;
+    private String vaccineFirst;
+    private String vaccineSec;
     private String commercialInsurance;
     private String bloodiness;
     private String eyesight;
@@ -45,4 +45,5 @@ public class OldmanVo {
     private LocationBo locationBo;
     private String birthday;
     private Map<String,String> typeMap;
+    private String war;
 }

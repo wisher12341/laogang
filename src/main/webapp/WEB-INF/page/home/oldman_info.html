@@ -28,6 +28,63 @@
     <script src="/static/js/plugins/dataTables/jquery.dataTables.js"></script>
     <script src="/static/js/plugins/dataTables/dataTables.bootstrap.js"></script>
     <script src="/static/js/bootstrap-select.min.js"></script>
+    <style>
+        .pagination {
+            display: inline-block;
+            padding-left: 0;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .pagination li {
+            display: inherit;
+        }
+
+        .pagination > li > a, .pagination > li > span {
+            background-color: #FFF;
+            border: 1px solid #DDD;
+            color: inherit;
+            float: left;
+            line-height: 1.42857;
+            margin-left: -1px;
+            padding: 4px 10px;
+            position: relative;
+            text-decoration: none;
+        }
+
+        .pagination > .active > a {
+            background-color: #bcc5bc !important;
+        }
+
+        .sx {
+            border: none;
+            color: grey;
+            cursor: default;
+            background-color: transparent;
+            font-weight: bolder;
+        }
+        #DataTables_Table_0_wrapper>div:first-child{
+            position: absolute;
+            bottom: -15px;
+            left: 20%;
+        }
+        .selectCx{
+            background-image: none;!important;
+            background-color: #375237!important;
+        }
+        .modal{
+            left: 42% !important;
+            width: 50% !important;
+            height: 80% !important;
+        }
+        .modal-body{
+            overflow-y: hidden;
+            max-height:1000px !important;
+        }
+        select[name],select[map]{
+            width: 130%;
+        }
+    </style>
 </head>
 
 <body>
@@ -38,7 +95,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="#">乐 健</a>
+            <a class="brand" href="/">乐 健</a>
             <div class="nav-collapse collapse">
                 <ul class="nav pull-right">
                     <li class="dropdown">
@@ -262,7 +319,7 @@
                                             <div class="divA">
                                                 <label class="control-label" >工作状态</label>
                                                 <div class="controls">
-                                                    <select class="chzn-select" type="6">
+                                                    <select class="chzn-select" map="6">
                                                         <option value=""></option>
                                                         <option value="2">退休</option>
                                                         <option value="3">在职</option>
@@ -274,7 +331,7 @@
                                             <div class="divA">
                                                 <label class="control-label" >从事社区工作</label>
                                                 <div class="controls">
-                                                    <select class="chzn-select" type="1">
+                                                    <select class="chzn-select" map="1">
                                                         <option value=""></option>
                                                         <option value="2">楼组长</option>
                                                         <option value="3">业务会成员</option>
@@ -304,7 +361,7 @@
                                             <div class="divA">
                                                 <label class="control-label" >生活来源</label>
                                                 <div class="controls">
-                                                    <select class="chzn-select" type="4">
+                                                    <select class="chzn-select" map="4">
                                                         <option value=""></option>
                                                         <option value="1">子女赡养</option>
                                                         <option value="2">低收入</option>
@@ -406,6 +463,9 @@
                                         </div>
                                     </fieldset>
                                 </form>
+                                <div class="control-group">
+                                    <button onclick="submit()" class="btn btn-success" style="margin-left: 20%">保存</button>
+                                </div>
                             </div>
                             <div class="tab-pane" id="tab2" role="3">
                                 <form class="form-horizontal">
@@ -423,20 +483,24 @@
                                                 </div>
                                             </div>
                                             <div class="divA">
-                                                <label class="control-label" >退伍军人是否参战</label>
+                                                <label class="control-label" >退伍军人<br>是否参战</label>
                                                 <div class="controls">
                                                     <select class="chzn-select" name="war">
-                                                        <option value=""></option>
-                                                        <option value="2">是</option>
-                                                        <option value="3">否</option>
+                                                        <option></option>
+                                                        <option value="非退伍军人">非退伍军人</option>
+                                                        <option value="是">是</option>
+                                                        <option value="否">否</option>
                                                     </select>
-                                                    <input style="display: none" class="input-xlarge focused" name="war" type="text"
+                                                    <input style="display: none" class="input-xlarge focused"  type="text"
                                                            value="" placeholder="参与战争">
                                                 </div>
                                             </div>
                                         </div>
                                     </fieldset>
                                 </form>
+                                <div class="control-group">
+                                    <button onclick="submit()" class="btn btn-success" style="margin-left: 20%">保存</button>
+                                </div>
                             </div>
                             <div class="tab-pane" id="tab3" role="4">
                                 <form class="form-horizontal">
@@ -447,7 +511,7 @@
                                                 <div class="controls">
                                                     <select class="chzn-select" name="vaccine">
                                                         <option value=""></option>
-                                                        <option value="1">科兴</option>
+                                                        <option value="科兴">科兴</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -470,6 +534,9 @@
                                         </div>
                                     </fieldset>
                                 </form>
+                                <div class="control-group">
+                                    <button onclick="submit()" class="btn btn-success" style="margin-left: 20%">保存</button>
+                                </div>
                             </div>
                             <div class="tab-pane" id="tab4" role="5">
                                 <form class="form-horizontal">
@@ -587,10 +654,10 @@
                                         </div>
                                     </fieldset>
                                 </form>
+                                <div class="control-group">
+                                    <button onclick="submit()" class="btn btn-success" style="margin-left: 20%">保存</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="control-group">
-                            <button onclick="submit()" class="btn btn-success" style="margin-left: 20%">保存</button>
                         </div>
                     </div>
                 </div>
@@ -598,7 +665,109 @@
         </div>
         <!-- /block -->
     </div>
-    <hr>
+
+    <div class="row-fluid section" style="width: 80%;margin-left: 10%" id="table12">
+        <!-- block -->
+        <div class="block">
+            <div class="navbar navbar-inner block-header">
+                <div class="muted pull-left">亲属</div>
+            </div>
+            <div class="block-content collapse in">
+                <div class="span12">
+                    <div class="table-toolbar">
+                        <div class="btn-group">
+                            <a href="#myModal" data-toggle="modal" id="linkman"  class="btn btn-success">添加</a>
+                            <div id="myModal" class="modal hide">
+                                <div class="modal-header">
+                                    <button data-dismiss="modal" class="close" type="button">&times;</button>
+                                    <h3>亲属</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row-fluid" style="font-size: 18px">
+                                        <!-- block -->
+                                        <div class="block">
+                                            <div class="block-content collapse in">
+                                                <div class="span12">
+                                                    <form class="form-horizontal">
+                                                        <fieldset>
+                                                            <div class="control-group">
+                                                                <label class="control-label" for="focusedInput1">姓名</label>
+                                                                <div class="controls">
+                                                                    <input linkman="name" class="input-xlarge focused" id="focusedInput1" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="control-group">
+                                                                <label class="control-label" for="focusedInput2">身份证</label>
+                                                                <div class="controls">
+                                                                    <input linkman="idCard" class="input-xlarge focused" id="focusedInput2" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="control-group">
+                                                                <label class="control-label" for="focusedInput3">关系</label>
+                                                                <div class="controls">
+                                                                    <input linkman="relation" class="input-xlarge focused" id="focusedInput3" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="control-group">
+                                                                <label class="control-label" for="focusedInput4">联系电话</label>
+                                                                <div class="controls">
+                                                                    <input linkman="phone" class="input-xlarge focused" id="focusedInput4" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="control-group">
+                                                                <label class="control-label" for="focusedInput4">应急联系人</label>
+                                                                <div class="controls">
+                                                                    <select linkman="call" id="select01" class="chzn-select">
+                                                                        <option value=""></option>
+                                                                        <option value="1">是</option>
+                                                                        <option value="2">否</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="control-group">
+                                                                <input type="button"  class="btn btn-success" onclick="saveLinkMan()" value="添加"></input>
+                                                            </div>
+                                                        </fieldset>
+                                                    </form>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /block -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-group pull-right">
+                            <button data-toggle="dropdown" class="btn dropdown-toggle">Tools <span
+                                    class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Print</a></li>
+                                <li><a href="#">Save as PDF</a></li>
+                                <li><a href="#">Export to Excel</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                        <tr>
+                            <th style="width:15px;"><input type='checkbox' class="checktd"/></th>
+                            <th>姓名</th>
+                            <th>身份证</th>
+                            <th>关系</th>
+                            <th>联系电话</th>
+                            <th>是否是应急联系人</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <!-- /block -->
+    </div>
 </div>
 <!--/.fluid-container-->
 
@@ -609,10 +778,13 @@
     if(role===2){
         $("#tab2 input").attr("disabled","disabled");
         $("#tab2 select").attr("disabled","disabled");
+        $("#tab2 button").attr("disabled","disabled");
         $("#tab3 input").attr("disabled","disabled");
         $("#tab3 select").attr("disabled","disabled");
         $("#tab4 input").attr("disabled","disabled");
         $("#tab4 select").attr("disabled","disabled");
+        $("#tab3 button").attr("disabled","disabled");
+        $("#tab4 button").attr("disabled","disabled");
     }
     if(role===3){
         $("#tab1 input").attr("disabled","disabled");
@@ -629,6 +801,10 @@
         $("#tab4").hide();
         $("#a3").hide();
         $("#a4").hide();
+        $("#tab3 button").attr("disabled","disabled");
+        $("#tab4 button").attr("disabled","disabled");
+        $("#tab1 button").attr("disabled","disabled");
+        $("#table12").hide();
     }
     if(role===4){
         $("#tab2 input").attr("disabled","disabled");
@@ -645,6 +821,10 @@
         $("#tab4").hide();
         $("#a2").hide();
         $("#a4").hide();
+        $("#tab2 button").attr("disabled","disabled");
+        $("#tab4 button").attr("disabled","disabled");
+        $("#tab1 button").attr("disabled","disabled");
+        $("#table12").hide();
     }
     if(role===5){
         $("#tab2 input").attr("disabled","disabled");
@@ -661,6 +841,10 @@
         $("#tab3").hide();
         $("#a2").hide();
         $("#a3").hide();
+        $("#table12").hide();
+        $("#tab3 button").attr("disabled","disabled");
+        $("#tab2 button").attr("disabled","disabled");
+        $("#tab1 button").attr("disabled","disabled");
     }
 </script>
 <script type="text/javascript" src="/static/js/laogang/home/oldman_info.js" charset="UTF-8"></script>

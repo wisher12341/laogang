@@ -90,12 +90,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="#">乐 健</a>
+            <a class="brand" href="/">乐 健</a>
             <div class="nav-collapse collapse">
                 <ul class="nav pull-right">
                     <li class="dropdown">
                         <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i
-                                class="icon-user"></i> 大河村 <i class="caret"></i>
+                                class="icon-user"></i> <span id="username"></span> <i class="caret"></i>
 
                         </a>
                         <ul class="dropdown-menu">
@@ -104,7 +104,7 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a tabindex="-1" href="login.html">Logout</a>
+                                <a tabindex="-1" href="/logout">Logout</a>
                             </li>
                         </ul>
                     </li>
@@ -183,10 +183,13 @@
                         <div class="span12">
                             <div class="table-toolbar">
                                 <div class="btn-group">
-                                    <a href="#">
+                                    <a href="#" class="add">
                                         <button class="btn btn-success" style="margin-right: 5px">导入<i class="icon-plus icon-white"></i></button>
                                     </a>
-                                    <a href="#myModal" data-toggle="modal" class="btn btn-success">政策下发</a>
+                                    <a href="#" class="add">
+                                        <button class="btn btn-success" onclick="window.open('/home/oldman/info')" style="margin-right: 5px">添加<i class="icon-plus icon-white"></i></button>
+                                    </a>
+                                    <a href="#myModal" data-toggle="modal" id="policy" style="display: none" class="btn btn-success">政策下发</a>
                                     <div id="myModal" class="modal hide">
                                         <div class="modal-header">
                                             <button data-dismiss="modal" class="close" type="button">&times;</button>
@@ -411,7 +414,22 @@
 </div>
 <!--/.fluid-container-->
 
-
+<script>
+    $(function () {
+        var username = "[[${username}]]";
+        if(username!==null && username!==undefined && username!==""){
+            var roleDesc = "[[${roleDesc}]]";
+            var role ="[[${role}]]";
+            $("#username").html(username+"("+roleDesc+")");
+            if (role==="1"){
+                $("#policy").show();
+            }
+            if (role!=="1" && role!=="2"){
+                $(".add").hide();
+            }
+        }
+    });
+</script>
 <script type="text/javascript" src="/static/js/laogang/home/oldman.js" charset="UTF-8"></script>
 
 <script src="/static/home/assets/scripts.js"></script>
