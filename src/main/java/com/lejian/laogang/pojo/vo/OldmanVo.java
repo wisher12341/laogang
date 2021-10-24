@@ -1,5 +1,6 @@
 package com.lejian.laogang.pojo.vo;
 
+import com.lejian.laogang.controller.contract.request.IntelligentDeviceParam;
 import com.lejian.laogang.enums.BusinessEnum;
 import com.lejian.laogang.pojo.bo.BaseBo;
 import com.lejian.laogang.pojo.bo.LocationBo;
@@ -46,4 +47,15 @@ public class OldmanVo {
     private String birthday;
     private Map<String,String> typeMap;
     private String war;
+    private Integer ideviceId;
+    private String  ideviceName;
+    private String ideviceStartTime;
+    private String ideviceEndTime;
+    private Integer homeBedId;
+    private String homeBedOrgan;
+    private String homeBedTime;
+    private Integer homeDoctorId;
+    private String  homeDoctorName;
+    private String homeDoctorOrgan;
+    private String homeDoctorTime;
 }

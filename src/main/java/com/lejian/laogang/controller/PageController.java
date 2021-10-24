@@ -81,7 +81,7 @@ public class PageController {
         mv.setViewName("/home/oldman_detail");
         return mv;
     }
-
+    @BackOldmanAuth
     @GetMapping("/home/oldman/info")
     public ModelAndView home_query_info(){
         ModelAndView mv = new ModelAndView();

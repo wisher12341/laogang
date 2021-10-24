@@ -148,9 +148,9 @@ public class OldmanRepository extends AbstractSpecificationRepository<OldmanBo, 
             }
             String sql;
             if (StringUtils.isBlank(whereSql.getSecond())) {
-                sql = String.format("select o.id,o.name,o.male,o.birthday,o.area_village from oldman o where %s limit %s,%s",where,pageNo,pageSize);
+                sql = String.format("select o.id,o.name,o.male,o.birthday,o.area_village,o.id_card,o.phone from oldman o where %s limit %s,%s",where,pageNo,pageSize);
             } else {
-                sql = String.format("select o.id,o.name,o.male,o.birthday,o.area_village,oa.type from oldman o left join(\n" +
+                sql = String.format("select o.id,o.name,o.male,o.birthday,o.area_village,o.id_card,o.phone,oa.type from oldman o left join(\n" +
                                 " select a.id,GROUP_CONCAT(CONCAT(\"@\",b.type,\"_\",b.value,\"_\",b.ext) SEPARATOR ',') AS type\n" +
                                 " from oldman a left join oldman_attr b on a.id=b.oldman_id\n" +
                                 " group by a.id) oa on o.id=oa.id\n" +
@@ -166,6 +166,8 @@ public class OldmanRepository extends AbstractSpecificationRepository<OldmanBo, 
                 oldmanBo.setMale(BusinessEnum.find((Integer) cells[2], OldmanEnum.Male.class));
                 oldmanBo.setBirthday(((Date) cells[3]).toLocalDate());
                 oldmanBo.setAreaVillage((String) cells[4]);
+                oldmanBo.setIdCard((String) cells[5]);
+                oldmanBo.setPhone((String) cells[6]);
                 oldmanBoList.add(oldmanBo);
             });
             return oldmanBoList;

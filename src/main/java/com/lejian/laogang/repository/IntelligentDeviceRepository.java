@@ -34,4 +34,7 @@ public class IntelligentDeviceRepository extends AbstractSpecificationRepository
         return "intelligent_device";
     }
 
+    public IntelligentDeviceBo findByOldmanId(Integer id) {
+        return IntelligentDeviceBo.convert(dao.findByOldmanId(id));
+    }
 }

@@ -6,8 +6,7 @@ import com.lejian.laogang.enums.OldmanEnum;
 import com.lejian.laogang.enums.label.LabelBaseEnum;
 import com.lejian.laogang.pojo.bo.JpaSpecBo;
 import com.lejian.laogang.pojo.bo.LocationBo;
-import com.lejian.laogang.repository.entity.OldmanAttrEntity;
-import com.lejian.laogang.repository.entity.OldmanEntity;
+import com.lejian.laogang.repository.entity.*;
 import com.lejian.laogang.util.DateUtils;
 import lombok.Data;
 import org.apache.commons.collections4.CollectionUtils;
@@ -59,6 +58,20 @@ public class EditOldmanParam {
     private String war;
     private Map<String,String> map;
 
+    private Integer ideviceId;
+    private String  ideviceName;
+    private String ideviceStartTime;
+    private String ideviceEndTime;
+
+    private Integer homeBedId;
+    private String homeBedOrgan;
+    private String homeBedTime;
+
+    private Integer homeDoctorId;
+    private String  homeDoctorName;
+    private String homeDoctorOrgan;
+    private String homeDoctorTime;
+
 
     public OldmanEntity convertEntity() {
         OldmanEntity oldmanEntity = new OldmanEntity();
@@ -92,5 +105,51 @@ public class EditOldmanParam {
             });
         }
         return list;
+    }
+
+    public IntelligentDeviceEntity convertId() {
+        if(StringUtils.isBlank(ideviceName)){
+            return null;
+        }
+        IntelligentDeviceEntity entity = new IntelligentDeviceEntity();
+        entity.setId(ideviceId);
+        entity.setOldmanId(id);
+        entity.setName(ideviceName);
+        if (StringUtils.isNotBlank(ideviceStartTime)) {
+            entity.setStartTime(DateUtils.stringToLocalDate(ideviceStartTime, YY_MM_DD));
+        }
+        if (StringUtils.isNotBlank(ideviceEndTime)) {
+            entity.setEndTime(DateUtils.stringToLocalDate(ideviceEndTime, YY_MM_DD));
+        }
+        return entity;
+    }
+
+    public HomeBedEntity convertHomeBed() {
+        if (StringUtils.isBlank(homeBedOrgan)){
+            return null;
+        }
+        HomeBedEntity entity = new HomeBedEntity();
+        entity.setOldmanId(id);
+        entity.setOrgan(homeBedOrgan);
+        entity.setId(homeBedId);
+        if (StringUtils.isNotBlank(homeBedTime)) {
+            entity.setTime(DateUtils.stringToLocalDate(homeBedTime, YY_MM_DD));
+        }
+        return entity;
+    }
+
+    public HomeDoctorEntity convertHomeDoctor() {
+        if (StringUtils.isBlank(homeDoctorName)){
+            return null;
+        }
+        HomeDoctorEntity entity = new HomeDoctorEntity();
+        entity.setId(homeDoctorId);
+        entity.setName(homeDoctorName);
+        entity.setOrgan(homeDoctorOrgan);
+        entity.setOldmanId(id);
+        if (StringUtils.isNotBlank(homeDoctorTime)) {
+            entity.setTime(DateUtils.stringToLocalDate(homeDoctorTime, YY_MM_DD));
+        }
+        return entity;
     }
 }

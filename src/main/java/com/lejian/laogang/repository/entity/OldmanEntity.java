@@ -85,6 +85,8 @@ public class OldmanEntity {
     private Integer isZd;
     @Column
     private String war;
+    @Column(name = "datachange_time")
+    private Timestamp datachangeTime;
 
     public static boolean haveField(String fieldName) {
         return Lists.newArrayList("male","huji","area_village").contains(fieldName);

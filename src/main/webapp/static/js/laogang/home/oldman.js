@@ -25,6 +25,9 @@ $(document).ready(function(){
     $(".serviceStatus").selectpicker({
         noneSelectedText : '养老状态'//默认显示内容
     });
+    $(".areaVillage").selectpicker({
+        noneSelectedText : '村/居委'//默认显示内容
+    });
 
 
     table =$(".dataTables-example").dataTable(
@@ -38,8 +41,6 @@ $(document).ready(function(){
             "bProcessing": true, //加载数据时显示正在加载信息
             "bServerSide": true, //指定从服务器端获取数据
             "columns":[{},{
-                data:"id"
-            },{
                 data:"name"
             },{
                 data:"male"
@@ -47,6 +48,10 @@ $(document).ready(function(){
                 data:"age"
             },{
                 data:"areaVillage"
+            },{
+                data:"idCard"
+            },{
+                data:"phone"
             }
             ],
             "columnDefs": [
@@ -59,7 +64,7 @@ $(document).ready(function(){
                     }
                 },
                 {
-                    "targets": [6], // 目标列位置，下标从0开始
+                    "targets": [7], // 目标列位置，下标从0开始
                     "data": "id", // 数据列名
                     "render": function(data, type, full) { // 返回自定义内容
                         return "<button class='btn btn-success' style='padding: 2px 4px;font-size: 10px' onclick=window.open('/home/oldman/info?id="+data+"')>查看</button>";
@@ -89,7 +94,9 @@ $(document).ready(function(){
                     "familyList":$("select[name='family']").val(),
                     "familyTypeList":$("select[name='familyType']").val(),
                     "incomeList":$("select[name='income']").val(),
-                    "serviceStatusList":$("select[name='serviceStatus']").val()
+                    "serviceStatusList":$("select[name='serviceStatus']").val(),
+                    "search":$("input[name='search']").val(),
+                    "areaVillageList":$("select[name='areaVillage']").val()
                 }
             }),
             type: 'post',
@@ -161,6 +168,9 @@ function deleteOldman(oid) {
     });
 }
 
+function searchOldman() {
+    table.fnFilter();
+}
 
 function searchReset() {
     $("#searchDiv input[type!='button']").val("");

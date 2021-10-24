@@ -12,4 +12,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IntelligentDeviceDao extends JpaRepository<IntelligentDeviceEntity, Long>,JpaSpecificationExecutor<IntelligentDeviceEntity> {
 
+    IntelligentDeviceEntity findByOldmanId(Integer id);
 }

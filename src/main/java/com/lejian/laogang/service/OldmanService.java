@@ -7,19 +7,15 @@ import com.lejian.laogang.controller.contract.request.EditOldmanParam;
 import com.lejian.laogang.controller.contract.request.OldmanParam;
 import com.lejian.laogang.controller.contract.request.PageParam;
 import com.lejian.laogang.enums.*;
-import com.lejian.laogang.pojo.bo.JpaSpecBo;
-import com.lejian.laogang.pojo.bo.LocationBo;
-import com.lejian.laogang.pojo.bo.OldmanAttrBo;
-import com.lejian.laogang.pojo.bo.OldmanBo;
+import com.lejian.laogang.pojo.bo.*;
+import com.lejian.laogang.pojo.vo.IntelligentDeviceVo;
 import com.lejian.laogang.pojo.vo.OldmanVo;
-import com.lejian.laogang.repository.LocationRepository;
-import com.lejian.laogang.repository.OldmanAttrRepository;
-import com.lejian.laogang.repository.OldmanRepository;
-import com.lejian.laogang.repository.entity.OldmanAttrEntity;
-import com.lejian.laogang.repository.entity.OldmanEntity;
+import com.lejian.laogang.repository.*;
+import com.lejian.laogang.repository.entity.*;
 import com.lejian.laogang.util.DateUtils;
 import com.lejian.laogang.util.LjReflectionUtils;
 import com.lejian.laogang.util.StringUtils;
+import com.lejian.laogang.util.UserUtils;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
@@ -29,6 +25,7 @@ import org.springframework.util.ObjectUtils;
 
 import javax.transaction.Transactional;
 import java.lang.reflect.Field;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -40,6 +37,7 @@ import static com.lejian.laogang.common.ComponentRespCode.REFLECTION_ERROR;
 import static com.lejian.laogang.common.Constant.IMPORT_RESET;
 import static com.lejian.laogang.enums.BusinessEnum.DefaultValue.NULL;
 import static com.lejian.laogang.util.DateUtils.YYMMDD;
+import static com.lejian.laogang.util.DateUtils.YY_MM_DD;
 
 @Service
 public class OldmanService {
@@ -52,6 +50,12 @@ public class OldmanService {
     private OldmanAttrRepository oldmanAttrRepository;
     @Autowired
     private LocationRepository locationRepository;
+    @Autowired
+    private IntelligentDeviceRepository intelligentDeviceRepository;
+    @Autowired
+    private HomeBedRepository homeBedRepository;
+    @Autowired
+    private HomeDoctorRepository homeDoctorRepository;
 
     @Transactional
     public List<CheckResultBo> addOldmanByExcel(Pair<List<String>, List<List<String>>> excelData) {
@@ -270,6 +274,7 @@ public class OldmanService {
                 if (existOldmanMap.containsKey(oldman.getIdCard().toLowerCase())) {
                     oldman.setId(existOldmanMap.get(oldman.getIdCard().toLowerCase()).getId());
                     oldman.setStatus(0);
+                    oldman.setDatachangeTime(new Timestamp(System.currentTimeMillis()));
                     updateList.add(oldman);
                 } else {
                     addList.add(oldman);
@@ -304,6 +309,40 @@ public class OldmanService {
             }
         });
         oldmanVo.setTypeMap(typeMap);
+
+        UserBo userBo = UserUtils.getUser();
+        if (Lists.newArrayList(1,2).contains(userBo.getRole())){
+            IntelligentDeviceBo bo = intelligentDeviceRepository.findByOldmanId(oldmanVo.getId());
+            if(bo!=null) {
+                oldmanVo.setIdeviceId(bo.getId());
+                oldmanVo.setIdeviceName(bo.getName());
+                if (bo.getStartTime()!=null) {
+                    oldmanVo.setIdeviceStartTime(bo.getStartTime().format(YY_MM_DD));
+                }
+                if (bo.getEndTime()!=null) {
+                    oldmanVo.setIdeviceEndTime(bo.getEndTime().format(YY_MM_DD));
+                }
+            }
+        }
+        if (Lists.newArrayList(1,2,5).contains(userBo.getRole())){
+            HomBedBo bo = homeBedRepository.findByOldmanId(oldmanVo.getId());
+            if(bo!=null) {
+                oldmanVo.setHomeBedId(bo.getId());
+                oldmanVo.setHomeBedOrgan(bo.getOrgan());
+                if (bo.getTime()!=null) {
+                    oldmanVo.setHomeBedTime(bo.getTime().format(YY_MM_DD));
+                }
+            }
+            HomeDoctorBo homeDoctorBo = homeDoctorRepository.findByOldmanId(oldmanVo.getId());
+            if(homeDoctorBo!=null) {
+                oldmanVo.setHomeDoctorId(homeDoctorBo.getId());
+                oldmanVo.setHomeDoctorName(homeDoctorBo.getName());
+                oldmanVo.setHomeDoctorOrgan(homeDoctorBo.getOrgan());
+                if (homeDoctorBo.getTime()!=null) {
+                    oldmanVo.setHomeDoctorTime(homeDoctorBo.getTime().format(YY_MM_DD));
+                }
+            }
+        }
         return oldmanVo;
     }
 
@@ -311,6 +350,9 @@ public class OldmanService {
     public void editOrAdd(EditOldmanParam request) {
         OldmanEntity oldmanEntity = request.convertEntity();
         List<OldmanAttrEntity> oldmanAttrEntityList = request.convertAttrEntity();
+        IntelligentDeviceEntity intelligentDeviceEntity = request.convertId();
+        HomeBedEntity homeBedEntity = request.convertHomeBed();
+        HomeDoctorEntity homeDoctorEntity = request.convertHomeDoctor();
         List<Integer> allType = oldmanAttrEntityList.stream().map(OldmanAttrEntity::getType).collect(Collectors.toList());
         oldmanAttrEntityList = oldmanAttrEntityList.stream().filter(item -> item.getValue() != null).collect(Collectors.toList());
         if (oldmanEntity.getId() != null) {
@@ -327,5 +369,33 @@ public class OldmanService {
         if (!CollectionUtils.isEmpty(oldmanAttrEntityList)) {
             oldmanAttrRepository.batchInsertEntity(oldmanAttrEntityList);
         }
+        if (intelligentDeviceEntity!=null) {
+            if (intelligentDeviceEntity.getId() != null) {
+                intelligentDeviceRepository.dynamicUpdateByPkId(intelligentDeviceEntity);
+            }else{
+                intelligentDeviceRepository.save(intelligentDeviceEntity);
+            }
+        }else if(request.getIdeviceId()!=null){
+            intelligentDeviceRepository.deleteById(request.getIdeviceId());
+        }
+        if (homeBedEntity!=null) {
+            if (homeBedEntity.getId() != null) {
+                homeBedRepository.dynamicUpdateByPkId(homeBedEntity);
+            }else{
+                homeBedRepository.save(homeBedEntity);
+            }
+        }else if(request.getHomeBedId()!=null){
+            homeBedRepository.deleteById(request.getHomeBedId());
+        }
+        if(homeDoctorEntity!=null) {
+            if (homeDoctorEntity.getId() != null) {
+                homeDoctorRepository.dynamicUpdateByPkId(homeDoctorEntity);
+            }else{
+                homeDoctorRepository.save(homeDoctorEntity);
+            }
+        }else if(request.getHomeDoctorId()!=null){
+            homeDoctorRepository.deleteById(request.getHomeDoctorId());
+        }
+
     }
 }

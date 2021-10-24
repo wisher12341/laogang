@@ -1,5 +1,6 @@
 var id;
 var table;
+var haslink=false;
 $(document).ready(function () {
 
     id = getQueryVariable("id");
@@ -61,7 +62,7 @@ $(document).ready(function () {
                     "targets": [0], // 目标列位置，下标从0开始
                     "data": "id", // 数据列名
                     "render": function (data, type, full) { // 返回自定义内容
-                        return "<input type='checkbox' name='id' value='" + data + "'/>";
+                        return "<input type='checkbox' name='linkmanid' value='" + data + "'/>";
                     }
                 }
             ],
@@ -85,6 +86,9 @@ $(document).ready(function () {
             dataType: 'json',
             contentType: "application/json;charset=UTF-8",
             success: function (result) {
+                if(result.voList!==null && result.voList.length>0){
+                    haslink = true;
+                }
                 var data = {
                     "iTotalRecords": result.count,
                     "iTotalDisplayRecords": result.count,
@@ -121,11 +125,58 @@ function loadOldmanInfo(id) {
                 var value = eval("type[" + field + "]");
                 setOldmanValue(this, value);
             });
+            if($("select[name='vaccine']").val()!=="" && $("select[name='vaccine']").val()!==null && $("select[name='vaccine']").val()!==undefined){
+                $('.ym').show();
+                $("#ra1").attr("checked",true);
+            }else{
+                $("#ra2").attr("checked",true);
+            }
+            if($("input[name='ideviceName']").val()!=="" && $("input[name='ideviceName']").val()!==null && $("input[name='ideviceName']").val()!==undefined){
+                $('.id').show();
+                $("#ra3").attr("checked",true);
+            }else{
+                $("#ra4").attr("checked",true);
+            }
+            if($("input[name='homeBedOrgan']").val()!=="" && $("input[name='homeBedOrgan']").val()!==null && $("input[name='homeBedOrgan']").val()!==undefined){
+                $('.hb').show();
+                $("#ra5").attr("checked",true);
+            }else{
+                $("#ra6").attr("checked",true);
+            }
+            if($("input[name='homeDoctorName']").val()!=="" && $("input[name='homeDoctorName']").val()!==null && $("input[name='homeDoctorName']").val()!==undefined){
+                $('.hd').show();
+                $("#ra7").attr("checked",true);
+            }else{
+                $("#ra8").attr("checked",true);
+            }
+        }
+    });
+}
+function deleteLinkman() {
+    var chk_value =[];
+    $('input[name="linkmanid"]:checked').each(function(){
+        chk_value.push($(this).val());
+    });
+    $.ajax({
+        url: "/linkman/delete",
+        data: JSON.stringify({
+            "idList": chk_value
+        }),
+        type: 'post',
+        dataType: 'json',
+        contentType: "application/json;charset=UTF-8",
+        success: function (result) {
+            table.fnFilter();
         }
     });
 }
 
 function submit() {
+    if(!haslink) {
+        alert("请填写必填项");
+        return;
+    }
+
     var param = {};
     $("[name]").each(function () {
         if ($(this).is(":disabled") === false && $(this).val() !== null && $(this).val().length > 0) {
@@ -142,7 +193,6 @@ function submit() {
         }
     });
     param.map = map;
-    console.log(JSON.stringify(param));
     $.ajax({
         url: "/oldman/editOrAdd",
         data: JSON.stringify(param),

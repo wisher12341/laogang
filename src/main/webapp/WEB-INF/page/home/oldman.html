@@ -190,6 +190,9 @@
                                         <button class="btn btn-success" onclick="window.open('/home/oldman/info')" style="margin-right: 5px">添加<i class="icon-plus icon-white"></i></button>
                                     </a>
                                     <a href="#myModal" data-toggle="modal" id="policy" style="display: none" class="btn btn-success">政策下发</a>
+
+                                    <input style="position: relative;top: 5px;left: 5px;" name="search" class="input-xlarge focused" placeholder="姓名、身份证" type="text" onchange="searchOldman()">
+
                                     <div id="myModal" class="modal hide">
                                         <div class="modal-header">
                                             <button data-dismiss="modal" class="close" type="button">&times;</button>
@@ -293,7 +296,10 @@
                                         <button class="btn btn-success" style="margin-right: 10px" onclick=sx("sx5",this)>养老状态</button>
                                     </a>
                                     <a href="#">
-                                        <button class="btn btn-warning" id="search">搜索</button>
+                                        <button class="btn btn-success" style="margin-right: 10px" onclick=sx("sx6",this)>村/居委</button>
+                                    </a>
+                                    <a href="#">
+                                        <button class="btn btn-warning" id="search">筛选</button>
                                     </a>
                                 </div>
                                 <div class="control-group sx1 sxx" style="margin-top: 1%;display: none" >
@@ -386,16 +392,33 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="control-group sx6 sxx" style="margin-top: 1%;display: none" >
+                                    <div class="controls">
+                                        <select name="areaVillage" class="serviceStatus selectpicker bla bla bli" multiple data-live-search="true">
+                                            <option value="牛肚村">牛肚村</option>
+                                            <option value="中港村">中港村</option>
+                                            <option value="成日村">成日村</option>
+                                            <option value="建港村">建港村</option>
+                                            <option value="东河村">东河村</option>
+                                            <option value="大河村">大河村</option>
+                                            <option value="欣河村">欣河村</option>
+                                            <option value="老港居委">老港居委</option>
+                                            <option value="滨海居委">滨海居委</option>
+                                            <option value="宏港苑居委">宏港苑居委</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                             <table class="table table-striped table-bordered table-hover dataTables-example">
                                 <thead>
                                 <tr>
                                     <th style="width:15px;"><input type='checkbox' class="checktd"/></th>
-                                    <th>编号</th>
                                     <th>姓名</th>
                                     <th>性别</th>
                                     <th>年龄</th>
                                     <th>村/居委</th>
+                                    <th>身份证</th>
+                                    <th>电话</th>
                                     <th></th>
                                 </tr>
                                 </thead>

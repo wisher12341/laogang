@@ -36,4 +36,9 @@ public class LinkManService {
         LinkManEntity entity = request.convert();
         linkManRepository.save(entity);
     }
+
+    @Transactional
+    public void delete(List<Integer> idList) {
+        idList.forEach(id-> linkManRepository.deleteById(id));
+    }
 }

@@ -26,6 +26,9 @@ public class HomeDoctorRepository extends AbstractSpecificationRepository<HomeDo
 
     @Override
     protected HomeDoctorBo convert(HomeDoctorEntity entity) {
+        if(entity == null){
+            return null;
+        }
         return HomeDoctorBo.convert(entity);
     }
 
@@ -34,4 +37,7 @@ public class HomeDoctorRepository extends AbstractSpecificationRepository<HomeDo
         return "home_doctor";
     }
 
+    public HomeDoctorBo findByOldmanId(Integer id) {
+        return convert(dao.findByOldmanId(id));
+    }
 }

@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Data
 public class OldmanParam {
+    private String search;
     private String name;
     private String idCard;
     private Integer serviceStatus;
@@ -65,6 +66,8 @@ public class OldmanParam {
     private List<String> incomeList;
     //或
     private List<String> serviceStatusList;
+    //或
+    private List<String> areaVillageList;
 
     public JpaSpecBo convert() {
         JpaSpecBo jpaSpecBo = new JpaSpecBo();
@@ -120,6 +123,9 @@ public class OldmanParam {
         if (CollectionUtils.isNotEmpty(this.getPsychosisList())) {
             jpaSpecBo.getInMap().put("psychosis", new ArrayList<>(this.getPsychosisList()));
         }
+        if (CollectionUtils.isNotEmpty(this.getAreaVillageList())) {
+            jpaSpecBo.getInMap().put("areaVillage", new ArrayList<>(this.getAreaVillageList()));
+        }
         if (StringUtils.isNotBlank(this.getAge())) {
             String start = this.getAge().split("-")[0];
             String end = "";
@@ -142,6 +148,13 @@ public class OldmanParam {
     public Pair<String, String> getSql() {
         JpaSpecBo jpaSpecBo = this.convert();
         String oldman = jpaSpecBo.getSql("o.");
+
+        if (StringUtils.isNotBlank(search)){
+            if (StringUtils.isNotBlank(oldman)){
+                oldman+=" and ";
+            }
+            oldman+=" (o.name like '%"+search+"%' or o.id_card like '%"+search+"%' )";
+        }
         StringBuilder attr = new StringBuilder();
         if (CollectionUtils.isNotEmpty(this.jkzkList)) {
             attr.append("(");

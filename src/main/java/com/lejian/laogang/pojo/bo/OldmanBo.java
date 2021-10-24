@@ -59,6 +59,7 @@ public class OldmanBo extends BaseBo {
     private String lng;
     private String lat;
     private String gpsDesc;
+    private Timestamp datachangeTime;
 
     public static OldmanBo convert(OldmanEntity entity) {
         OldmanBo oldmanBo = new OldmanBo();

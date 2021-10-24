@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface HomeDoctorDao extends JpaRepository<HomeDoctorEntity, Long>,JpaSpecificationExecutor<HomeDoctorEntity> {
 
+    HomeDoctorEntity findByOldmanId(Integer id);
 }

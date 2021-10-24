@@ -23,6 +23,9 @@ public class HomeBedRepository extends AbstractSpecificationRepository<HomBedBo,
 
     @Override
     protected HomBedBo convert(HomeBedEntity entity) {
+        if(entity == null){
+            return null;
+        }
         return HomBedBo.convert(entity);
     }
 
@@ -31,4 +34,7 @@ public class HomeBedRepository extends AbstractSpecificationRepository<HomBedBo,
         return "home_bed";
     }
 
+    public HomBedBo findByOldmanId(Integer id) {
+        return convert(dao.findByOldmanId(id));
+    }
 }
