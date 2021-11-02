@@ -1,8 +1,12 @@
 var id;
 var table;
 var haslink=false;
+var view;
 $(document).ready(function () {
-
+    view = getQueryVariable("view");
+    if(view==="true"){
+        $("#view").css("display","none");
+    }
     id = getQueryVariable("id");
     $('#rootwizard').bootstrapWizard({
         onTabShow: function (tab, navigation, index) {
@@ -123,6 +127,52 @@ function loadOldmanInfo(id) {
             $("[map]").each(function () {
                 var field = $(this).attr("map");
                 var value = eval("type[" + field + "]");
+                var ext="";
+                value=""+value;
+                if(value.indexOf(",")!=-1){
+                    var arr = value.split(",");
+                    var values=[];
+                    for(var i=0;i<arr.length;i++){
+                        if (arr[i].indexOf("_")!=-1){
+                            ext = arr[i].split("_")[1];
+                            var s =0;
+                            $(this).children().each(function () {
+                               if($(this).text()===arr[i].split("_")[0]){
+                                   s=$(this).val();
+                               }
+                            });
+                            var item="input[ext='"+field+"_"+s+"']";
+                            $(item).val(ext);
+                            $("#ext"+field+"_"+s).show();
+                            values[i] = arr[i].split("_")[0];
+                        }else{
+                            var s =0;
+                            $(this).children().each(function () {
+                                if($(this).text()===arr[i]){
+                                    s=$(this).val();
+                                }
+                            });
+                            $("#ext"+field+"_"+s).show();
+                            values[i] = arr[i];
+                        }
+                    }
+                    value = values.join(",");
+                }else{
+                    if (value.indexOf("_")!=-1){
+                        ext = value.split("_")[1];
+                        var s =0;
+                        $(this).children().each(function () {
+                            if($(this).text()===value.split("_")[0]){
+                                s=$(this).val();
+                            }
+                        });
+                        $("input[ext='"+field+"']").val(ext);
+                        $("#ext"+field).show();
+                        $("input[ext='"+field+"_"+s+"']").val(ext);
+                        $("#ext"+field+"_"+s).show();
+                        value = value.split("_")[0];
+                    }
+                }
                 setOldmanValue(this, value);
             });
             if($("select[name='vaccine']").val()!=="" && $("select[name='vaccine']").val()!==null && $("select[name='vaccine']").val()!==undefined){
@@ -149,9 +199,49 @@ function loadOldmanInfo(id) {
             }else{
                 $("#ra8").attr("checked",true);
             }
+            if($("select[map='13']").val()==="3"){
+                $("#map14").show();
+            }
+            if($("select[map='11']").val()==="1" || $("select[map='11']").val()==="2"){
+                $("#ext11").show();
+            }
         }
     });
 }
+function map11Change(obj){
+    if($(obj).val()==="1" || $(obj).val()==="2"){
+        $("#ext11").show();
+    }else{
+        $("#ext11").hide();
+        $("#ext11 input").val("");
+    }
+}
+
+function map12Change(obj){
+    var val = ""+$(obj).val();
+    if(val.indexOf("7")!==-1){
+        $("#ext12_7").show();
+    }else{
+        $("#ext12_7").hide();
+        $("#ext12_7 input").val("");
+    }
+    if (val.indexOf("8")!==-1){
+        $("#ext12_8").show();
+    }else{
+        $("#ext12_8").hide();
+        $("#ext12_8 input").val("");
+    }
+}
+
+function oldStatusChange(obj) {
+    if($(obj).val()==="3"){
+        $("#map14").show();
+    }else{
+        $("#map14").hide();
+        $("#map14 select").val("");
+    }
+}
+
 function deleteLinkman() {
     var chk_value =[];
     $('input[name="linkmanid"]:checked').each(function(){
@@ -193,6 +283,14 @@ function submit() {
         }
     });
     param.map = map;
+    var ext = {};
+    $("[ext]").each(function () {
+        if ($(this).is(":disabled") === false) {
+            var condition = "ext.type" + $(this).attr("ext") + "='" + $(this).val() + "'";
+            eval(condition);
+        }
+    });
+    param.ext = ext;
     $.ajax({
         url: "/oldman/editOrAdd",
         data: JSON.stringify(param),

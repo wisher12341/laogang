@@ -147,15 +147,16 @@ public class OldmanRepository extends AbstractSpecificationRepository<OldmanBo, 
                 where = "1=1";
             }
             String sql;
+            int limitStart = pageNo*pageSize;
             if (StringUtils.isBlank(whereSql.getSecond())) {
-                sql = String.format("select o.id,o.name,o.male,o.birthday,o.area_village,o.id_card,o.phone from oldman o where %s limit %s,%s",where,pageNo,pageSize);
+                sql = String.format("select o.id,o.name,o.male,o.birthday,o.area_village,o.id_card,o.phone from oldman o where %s limit %s,%s",where,limitStart,pageSize);
             } else {
                 sql = String.format("select o.id,o.name,o.male,o.birthday,o.area_village,o.id_card,o.phone,oa.type from oldman o left join(\n" +
                                 " select a.id,GROUP_CONCAT(CONCAT(\"@\",b.type,\"_\",b.value,\"_\",b.ext) SEPARATOR ',') AS type\n" +
                                 " from oldman a left join oldman_attr b on a.id=b.oldman_id\n" +
                                 " group by a.id) oa on o.id=oa.id\n" +
                                 " where %s limit %s,%s",
-                        where, pageNo, pageSize);
+                        where, limitStart, pageSize);
             }
             Query query = entityManager.createNativeQuery(sql);
             query.getResultList().forEach(object -> {

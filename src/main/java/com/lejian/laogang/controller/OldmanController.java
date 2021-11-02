@@ -68,7 +68,13 @@ public class OldmanController {
         Pair<List<String>,List<List<String>>> excelData=excelHandler.parse(file,1);
         List<CheckResultBo> checkResultBoList= Lists.newArrayList();
         if(CollectionUtils.isNotEmpty(excelData.getSecond())) {
-            checkResultBoList=service.addOldmanByExcel(excelData);
+            if (file.getOriginalFilename().contains("经济条件")){
+                checkResultBoList=service.addIncome(excelData);
+            }else if(file.getOriginalFilename().contains("健康状态")){
+                checkResultBoList=service.addHealth(excelData);
+            }else{
+                checkResultBoList=service.addOldmanByExcel(excelData);
+            }
         }
         ModelAndView mv=new ModelAndView("/oldman");
         mv.addObject("check",checkResultBoList);

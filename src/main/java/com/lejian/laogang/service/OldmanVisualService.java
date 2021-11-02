@@ -133,7 +133,7 @@ public class OldmanVisualService {
         if (oldmanParam.getLabelIdList().contains("1")
                 ||(!oldmanParam.getLabelIdList().contains("5") && !oldmanParam.getLabelIdList().contains("19"))) {
             jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(60).toLocalDate());
-            jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(69).toLocalDate());
+            jpaSpecBo.getGreatMap().put("birthday", LocalDateTime.now().minusYears(70).toLocalDate());
 
             Map<String, Long> result = oldmanViewRepository.getGroupCount("male", jpaSpecBo);
 
@@ -152,7 +152,7 @@ public class OldmanVisualService {
         if (oldmanParam.getLabelIdList().contains("5")
                 ||(!oldmanParam.getLabelIdList().contains("1") && !oldmanParam.getLabelIdList().contains("19"))) {
             jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(70).toLocalDate());
-            jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(79).toLocalDate());
+            jpaSpecBo.getGreatMap().put("birthday", LocalDateTime.now().minusYears(80).toLocalDate());
 
 
             Map<String, Long> result2 = oldmanViewRepository.getGroupCount("male", jpaSpecBo);
@@ -170,7 +170,7 @@ public class OldmanVisualService {
         if (oldmanParam.getLabelIdList().contains("19")
                 ||(!oldmanParam.getLabelIdList().contains("5") && !oldmanParam.getLabelIdList().contains("1"))) {
             jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(80).toLocalDate());
-            jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(89).toLocalDate());
+            jpaSpecBo.getGreatMap().put("birthday", LocalDateTime.now().minusYears(90).toLocalDate());
             Map<String, Long> result3 = oldmanViewRepository.getGroupCount("male", jpaSpecBo);
             Map<String, Long> voResult3 = Maps.newHashMap();
             result3.forEach((k, v) -> {

@@ -61,11 +61,11 @@
             background-color: transparent;
             font-weight: bolder;
         }
-        #DataTables_Table_0_wrapper>div:first-child{
-            position: absolute;
-            bottom: -15px;
-            left: 20%;
-        }
+        /*#DataTables_Table_0_wrapper>div:first-child{*/
+            /*position: absolute;*/
+            /*bottom: -15px;*/
+            /*left: 0%;*/
+        /*}*/
         .selectCx{
             background-image: none;!important;
             background-color: #375237!important;
@@ -191,7 +191,7 @@
                                     </a>
                                     <a href="#myModal" data-toggle="modal" id="policy" style="display: none" class="btn btn-success">政策下发</a>
 
-                                    <input style="position: relative;top: 5px;left: 5px;" name="search" class="input-xlarge focused" placeholder="姓名、身份证" type="text" onchange="searchOldman()">
+                                    <input style="position: relative;top: 5px;left: 5px;" name="search" class="input-xlarge focused" placeholder="姓名/身份证" type="text" onchange="searchOldman()">
 
                                     <div id="myModal" class="modal hide">
                                         <div class="modal-header">
@@ -299,7 +299,10 @@
                                         <button class="btn btn-success" style="margin-right: 10px" onclick=sx("sx6",this)>村/居委</button>
                                     </a>
                                     <a href="#">
-                                        <button class="btn btn-warning" id="search">筛选</button>
+                                        <button class="btn btn-warning" style="margin-right: 10px"  id="search">筛选</button>
+                                    </a>
+                                    <a href="#">
+                                        <button class="btn btn-warning" onclick="searchReset1()">重置</button>
                                     </a>
                                 </div>
                                 <div class="control-group sx1 sxx" style="margin-top: 1%;display: none" >
@@ -380,6 +383,8 @@
                                             <option value="4">帮困</option>
                                             <option value="5">退休金</option>
                                             <option value="6">其他</option>
+                                            <option value="7">重残无业</option>
+                                            <option value="8">特困供养人员</option>
                                         </select>
                                     </div>
                                 </div>
@@ -394,7 +399,7 @@
                                 </div>
                                 <div class="control-group sx6 sxx" style="margin-top: 1%;display: none" >
                                     <div class="controls">
-                                        <select name="areaVillage" class="serviceStatus selectpicker bla bla bli" multiple data-live-search="true">
+                                        <select name="areaVillage" class="areaVillage selectpicker bla bla bli" multiple data-live-search="true">
                                             <option value="牛肚村">牛肚村</option>
                                             <option value="中港村">中港村</option>
                                             <option value="成日村">成日村</option>

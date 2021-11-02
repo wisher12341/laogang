@@ -398,4 +398,70 @@ public class OldmanService {
         }
 
     }
+
+    @Transactional
+    public List<CheckResultBo> addIncome(Pair<List<String>, List<List<String>>> excelData) {
+        List<OldmanAttrBo> oldmanAttrBoList = Lists.newArrayList();
+        for (int i = 0; i < excelData.getSecond().size(); i++) {
+            OldmanAttrBo oldmanAttrBo = new OldmanAttrBo();
+            oldmanAttrBo.setIdCard(excelData.getSecond().get(i).get(1));
+            oldmanAttrBo.setType(OldmanAttrEnum.OldmanAttrType.A4);
+            if(StringUtils.isNotBlank(excelData.getSecond().get(i).get(3))){
+                oldmanAttrBo.setValue(OldmanAttrEnum.Income.C);
+            }
+            if(StringUtils.isNotBlank(excelData.getSecond().get(i).get(4))){
+                oldmanAttrBo.setValue(OldmanAttrEnum.Income.G);
+            }
+            if(StringUtils.isNotBlank(excelData.getSecond().get(i).get(5))){
+                oldmanAttrBo.setValue(OldmanAttrEnum.Income.H);
+            }
+            if(StringUtils.isNotBlank(excelData.getSecond().get(i).get(6))){
+                oldmanAttrBo.setValue(OldmanAttrEnum.Income.B);
+            }
+            oldmanAttrBoList.add(oldmanAttrBo);
+        }
+        List<String> idCardList = oldmanAttrBoList.stream().map(OldmanAttrBo::getIdCard).collect(Collectors.toList());
+        Map<String,OldmanBo> map = oldmanRepository.getByIdCards(idCardList).stream().collect(Collectors.toMap(OldmanBo::getIdCard,Function.identity()));
+
+        oldmanAttrBoList.forEach(item->{
+            if (map.containsKey(item.getIdCard())) {
+                item.setOldmanId(map.get(item.getIdCard()).getId());
+                //todo优化 改成批量删除
+                oldmanAttrRepository.deleteByType(item.getOldmanId(), Lists.newArrayList(item.getType().getValue()));
+            }
+        });
+        oldmanAttrRepository.batchInsert(oldmanAttrBoList.stream().filter(item->item.getOldmanId()!=null).collect(Collectors.toList()));
+        return Lists.newArrayList();
+    }
+
+    @Transactional
+    public List<CheckResultBo> addHealth(Pair<List<String>, List<List<String>>> excelData) {
+        List<OldmanAttrBo> oldmanAttrBoList = Lists.newArrayList();
+        for (int i = 0; i < excelData.getSecond().size(); i++) {
+            OldmanAttrBo oldmanAttrBo = new OldmanAttrBo();
+            oldmanAttrBo.setIdCard(excelData.getSecond().get(i).get(1));
+            oldmanAttrBo.setType(OldmanAttrEnum.OldmanAttrType.A11);
+            if(StringUtils.isNotBlank(excelData.getSecond().get(i).get(2))){
+                oldmanAttrBo.setValue(OldmanAttrEnum.ZL.A);
+                oldmanAttrBo.setExt(excelData.getSecond().get(i).get(2));
+            }
+            if(StringUtils.isNotBlank(excelData.getSecond().get(i).get(4))){
+                oldmanAttrBo.setValue(OldmanAttrEnum.ZL.B);
+                oldmanAttrBo.setExt(excelData.getSecond().get(i).get(4));
+            }
+            oldmanAttrBoList.add(oldmanAttrBo);
+        }
+        List<String> idCardList = oldmanAttrBoList.stream().map(OldmanAttrBo::getIdCard).collect(Collectors.toList());
+        Map<String,OldmanBo> map = oldmanRepository.getByIdCards(idCardList).stream().collect(Collectors.toMap(OldmanBo::getIdCard,Function.identity()));
+
+        oldmanAttrBoList.forEach(item->{
+            if (map.containsKey(item.getIdCard())) {
+                item.setOldmanId(map.get(item.getIdCard()).getId());
+                //todo优化 改成批量删除
+                oldmanAttrRepository.deleteByType(item.getOldmanId(), Lists.newArrayList(item.getType().getValue()));
+            }
+        });
+        oldmanAttrRepository.batchInsert(oldmanAttrBoList.stream().filter(item->item.getOldmanId()!=null).collect(Collectors.toList()));
+        return Lists.newArrayList();
+    }
 }

@@ -6,6 +6,7 @@ import com.lejian.laogang.pojo.vo.LocationVo;
 import com.lejian.laogang.repository.entity.LocationEntity;
 import com.lejian.laogang.repository.entity.OldmanAttrEntity;
 import lombok.Data;
+import org.springframework.beans.BeanUtils;
 
 import java.util.Map;
 
@@ -31,6 +32,7 @@ public class OldmanAttrBo extends BaseBo{
 
     public static OldmanAttrBo convert(OldmanAttrEntity entity) {
         OldmanAttrBo bo = new OldmanAttrBo();
+        BeanUtils.copyProperties(entity,bo);
         bo.setType(BusinessEnum.find(entity.getType(), OldmanAttrEnum.OldmanAttrType.class));
         bo.setValue(BusinessEnum.find(entity.getValue(), OldmanAttrEnum.OldmanAttrType.findEnumClass(bo.getType().getValue())));
         return bo;

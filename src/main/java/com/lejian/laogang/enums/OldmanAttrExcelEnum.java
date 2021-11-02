@@ -51,7 +51,6 @@ public enum OldmanAttrExcelEnum implements ExcelEnum{
     a61("61",OldmanAttrEnum.OldmanAttrType.A16.getValue().toString(),OldmanAttrEnum.ZCD.class),
     a62("62",OldmanAttrEnum.OldmanAttrType.A16.getValue().toString(),OldmanAttrEnum.ZCD.class),
     a63("63",OldmanAttrEnum.OldmanAttrType.A16.getValue().toString(),OldmanAttrEnum.ZCD.class),
-
     ;
 
     private String columnName;

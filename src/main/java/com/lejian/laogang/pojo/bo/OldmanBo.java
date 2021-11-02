@@ -105,7 +105,9 @@ public class OldmanBo extends BaseBo {
         OldmanVo vo = new OldmanVo();
         BeanUtils.copyProperties(this,vo);
         vo.setAge(DateUtils.birthdayToAge(this.getBirthday()));
-        vo.setBirthday(this.getBirthday().format(YY_MM_DD));
+        if (this.getBirthday()!=null) {
+            vo.setBirthday(this.getBirthday().format(YY_MM_DD));
+        }
         vo.setIdName(id+"_"+name);
         if (male!=null) vo.setMale(male.getDesc());
         if (huji!=null) vo.setHuji(huji.getDesc());

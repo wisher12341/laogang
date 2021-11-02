@@ -192,7 +192,9 @@ public interface OldmanAttrEnum extends BusinessEnum {
         C(3, "低保",true),
         D(4,"帮困",true),
         E(5,"退休金",true),
-        F(6,"其他",false)
+        F(6,"其他",false),
+        G(7,"重残无业",true),
+        H(8,"特困供养人员",true)
         ;
         private Integer value;
         private String desc;

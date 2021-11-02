@@ -132,9 +132,11 @@ public class OldmanParam {
             if (this.getAge().split("-").length > 1) {
                 end = this.getAge().split("-")[1];
             }
-            jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(Integer.valueOf(start)).toLocalDate());
+            if (StringUtils.isNotBlank(start)) {
+                jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(Integer.valueOf(start)).toLocalDate());
+            }
             if (StringUtils.isNotBlank(end)) {
-                jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(Integer.valueOf(end)).toLocalDate());
+                jpaSpecBo.getGreatMap().put("birthday", LocalDateTime.now().minusYears(Integer.valueOf(end)+1).toLocalDate());
             }
         }
 

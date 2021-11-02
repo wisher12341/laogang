@@ -57,6 +57,7 @@ public class EditOldmanParam {
     private Integer isZd;
     private String war;
     private Map<String,String> map;
+    private Map<String,String> ext;
 
     private Integer ideviceId;
     private String  ideviceName;
@@ -87,19 +88,32 @@ public class EditOldmanParam {
         if (MapUtils.isNotEmpty(map)){
             map.forEach((k,v)->{
                 String type = k.substring(4);
+                String e=null;
+                if (ext.containsKey("type"+type)){
+                    e = ext.get("type"+type) ;
+                }
+
                 if (StringUtils.isNotBlank(v) && !v.equals("null")){
                     List<String> valueList = Lists.newArrayList(v.split(","));
+                    String finalE = e;
                     valueList.forEach(value->{
                         OldmanAttrEntity entity = new OldmanAttrEntity();
                         entity.setValue(Integer.valueOf(value));
                         entity.setType(Integer.valueOf(type));
                         entity.setOldmanId(id);
                         entity.setIdCard(idCard);
+                        if(ext.containsKey("type"+type+"_"+value)){
+                            entity.setExt(ext.get("type"+type+"_"+value));
+                        }else {
+                            entity.setExt(finalE);
+                        }
                         list.add(entity);
                     });
                 }else{
                     OldmanAttrEntity entity = new OldmanAttrEntity();
                     entity.setType(Integer.valueOf(type));
+                    entity.setOldmanId(id);
+                    entity.setIdCard(idCard);
                     list.add(entity);
                 }
             });

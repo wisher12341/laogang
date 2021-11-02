@@ -20,7 +20,7 @@ $(document).ready(function(){
         noneSelectedText : '家庭属性'//默认显示内容
     });
     $(".income").selectpicker({
-        noneSelectedText : '生活来源'//默认显示内容
+        noneSelectedText : '经济条件'//默认显示内容
     });
     $(".serviceStatus").selectpicker({
         noneSelectedText : '养老状态'//默认显示内容
@@ -252,4 +252,10 @@ function savePolicy() {
             // alert("status:"+XMLHttpRequest.status+",readyState:"+XMLHttpRequest.readyState+",textStatus:"+textStatus);
         }
     });
+}
+
+function searchReset1() {
+    $("input[name]").val("");
+    $("select[name]").val("");
+    $("select[name]").selectpicker("refresh");
 }
