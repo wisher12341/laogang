@@ -4,6 +4,7 @@ package com.lejian.laogang.controller;
 import com.lejian.laogang.pojo.bo.UserBo;
 import com.lejian.laogang.pojo.vo.UserVo;
 import com.lejian.laogang.security.annotation.BackOldmanAuth;
+import com.lejian.laogang.security.annotation.VisualAuth;
 import com.lejian.laogang.util.UserUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -27,10 +28,17 @@ public class PageController {
         return mv;
     }
 
+    @VisualAuth
     @GetMapping("/visual")
     public ModelAndView visual(){
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/visual");
+        UserBo userBo = UserUtils.getUser();
+        if (userBo!=null) {
+            mv.addObject("role",userBo.getRole());
+        }else{
+            mv.addObject("role","0");
+        }
         return mv;
     }
 

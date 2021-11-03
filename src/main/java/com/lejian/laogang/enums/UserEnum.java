@@ -19,6 +19,8 @@ public interface UserEnum extends BusinessEnum{
         A3(3,"社区事务受理中心"),
         A4(4,"社建办"),
         A5(5,"卫生院"),
+
+        A99(99,"大屏展示"),
         ;
         private Integer value;
         private String desc;

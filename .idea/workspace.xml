@@ -2,51 +2,16 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="laogang:war" />
+      <artifact name="laogang:war exploded" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0ea2ff2-7299-4f96-bf83-2ea0c7d8bf2e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/lejian/laogang/controller/OldmanController.class" afterPath="$PROJECT_DIR$/target/classes/com/lejian/laogang/controller/OldmanController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/lejian/laogang/controller/PageController.class" afterPath="$PROJECT_DIR$/target/classes/com/lejian/laogang/controller/PageController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/lejian/laogang/controller/contract/request/OldmanParam.class" afterPath="$PROJECT_DIR$/target/classes/com/lejian/laogang/controller/contract/request/OldmanParam.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/lejian/laogang/enums/OldmanAttrEnum.class" afterPath="$PROJECT_DIR$/target/classes/com/lejian/laogang/enums/OldmanAttrEnum.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/lejian/laogang/pojo/bo/JpaSpecBo.class" afterPath="$PROJECT_DIR$/target/classes/com/lejian/laogang/pojo/bo/JpaSpecBo.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/lejian/laogang/pojo/bo/OldmanBo.class" afterPath="$PROJECT_DIR$/target/classes/com/lejian/laogang/pojo/bo/OldmanBo.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/lejian/laogang/repository/OldmanRepository.class" afterPath="$PROJECT_DIR$/target/classes/com/lejian/laogang/repository/OldmanRepository.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/controller/OldmanController.class" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/controller/OldmanController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/controller/PageController.class" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/controller/PageController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/controller/contract/request/OldmanParam.class" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/controller/contract/request/OldmanParam.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/enums/OldmanAttrEnum.class" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/enums/OldmanAttrEnum.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/pojo/bo/JpaSpecBo.class" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/pojo/bo/JpaSpecBo.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/pojo/bo/OldmanBo.class" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/pojo/bo/OldmanBo.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/repository/OldmanRepository.class" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/repository/OldmanRepository.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/service/OldmanService.class" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/com/lejian/laogang/service/OldmanService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/security/annotation/VisualAuth.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/OldmanController.java" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/OldmanController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/PageController.java" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/PageController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/EditOldmanParam.java" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/EditOldmanParam.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/OldmanParam.java" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/OldmanParam.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/enums/OldmanAttrEnum.java" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/enums/OldmanAttrEnum.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/enums/OldmanAttrExcelEnum.java" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/enums/OldmanAttrExcelEnum.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/JpaSpecBo.java" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/JpaSpecBo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/OldmanAttrBo.java" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/OldmanAttrBo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/OldmanBo.java" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/OldmanBo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/OldmanRepository.java" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/OldmanRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/service/OldmanService.java" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/service/OldmanService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/service/OldmanVisualService.java" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/service/OldmanVisualService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/home/oldman.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/home/oldman.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/home/oldman_info.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/home/oldman_info.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/login.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/static/js/laogang/home/oldman.js" afterPath="$PROJECT_DIR$/src/main/webapp/static/js/laogang/home/oldman.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/static/js/laogang/home/oldman_info.js" afterPath="$PROJECT_DIR$/src/main/webapp/static/js/laogang/home/oldman_info.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/static/js/laogang/visual/visual.js" afterPath="$PROJECT_DIR$/src/main/webapp/static/js/laogang/visual/visual.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/static/WEB-INF/page/login.html" afterPath="$PROJECT_DIR$/target/classes/static/WEB-INF/page/login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/static/static/js/laogang/visual/visual.js" afterPath="$PROJECT_DIR$/target/classes/static/static/js/laogang/visual/visual.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/static/WEB-INF/page/login.html" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/static/WEB-INF/page/login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/static/static/js/laogang/visual/visual.js" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/classes/static/static/js/laogang/visual/visual.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/page/login.html" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/WEB-INF/page/login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/static/js/laogang/visual/visual.js" afterPath="$PROJECT_DIR$/target/laogang-1.0-SNAPSHOT/static/js/laogang/visual/visual.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/enums/UserEnum.java" afterPath="$PROJECT_DIR$/src/main/java/com/lejian/laogang/enums/UserEnum.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/visual.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/visual.html" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -59,80 +24,95 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="oldman_info.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/page/home/oldman_info.html">
+      <file leaf-file-name="UserEnum.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/enums/UserEnum.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="979" column="68" lean-forward="false" selection-start-line="979" selection-start-column="68" selection-end-line="979" selection-end-column="68" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#div#9;n#fieldset#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#div#10;n#fieldset#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#div#11;n#fieldset#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#div#11;n#fieldset#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#div#1;n#div#11;n#fieldset#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#style#0;n#label#0;n#div#0;n#div#1;n#div#11;n#fieldset#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#label#1;n#div#0;n#div#1;n#div#11;n#fieldset#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#12;n#fieldset#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#1;n#div#12;n#fieldset#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#div#1;n#div#12;n#fieldset#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#1;n#div#0;n#div#1;n#div#12;n#fieldset#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#13;n#fieldset#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#div#1;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#div#1;n#div#0;n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#button#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#div#2;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#style#0;n#label#0;n#div#0;n#div#0;n#div#0;n#fieldset#0;n#form#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#label#1;n#div#0;n#div#0;n#div#0;n#fieldset#0;n#form#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#0;n#fieldset#0;n#form#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#fieldset#0;n#form#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#1;n#fieldset#0;n#form#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#div#1;n#div#1;n#fieldset#0;n#form#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#button#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#div#0;n#fieldset#0;n#form#0;n#div#3;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#div#1;n#fieldset#0;n#form#0;n#div#3;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#div#2;n#fieldset#0;n#form#0;n#div#3;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#style#0;n#div#0;n#div#4;n#fieldset#0;n#form#0;n#div#3;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#5;n#fieldset#0;n#form#0;n#div#3;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#5;n#fieldset#0;n#form#0;n#div#3;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#label#0;n#div#0;n#div#0;n#div#6;n#fieldset#0;n#form#0;n#div#3;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#label#1;n#div#0;n#div#0;n#div#6;n#fieldset#0;n#form#0;n#div#3;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#label#0;n#div#0;n#div#1;n#div#6;n#fieldset#0;n#form#0;n#div#3;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#label#1;n#div#0;n#div#1;n#div#6;n#fieldset#0;n#form#0;n#div#3;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#7;n#fieldset#0;n#form#0;n#div#3;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#div#7;n#fieldset#0;n#form#0;n#div#3;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#style#0;n#div#8;n#fieldset#0;n#form#0;n#div#3;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#9;n#fieldset#0;n#form#0;n#div#3;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#button#0;n#div#0;n#div#3;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#style#0;n#a#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#table#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="oldman_info.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/laogang/home/oldman_info.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="222" column="28" lean-forward="true" selection-start-line="222" selection-start-column="28" selection-end-line="222" selection-end-column="28" />
-              <folding>
-                <element signature="e#10930#11275#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OldmanParam.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/OldmanParam.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="136" column="13" lean-forward="false" selection-start-line="136" selection-start-column="13" selection-end-line="136" selection-end-column="13" />
+            <state relative-caret-position="450">
+              <caret line="22" column="20" lean-forward="false" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PageController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/PageController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="oldman_detail.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/page/home/oldman_detail.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="309" column="69" lean-forward="false" selection-start-line="309" selection-start-column="69" selection-end-line="309" selection-end-column="69" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="oldman.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/page/home/oldman.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="87">
+              <caret line="445" column="19" lean-forward="true" selection-start-line="445" selection-start-column="4" selection-end-line="445" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/page/home.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="25">
+              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="56" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BackOldmanAuth.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/security/annotation/BackOldmanAuth.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="275">
+              <caret line="16" column="18" lean-forward="false" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VisualAuth.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/security/annotation/VisualAuth.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="16" column="18" lean-forward="false" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SecurityConfig.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/security/SecurityConfig.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-575">
+              <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="visual.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/page/visual.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="287">
+              <caret line="410" column="7" lean-forward="true" selection-start-line="410" selection-start-column="7" selection-end-line="410" selection-end-column="7" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -211,9 +191,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/GetIDRequest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/response/GetIDResponse.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/IntelligentDeviceController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/vo/IntelligentDeviceVo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/vo/HomeDoctorBo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/vo/HomBedBo.java" />
@@ -245,7 +222,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/LinkManController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/OldmanBo.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/static/js/laogang/visual/visual.js" />
-        <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/PageController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/static/js/laogang/home/oldman.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/enums/OldmanAttrEnum.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/service/OldmanVisualService.java" />
@@ -262,6 +238,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/service/OldmanService.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/static/js/laogang/home/oldman_info.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/OldmanParam.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/enums/UserEnum.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/security/annotation/VisualAuth.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/PageController.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/visual.html" />
       </list>
     </option>
   </component>
@@ -285,8 +265,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
+    <option name="x" value="183" />
+    <option name="y" value="105" />
     <option name="width" value="1164" />
     <option name="height" value="798" />
   </component>
@@ -424,6 +404,25 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="laogang" type="462c0819:PsiDirectoryNode" />
+              <item name="security" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="laogang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="laogang" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="laogang" type="462c0819:PsiDirectoryNode" />
+              <item name="security" type="462c0819:PsiDirectoryNode" />
+              <item name="annotation" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="laogang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="laogang" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="laogang" type="462c0819:PsiDirectoryNode" />
               <item name="service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -533,24 +532,24 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\sp\gitProject\laogang\src\main\webapp\static\js\laogang\visual" />
-      <recent name="C:\sp\gitProject\laogang\src\main\webapp\static\js\laogang\common" />
-      <recent name="C:\sp\gitProject\laogang\src\main\webapp\static\js" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.lejian.laogang.controller" />
-      <recent name="com.lejian.laogang.service" />
-      <recent name="com.lejian.laogang.controller.contract.response" />
-      <recent name="com.lejian.laogang.controller.contract.request" />
-      <recent name="com.lejian.laogang.controller.contract" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\sp\gitProject\laogang\src\main\java\com\lejian\laogang\pojo\vo" />
       <recent name="C:\sp\gitProject\laogang\src\main\java\com\lejian\laogang\util" />
       <recent name="C:\sp\gitProject\laogang\src\main\webapp\WEB-INF\page" />
       <recent name="C:\sp\gitProject\laogang\src\main\java\com\lejian\laogang" />
       <recent name="C:\sp\gitProject\laogang\src\main\webapp\static\css" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.lejian.laogang.security.annotation" />
+      <recent name="com.lejian.laogang.controller" />
+      <recent name="com.lejian.laogang.service" />
+      <recent name="com.lejian.laogang.controller.contract.response" />
+      <recent name="com.lejian.laogang.controller.contract.request" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\sp\gitProject\laogang\src\main\webapp\static\js\laogang\visual" />
+      <recent name="C:\sp\gitProject\laogang\src\main\webapp\static\js\laogang\common" />
+      <recent name="C:\sp\gitProject\laogang\src\main\webapp\static\js" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -575,7 +574,7 @@
     <configuration name="Unnamed" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.59" ALTERNATIVE_JRE_ENABLED="false">
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
-        <artifact name="laogang:war">
+        <artifact name="laogang:war exploded">
           <settings>
             <option name="CONTEXT_PATH" value="/" />
           </settings>
@@ -639,9 +638,7 @@
         </SHUTDOWN>
       </ConfigurationWrapper>
       <method>
-        <option name="BuildArtifacts" enabled="true">
-          <artifact name="laogang:war" />
-        </option>
+        <option name="BuildArtifacts" enabled="false" />
       </method>
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
@@ -761,12 +758,12 @@
       <workItem from="1634142124656" duration="13010000" />
       <workItem from="1634440040517" duration="82261000" />
       <workItem from="1635058990328" duration="6094000" />
-      <workItem from="1635069022187" duration="43394000" />
+      <workItem from="1635069022187" duration="46550000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="814167000" />
+    <option name="totallyTimeSpent" value="817323000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -791,7 +788,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.45393258" sideWeight="0.4946352" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.45393258" sideWeight="0.4946352" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921347" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4247191" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -832,59 +829,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="512" />
+      <option name="time" value="513" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/dao/HomeBedDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="12" column="45" lean-forward="false" selection-start-line="12" selection-start-column="45" selection-end-line="12" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/pojo/bo/HomeDoctorBo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="35" column="31" lean-forward="false" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/dao/HomeDoctorDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="12" column="48" lean-forward="false" selection-start-line="12" selection-start-column="48" selection-end-line="12" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/AbstractRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7">
-          <caret line="154" column="60" lean-forward="false" selection-start-line="154" selection-start-column="51" selection-end-line="154" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/dao/IntelligentDeviceDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="14" column="55" lean-forward="false" selection-start-line="14" selection-start-column="55" selection-end-line="14" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/HomBedBParam.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="18" column="4" lean-forward="false" selection-start-line="18" selection-start-column="4" selection-end-line="20" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/HomeDoctorParam.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -1016,14 +965,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/page/home/oldman_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="309" column="69" lean-forward="false" selection-start-line="309" selection-start-column="69" selection-end-line="309" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/laogang/home/oldman_detail.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
@@ -1128,17 +1069,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/page/home/oldman.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="412" column="49" lean-forward="true" selection-start-line="412" selection-start-column="49" selection-end-line="412" selection-end-column="49" />
-          <folding>
-            <element signature="n#style#0;n#button#0;n#a#6;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#button#0;n#a#7;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/repository/AbstractSpecificationRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="188">
@@ -1198,14 +1128,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/PageController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1925">
-          <caret line="84" column="21" lean-forward="false" selection-start-line="84" selection-start-column="21" selection-end-line="84" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/OldmanVisualController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="325">
@@ -1255,9 +1177,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/OldmanParam.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="136" column="13" lean-forward="false" selection-start-line="136" selection-start-column="13" selection-end-line="136" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/laogang/home/oldman_info.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="222" column="28" lean-forward="true" selection-start-line="222" selection-start-column="28" selection-end-line="222" selection-end-column="28" />
+          <folding>
+            <element signature="e#10930#11275#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/page/home/oldman_info.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
+        <state relative-caret-position="210">
           <caret line="979" column="68" lean-forward="false" selection-start-line="979" selection-start-column="68" selection-end-line="979" selection-end-column="68" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1309,20 +1249,77 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/laogang/home/oldman_info.js">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/security/SecurityConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="222" column="28" lean-forward="true" selection-start-line="222" selection-start-column="28" selection-end-line="222" selection-end-column="28" />
+        <state relative-caret-position="-575">
+          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/security/annotation/VisualAuth.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="16" column="18" lean-forward="false" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/PageController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/page/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/security/annotation/BackOldmanAuth.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="16" column="18" lean-forward="false" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/page/home/oldman_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="309" column="69" lean-forward="false" selection-start-line="309" selection-start-column="69" selection-end-line="309" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/page/home/oldman.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="445" column="19" lean-forward="true" selection-start-line="445" selection-start-column="4" selection-end-line="445" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/page/visual.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="410" column="7" lean-forward="true" selection-start-line="410" selection-start-column="7" selection-end-line="410" selection-end-column="7" />
           <folding>
-            <element signature="e#10930#11275#0" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/controller/contract/request/OldmanParam.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lejian/laogang/enums/UserEnum.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="136" column="13" lean-forward="false" selection-start-line="136" selection-start-column="13" selection-end-line="136" selection-end-column="13" />
+        <state relative-caret-position="450">
+          <caret line="22" column="20" lean-forward="false" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
           <folding />
         </state>
       </provider>
