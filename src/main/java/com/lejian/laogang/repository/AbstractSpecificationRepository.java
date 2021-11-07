@@ -59,6 +59,18 @@ public abstract class AbstractSpecificationRepository<Bo extends BaseBo,Entity> 
         return findByPageWithSpec( pageNo,  pageSize,  jpaSpecBo,null);
     }
 
+    public List<Entity> findEntityByPageWithSpec(Integer pageNo, Integer pageSize, JpaSpecBo jpaSpecBo) {
+        try {
+            Pageable pageable;
+            pageable= PageRequest.of(pageNo, pageSize);
+            Page<Entity> page = getSpecDao().findAll(createSpec(jpaSpecBo), pageable);
+            return page.get().collect(Collectors.toList());
+        }catch (Exception e){
+            REPOSITORY_ERROR.doThrowException("findByPageWithSpec",e);
+        }
+        return Lists.newArrayList();
+    }
+
     /**
      * 根据bo查询equal条件 获取数据
      * @param jpaSpecBo
@@ -66,10 +78,18 @@ public abstract class AbstractSpecificationRepository<Bo extends BaseBo,Entity> 
      */
     public List<Bo> findWithSpec(JpaSpecBo jpaSpecBo) {
         try {
-            List<Entity> entityList = getSpecDao().findAll(createSpec(jpaSpecBo));
-            return entityList.stream().map(this::convert).collect(Collectors.toList());
+            return findEntityWithSpec(jpaSpecBo).stream().map(this::convert).collect(Collectors.toList());
         }catch (Exception e){
             REPOSITORY_ERROR.doThrowException("findWithSpec",e);
+        }
+        return Lists.newArrayList();
+    }
+
+    public List<Entity> findEntityWithSpec(JpaSpecBo jpaSpecBo) {
+        try {
+            return getSpecDao().findAll(createSpec(jpaSpecBo));
+        }catch (Exception e){
+            REPOSITORY_ERROR.doThrowException("findEntityWithSpec",e);
         }
         return Lists.newArrayList();
     }
@@ -116,9 +136,9 @@ public abstract class AbstractSpecificationRepository<Bo extends BaseBo,Entity> 
         });
         jpaSpecBo.getInMap().forEach((k,v)->{
             if (CollectionUtils.isNotEmpty(v)){
-                CriteriaBuilder.In<String> in = criteriaBuilder.in(root.get(k));
+                CriteriaBuilder.In<Object> in = criteriaBuilder.in(root.get(k));
                 for (Object item : v) {
-                    in.value((String)item);
+                    in.value(item);
                 }
                 predicateList.add(in);
             }

@@ -275,7 +275,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="table-toolbar">
+                            <div class="table-toolbar" id="sear">
                                 <div class="btn-group">
                                     <a href="#">
                                         <button class="sx">筛选：</button>
@@ -390,11 +390,19 @@
                                 </div>
                                 <div class="control-group sx5 sxx" style="margin-top: 1%;display: none" >
                                     <div class="controls">
-                                        <select name="serviceStatus" class="serviceStatus selectpicker bla bla bli" multiple data-live-search="true">
+                                        <select name="serviceStatus" class="chzn-select" onchange="serviceStatusChange(this)" style="width: 14%">
+                                            <option value="">养老状态</option>
                                             <option value="1">机构养老</option>
                                             <option value="2">社区养老</option>
                                             <option value="3">居家养老</option>
                                         </select>
+                                        <div id="jujia" style="display:none;">
+                                            <select name="jujia"  class="jujia selectpicker bla bla bli" multiple data-live-search="true">
+                                                <option value="2">居家养老(民政局)</option>
+                                                <option value="3">居家养老(镇级)</option>
+                                                <option value="1">长护险</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="control-group sx6 sxx" style="margin-top: 1%;display: none" >

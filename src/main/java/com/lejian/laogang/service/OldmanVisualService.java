@@ -128,10 +128,10 @@ public class OldmanVisualService {
     }
 
     public Map<String, Object> getAgeGroupCount(OldmanParam oldmanParam) {
-        Map<String, Object> map = Maps.newHashMap();
+        Map<String, Object> map = Maps.newLinkedHashMap();
         JpaSpecBo jpaSpecBo = oldmanParam.convert();
         if (oldmanParam.getLabelIdList().contains("1")
-                ||(!oldmanParam.getLabelIdList().contains("5") && !oldmanParam.getLabelIdList().contains("19"))) {
+                ||(!oldmanParam.getLabelIdList().contains("5") && !oldmanParam.getLabelIdList().contains("19") && !oldmanParam.getLabelIdList().contains("191") && !oldmanParam.getLabelIdList().contains("192"))) {
             jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(60).toLocalDate());
             jpaSpecBo.getGreatMap().put("birthday", LocalDateTime.now().minusYears(70).toLocalDate());
 
@@ -150,7 +150,7 @@ public class OldmanVisualService {
         }
 
         if (oldmanParam.getLabelIdList().contains("5")
-                ||(!oldmanParam.getLabelIdList().contains("1") && !oldmanParam.getLabelIdList().contains("19"))) {
+                ||(!oldmanParam.getLabelIdList().contains("1") && !oldmanParam.getLabelIdList().contains("19") && !oldmanParam.getLabelIdList().contains("191") && !oldmanParam.getLabelIdList().contains("192"))) {
             jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(70).toLocalDate());
             jpaSpecBo.getGreatMap().put("birthday", LocalDateTime.now().minusYears(80).toLocalDate());
 
@@ -168,7 +168,7 @@ public class OldmanVisualService {
             map.put("70-79", voResult2);
         }
         if (oldmanParam.getLabelIdList().contains("19")
-                ||(!oldmanParam.getLabelIdList().contains("5") && !oldmanParam.getLabelIdList().contains("1"))) {
+                ||(!oldmanParam.getLabelIdList().contains("5") && !oldmanParam.getLabelIdList().contains("1")&& !oldmanParam.getLabelIdList().contains("191") && !oldmanParam.getLabelIdList().contains("192"))) {
             jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(80).toLocalDate());
             jpaSpecBo.getGreatMap().put("birthday", LocalDateTime.now().minusYears(90).toLocalDate());
             Map<String, Long> result3 = oldmanViewRepository.getGroupCount("male", jpaSpecBo);
@@ -182,6 +182,37 @@ public class OldmanVisualService {
                 }
             });
             map.put("80-89", voResult3);
+        }
+        if (oldmanParam.getLabelIdList().contains("191")
+                ||(!oldmanParam.getLabelIdList().contains("5") && !oldmanParam.getLabelIdList().contains("1") && !oldmanParam.getLabelIdList().contains("19") && !oldmanParam.getLabelIdList().contains("192"))) {
+            jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(90).toLocalDate());
+            jpaSpecBo.getGreatMap().put("birthday", LocalDateTime.now().minusYears(100).toLocalDate());
+            Map<String, Long> result3 = oldmanViewRepository.getGroupCount("male", jpaSpecBo);
+            Map<String, Long> voResult3 = Maps.newHashMap();
+            result3.forEach((k, v) -> {
+                if (NumberUtils.isNumber(k)) {
+                    BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
+                    if (BusinessEnum.DefaultValue.NULL != businessEnum) {
+                        voResult3.put(businessEnum.getDesc(), v);
+                    }
+                }
+            });
+            map.put("90-99", voResult3);
+        }
+        if (oldmanParam.getLabelIdList().contains("192")
+                ||(!oldmanParam.getLabelIdList().contains("5") && !oldmanParam.getLabelIdList().contains("1") && !oldmanParam.getLabelIdList().contains("19") && !oldmanParam.getLabelIdList().contains("191"))) {
+            jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(100).toLocalDate());
+            Map<String, Long> result3 = oldmanViewRepository.getGroupCount("male", jpaSpecBo);
+            Map<String, Long> voResult3 = Maps.newHashMap();
+            result3.forEach((k, v) -> {
+                if (NumberUtils.isNumber(k)) {
+                    BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
+                    if (BusinessEnum.DefaultValue.NULL != businessEnum) {
+                        voResult3.put(businessEnum.getDesc(), v);
+                    }
+                }
+            });
+            map.put("100-", voResult3);
         }
         return map;
     }
@@ -253,10 +284,10 @@ public class OldmanVisualService {
         Map<String, Object> map = Maps.newHashMap();
         fieldNameList.forEach(item -> {
             if (item.equals("age")) {
-                Map<String, Object> res = Maps.newHashMap();
+                Map<String, Object> res = Maps.newLinkedHashMap();
                 JpaSpecBo jpaSpecBo = oldmanParam.convert();
                 jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(60).toLocalDate());
-                jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(69).toLocalDate());
+                jpaSpecBo.getGreatMap().put("birthday", LocalDateTime.now().minusYears(70).toLocalDate());
                 Map<String,Long> result1 = oldmanRepository.getOldmanBaseGroupByAttr("male", typeList, jpaSpecBo);
                 Map<String, Long> voResult1 = Maps.newHashMap();
                 result1.forEach((k, v) -> {
@@ -268,7 +299,7 @@ public class OldmanVisualService {
                 res.put("60-69", voResult1);
 
                 jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(70).toLocalDate());
-                jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(79).toLocalDate());
+                jpaSpecBo.getGreatMap().put("birthday", LocalDateTime.now().minusYears(80).toLocalDate());
                 Map<String,Long> result2 = oldmanRepository.getOldmanBaseGroupByAttr("male", typeList, jpaSpecBo);
                 Map<String, Long> voResult2 = Maps.newHashMap();
                 result2.forEach((k, v) -> {
@@ -279,7 +310,7 @@ public class OldmanVisualService {
                 });
                 res.put("70-79", voResult2);
                 jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(80).toLocalDate());
-                jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(89).toLocalDate());
+                jpaSpecBo.getGreatMap().put("birthday", LocalDateTime.now().minusYears(90).toLocalDate());
                 Map<String,Long> result3 = oldmanRepository.getOldmanBaseGroupByAttr("male", typeList, jpaSpecBo);
                 Map<String, Long> voResult3 = Maps.newHashMap();
                 result3.forEach((k, v) -> {
@@ -289,6 +320,29 @@ public class OldmanVisualService {
                     }
                 });
                 res.put("80-89", voResult3);
+
+                jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(90).toLocalDate());
+                jpaSpecBo.getGreatMap().put("birthday", LocalDateTime.now().minusYears(100).toLocalDate());
+                Map<String,Long> result4 = oldmanRepository.getOldmanBaseGroupByAttr("male", typeList, jpaSpecBo);
+                Map<String, Long> voResult4 = Maps.newHashMap();
+                result4.forEach((k, v) -> {
+                    BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
+                    if (BusinessEnum.DefaultValue.NULL!=businessEnum){
+                        voResult4.put(businessEnum.getDesc(),v);
+                    }
+                });
+                res.put("90-99", voResult4);
+
+                jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(100).toLocalDate());
+                Map<String,Long> result5 = oldmanRepository.getOldmanBaseGroupByAttr("male", typeList, jpaSpecBo);
+                Map<String, Long> voResult5 = Maps.newHashMap();
+                result5.forEach((k, v) -> {
+                    BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
+                    if (BusinessEnum.DefaultValue.NULL!=businessEnum){
+                        voResult5.put(businessEnum.getDesc(),v);
+                    }
+                });
+                res.put("100-", voResult5);
                 map.put("age", res);
             } else {
                 JpaSpecBo jpaSpecBo = oldmanParam.convert();

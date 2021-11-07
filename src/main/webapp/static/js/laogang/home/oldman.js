@@ -22,11 +22,11 @@ $(document).ready(function(){
     $(".income").selectpicker({
         noneSelectedText : '经济条件'//默认显示内容
     });
-    $(".serviceStatus").selectpicker({
-        noneSelectedText : '养老状态'//默认显示内容
-    });
     $(".areaVillage").selectpicker({
         noneSelectedText : '村/居委'//默认显示内容
+    });
+    $(".jujia").selectpicker({
+        noneSelectedText : '居家养老项目'//默认显示内容
     });
 
 
@@ -94,9 +94,10 @@ $(document).ready(function(){
                     "familyList":$("select[name='family']").val(),
                     "familyTypeList":$("select[name='familyType']").val(),
                     "incomeList":$("select[name='income']").val(),
-                    "serviceStatusList":$("select[name='serviceStatus']").val(),
+                    "serviceStatus":$("select[name='serviceStatus']").val(),
                     "search":$("input[name='search']").val(),
-                    "areaVillageList":$("select[name='areaVillage']").val()
+                    "areaVillageList":$("select[name='areaVillage']").val(),
+                    "jujiaList":$("select[name='jujia']").val()
                 }
             }),
             type: 'post',
@@ -151,6 +152,16 @@ $(document).ready(function(){
             "column":oTable.fnGetPosition(this)[2]}},"width":"90%","height":"100%"});
 
 });
+
+function serviceStatusChange(obj) {
+    if($(obj).val()==="3"){
+        $("#jujia").css("display","inline");
+    }else{
+        $("#jujia").hide();
+        $(".jujia").val("");
+        $(".jujia").selectpicker("refresh");
+    }
+}
 
 function deleteOldman(oid) {
     $.ajax({
@@ -255,7 +266,11 @@ function savePolicy() {
 }
 
 function searchReset1() {
-    $("input[name]").val("");
-    $("select[name]").val("");
-    $("select[name]").selectpicker("refresh");
+    $("#sear input[name]").val("");
+    $("#sear select[name]").each(function () {
+        $(this).val("");
+        if ($(this).attr("class").indexOf("selectpicker")>0){
+            $(this).selectpicker("refresh");
+        }
+    });
 }

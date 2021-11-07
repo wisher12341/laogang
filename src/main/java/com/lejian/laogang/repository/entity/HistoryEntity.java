@@ -17,6 +17,8 @@ public class HistoryEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Long count;
+    @Column(name = "area_village")
+    private String areaVillage;
     @Column
     private Integer type;
     @Column

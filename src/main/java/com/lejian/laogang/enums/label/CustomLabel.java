@@ -23,7 +23,7 @@ public enum CustomLabel implements LabelBaseEnum {
             String start=getDesc().split("-")[0];
             String end=getDesc().split("-")[1];
             jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(Integer.valueOf(start)).toLocalDate());
-            jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(Integer.valueOf(end)).toLocalDate());
+            jpaSpecBo.getGreatMap().put("birthday", LocalDateTime.now().minusYears(Integer.valueOf(end)+1).toLocalDate());
         }
     },
     AGE_70_79(5, 1, 1, "70-79",true) {
@@ -32,7 +32,7 @@ public enum CustomLabel implements LabelBaseEnum {
             String start=getDesc().split("-")[0];
             String end=getDesc().split("-")[1];
             jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(Integer.valueOf(start)).toLocalDate());
-            jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(Integer.valueOf(end)).toLocalDate());
+            jpaSpecBo.getGreatMap().put("birthday", LocalDateTime.now().minusYears(Integer.valueOf(end)+1).toLocalDate());
         }
     },
     AGE_80_89(19, 1, 1, "80-89",true) {
@@ -41,7 +41,23 @@ public enum CustomLabel implements LabelBaseEnum {
             String start=getDesc().split("-")[0];
             String end=getDesc().split("-")[1];
             jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(Integer.valueOf(start)).toLocalDate());
-            jpaSpecBo.getGreatEMap().put("birthday", LocalDateTime.now().minusYears(Integer.valueOf(end)).toLocalDate());
+            jpaSpecBo.getGreatMap().put("birthday", LocalDateTime.now().minusYears(Integer.valueOf(end)+1).toLocalDate());
+        }
+    },
+    AGE_90_99(191, 1, 1, "90-99",true) {
+        @Override
+        public void setWhereCase(JpaSpecBo jpaSpecBo) {
+            String start=getDesc().split("-")[0];
+            String end=getDesc().split("-")[1];
+            jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(Integer.valueOf(start)).toLocalDate());
+            jpaSpecBo.getGreatMap().put("birthday", LocalDateTime.now().minusYears(Integer.valueOf(end)+1).toLocalDate());
+        }
+    },
+    AGE_100(192, 1, 1, "100-",true) {
+        @Override
+        public void setWhereCase(JpaSpecBo jpaSpecBo) {
+            String start="100";
+            jpaSpecBo.getLessEMap().put("birthday", LocalDateTime.now().minusYears(Integer.valueOf(start)).toLocalDate());
         }
     },
     A21(10, 2, 1, "有慢病",true) {

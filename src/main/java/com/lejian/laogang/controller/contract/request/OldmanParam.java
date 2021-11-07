@@ -65,9 +65,8 @@ public class OldmanParam {
     //或
     private List<String> incomeList;
     //或
-    private List<String> serviceStatusList;
-    //或
     private List<String> areaVillageList;
+    private List<String> jujiaList;
 
     public JpaSpecBo convert() {
         JpaSpecBo jpaSpecBo = new JpaSpecBo();
@@ -210,16 +209,24 @@ public class OldmanParam {
             }
             attr.append(")");
         }
-        if (CollectionUtils.isNotEmpty(serviceStatusList)){
+        if (serviceStatus!=null){
+            if (attr.length()>0){
+                attr.append(" and ");
+            }
+
+            attr.append(" oa.type ").append(" like ").append("'%").append("@13_").append(serviceStatus).append("_%'");
+
+        }
+        if (CollectionUtils.isNotEmpty(jujiaList)){
             if (attr.length()>0){
                 attr.append(" and ");
             }
             attr.append("(");
-            for (int i=0;i<serviceStatusList.size();i++){
+            for (int i=0;i<jujiaList.size();i++){
                 if (i!=0){
                     attr.append(" or ");
                 }
-                attr.append(" oa.type ").append(" like ").append("'%").append("@13_").append(serviceStatusList.get(i)).append("_%'");
+                attr.append(" oa.type ").append(" like ").append("'%").append("@14_").append(jujiaList.get(i)).append("_%'");
             }
 
             attr.append(")");

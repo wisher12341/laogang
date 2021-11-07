@@ -36,7 +36,7 @@ public interface OldmanAttrEnum extends BusinessEnum {
         A1(1, "从事社区工作",CommunityWork.class),
         A2(2, "家庭结构",FamilyType.class),
         A3(3, "家庭属性",Faimly.class),
-        A4(4,"生活来源",Income.class),
+        A4(4,"经济条件",Income.class),
         A5(5,"医保",YB.class),
         A6(6,"工作状态",WorkStatus.class),
         A7(7,"恶习",EX.class),

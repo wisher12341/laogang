@@ -1,11 +1,13 @@
 package com.lejian.laogang.controller;
 
 
+import com.lejian.laogang.job.HistoryJob;
 import com.lejian.laogang.pojo.bo.UserBo;
 import com.lejian.laogang.pojo.vo.UserVo;
 import com.lejian.laogang.security.annotation.BackOldmanAuth;
 import com.lejian.laogang.security.annotation.VisualAuth;
 import com.lejian.laogang.util.UserUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +43,8 @@ public class PageController {
         }
         return mv;
     }
+    @Autowired
+    private HistoryJob job;
 
     @GetMapping("/")
     public ModelAndView home(){
