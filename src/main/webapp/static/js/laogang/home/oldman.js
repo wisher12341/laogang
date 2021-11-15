@@ -28,7 +28,9 @@ $(document).ready(function(){
     $(".jujia").selectpicker({
         noneSelectedText : '居家养老项目'//默认显示内容
     });
-
+    $(".serviceStatus").selectpicker({
+        noneSelectedText : '养老状态'//默认显示内容
+    });
 
     table =$(".dataTables-example").dataTable(
         {
@@ -94,7 +96,7 @@ $(document).ready(function(){
                     "familyList":$("select[name='family']").val(),
                     "familyTypeList":$("select[name='familyType']").val(),
                     "incomeList":$("select[name='income']").val(),
-                    "serviceStatus":$("select[name='serviceStatus']").val(),
+                    "serviceStatusList":$("select[name='serviceStatus']").val(),
                     "search":$("input[name='search']").val(),
                     "areaVillageList":$("select[name='areaVillage']").val(),
                     "jujiaList":$("select[name='jujia']").val()
@@ -154,7 +156,8 @@ $(document).ready(function(){
 });
 
 function serviceStatusChange(obj) {
-    if($(obj).val()==="3"){
+    var val = ""+$(obj).val();
+    if(val.indexOf("3")>=0){
         $("#jujia").css("display","inline");
     }else{
         $("#jujia").hide();
@@ -269,8 +272,11 @@ function searchReset1() {
     $("#sear input[name]").val("");
     $("#sear select[name]").each(function () {
         $(this).val("");
-        if ($(this).attr("class").indexOf("selectpicker")>0){
+        if ($(this).attr("class").indexOf("selectpicker")>=0){
             $(this).selectpicker("refresh");
         }
     });
+    $("#jujia").hide();
+    $(".jujia").val("");
+    $(".jujia").selectpicker("refresh");
 }

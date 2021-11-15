@@ -464,4 +464,63 @@ public class OldmanService {
         oldmanAttrRepository.batchInsert(oldmanAttrBoList.stream().filter(item->item.getOldmanId()!=null).collect(Collectors.toList()));
         return Lists.newArrayList();
     }
+
+    @Transactional
+    public List<CheckResultBo> addJujia(Pair<List<String>, List<List<String>>> excelData) {
+        List<OldmanAttrBo> oldmanAttrBoList = Lists.newArrayList();
+        for (int i = 0; i < excelData.getSecond().size(); i++) {
+            String idCard = excelData.getSecond().get(i).get(2);
+            BusinessEnum type =  OldmanAttrEnum.OldmanAttrType.A14;
+            boolean has = false;
+            if(StringUtils.isNotBlank(excelData.getSecond().get(i).get(3))
+                    && !excelData.getSecond().get(i).get(3).equals("0")){
+                OldmanAttrBo oldmanAttrBo = new OldmanAttrBo();
+                oldmanAttrBo.setIdCard(idCard);
+                oldmanAttrBo.setType(type);
+                oldmanAttrBo.setValue(OldmanAttrEnum.JJYLXM.A);
+                oldmanAttrBo.setExt(excelData.getSecond().get(i).get(3));
+                oldmanAttrBoList.add(oldmanAttrBo);
+                has = true;
+            }
+            if(StringUtils.isNotBlank(excelData.getSecond().get(i).get(4))
+                    && !excelData.getSecond().get(i).get(4).equals("0")){
+                OldmanAttrBo oldmanAttrBo = new OldmanAttrBo();
+                oldmanAttrBo.setIdCard(idCard);
+                oldmanAttrBo.setType(type);
+                oldmanAttrBo.setValue(OldmanAttrEnum.JJYLXM.B);
+                oldmanAttrBo.setExt(excelData.getSecond().get(i).get(4));
+                oldmanAttrBoList.add(oldmanAttrBo);
+                has = true;
+            }
+            if(StringUtils.isNotBlank(excelData.getSecond().get(i).get(5))
+                    && !excelData.getSecond().get(i).get(5).equals("0")){
+                OldmanAttrBo oldmanAttrBo = new OldmanAttrBo();
+                oldmanAttrBo.setIdCard(idCard);
+                oldmanAttrBo.setType(type);
+                oldmanAttrBo.setValue(OldmanAttrEnum.JJYLXM.C);
+                oldmanAttrBo.setExt(excelData.getSecond().get(i).get(5));
+                oldmanAttrBoList.add(oldmanAttrBo);
+                has = true;
+            }
+            if (has){
+                OldmanAttrBo map13 = new OldmanAttrBo();
+                map13.setType(OldmanAttrEnum.OldmanAttrType.A13);
+                map13.setValue(OldmanAttrEnum.OldmanAttrType.ServiceStatus.JJ);
+                map13.setIdCard(idCard);
+                oldmanAttrBoList.add(map13);
+            }
+        }
+        List<String> idCardList = oldmanAttrBoList.stream().map(OldmanAttrBo::getIdCard).collect(Collectors.toList());
+        Map<String,OldmanBo> map = oldmanRepository.getByIdCards(idCardList).stream().collect(Collectors.toMap(OldmanBo::getIdCard,Function.identity()));
+
+        oldmanAttrBoList.forEach(item->{
+            if (map.containsKey(item.getIdCard())) {
+                item.setOldmanId(map.get(item.getIdCard()).getId());
+                //todo优化 改成批量删除
+                oldmanAttrRepository.deleteByType(item.getOldmanId(), Lists.newArrayList(item.getType().getValue()));
+            }
+        });
+        oldmanAttrRepository.batchInsert(oldmanAttrBoList.stream().filter(item->item.getOldmanId()!=null).collect(Collectors.toList()));
+        return Lists.newArrayList();
+    }
 }

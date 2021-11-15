@@ -49,24 +49,25 @@ public class OldmanParam {
     private Boolean isView = false;
 
 
-    //或
+    //与
     private List<String> politicsList;
     private String huiji;
-    //或
+    //与
     private List<String> eyesightList;
-    //或
+    //与
     private List<String> psychosisList;
-    //或
+    //与
     private List<String> jkzkList;
-    //或
+    //与
     private List<String> familyList;
-    //或
+    //与
     private List<String> familyTypeList;
-    //或
+    //与
     private List<String> incomeList;
-    //或
+    //与
     private List<String> areaVillageList;
     private List<String> jujiaList;
+    private List<String> serviceStatusList;
 
     public JpaSpecBo convert() {
         JpaSpecBo jpaSpecBo = new JpaSpecBo();
@@ -161,7 +162,7 @@ public class OldmanParam {
             attr.append("(");
             for (int i=0;i<jkzkList.size();i++){
                 if (i!=0){
-                    attr.append(" or ");
+                    attr.append(" and ");
                 }
                 attr.append(" oa.type ").append(" like ").append("'%").append("@").append(jkzkList.get(i)).append("_%'");
             }
@@ -174,7 +175,7 @@ public class OldmanParam {
             attr.append("(");
             for (int i=0;i<familyList.size();i++){
                 if (i!=0){
-                    attr.append(" or ");
+                    attr.append(" and ");
                 }
                 attr.append(" oa.type ").append(" like ").append("'%").append("@2_").append(familyList.get(i)).append("_%'");
             }
@@ -189,7 +190,7 @@ public class OldmanParam {
             attr.append("(");
             for (int i=0;i<familyTypeList.size();i++){
                 if (i!=0){
-                    attr.append(" or ");
+                    attr.append(" and ");
                 }
                 attr.append(" oa.type ").append(" like ").append("'%").append("@3_").append(familyTypeList.get(i)).append("_%'");
             }
@@ -203,7 +204,7 @@ public class OldmanParam {
             attr.append("(");
             for (int i=0;i<incomeList.size();i++){
                 if (i!=0){
-                    attr.append(" or ");
+                    attr.append(" and ");
                 }
                 attr.append(" oa.type ").append(" like ").append("'%").append("@4_").append(incomeList.get(i)).append("_%'");
             }
@@ -217,18 +218,27 @@ public class OldmanParam {
             attr.append(" oa.type ").append(" like ").append("'%").append("@13_").append(serviceStatus).append("_%'");
 
         }
-        if (CollectionUtils.isNotEmpty(jujiaList)){
+        //养老状态 和 居家养老项目
+        if (CollectionUtils.isNotEmpty(serviceStatusList) || CollectionUtils.isNotEmpty(jujiaList)){
             if (attr.length()>0){
                 attr.append(" and ");
             }
             attr.append("(");
-            for (int i=0;i<jujiaList.size();i++){
+            for (int i=0;i<serviceStatusList.size();i++){
                 if (i!=0){
-                    attr.append(" or ");
+                    attr.append(" and ");
                 }
-                attr.append(" oa.type ").append(" like ").append("'%").append("@14_").append(jujiaList.get(i)).append("_%'");
+                attr.append(" oa.type ").append(" like ").append("'%").append("@13_").append(serviceStatusList.get(i)).append("_%'");
             }
-
+            if (CollectionUtils.isNotEmpty(jujiaList)) {
+                attr.append(" and ");
+                for (int i = 0; i < jujiaList.size(); i++) {
+                    if (i != 0) {
+                        attr.append(" and ");
+                    }
+                    attr.append(" oa.type ").append(" like ").append("'%").append("@14_").append(jujiaList.get(i)).append("_%'");
+                }
+            }
             attr.append(")");
         }
         return Pair.of(oldman, attr.toString());

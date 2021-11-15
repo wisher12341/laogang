@@ -81,7 +81,7 @@
             overflow-y: hidden;
             max-height:1000px !important;
         }
-        input[type="text"],input[type="date"]{
+        input[type="text"],input[type="date"],input[type="number"]{
             width: 90%;
         }
         select,.btn-group{
@@ -438,8 +438,7 @@
                                             <div class="divA">
                                                 <label class="control-label" >养老状态</label>
                                                 <div class="controls">
-                                                    <select class="chzn-select" map="13"  id="oldStatus" onchange=oldStatusChange(this) >
-                                                        <option value=""></option>
+                                                    <select class="selectpicker bla bla bli"  multiple data-live-search="true" map="13"  id="oldStatus" onchange=oldStatusChange(this) >
                                                         <option value="1">机构养老</option>
                                                         <option value="2">社区养老</option>
                                                         <option value="3">居家养老</option>
@@ -482,12 +481,34 @@
                                             <div class="divA" style="display:none;" id="map14">
                                                 <label class="control-label" >居家养老项目</label>
                                                 <div class="controls">
-                                                    <select class="chzn-select" map="14">
-                                                        <option value=""></option>
+                                                    <select class="selectpicker bla bla bli"  multiple data-live-search="true" map="14" onchange=map14Change(this)>
                                                         <option value="2">居家养老(民政局)</option>
                                                         <option value="3">居家养老(镇级)</option>
                                                         <option value="1">长护险</option>
                                                     </select>
+                                                </div>
+                                            </div>
+                                            <div class="divA" id="ext14_1" style="display: none">
+                                                <label class="control-label" >长护险评级</label>
+                                                <div class="controls">
+                                                    <input class="input-xlarge focused" ext="14_1" type="number"
+                                                           value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <div class="divA" id="ext14_2" style="display: none">
+                                                <label class="control-label" >居家养老(民政局)评级</label>
+                                                <div class="controls">
+                                                    <input class="input-xlarge focused" ext="14_2" type="number"
+                                                           value="">
+                                                </div>
+                                            </div>
+                                            <div class="divA" id="ext14_3" style="display: none">
+                                                <label class="control-label" >居家养老(镇级)评级</label>
+                                                <div class="controls">
+                                                    <input class="input-xlarge focused" ext="14_3" type="number"
+                                                           value="">
                                                 </div>
                                             </div>
                                         </div>

@@ -199,7 +199,7 @@ function loadOldmanInfo(id) {
             }else{
                 $("#ra8").attr("checked",true);
             }
-            if($("select[map='13']").val()==="3"){
+            if($("select[map='13']").val().indexOf("3")>=0){
                 $("#map14").show();
             }
             if($("select[map='11']").val()==="1" || $("select[map='11']").val()==="2"){
@@ -233,8 +233,30 @@ function map12Change(obj){
     }
 }
 
+function map14Change(obj){
+    var val = ""+$(obj).val();
+    if(val.indexOf("1")!==-1){
+        $("#ext14_1").show();
+    }else{
+        $("#ext14_1").hide();
+        $("#ext14_1 input").val("");
+    }
+    if (val.indexOf("2")!==-1){
+        $("#ext14_2").show();
+    }else{
+        $("#ext14_2").hide();
+        $("#ext14_2 input").val("");
+    }
+    if (val.indexOf("3")!==-1){
+        $("#ext14_3").show();
+    }else{
+        $("#ext14_3").hide();
+        $("#ext14_3 input").val("");
+    }
+}
+
 function oldStatusChange(obj) {
-    if($(obj).val()==="3"){
+    if($(obj).val().indexOf("3")>=0){
         $("#map14").show();
     }else{
         $("#map14").hide();

@@ -17,6 +17,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -121,6 +122,7 @@ public class OldmanAttrRepository extends AbstractSpecificationRepository<Oldman
         }
     }
 
+    @Transactional
     public void deleteByType(Integer id, List<Integer> typeList) {
         try {
             if (CollectionUtils.isEmpty(typeList) || id ==null){
