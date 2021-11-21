@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Tables</title>
+    <!-- Bootstrap -->
+    <link href="/static/home/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/static/home/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <link href="/static/home/assets/styles.css" rel="stylesheet" media="screen">
+
+    <link href="/static/css/common.css" rel="stylesheet">
+    <!--<link href="/static/css/style.min.css?v=4.0.0" rel="stylesheet">-->
+    <link href="/static/home/assets/DT_bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lte IE 8]>
+    <script language="javascript" type="text/javascript" src="/static/home/vendors/flot/excanvas.min.js"></script><![endif]-->
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="/static/home/vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <script src="/static/js/jquery.min.js?v=2.1.4"></script>
+    <script src="/static/js/bootstrap.min.js?v=3.3.5"></script>
+    <script src="/static/js/content.min.js?v=1.0.0"></script>
+
+</head>
+
+<body style="overflow: hidden">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="/">乐 健</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav pull-right">
+                    <li class="dropdown">
+                        <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i
+                                class="icon-user"></i> <span id="username"></span> <i class="caret"></i>
+
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a tabindex="-1" href="#">Profile</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a tabindex="-1" href="/logout">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav">
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Settings <b class="caret"></b>
+
+                        </a>
+                        <ul class="dropdown-menu" id="menu1">
+                            <li>
+                                <a href="#">Tools <i class="icon-arrow-right"></i>
+
+                                </a>
+                                <ul class="dropdown-menu sub-menu">
+                                    <li>
+                                        <a href="#">Reports</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Logs</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Errors</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">SEO Settings</a>
+                            </li>
+                            <li>
+                                <a href="#">Other Link</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">Other Link</a>
+                            </li>
+                            <li>
+                                <a href="#">Other Link</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3" id="sidebar">
+            <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse" id="menu">
+                <!--<li class="active">-->
+                    <!--<a href="/home/oldman"><i class="icon-chevron-right"></i> 老人管理</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href="/home/policy"><i class="icon-chevron-right"></i> 政策管理</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href="/home/message"><span class="badge badge-important pull-right">83</span> 收件箱</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href="form.html"><i class="icon-chevron-right"></i> 账号管理</a>-->
+                <!--</li>-->
+            </ul>
+        </div>
+        <!--/span-->
+        <div class="span9" id="content" style="height: calc(90vh);">
+            <iframe  style="width: 100%;border: 1px solid #ccc;height: 100%"></iframe>
+        </div>
+    </div>
+    <hr>
+</div>
+<!--/.fluid-container-->
+
+<script type="text/javascript" th:inline="javascript">
+    function menua(url,obj) {
+        $("li.active").removeClass("active");
+        $(obj).addClass("active")
+        $("iframe").attr("src",url);
+    }
+    $(function () {
+        var username = [[${username}]];
+        if(username!==null && username!==undefined && username!==""){
+            var roleDesc = [[${roleDesc}]];
+            $("#username").html(username+"("+roleDesc+")");
+        }
+
+        var menu = JSON.parse([[${menu}]]);
+        for(var i=0;i<menu.length;i++){
+            var $li;
+            if (i===0){
+                $li=$('<li class="active" onclick=menua("'+menu[i].url+'",this)><a href="#"><i class="icon-chevron-right"></i> '+menu[i].name+'</a></li>');
+                $("iframe").attr("src",menu[i].url);
+            }else{
+                $li=$('<li onclick=menua("'+menu[i].url+'",this)><a href="#"><i class="icon-chevron-right"></i> '+menu[i].name+'</a></li>');
+            }
+            $("#menu").append($li);
+        }
+
+    });
+
+</script>
+
+<script src="/static/home/assets/scripts.js"></script>
+<script src="/static/home/assets/DT_bootstrap.js"></script>
+
+</body>
+
+</html>

@@ -172,6 +172,9 @@ public abstract class AbstractRepository<Bo extends BaseBo,Entity> {
                     }
                 }
             }
+            if (StringUtils.isBlank(updateStr.toString())){
+                return;
+            }
             updateStr.deleteCharAt(updateStr.length()-1);
 
 

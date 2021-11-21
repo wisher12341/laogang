@@ -19,7 +19,7 @@ public class OrganEntity {
     @Column
     private String name;
     @Column
-    private String desc;
+    private String descri;
 
     @Column
     private String service;
@@ -48,4 +48,6 @@ public class OrganEntity {
     @Column(name = "create_time")
     private Timestamp createTime;
     private Integer status;
+    @Column(name = "user_id")
+    private Integer userId;
 }

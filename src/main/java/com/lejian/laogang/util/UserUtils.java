@@ -1,6 +1,5 @@
 package com.lejian.laogang.util;
 
-import com.lejian.laogang.enums.UserEnum;
 import com.lejian.laogang.pojo.bo.UserBo;
 import com.lejian.laogang.repository.UserRepository;
 import com.lejian.laogang.security.UserContext;

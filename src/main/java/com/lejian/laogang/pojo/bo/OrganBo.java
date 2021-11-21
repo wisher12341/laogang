@@ -8,7 +8,7 @@ import org.springframework.beans.BeanUtils;
 @Data
 public class OrganBo extends BaseBo {
     private String name;
-    private String desc;
+    private String descri;
     private String service;
     private String address;
     private String web;
@@ -21,6 +21,7 @@ public class OrganBo extends BaseBo {
     private Integer type;
     private String gps;
     private Integer id;
+    private Integer userId;
 
     @Override
     public OrganEntity convert() {

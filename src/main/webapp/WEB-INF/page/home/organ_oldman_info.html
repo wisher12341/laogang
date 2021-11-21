@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tables</title>
+    <!-- Bootstrap -->
+    <link href="/static/home/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/static/home/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <link href="/static/home/assets/styles.css" rel="stylesheet" media="screen">
+
+    <link href="/static/css/common.css" rel="stylesheet">
+    <!--<link href="/static/css/style.min.css?v=4.0.0" rel="stylesheet">-->
+    <link href="/static/home/assets/DT_bootstrap.css" rel="stylesheet" media="screen">
+    <link href="/static/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-select.min.css" rel="stylesheet">
+    <!--[if lte IE 8]>
+    <script language="javascript" type="text/javascript" src="/static/home/vendors/flot/excanvas.min.js"></script><![endif]-->
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="/static/home/vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <script src="/static/js/jquery.min.js?v=2.1.4"></script>
+    <script src="/static/js/bootstrap.min.js?v=3.3.5"></script>
+    <script src="/static/js/content.min.js?v=1.0.0"></script>
+    <script src="/static/js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="/static/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script src="/static/js/bootstrap-select.min.js"></script>
+    <style>
+        .block{
+            border: none;
+        }
+    </style>
+</head>
+
+<body style="padding-top: 0;background-color: white">
+<div class="container-fluid">
+    <div class="row-fluid">
+        <!-- block -->
+        <div class="block">
+            <div class="block-content collapse in">
+                <div class="span12">
+                    <div class="form-horizontal">
+                        <fieldset>
+                            <input class="input-xxlarge focused" name="id" type="hidden" >
+                            <div class="control-group">
+                                <label class="control-label" for="focusedInput1">姓名</label>
+                                <div class="controls">
+                                    <input class="input-xxlarge focused" name="name" id="focusedInput1" type="text" >
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="focusedInput2">身份证</label>
+                                <div class="controls">
+                                    <input class="input-xxlarge focused" name="idCard" id="focusedInput2" type="text" >
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="focusedInput3">床位</label>
+                                <div class="controls">
+                                    <input class="input-xxlarge focused" name="bed" id="focusedInput3" type="text" >
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" >身体状况</label>
+                                <div class="controls">
+                                    <select name="body" class="selectpicker bla bla bli" multiple data-live-search="true">
+                                        <option value="1">正常</option>
+                                        <option value="2">失能</option>
+                                        <option value="3">半失能</option>
+                                        <option value="4">失智</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="focusedInput5">入院日期</label>
+                                <div class="controls">
+                                    <input class="input-xxlarge focused" name="startTime"  id="focusedInput5" type="date" >
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="focusedInput6">出院日期</label>
+                                <div class="controls">
+                                    <input class="input-xxlarge focused" name="endTime"  id="focusedInput6" type="date">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <button onclick="submitOrgan()" class="btn btn-success" style="margin-left: 20%">保存</button>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /block -->
+    </div>
+
+    <hr>
+</div>
+
+<script type="text/javascript" src="/static/js/laogang/home/organ_oldman_info.js" charset="UTF-8"></script>
+
+<script src="/static/home/assets/scripts.js"></script>
+
+</body>
+
+</html>

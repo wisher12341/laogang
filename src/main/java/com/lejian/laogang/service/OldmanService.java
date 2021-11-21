@@ -353,7 +353,7 @@ public class OldmanService {
         IntelligentDeviceEntity intelligentDeviceEntity = request.convertId();
         HomeBedEntity homeBedEntity = request.convertHomeBed();
         HomeDoctorEntity homeDoctorEntity = request.convertHomeDoctor();
-        List<Integer> allType = oldmanAttrEntityList.stream().map(OldmanAttrEntity::getType).collect(Collectors.toList());
+        List<Integer> allType = oldmanAttrEntityList.stream().map(OldmanAttrEntity::getType).distinct().collect(Collectors.toList());
         oldmanAttrEntityList = oldmanAttrEntityList.stream().filter(item -> item.getValue() != null).collect(Collectors.toList());
         if (oldmanEntity.getId() != null) {
             oldmanRepository.dynamicUpdateByPkId(oldmanEntity);

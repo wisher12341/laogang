@@ -184,6 +184,7 @@
                                         <li id="a2"><a href="#tab2" data-toggle="tab" >社区信息</a></li>
                                         <li id="a3"><a href="#tab3" data-toggle="tab">疫苗信息</a></li>
                                         <li id="a4"><a href="#tab4" data-toggle="tab" >健康信息</a></li>
+                                        <li id="a5"><a href="#tab5" data-toggle="tab" >居家养老</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -229,13 +230,10 @@
                                         </div>
                                         <div class="control-group">
                                             <div class="divA">
-                                                <label class="control-label" >国籍</label>
+                                                <label class="control-label" >年龄</label>
                                                 <div class="controls">
-                                                    <select class="chzn-select" name="country">
-                                                        <option value=""></option>
-                                                        <option value="1">中国</option>
-                                                        <option value="2">中国台湾</option>
-                                                    </select>
+                                                    <input class="input-xlarge focused" name="age" type="text" disabled
+                                                           value="">
                                                 </div>
                                             </div>
                                             <div class="divA">
@@ -477,38 +475,15 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="control-group" >
-                                            <div class="divA" style="display:none;" id="map14">
-                                                <label class="control-label" >居家养老项目</label>
-                                                <div class="controls">
-                                                    <select class="selectpicker bla bla bli"  multiple data-live-search="true" map="14" onchange=map14Change(this)>
-                                                        <option value="2">居家养老(民政局)</option>
-                                                        <option value="3">居家养老(镇级)</option>
-                                                        <option value="1">长护险</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="divA" id="ext14_1" style="display: none">
-                                                <label class="control-label" >长护险评级</label>
-                                                <div class="controls">
-                                                    <input class="input-xlarge focused" ext="14_1" type="number"
-                                                           value="">
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="control-group">
-                                            <div class="divA" id="ext14_2" style="display: none">
-                                                <label class="control-label" >居家养老(民政局)评级</label>
+                                            <div class="divA">
+                                                <label class="control-label" >国籍</label>
                                                 <div class="controls">
-                                                    <input class="input-xlarge focused" ext="14_2" type="number"
-                                                           value="">
-                                                </div>
-                                            </div>
-                                            <div class="divA" id="ext14_3" style="display: none">
-                                                <label class="control-label" >居家养老(镇级)评级</label>
-                                                <div class="controls">
-                                                    <input class="input-xlarge focused" ext="14_3" type="number"
-                                                           value="">
+                                                    <select class="chzn-select" name="country">
+                                                        <option value=""></option>
+                                                        <option value="1">中国</option>
+                                                        <option value="2">中国台湾</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -816,6 +791,50 @@
                                     <button onclick="submit()" class="btn btn-success" style="margin-left: 20%">保存</button>
                                 </div>
                             </div>
+                            <div class="tab-pane" id="tab5" role="7">
+                                <form class="form-horizontal">
+                                    <fieldset>
+                                        <div class="control-group" >
+                                            <div class="divA" style="display:none;" id="map14">
+                                                <label class="control-label" >居家养老项目</label>
+                                                <div class="controls">
+                                                    <select class="selectpicker bla bla bli"  multiple data-live-search="true" map="14" onchange=map14Change(this)>
+                                                        <option value="2">居家养老(民政局)</option>
+                                                        <option value="3">居家养老(镇级)</option>
+                                                        <option value="1">长护险</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="divA" id="ext14_1" style="display: none">
+                                                <label class="control-label" >长护险评级</label>
+                                                <div class="controls">
+                                                    <input class="input-xlarge focused" ext="14_1" type="number"
+                                                           value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <div class="divA" id="ext14_2" style="display: none">
+                                                <label class="control-label" >居家养老(民政局)评级</label>
+                                                <div class="controls">
+                                                    <input class="input-xlarge focused" ext="14_2" type="number"
+                                                           value="">
+                                                </div>
+                                            </div>
+                                            <div class="divA" id="ext14_3" style="display: none">
+                                                <label class="control-label" >居家养老(镇级)评级</label>
+                                                <div class="controls">
+                                                    <input class="input-xlarge focused" ext="14_3" type="number"
+                                                           value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                                <div class="control-group">
+                                    <button onclick="submit()" class="btn btn-success" style="margin-left: 20%">保存</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -934,8 +953,11 @@
         $("#tab3 select").attr("disabled","disabled");
         $("#tab4 input").attr("disabled","disabled");
         $("#tab4 select").attr("disabled","disabled");
+        $("#tab5 input").attr("disabled","disabled");
+        $("#tab5 select").attr("disabled","disabled");
         $("#tab3 button").attr("disabled","disabled");
         $("#tab4 button").attr("disabled","disabled");
+        $("#tab5 button").attr("disabled","disabled");
     }
     if(role===3){
         $("#tab1 input").attr("disabled","disabled");
@@ -944,6 +966,8 @@
         $("#tab3 select").attr("disabled","disabled");
         $("#tab4 input").attr("disabled","disabled");
         $("#tab4 select").attr("disabled","disabled");
+        $("#tab5 input").attr("disabled","disabled");
+        $("#tab5 select").attr("disabled","disabled");
         $("#a2").addClass("active");
         $("#tab2").show();
         $("#tab1").hide();
@@ -952,9 +976,12 @@
         $("#tab4").hide();
         $("#a3").hide();
         $("#a4").hide();
+        $("#tab5").hide();
+        $("#a5").hide();
         $("#tab3 button").attr("disabled","disabled");
         $("#tab4 button").attr("disabled","disabled");
         $("#tab1 button").attr("disabled","disabled");
+        $("#tab5 button").attr("disabled","disabled");
         $("#table12").hide();
     }
     if(role===4){
@@ -964,6 +991,8 @@
         $("#tab1 select").attr("disabled","disabled");
         $("#tab4 input").attr("disabled","disabled");
         $("#tab4 select").attr("disabled","disabled");
+        $("#tab5 input").attr("disabled","disabled");
+        $("#tab5 select").attr("disabled","disabled");
         $("#a3").addClass("active");
         $("#tab3").show();
         $("#tab1").hide();
@@ -972,9 +1001,12 @@
         $("#tab4").hide();
         $("#a2").hide();
         $("#a4").hide();
+        $("#tab5").hide();
+        $("#a5").hide();
         $("#tab2 button").attr("disabled","disabled");
         $("#tab4 button").attr("disabled","disabled");
         $("#tab1 button").attr("disabled","disabled");
+        $("#tab5 button").attr("disabled","disabled");
         $("#table12").hide();
     }
     if(role===5){
@@ -984,6 +1016,8 @@
         $("#tab3 select").attr("disabled","disabled");
         $("#tab1 input").attr("disabled","disabled");
         $("#tab1 select").attr("disabled","disabled");
+        $("#tab5 input").attr("disabled","disabled");
+        $("#tab5 select").attr("disabled","disabled");
         $("#a4").addClass("active");
         $("#tab4").show();
         $("#tab1").hide();
@@ -993,9 +1027,38 @@
         $("#a2").hide();
         $("#a3").hide();
         $("#table12").hide();
+        $("#tab5").hide();
+        $("#a5").hide();
+        $("#tab5 button").attr("disabled","disabled");
         $("#tab3 button").attr("disabled","disabled");
         $("#tab2 button").attr("disabled","disabled");
         $("#tab1 button").attr("disabled","disabled");
+    }
+    if(role===7){
+        $("#tab2 input").attr("disabled","disabled");
+        $("#tab2 select").attr("disabled","disabled");
+        $("#tab3 input").attr("disabled","disabled");
+        $("#tab3 select").attr("disabled","disabled");
+        $("#tab1 input").attr("disabled","disabled");
+        $("#tab1 select").attr("disabled","disabled");
+        $("#tab4 input").attr("disabled","disabled");
+        $("#tab4 select").attr("disabled","disabled");
+        $("#a5").addClass("active");
+        $("#tab5").show();
+        $("#tab1").hide();
+        $("#a1").hide();
+        $("#tab2").hide();
+        $("#tab3").hide();
+        $("#a2").hide();
+        $("#a3").hide();
+        $("#tab4").hide();
+        $("#a4").hide();
+        $("#table12").hide();
+        $("#tab3 button").attr("disabled","disabled");
+        $("#tab2 button").attr("disabled","disabled");
+        $("#tab1 button").attr("disabled","disabled");
+        $("#tab4 button").attr("disabled","disabled");
+        $("#table12").hide();
     }
 </script>
 <script type="text/javascript" src="/static/js/laogang/home/oldman_info.js" charset="UTF-8"></script>

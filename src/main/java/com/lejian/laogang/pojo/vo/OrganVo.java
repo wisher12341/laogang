@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class OrganVo {
     private String name;
-    private String desc;
+    private String descri;
     private String service;
     private String address;
     private String web;
