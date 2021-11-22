@@ -269,6 +269,7 @@ function savePolicy() {
 }
 
 function searchReset1() {
+    $("input[name='search']").val("");
     $("#sear input[name]").val("");
     $("#sear select[name]").each(function () {
         $(this).val("");
@@ -279,4 +280,7 @@ function searchReset1() {
     $("#jujia").hide();
     $(".jujia").val("");
     $(".jujia").selectpicker("refresh");
+    $(".sxx").hide();
+    $(".selectCx").removeClass("selectCx");
+    table.fnFilter();
 }

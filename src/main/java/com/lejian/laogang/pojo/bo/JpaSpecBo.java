@@ -141,7 +141,7 @@ public class JpaSpecBo {
                 whereCase.append(" and ");
                 key = (String) iterator.next();
                 convertKey = StringUtils.camelToUnderline(key);
-                whereCase.append(prex+convertKey).append(" in'").append(inMap.get(key).stream().map(item -> "'" + item + "'").collect(Collectors.joining(","))).append("'");
+                whereCase.append(prex+convertKey).append(" in (").append(inMap.get(key).stream().map(item -> "'" + item + "'").collect(Collectors.joining(","))).append(")");
             }
         }
         if(CollectionUtils.isNotEmpty(viewLabelLike)){

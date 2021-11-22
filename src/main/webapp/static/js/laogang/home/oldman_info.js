@@ -35,7 +35,9 @@ $(document).ready(function () {
         noneSelectedText: ''//默认显示内容
     });
 
-    loadOldmanInfo(id);
+    if (id!=="" && id!==null && id!==undefined){
+        loadOldmanInfo(id);
+    }
 
 
     table = $(".dataTables-example").dataTable(

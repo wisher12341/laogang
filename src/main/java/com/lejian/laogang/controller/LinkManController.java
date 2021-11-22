@@ -1,6 +1,7 @@
 package com.lejian.laogang.controller;
 
 
+import com.google.common.collect.Lists;
 import com.lejian.laogang.controller.contract.request.*;
 import com.lejian.laogang.controller.contract.response.GetLinkManResponse;
 import com.lejian.laogang.controller.contract.response.GetOldmanResponse;
@@ -48,6 +49,11 @@ public class LinkManController {
     @RequestMapping("/getByPage")
     public GetLinkManResponse getByPage(@RequestBody GetLinkManRequest request){
         GetLinkManResponse response = new GetLinkManResponse();
+        if (request.getParam().getOldmanId()==null){
+            response.setCount(0L);
+            response.setVoList(Lists.newArrayList());
+            return response;
+        }
         response.setVoList(service.getByPage(request.getPageParam(),request.getParam()));
         response.setCount(service.count(request.getParam()));
         return response;

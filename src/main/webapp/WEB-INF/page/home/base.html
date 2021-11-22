@@ -24,7 +24,7 @@
 
 </head>
 
-<body style="overflow: hidden">
+<body style="overflow: hidden;">
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container-fluid">
@@ -36,13 +36,13 @@
             <div class="nav-collapse collapse">
                 <ul class="nav pull-right">
                     <li class="dropdown">
-                        <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i
+                        <a href="javascript:void(0)" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i
                                 class="icon-user"></i> <span id="username"></span> <i class="caret"></i>
 
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a tabindex="-1" href="#">Profile</a>
+                                <a tabindex="-1" href="javascript:void(0)">Profile</a>
                             </li>
                             <li class="divider"></li>
                             <li>
@@ -53,38 +53,38 @@
                 </ul>
                 <ul class="nav">
                     <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Settings <b class="caret"></b>
+                        <a href="javascript:void(0)" data-toggle="dropdown" class="dropdown-toggle">Settings <b class="caret"></b>
 
                         </a>
                         <ul class="dropdown-menu" id="menu1">
                             <li>
-                                <a href="#">Tools <i class="icon-arrow-right"></i>
+                                <a href="javascript:void(0)">Tools <i class="icon-arrow-right"></i>
 
                                 </a>
                                 <ul class="dropdown-menu sub-menu">
                                     <li>
-                                        <a href="#">Reports</a>
+                                        <a href="javascript:void(0)">Reports</a>
                                     </li>
                                     <li>
-                                        <a href="#">Logs</a>
+                                        <a href="javascript:void(0)">Logs</a>
                                     </li>
                                     <li>
-                                        <a href="#">Errors</a>
+                                        <a href="javascript:void(0)">Errors</a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">SEO Settings</a>
+                                <a href="javascript:void(0)">SEO Settings</a>
                             </li>
                             <li>
-                                <a href="#">Other Link</a>
+                                <a href="javascript:void(0)">Other Link</a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="#">Other Link</a>
+                                <a href="javascript:void(0)">Other Link</a>
                             </li>
                             <li>
-                                <a href="#">Other Link</a>
+                                <a href="javascript:void(0)">Other Link</a>
                             </li>
                         </ul>
                     </li>
@@ -138,10 +138,10 @@
         for(var i=0;i<menu.length;i++){
             var $li;
             if (i===0){
-                $li=$('<li class="active" onclick=menua("'+menu[i].url+'",this)><a href="#"><i class="icon-chevron-right"></i> '+menu[i].name+'</a></li>');
+                $li=$('<li class="active" onclick=menua("'+menu[i].url+'",this)><a href="javascript:void(0)"><i class="icon-chevron-right"></i> '+menu[i].name+'</a></li>');
                 $("iframe").attr("src",menu[i].url);
             }else{
-                $li=$('<li onclick=menua("'+menu[i].url+'",this)><a href="#"><i class="icon-chevron-right"></i> '+menu[i].name+'</a></li>');
+                $li=$('<li onclick=menua("'+menu[i].url+'",this)><a href="javascript:void(0)"><i class="icon-chevron-right"></i> '+menu[i].name+'</a></li>');
             }
             $("#menu").append($li);
         }
