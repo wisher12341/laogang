@@ -52,18 +52,22 @@ public class MenuVo {
     }
 
     public static List<MenuVo> getOldmanMenu(){
-        return Lists.newArrayList(
-                oldman(),
-                policy(),
-                messgae(),
-                account());
+//        return Lists.newArrayList(
+//                oldman(),
+//                policy(),
+//                messgae(),
+//                account());
+        return Lists.newArrayList(oldman());
     }
 
     public static List<MenuVo> getOrganMenu(){
+//        return Lists.newArrayList(
+//                organInfo(),
+//                organOldman(),
+//                messgae(),
+//                account());
         return Lists.newArrayList(
                 organInfo(),
-                organOldman(),
-                messgae(),
-                account());
+                organOldman());
     }
 }
