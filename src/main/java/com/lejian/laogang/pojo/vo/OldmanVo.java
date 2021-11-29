@@ -58,4 +58,10 @@ public class OldmanVo {
     private String  homeDoctorName;
     private String homeDoctorOrgan;
     private String homeDoctorTime;
+
+    private String lng;
+    private String lat;
+
+    private String address;
+    private String rh;
 }

@@ -73,6 +73,11 @@ public class EditOldmanParam {
     private String homeDoctorOrgan;
     private String homeDoctorTime;
 
+    private String lng;
+    private String lat;
+
+    private String address;
+    private Integer rh;
 
     public OldmanEntity convertEntity() {
         OldmanEntity oldmanEntity = new OldmanEntity();

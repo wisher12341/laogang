@@ -28,6 +28,7 @@
     <script src="/static/js/plugins/dataTables/jquery.dataTables.js"></script>
     <script src="/static/js/plugins/dataTables/dataTables.bootstrap.js"></script>
     <script src="/static/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?type=webgl&v=2.0&ak=6YSpoya23ILZkeQeyRGdt8s0CVzhKtzG"></script>
     <style>
         .pagination {
             display: inline-block;
@@ -244,6 +245,25 @@
                                                         <option value="1">本镇户籍</option>
                                                         <option value="2">非本镇户籍</option>
                                                     </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <div class="divA">
+                                                <label class="control-label" >人户情况</label>
+                                                <div class="controls">
+                                                    <select class="chzn-select" name="rh" >
+                                                        <option value=""></option>
+                                                        <option value="1">人户一致</option>
+                                                        <option value="2">人户分离</option>
+                                                        <option value="3">查无此人</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="divA">
+                                                <label class="control-label" >现居地</label>
+                                                <div class="controls">
+                                                    <input class="input-xlarge focused" name="address" type="text" value="">
                                                 </div>
                                             </div>
                                         </div>
@@ -484,6 +504,17 @@
                                                         <option value="1">中国</option>
                                                         <option value="2">中国台湾</option>
                                                     </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <div class="divA">
+                                                <label class="control-label" >坐标</label>
+                                                <div class="controls">
+                                                    <input type="button" onclick="gps()" class="btn btn-default" value="定位至常住地" />
+                                                    <input name="lng" type="hidden">
+                                                    <input name="lat" type="hidden">
+                                                    <div id="map" style="margin-top:10px;height: 400px; width: 400px"></div>
                                                 </div>
                                             </div>
                                         </div>

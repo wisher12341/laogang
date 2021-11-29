@@ -42,7 +42,7 @@ public class OldmanParam {
      * 重点老人
      */
     private Boolean isZd;
-
+    private String rh;
 
     private List<String> labelIdList;
 
@@ -113,6 +113,9 @@ public class OldmanParam {
         }
         if (StringUtils.isNotBlank(this.getHuiji())) {
             jpaSpecBo.getEqualMap().put("huji", this.getHuiji());
+        }
+        if (StringUtils.isNotBlank(this.getRh())) {
+            jpaSpecBo.getEqualMap().put("rh", this.getRh());
         }
         if (CollectionUtils.isNotEmpty(this.getPoliticsList())) {
             jpaSpecBo.getInMap().put("politics", new ArrayList<>(this.getPoliticsList()));

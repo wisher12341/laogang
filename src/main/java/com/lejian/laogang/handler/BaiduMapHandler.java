@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
  * 百度地图
  *
  */
-@Component
 public class BaiduMapHandler {
 
     private static final String AK="6YSpoya23ILZkeQeyRGdt8s0CVzhKtzG";
@@ -39,9 +38,10 @@ public class BaiduMapHandler {
 
     /**
      *地理编码
+     * @return lng,lat
      */
     //todo 加缓存
-    public Pair<String,String> geocoding(String address,String city){
+    public static Pair<String,String> geocoding(String address,String city){
         String url = String.format(ADDRESS_ANALYZER_URL_TEMPLATE,address,AK,city);
         GeoCodingBo geoCodingBo= SerializationUtils.gsonSerialize(HttpUtils.get(url),GeoCodingBo.class);
         if(verifyGeoResult(geoCodingBo)){
@@ -59,17 +59,17 @@ public class BaiduMapHandler {
      * @param geoCodingBo
      * @return
      */
-    private boolean verifyGeoResult(GeoCodingBo geoCodingBo) {
+    private static boolean verifyGeoResult(GeoCodingBo geoCodingBo) {
         if(geoCodingBo.getStatus()!=SUCCESS_STATUS) {
             return false;
         }
         if(geoCodingBo.getResult().getPrecise()!=RIGHT_PRECISE){
             return false;
         }
-        if(geoCodingBo.getResult().getConfidence()<CONFIDENCE_MIN
-                || geoCodingBo.getResult().getComprehension()<COMPREHENSION_MIN ){
-            return false;
-        }
+//        if(geoCodingBo.getResult().getConfidence()<CONFIDENCE_MIN
+//                || geoCodingBo.getResult().getComprehension()<COMPREHENSION_MIN ){
+//            return false;
+//        }
         return true;
     }
 

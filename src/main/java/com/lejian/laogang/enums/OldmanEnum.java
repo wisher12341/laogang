@@ -11,6 +11,21 @@ import java.util.List;
  */
 public interface OldmanEnum extends BusinessEnum{
 
+    /**
+     * 人户情况
+     */
+    @Getter
+    @AllArgsConstructor
+    enum RH implements OldmanAttrEnum {
+        A1(1,"人户一致"),
+        A2(2,"人户分离"),
+        A3(3,"查无此人"),
+        ;
+        private Integer value;
+        private String desc;
+    }
+
+
 
     /**
      * 性别

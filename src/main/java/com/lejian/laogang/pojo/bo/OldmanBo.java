@@ -2,6 +2,7 @@ package com.lejian.laogang.pojo.bo;
 
 import com.lejian.laogang.enums.BusinessEnum;
 import com.lejian.laogang.enums.OldmanEnum;
+import com.lejian.laogang.handler.BaiduMapHandler;
 import com.lejian.laogang.pojo.vo.OldmanVo;
 import com.lejian.laogang.repository.entity.OldmanEntity;
 import com.lejian.laogang.repository.entity.OldmanViewEntity;
@@ -9,6 +10,7 @@ import com.lejian.laogang.util.DateUtils;
 import lombok.Data;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.util.Pair;
 
 import javax.persistence.Column;
 import java.sql.Timestamp;
@@ -61,6 +63,9 @@ public class OldmanBo extends BaseBo {
     private String gpsDesc;
     private Timestamp datachangeTime;
 
+    private String address;
+    private BusinessEnum rh;
+
     public static OldmanBo convert(OldmanEntity entity) {
         OldmanBo oldmanBo = new OldmanBo();
         BeanUtils.copyProperties(entity,oldmanBo);
@@ -74,6 +79,7 @@ public class OldmanBo extends BaseBo {
         if (entity.getEducation()!=null) oldmanBo.setEducation(BusinessEnum.find(entity.getEducation(), OldmanEnum.education.class));
         if (entity.getIncome()!=null) oldmanBo.setIncome(BusinessEnum.find(entity.getIncome(), OldmanEnum.income.class));
         if (entity.getPsychosis()!=null) oldmanBo.setPsychosis(BusinessEnum.find(entity.getPsychosis(), OldmanEnum.psychosis.class));
+        if (entity.getRh()!=null) oldmanBo.setRh(BusinessEnum.find(entity.getRh(),OldmanEnum.RH.class));
         return oldmanBo;
     }
 
@@ -98,6 +104,7 @@ public class OldmanBo extends BaseBo {
         if (education!=null) entity.setEducation(education.getValue());
         if (income!=null) entity.setIncome(income.getValue());
         if (psychosis!=null) entity.setPsychosis(psychosis.getValue());
+        if (rh!=null) entity.setRh(rh.getValue());
         return entity;
     }
 
@@ -119,6 +126,7 @@ public class OldmanBo extends BaseBo {
         if (education!=null) vo.setEducation(education.getDesc());
         if (income!=null) vo.setIncome(income.getDesc());
         if (psychosis!=null) vo.setPsychosis(psychosis.getDesc());
+        if (rh!=null) vo.setRh(rh.getDesc());
         return vo;
     }
 }

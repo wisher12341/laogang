@@ -2,6 +2,8 @@ var id;
 var table;
 var haslink=false;
 var view;
+var map;
+var myIcon = new BMapGL.Icon("/static/img/mapGreen.png", new BMapGL.Size(32, 32));
 $(document).ready(function () {
     view = getQueryVariable("view");
     if(view==="true"){
@@ -207,9 +209,70 @@ function loadOldmanInfo(id) {
             if($("select[map='11']").val()==="1" || $("select[map='11']").val()==="2"){
                 $("#ext11").show();
             }
+            initMap();
         }
     });
 }
+
+function initMap() {
+    var lng = $("input[name='lng']").val();
+    var lat = $("input[name='lat']").val();
+    map = new BMapGL.Map("map", {});
+    if (lng!=='' && lat!==""){
+        var marker = new BMapGL.Marker(new BMapGL.Point(lng, lat), {
+            icon: myIcon
+        });
+        map.centerAndZoom(new BMapGL.Point(lng,lat), 16);
+        map.addOverlay(marker);
+    }else{
+        map.centerAndZoom(new BMapGL.Point(121.846199,31.045218), 16);
+    }
+    var scaleCtrl = new BMapGL.ScaleControl();  // 添加比例尺控件
+    map.addControl(scaleCtrl);
+    var zoomCtrl = new BMapGL.ZoomControl();  // 添加比例尺控件
+    map.addControl(zoomCtrl);
+    map.addEventListener('click', function (e) {
+        var allOverlay = map.getOverlays();
+        for (var j = 0; j < allOverlay.length; j++) {
+            map.removeOverlay(allOverlay[j]);
+        }
+        $("input[name='lng']").val(e.latlng.lng);
+        $("input[name='lat']").val(e.latlng.lat);
+        var marker = new BMapGL.Marker(new BMapGL.Point(e.latlng.lng, e.latlng.lat), {
+            icon: myIcon
+        });
+        map.addOverlay(marker);
+    });
+}
+
+function gps() {
+    $.ajax({
+        url: "/map/geocoding",
+        data: JSON.stringify({
+            "address": $("input[name='residence']").val()
+        }),
+        type: 'post',
+        dataType: 'json',
+        contentType: "application/json;charset=UTF-8",
+        success: function (result) {
+            var allOverlay = map.getOverlays();
+            for (var j = 0; j < allOverlay.length; j++) {
+                map.removeOverlay(allOverlay[j]);
+            }
+            var lng = result["map"]["lng"];
+            var lat = result["map"]["lat"];
+            $("input[name='lng']").val(lng);
+            $("input[name='lat']").val(lat);
+            var marker = new BMapGL.Marker(new BMapGL.Point(lng,lat), {
+                icon: myIcon
+            });
+            map.addOverlay(marker);
+            map.panTo(new BMapGL.Point(lng,lat));
+        }
+    });
+
+}
+
 function map11Change(obj){
     if($(obj).val()==="1" || $(obj).val()==="2"){
         $("#ext11").show();

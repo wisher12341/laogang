@@ -30,10 +30,7 @@ var polygon1 = new BMap.Polygon([
     new BMap.Point(121.824883,31.041064),
     new BMap.Point(121.822871,31.046014),
     new BMap.Point(121.828405,31.046261),
-    new BMap.Point(121.814355,31.056563)
-
-
-], { strokeColor: "#FFFFFF", strokeWeight: 3, strokeOpacity: 0.0, fillOpacity: 0.5,fillColor:"#021929"  });
+    new BMap.Point(121.814355,31.056563)], { strokeColor: "#FFFFFF", strokeWeight: 3, strokeOpacity: 0.0, fillOpacity: 0.5,fillColor:"#021929"  });
 
 function initMap() {
     map = new BMap.Map("map", {enableMapClick: false});

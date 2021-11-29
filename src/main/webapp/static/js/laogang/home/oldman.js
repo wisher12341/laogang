@@ -99,7 +99,8 @@ $(document).ready(function(){
                     "serviceStatusList":$("select[name='serviceStatus']").val(),
                     "search":$("input[name='search']").val(),
                     "areaVillageList":$("select[name='areaVillage']").val(),
-                    "jujiaList":$("select[name='jujia']").val()
+                    "jujiaList":$("select[name='jujia']").val(),
+                    "rh":$("select[name='rh']").val()
                 }
             }),
             type: 'post',

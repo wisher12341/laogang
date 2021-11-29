@@ -84,6 +84,14 @@ public class OldmanEntity {
     @Column(name = "is_zd")
     private Integer isZd;
     @Column
+    private String address;
+    @Column
+    private Integer rh;
+    @Column
+    private String lng;
+    @Column
+    private String lat;
+    @Column
     private String war;
     @Column(name = "datachange_time")
     private Timestamp datachangeTime;
