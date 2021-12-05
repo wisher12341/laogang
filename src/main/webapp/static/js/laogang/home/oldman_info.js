@@ -39,9 +39,9 @@ $(document).ready(function () {
 
     if (id!=="" && id!==null && id!==undefined){
         loadOldmanInfo(id);
+    }else{
+        initMap();
     }
-
-
     table = $(".dataTables-example").dataTable(
         {
             "sPaginationType": "full_numbers",
@@ -203,10 +203,12 @@ function loadOldmanInfo(id) {
             }else{
                 $("#ra8").attr("checked",true);
             }
-            if($("select[map='13']").val().indexOf("3")>=0){
+            var map13 = $("select[map='13']").val()+"";
+            if(map13.indexOf("3")>=0){
                 $("#map14").show();
             }
-            if($("select[map='11']").val()==="1" || $("select[map='11']").val()==="2"){
+            var map11 = $("select[map='11']").val()+"";
+            if(map11==="1" || map11==="2"){
                 $("#ext11").show();
             }
             initMap();
@@ -320,14 +322,14 @@ function map14Change(obj){
     }
 }
 
-function oldStatusChange(obj) {
-    if($(obj).val().indexOf("3")>=0){
-        $("#map14").show();
-    }else{
-        $("#map14").hide();
-        $("#map14 select").val("");
-    }
-}
+// function oldStatusChange(obj) {
+//     if($(obj).val().indexOf("3")>=0){
+//         $("#map14").show();
+//     }else{
+//         $("#map14").hide();
+//         $("#map14 select").val("");
+//     }
+// }
 
 function deleteLinkman() {
     var chk_value =[];
@@ -349,10 +351,10 @@ function deleteLinkman() {
 }
 
 function submit() {
-    if(!haslink) {
-        alert("请填写必填项");
-        return;
-    }
+    // if(!haslink) {
+    //     alert("请填写必填项");
+    //     return;
+    // }
 
     var param = {};
     $("[name]").each(function () {

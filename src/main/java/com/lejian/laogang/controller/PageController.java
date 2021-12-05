@@ -165,6 +165,13 @@ public class PageController {
         return mv;
     }
 
+    @GetMapping("/home/policy/info")
+    public ModelAndView home_policy_info(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/home/policy_info");
+        return mv;
+    }
+
     @GetMapping("/monitor")
     public ModelAndView monitor(){
         ModelAndView mv = new ModelAndView();

@@ -64,4 +64,8 @@ public class OldmanVo {
 
     private String address;
     private String rh;
+    //当前政策是否完成
+    private String finish;
+    //id_finish
+    private String idFinish;
 }

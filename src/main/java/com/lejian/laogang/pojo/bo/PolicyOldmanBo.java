@@ -15,6 +15,8 @@ public class PolicyOldmanBo extends BaseBo{
     private Integer oldmanId;
 
     private Integer policyId;
+    private Integer oldmanUserId;
+    private Integer finish;
 
 
     @Override

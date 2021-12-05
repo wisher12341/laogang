@@ -21,5 +21,8 @@ public class PolicyOldmanEntity {
     private Integer oldmanId;
     @Column(name = "policy_id")
     private Integer policyId;
+    @Column(name = "oldman_user_id")
+    private Integer oldmanUserId;
+    private Integer finish;
 
 }

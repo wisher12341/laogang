@@ -249,7 +249,8 @@ function savePolicy() {
                 "familyList":$("select[name='family']").val(),
                 "familyTypeList":$("select[name='familyType']").val(),
                 "incomeList":$("select[name='income']").val(),
-                "serviceStatusList":$("select[name='serviceStatus']").val()
+                "serviceStatusList":$("select[name='serviceStatus']").val(),
+                "search":$("input[name='search']").val()
             }
         }),
         type: 'post',

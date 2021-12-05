@@ -1,6 +1,56 @@
-.btn-primary{
-    /*padding:3px 6px!important;*/
-    background-color: #1ab394 !important;
-    border-color: #1ab394 !important;
-    /*margin-right: 3px;*/
+
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+.pagination li {
+    display: inherit;
+}
+
+.pagination > li > a, .pagination > li > span {
+    background-color: #FFF;
+    border: 1px solid #DDD;
+    color: inherit;
+    float: left;
+    line-height: 1.42857;
+    margin-left: -1px;
+    padding: 4px 10px;
+    position: relative;
+    text-decoration: none;
+}
+
+.pagination > .active > a {
+    background-color: #bcc5bc !important;
+}
+
+.sx {
+    border: none;
+    color: grey;
+    cursor: default;
+    background-color: transparent;
+    font-weight: bolder;
+}
+
+.selectCx{
+    background-image: none;!important;
+    background-color: #375237!important;
+}
+.modal{
+    left: 42% !important;
+    width: 50% !important;
+    height: 80% !important;
+}
+.modal-body{
+    overflow-y: hidden;
+    max-height:1000px !important;
+}
+.block{
+    border: none;
+}
+body{
+    padding-top: 0;
+    background-color: white
 }

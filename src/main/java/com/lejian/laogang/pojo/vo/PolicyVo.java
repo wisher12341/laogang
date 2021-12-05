@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import static com.lejian.laogang.util.DateUtils.YY_MM_DD;
 
 @Data
-public class PolicyVo extends BaseBo{
+public class PolicyVo{
     private Integer id;
 
     private String name;
@@ -23,27 +23,9 @@ public class PolicyVo extends BaseBo{
     private String wh;
 
 
-    private LocalDate startTime;
-    private LocalDate endTime;
+    private String startTime;
+    private String endTime;
+    private String createTime;
 
-    @Override
-    public PolicyEntity convert() {
-        PolicyEntity policyEntity = new PolicyEntity();
-        BeanUtils.copyProperties(this,policyEntity);
-        return policyEntity;
-    }
 
-    public static PolicyVo convert(PolicyEntity policyEntity) {
-        PolicyVo policyBo = new PolicyVo();
-        BeanUtils.copyProperties(policyEntity,policyBo);
-        return policyBo;
-    }
-
-    public static PolicyVo convert(PolicyParam policyParam) {
-        PolicyVo policyBo = new PolicyVo();
-        BeanUtils.copyProperties(policyParam,policyBo);
-        policyBo.setStartTime(DateUtils.stringToLocalDate(policyParam.getStartTime(),YY_MM_DD));
-        policyBo.setEndTime(DateUtils.stringToLocalDate(policyParam.getEndTime(),YY_MM_DD));
-        return policyBo;
-    }
 }

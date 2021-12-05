@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
+
 @Slf4j
 @Repository
 public class PolicyOldmanRepository extends AbstractSpecificationRepository<PolicyOldmanBo, PolicyOldmanEntity> {
@@ -32,5 +34,10 @@ public class PolicyOldmanRepository extends AbstractSpecificationRepository<Poli
     @Override
     protected String getTableName() {
         return "policy_oldman";
+    }
+
+    @Transactional
+    public void updateFinish(Integer finish,Integer oldmanId, Integer policyId) {
+        dao.updateFinish(finish,oldmanId,policyId);
     }
 }

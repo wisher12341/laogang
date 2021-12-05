@@ -65,6 +65,7 @@ public class OldmanBo extends BaseBo {
 
     private String address;
     private BusinessEnum rh;
+    private Integer userId;
 
     public static OldmanBo convert(OldmanEntity entity) {
         OldmanBo oldmanBo = new OldmanBo();
@@ -127,6 +128,13 @@ public class OldmanBo extends BaseBo {
         if (income!=null) vo.setIncome(income.getDesc());
         if (psychosis!=null) vo.setPsychosis(psychosis.getDesc());
         if (rh!=null) vo.setRh(rh.getDesc());
+        return vo;
+    }
+
+    public OldmanVo convertVo(PolicyOldmanBo policyOldmanBo){
+        OldmanVo vo = convertVo();
+        vo.setFinish(policyOldmanBo.getFinish()==1?"是":"否");
+        vo.setIdFinish(vo.getId()+"_"+policyOldmanBo.getFinish());
         return vo;
     }
 }

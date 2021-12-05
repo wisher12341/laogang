@@ -8,8 +8,10 @@ import com.lejian.laogang.controller.contract.request.GetOldmanRequest;
 import com.lejian.laogang.controller.contract.response.GetOldmanResponse;
 import com.lejian.laogang.controller.contract.response.SuccessResponse;
 import com.lejian.laogang.handler.ExcelHandler;
+import com.lejian.laogang.pojo.bo.UserBo;
 import com.lejian.laogang.pojo.vo.OldmanVo;
 import com.lejian.laogang.service.OldmanService;
+import com.lejian.laogang.util.UserUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
@@ -36,8 +38,9 @@ public class OldmanController {
     @RequestMapping("/getByPage")
     public GetOldmanResponse getByPage(@RequestBody GetOldmanRequest request){
         GetOldmanResponse response = new GetOldmanResponse();
-        response.setOldmanVoList(service.getByPage(request.getOldmanParam(),request.getPageParam()));
-        response.setCount(service.getOldmanCount(request.getOldmanParam()));
+        UserBo userBo = UserUtils.getUser();
+        response.setOldmanVoList(service.getByPage(request.getOldmanParam(),request.getPageParam(),userBo));
+        response.setCount(service.getOldmanCount(request.getOldmanParam(),userBo));
         return response;
     }
 

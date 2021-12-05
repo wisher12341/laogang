@@ -1,6 +1,4 @@
 var table;
-var table2 = null;
-var policyId = null;
 $(document).ready(function () {
     table = $("#table1").dataTable(
         {
@@ -16,9 +14,7 @@ $(document).ready(function () {
                 data: "sender"
             }, {
                 data: "type"
-            }, {
-                data: "type"
-            }, {
+            },{data:"title"}, {
                 data: "content"
             }, {
                 data: "time"
@@ -34,10 +30,11 @@ $(document).ready(function () {
                     }
                 },
                 {
-                    "targets": [5], // 目标列位置，下标从0开始
+                    "targets": [6], // 目标列位置，下标从0开始
                     "data": "id", // 数据列名
                     "render": function (data, type, full) { // 返回自定义内容
-                        return '<a href="#myModal" style="padding: 2px 4px;font-size: 10px" data-toggle="modal" class="btn btn-success" onclick=look(' + data + ')>查看</a>';
+                        return "";
+                        // return '<a href="#myModal" style="padding: 2px 4px;font-size: 10px" data-toggle="modal" class="btn btn-success" onclick=look(' + data + ')>查看</a>';
                     }
                 }
             ],

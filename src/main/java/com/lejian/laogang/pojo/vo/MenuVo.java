@@ -48,26 +48,26 @@ public class MenuVo {
     }
 
     public static MenuVo messgae() {
-        return new MenuVo("收件箱","home/message");
+        return new MenuVo("收件箱","/home/message");
     }
 
     public static List<MenuVo> getOldmanMenu(){
-//        return Lists.newArrayList(
-//                oldman(),
-//                policy(),
-//                messgae(),
+        return Lists.newArrayList(
+                oldman(),
+                policy(),
+                messgae());
 //                account());
-        return Lists.newArrayList(oldman());
+//        return Lists.newArrayList(oldman());
     }
 
     public static List<MenuVo> getOrganMenu(){
-//        return Lists.newArrayList(
-//                organInfo(),
-//                organOldman(),
-//                messgae(),
-//                account());
         return Lists.newArrayList(
                 organInfo(),
-                organOldman());
+                organOldman(),
+                messgae());
+//                account());
+//        return Lists.newArrayList(
+//                organInfo(),
+//                organOldman());
     }
 }

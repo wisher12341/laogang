@@ -13,6 +13,7 @@
     <link href="/static/home/assets/DT_bootstrap.css" rel="stylesheet" media="screen">
     <link href="/static/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
     <link href="/static/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="/static/css/common.css.min.css" rel="stylesheet">
     <!--[if lte IE 8]>
     <script language="javascript" type="text/javascript" src="/static/home/vendors/flot/excanvas.min.js"></script><![endif]-->
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -27,65 +28,19 @@
     <script src="/static/js/plugins/dataTables/dataTables.bootstrap.js"></script>
     <script src="/static/js/bootstrap-select.min.js"></script>
     <style>
-        .pagination {
-            display: inline-block;
-            padding-left: 0;
-            margin: 20px 0;
-            border-radius: 4px;
+        .modal-body .control-label{
+            width: 25%!important;
         }
-
-        .pagination li {
-            display: inherit;
+        .modal-body .controls{
+            margin-left: 0px!important;
         }
-
-        .pagination > li > a, .pagination > li > span {
-            background-color: #FFF;
-            border: 1px solid #DDD;
-            color: inherit;
-            float: left;
-            line-height: 1.42857;
-            margin-left: -1px;
-            padding: 4px 10px;
-            position: relative;
-            text-decoration: none;
+        .modal-body .controls input,.modal-body .controls select{
+            margin-left: 10px!important;
         }
-
-        .pagination > .active > a {
-            background-color: #bcc5bc !important;
-        }
-
-        .sx {
-            border: none;
-            color: grey;
-            cursor: default;
-            background-color: transparent;
-            font-weight: bolder;
-        }
-        /*#DataTables_Table_0_wrapper>div:first-child{*/
-            /*position: absolute;*/
-            /*bottom: -15px;*/
-            /*left: 0%;*/
-        /*}*/
-        .selectCx{
-            background-image: none;!important;
-            background-color: #375237!important;
-        }
-        .modal{
-            left: 42% !important;
-            width: 50% !important;
-            height: 80% !important;
-        }
-        .modal-body{
-            overflow-y: hidden;
-            max-height:1000px !important;
-        }
-         .block{
-             border: none;
-         }
     </style>
 </head>
 
-<body style="padding-top: 0;background-color: white">
+<body>
 
 <div class="container-fluid">
     <div class="row-fluid">
@@ -166,8 +121,8 @@
                                                                             <input name="policyEndTime" class="input-xlarge focused" id="focusedInput5" type="date">
                                                                         </div>
                                                                     </div>
-                                                                    <div class="form-actions">
-                                                                        <button type="submit" class="btn btn-primary" onclick="savePolicy()">生成</button>
+                                                                    <div class="control-group">
+                                                                        <button type="submit" class="btn btn-primary" onclick="savePolicy()" style="margin-left: 35%">生成</button>
                                                                     </div>
                                                                 </fieldset>
                                                             </form>
@@ -374,9 +329,9 @@
 <script>
     $(function () {
         var role ="[[${role}]]";
-//        if (role==="1"){
-//            $("#policy").show();
-//        }
+        if (role==="1"){
+            $("#policy").show();
+        }
         if (role!=="1" && role!=="2"){
             $(".add").hide();
         }

@@ -18,13 +18,13 @@ public class MessageEntity {
     private Integer id;
     private String content;
     @Column(name = "user_id")
-    private String userId;
-    @Column(name = "role_id")
-    private Integer roleId;
+    private Integer userId;
     @Column
     private String sender;
     @Column
     private Integer type;
     @Column(name = "create_time")
     private Timestamp createTime;
+    @Column
+    private String title;
 }

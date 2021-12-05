@@ -285,14 +285,14 @@ public class OldmanService {
     }
 
 
-    public List<OldmanVo> getByPage(OldmanParam oldmanParam, PageParam pageParam) {
-        List<OldmanBo> oldmanBoList = oldmanRepository.findByPage(pageParam.getPageNo(), pageParam.getPageSize(), oldmanParam.getSql());
+    public List<OldmanVo> getByPage(OldmanParam oldmanParam, PageParam pageParam, UserBo userBo) {
+        List<OldmanBo> oldmanBoList = oldmanRepository.findByPage(pageParam.getPageNo(), pageParam.getPageSize(), oldmanParam.getSql(userBo));
         List<OldmanVo> voList = oldmanBoList.stream().map(OldmanBo::convertVo).collect(Collectors.toList());
         return voList;
     }
 
-    public Long getOldmanCount(OldmanParam oldmanParam) {
-        return oldmanRepository.count(oldmanParam.getSql());
+    public Long getOldmanCount(OldmanParam oldmanParam, UserBo userBo) {
+        return oldmanRepository.count(oldmanParam.getSql(userBo));
     }
 
     public OldmanVo getBYId(Integer id) {
@@ -359,6 +359,9 @@ public class OldmanService {
             oldmanRepository.dynamicUpdateByPkId(oldmanEntity);
             oldmanAttrRepository.deleteByType(oldmanEntity.getId(), allType);
         } else {
+            //添加
+            UserBo userBo = UserUtils.getUser();
+            oldmanEntity.setUserId(userBo.getId());
             oldmanEntity = oldmanRepository.saveAndReturn(oldmanEntity);
             for (OldmanAttrEntity item : oldmanAttrEntityList) {
                 item.setOldmanId(oldmanEntity.getId());

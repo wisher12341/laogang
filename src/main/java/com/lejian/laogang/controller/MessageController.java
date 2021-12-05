@@ -9,8 +9,10 @@ import com.lejian.laogang.controller.contract.response.GetMessageResponse;
 import com.lejian.laogang.controller.contract.response.GetOldmanResponse;
 import com.lejian.laogang.controller.contract.response.GetPolicyResponse;
 import com.lejian.laogang.controller.contract.response.SuccessResponse;
+import com.lejian.laogang.pojo.bo.UserBo;
 import com.lejian.laogang.service.MessageService;
 import com.lejian.laogang.service.PolicyService;
+import com.lejian.laogang.util.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,8 +36,9 @@ public class MessageController {
     @RequestMapping("/getByPage")
     public GetMessageResponse getByPage(@RequestBody PageParam pageParam){
         GetMessageResponse response = new GetMessageResponse();
-        response.setVoList(service.getByPage(pageParam));
-        response.setCount(service.count(pageParam));
+        UserBo userBo = UserUtils.getUser();
+        response.setVoList(service.getByPage(pageParam,userBo));
+        response.setCount(service.count(pageParam,userBo));
         return response;
     }
 

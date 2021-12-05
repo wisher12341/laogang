@@ -2,8 +2,10 @@ package com.lejian.laogang.controller.contract.request;
 
 import com.lejian.laogang.enums.BusinessEnum;
 import com.lejian.laogang.enums.OldmanEnum;
+import com.lejian.laogang.enums.UserEnum;
 import com.lejian.laogang.enums.label.LabelBaseEnum;
 import com.lejian.laogang.pojo.bo.JpaSpecBo;
+import com.lejian.laogang.pojo.bo.UserBo;
 import lombok.Data;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
@@ -149,11 +151,14 @@ public class OldmanParam {
         return jpaSpecBo;
     }
 
-
-    public Pair<String, String> getSql() {
+    public Pair<String, String> getSql(UserBo userBo){
         JpaSpecBo jpaSpecBo = this.convert();
-        String oldman = jpaSpecBo.getSql("o.");
+        //村居角色
+        if (userBo!=null && userBo.getRole().intValue() == UserEnum.Role.A2.getValue()){
+            jpaSpecBo.getEqualMap().put("userId",userBo.getId());
+        }
 
+        String oldman = jpaSpecBo.getSql("o.");
         if (StringUtils.isNotBlank(search)){
             if (StringUtils.isNotBlank(oldman)){
                 oldman+=" and ";
@@ -245,5 +250,9 @@ public class OldmanParam {
             attr.append(")");
         }
         return Pair.of(oldman, attr.toString());
+    }
+
+    public Pair<String, String> getSql() {
+        return getSql(null);
     }
 }

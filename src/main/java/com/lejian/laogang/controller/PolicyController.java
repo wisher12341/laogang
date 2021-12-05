@@ -1,16 +1,14 @@
 package com.lejian.laogang.controller;
 
 
-import com.lejian.laogang.controller.contract.request.GetByIdRequest;
-import com.lejian.laogang.controller.contract.request.GetOrganRequest;
-import com.lejian.laogang.controller.contract.request.GetPolicyRequest;
-import com.lejian.laogang.controller.contract.request.PolicyAddRequest;
+import com.lejian.laogang.controller.contract.request.*;
 import com.lejian.laogang.controller.contract.response.GetOldmanResponse;
-import com.lejian.laogang.controller.contract.response.GetOrganResponse;
 import com.lejian.laogang.controller.contract.response.GetPolicyResponse;
 import com.lejian.laogang.controller.contract.response.SuccessResponse;
-import com.lejian.laogang.service.OrganService;
+import com.lejian.laogang.pojo.bo.UserBo;
+import com.lejian.laogang.pojo.vo.PolicyVo;
 import com.lejian.laogang.service.PolicyService;
+import com.lejian.laogang.util.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -51,8 +49,25 @@ public class PolicyController {
     @RequestMapping("/getOldman")
     public GetOldmanResponse getOldman(@RequestBody GetByIdRequest request){
         GetOldmanResponse response = new GetOldmanResponse();
-        response.setOldmanVoList(service.getOldmanByPage(request.getPageParam(),request.getId()));
-        response.setCount(service.oldmanCount(request.getId()));
+        UserBo userBo = UserUtils.getUser();
+        response.setOldmanVoList(service.getOldmanByPage(request.getPageParam(),request.getId(),userBo));
+        response.setCount(service.oldmanCount(request.getId(),userBo));
+        return response;
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/getById")
+    public PolicyVo getById(@RequestBody GetByIdRequest request){
+        return service.getById(request.getId());
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/oldman/finish")
+    public SuccessResponse finish(@RequestBody PolicyOldmanRequest request){
+        SuccessResponse response = new SuccessResponse();
+        service.oldmanFinish(request.getFinish(),request.getOldmanId(),request.getPolicyId());
         return response;
     }
 }

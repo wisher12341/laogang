@@ -12,5 +12,7 @@ public class MessageVo{
     private Integer userId;
     private String sender;
     private String type;
+    private String time;
+    private String title;
 
 }
