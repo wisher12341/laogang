@@ -162,12 +162,20 @@ public class PageController {
     public ModelAndView home_policy(){
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/home/policy");
+        UserBo userBo = UserUtils.getUser();
+        if (userBo!=null) {
+            mv.addObject("role",userBo.getRole());
+        }
         return mv;
     }
 
     @GetMapping("/home/policy/info")
     public ModelAndView home_policy_info(){
         ModelAndView mv = new ModelAndView();
+        UserBo userBo = UserUtils.getUser();
+        if (userBo!=null) {
+            mv.addObject("role",userBo.getRole());
+        }
         mv.setViewName("/home/policy_info");
         return mv;
     }

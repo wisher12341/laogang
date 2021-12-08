@@ -124,4 +124,17 @@ public class PolicyService {
     public void oldmanFinish(Integer finish, Integer oldmanId, Integer policyId) {
         policyOldmanRepository.updateFinish(finish,oldmanId,policyId);
     }
+
+    @Transactional
+    public void delete(List<Integer> idList) {
+        idList.forEach(id->{
+            policyRepository.deleteById(id);
+            policyOldmanRepository.deleteByPolicyId(id);
+        });
+    }
+
+    public void edit(PolicyParam policyParam) {
+        PolicyBo policyBo = policyParam.convertToBo();
+        policyRepository.dynamicUpdateByPkId(policyBo);
+    }
 }

@@ -40,4 +40,8 @@ public class PolicyOldmanRepository extends AbstractSpecificationRepository<Poli
     public void updateFinish(Integer finish,Integer oldmanId, Integer policyId) {
         dao.updateFinish(finish,oldmanId,policyId);
     }
+
+    public void deleteByPolicyId(Integer id) {
+        dao.deleteByPolicyId(id);
+    }
 }

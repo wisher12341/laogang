@@ -83,10 +83,16 @@ $(document).ready(function(){
 
 
 
-function deleteOldman(oid) {
+function deletePolicy() {
+    var param =[];
+    var i=0;
+    $("input[name='id']:checked").each(function () {
+       param[i]=$(this).val();
+       i++;
+    });
     $.ajax({
-        url: "/oldman/delete",//这个就是请求地址对应sAjaxSource
-        data: JSON.stringify({"oid": oid}),
+        url: "/policy/delete",//这个就是请求地址对应sAjaxSource
+        data: JSON.stringify({"idList": param}),
         type: 'post',
         dataType: 'json',
         contentType: "application/json;charset=UTF-8",

@@ -60,6 +60,15 @@ public class MenuVo {
 //        return Lists.newArrayList(oldman());
     }
 
+    public static List<MenuVo> getOrganOldmanMenu(){
+        return Lists.newArrayList(
+                oldman(),
+                messgae());
+//                account());
+//        return Lists.newArrayList(oldman());
+    }
+
+
     public static List<MenuVo> getOrganMenu(){
         return Lists.newArrayList(
                 organInfo(),

@@ -21,6 +21,7 @@ public class PolicyEntity {
     private String name;
     @Column
     private String content;
+    @Column
     private Integer type;
     @Column
     private String wh;
@@ -32,5 +33,6 @@ public class PolicyEntity {
 
     @Column(name = "create_time")
     private Timestamp createTime;
+    @Column
     private Integer status;
 }

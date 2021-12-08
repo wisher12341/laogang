@@ -36,19 +36,19 @@ public interface UserEnum extends BusinessEnum{
         A3(3,"社区事务受理中心") {
             @Override
             public List<MenuVo> getMenu() {
-                return MenuVo.getOldmanMenu();
+                return MenuVo.getOrganOldmanMenu();
             }
         },
         A4(4,"社建办") {
             @Override
             public List<MenuVo> getMenu() {
-                return MenuVo.getOldmanMenu();
+                return MenuVo.getOrganOldmanMenu();
             }
         },
         A5(5,"卫生院") {
             @Override
             public List<MenuVo> getMenu() {
-                return MenuVo.getOldmanMenu();
+                return MenuVo.getOrganOldmanMenu();
             }
         },
         A6(6,"养老机构") {
@@ -60,7 +60,7 @@ public interface UserEnum extends BusinessEnum{
         A7(7,"居家养老") {
             @Override
             public List<MenuVo> getMenu() {
-                return MenuVo.getOldmanMenu();
+                return MenuVo.getOrganOldmanMenu();
             }
         },
 

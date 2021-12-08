@@ -128,7 +128,7 @@ $(document).ready(function(){
             var text = $(this).children("option:selected").text();
             var value = $(this).children("option:selected").val();
             if (value!==null && value!=="" && value!==undefined){
-                var span = $("<span>"+text+"</span>");
+                var span = $("<span>"+text+"，</span>");
                 $(".lll").append(span);
             }
         });

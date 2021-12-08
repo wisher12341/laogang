@@ -60,6 +60,7 @@ public class PolicyBo extends BaseBo{
     public static PolicyBo convert(PolicyEntity policyEntity) {
         PolicyBo policyBo = new PolicyBo();
         BeanUtils.copyProperties(policyEntity,policyBo);
+        if (policyEntity.getCreateTime()!=null)
         policyBo.setCreateTime(policyEntity.getCreateTime().toLocalDateTime());
         return policyBo;
     }

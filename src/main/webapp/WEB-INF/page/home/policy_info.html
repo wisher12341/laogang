@@ -83,7 +83,7 @@
                             </div>
 
                             <div class="control-group">
-                                <button onclick="submitOrgan()" class="btn btn-success" style="margin-left: 20%">保存</button>
+                                <button onclick="submitPolicy()" class="btn btn-success" style="margin-left: 20%">保存</button>
                             </div>
                         </fieldset>
                     </div>
@@ -125,6 +125,16 @@
 
 <script type="text/javascript" src="/static/js/laogang/home/policy_info.js" charset="UTF-8"></script>
 
+<script>
+    $(function () {
+        var role ="[[${role}]]";
+        if (role!=="1"){
+            $("#info input").attr("disabled","disabled");
+            $("#info button").attr("disabled","disabled");
+            $("#info select").attr("disabled","disabled");
+        }
+    });
+</script>
 <script src="/static/home/assets/scripts.js"></script>
 <script src="/static/home/assets/DT_bootstrap.js"></script>
 </body>

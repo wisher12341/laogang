@@ -34,6 +34,22 @@ public class PolicyController {
         return response;
     }
 
+    @ResponseBody
+    @RequestMapping("/edit")
+    public SuccessResponse edit(@RequestBody PolicyParam policyParam){
+        SuccessResponse response = new SuccessResponse();
+        service.edit(policyParam);
+        return response;
+    }
+
+    @ResponseBody
+    @RequestMapping("/delete")
+    public SuccessResponse delete(@RequestBody IdListRequest request){
+        SuccessResponse response = new SuccessResponse();
+        service.delete(request.getIdList());
+        return response;
+    }
+
 
     @ResponseBody
     @RequestMapping("/getByPage")

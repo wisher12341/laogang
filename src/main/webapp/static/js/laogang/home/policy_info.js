@@ -102,15 +102,15 @@ function finishChange(oldmanId,finish) {
     });
 }
 
-function submitOrgan() {
+function submitPolicy() {
     var param = {};
-    $("[name]").each(function () {
+    $("#info [name]").each(function () {
         var condition = "param." + $(this).attr("name") + "='" + $(this).val() + "'";
         eval(condition);
 
     });
     $.ajax({
-        url: "/organ/edit",
+        url: "/policy/edit",
         data: JSON.stringify(param),
         type: 'post',
         dataType: 'json',

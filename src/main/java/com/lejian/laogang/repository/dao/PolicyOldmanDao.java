@@ -16,4 +16,8 @@ public interface PolicyOldmanDao extends JpaRepository<PolicyOldmanEntity, Long>
     @Modifying
     @Query(value = "update policy_oldman set finish=?1 where oldman_id=?2 and policy_id=?3",nativeQuery = true)
     void updateFinish(Integer finish,Integer oldmanId, Integer policyId);
+
+    @Modifying
+    @Query(value = "delete from policy_oldman policy_id=?1",nativeQuery = true)
+    void deleteByPolicyId(Integer id);
 }
