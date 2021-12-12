@@ -67,6 +67,7 @@ $(document).ready(function () {
         });
     }
 
+    $("#table1_info").parent().addClass("span6");
 
     $('#search').click(function () {
         table.fnFilter();

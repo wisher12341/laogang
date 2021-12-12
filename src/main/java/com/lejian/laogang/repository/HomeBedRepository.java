@@ -30,7 +30,7 @@ public class HomeBedRepository extends AbstractSpecificationRepository<HomBedBo,
     }
 
     @Override
-    protected String getTableName() {
+    public String getTableName() {
         return "home_bed";
     }
 

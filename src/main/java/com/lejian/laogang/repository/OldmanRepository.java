@@ -50,7 +50,7 @@ public class OldmanRepository extends AbstractSpecificationRepository<OldmanBo, 
 
 
     @Override
-    protected String getTableName() {
+    public String getTableName() {
         return "oldman";
     }
 
@@ -165,7 +165,9 @@ public class OldmanRepository extends AbstractSpecificationRepository<OldmanBo, 
                 oldmanBo.setId((Integer) cells[0]);
                 oldmanBo.setName((String) cells[1]);
                 oldmanBo.setMale(BusinessEnum.find((Integer) cells[2], OldmanEnum.Male.class));
-                oldmanBo.setBirthday(((Date) cells[3]).toLocalDate());
+                if (cells[3]!=null) {
+                    oldmanBo.setBirthday(((Date) cells[3]).toLocalDate());
+                }
                 oldmanBo.setAreaVillage((String) cells[4]);
                 oldmanBo.setIdCard((String) cells[5]);
                 oldmanBo.setPhone((String) cells[6]);

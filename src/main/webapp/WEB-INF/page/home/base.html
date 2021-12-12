@@ -2,7 +2,7 @@
 <html  xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Tables</title>
+    <title>老港镇智慧健康养老信息化管理系统</title>
     <!-- Bootstrap -->
     <link href="/static/home/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="/static/home/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -27,6 +27,20 @@
             border-color: #1ab394 !important;
             /*margin-right: 3px;*/
         }
+        #spinner{
+            position: absolute;
+            z-index: 999;
+            top: 20%;
+            left: 45%;
+            width: 200px;
+            height:200px;
+            background-color: transparent;
+            border: none;
+        }
+        .sk-spinner-fading-circle.sk-spinner{
+            width: 80px;
+            height: 80px;
+        }
     </style>
 </head>
 
@@ -47,54 +61,54 @@
 
                         </a>
                         <ul class="dropdown-menu">
+                            <!--<li>-->
+                                <!--<a tabindex="-1" href="javascript:void(0)">Profile</a>-->
+                            <!--</li>-->
+                            <!--<li class="divider"></li>-->
                             <li>
-                                <a tabindex="-1" href="javascript:void(0)">Profile</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a tabindex="-1" href="/logout">Logout</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="nav">
-                    <li class="dropdown">
-                        <a href="javascript:void(0)" data-toggle="dropdown" class="dropdown-toggle">Settings <b class="caret"></b>
-
-                        </a>
-                        <ul class="dropdown-menu" id="menu1">
-                            <li>
-                                <a href="javascript:void(0)">Tools <i class="icon-arrow-right"></i>
-
-                                </a>
-                                <ul class="dropdown-menu sub-menu">
-                                    <li>
-                                        <a href="javascript:void(0)">Reports</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)">Logs</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)">Errors</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">SEO Settings</a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">Other Link</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="javascript:void(0)">Other Link</a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">Other Link</a>
+                                <a tabindex="-1" href="/logout">退出</a>
                             </li>
                         </ul>
                     </li>
                 </ul>
+                <!--<ul class="nav">-->
+                    <!--<li class="dropdown">-->
+                        <!--<a href="javascript:void(0)" data-toggle="dropdown" class="dropdown-toggle">Settings <b class="caret"></b>-->
+
+                        <!--</a>-->
+                        <!--<ul class="dropdown-menu" id="menu1">-->
+                            <!--<li>-->
+                                <!--<a href="javascript:void(0)">Tools <i class="icon-arrow-right"></i>-->
+
+                                <!--</a>-->
+                                <!--<ul class="dropdown-menu sub-menu">-->
+                                    <!--<li>-->
+                                        <!--<a href="javascript:void(0)">Reports</a>-->
+                                    <!--</li>-->
+                                    <!--<li>-->
+                                        <!--<a href="javascript:void(0)">Logs</a>-->
+                                    <!--</li>-->
+                                    <!--<li>-->
+                                        <!--<a href="javascript:void(0)">Errors</a>-->
+                                    <!--</li>-->
+                                <!--</ul>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="javascript:void(0)">SEO Settings</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="javascript:void(0)">Other Link</a>-->
+                            <!--</li>-->
+                            <!--<li class="divider"></li>-->
+                            <!--<li>-->
+                                <!--<a href="javascript:void(0)">Other Link</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="javascript:void(0)">Other Link</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</li>-->
+                <!--</ul>-->
             </div>
             <!--/.nav-collapse -->
         </div>
@@ -126,7 +140,24 @@
     <hr>
 </div>
 <!--/.fluid-container-->
-
+<div class="ibox-content" id="spinner" style="display: none">
+    <div class="spiner-example">
+        <div class="sk-spinner sk-spinner-fading-circle">
+            <div class="sk-circle1 sk-circle"></div>
+            <div class="sk-circle2 sk-circle"></div>
+            <div class="sk-circle3 sk-circle"></div>
+            <div class="sk-circle4 sk-circle"></div>
+            <div class="sk-circle5 sk-circle"></div>
+            <div class="sk-circle6 sk-circle"></div>
+            <div class="sk-circle7 sk-circle"></div>
+            <div class="sk-circle8 sk-circle"></div>
+            <div class="sk-circle9 sk-circle"></div>
+            <div class="sk-circle10 sk-circle"></div>
+            <div class="sk-circle11 sk-circle"></div>
+            <div class="sk-circle12 sk-circle"></div>
+        </div>
+    </div>
+</div>
 <script type="text/javascript" th:inline="javascript">
     function menua(url,obj) {
         $("li.active").removeClass("active");

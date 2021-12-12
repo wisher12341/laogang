@@ -23,6 +23,8 @@ public class HomeDoctorEntity {
     private String  name;
     @Column
     private String organ;
+    @Column(name = "organ_id")
+    private Integer organId;
     @Column
     private LocalDate time;
     @Column(name = "create_time")

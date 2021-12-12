@@ -71,6 +71,9 @@ public class OldmanParam {
     private List<String> jujiaList;
     private List<String> serviceStatusList;
 
+    //是否有家庭医生 1有 2没有
+    private Integer haveDoctor;
+
     public JpaSpecBo convert() {
         JpaSpecBo jpaSpecBo = new JpaSpecBo();
         if (CollectionUtils.isNotEmpty(labelIdList)) {
@@ -147,6 +150,14 @@ public class OldmanParam {
 
         if (this.isZd != null && this.isZd) {
             jpaSpecBo.getEqualMap().put("isZd", "1");
+        }
+        if (haveDoctor!=null){
+            if (haveDoctor==1){
+                jpaSpecBo.getNotEqualMap().put("doctorId","0");
+            }
+            if (haveDoctor==2){
+                jpaSpecBo.getEqualMap().put("doctorId","0");
+            }
         }
         return jpaSpecBo;
     }

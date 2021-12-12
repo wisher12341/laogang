@@ -23,7 +23,7 @@ public class HomeDoctorBo extends BaseBo{
     private String  name;
 
     private String organ;
-
+    private Integer organId;
     private LocalDate time;
 
     @Override

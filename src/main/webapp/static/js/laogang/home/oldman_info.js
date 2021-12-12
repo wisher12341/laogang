@@ -1,6 +1,5 @@
 var id;
 var table;
-var haslink=false;
 var view;
 var map;
 var myIcon = new BMapGL.Icon("/static/img/mapGreen.png", new BMapGL.Size(32, 32));
@@ -94,9 +93,6 @@ $(document).ready(function () {
             dataType: 'json',
             contentType: "application/json;charset=UTF-8",
             success: function (result) {
-                if(result.voList!==null && result.voList.length>0){
-                    haslink = true;
-                }
                 var data = {
                     "iTotalRecords": result.count,
                     "iTotalDisplayRecords": result.count,
@@ -109,6 +105,8 @@ $(document).ready(function () {
             }
         });
     }
+    $("#DataTables_Table_0_info").parent().addClass("span6");
+
 });
 
 function loadOldmanInfo(id) {
@@ -350,11 +348,19 @@ function deleteLinkman() {
     });
 }
 
+function checkSave() {
+    //亲属
+    if(table===null || table.fnGetData().length===0){
+        return false;
+    }
+    return true;
+}
+
 function submit() {
-    // if(!haslink) {
-    //     alert("请填写必填项");
-    //     return;
-    // }
+    if(!checkSave()) {
+        alert("请填写必填项");
+        return;
+    }
 
     var param = {};
     $("[name]").each(function () {
@@ -456,6 +462,7 @@ function saveLinkMan() {
         dataType: 'json',
         contentType: "application/json;charset=UTF-8",
         success: function (result) {
+            id = result.value;
             table.fnFilter();
             $("#myModal").modal('hide');
             $("[linkman]").val("")

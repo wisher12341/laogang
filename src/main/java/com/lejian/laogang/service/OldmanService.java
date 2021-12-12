@@ -16,11 +16,11 @@ import com.lejian.laogang.util.DateUtils;
 import com.lejian.laogang.util.LjReflectionUtils;
 import com.lejian.laogang.util.StringUtils;
 import com.lejian.laogang.util.UserUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
 import javax.transaction.Transactional;
@@ -56,6 +56,8 @@ public class OldmanService {
     private HomeBedRepository homeBedRepository;
     @Autowired
     private HomeDoctorRepository homeDoctorRepository;
+    @Autowired
+    private OrganRepository organRepository;
 
     @Transactional
     public List<CheckResultBo> addOldmanByExcel(Pair<List<String>, List<List<String>>> excelData) {
@@ -338,6 +340,12 @@ public class OldmanService {
                 oldmanVo.setHomeDoctorId(homeDoctorBo.getId());
                 oldmanVo.setHomeDoctorName(homeDoctorBo.getName());
                 oldmanVo.setHomeDoctorOrgan(homeDoctorBo.getOrgan());
+                if (homeDoctorBo.getOrganId()!=null && homeDoctorBo.getOrganId()!=0){
+                    OrganBo organBo = organRepository.getByPkId(homeDoctorBo.getOrganId());
+                    if (organBo!=null){
+                        oldmanVo.setHomeDoctorOrgan(organBo.getName());
+                    }
+                }
                 if (homeDoctorBo.getTime()!=null) {
                     oldmanVo.setHomeDoctorTime(homeDoctorBo.getTime().format(YY_MM_DD));
                 }
@@ -355,19 +363,6 @@ public class OldmanService {
         HomeDoctorEntity homeDoctorEntity = request.convertHomeDoctor();
         List<Integer> allType = oldmanAttrEntityList.stream().map(OldmanAttrEntity::getType).distinct().collect(Collectors.toList());
         oldmanAttrEntityList = oldmanAttrEntityList.stream().filter(item -> item.getValue() != null).collect(Collectors.toList());
-        if (oldmanEntity.getId() != null) {
-            oldmanRepository.dynamicUpdateByPkId(oldmanEntity);
-            oldmanAttrRepository.deleteByType(oldmanEntity.getId(), allType);
-        } else {
-            //添加
-            UserBo userBo = UserUtils.getUser();
-            oldmanEntity.setUserId(userBo.getId());
-            oldmanEntity = oldmanRepository.saveAndReturn(oldmanEntity);
-            for (OldmanAttrEntity item : oldmanAttrEntityList) {
-                item.setOldmanId(oldmanEntity.getId());
-                item.setIdCard(oldmanEntity.getIdCard());
-            }
-        }
 
         if (!CollectionUtils.isEmpty(oldmanAttrEntityList)) {
             oldmanAttrRepository.batchInsertEntity(oldmanAttrEntityList);
@@ -394,12 +389,28 @@ public class OldmanService {
             if (homeDoctorEntity.getId() != null) {
                 homeDoctorRepository.dynamicUpdateByPkId(homeDoctorEntity);
             }else{
-                homeDoctorRepository.save(homeDoctorEntity);
+                HomeDoctorEntity entity = homeDoctorRepository.saveAndReturn(homeDoctorEntity);
+                oldmanEntity.setDoctorId(entity.getId());
             }
         }else if(request.getHomeDoctorId()!=null){
             homeDoctorRepository.deleteById(request.getHomeDoctorId());
+            oldmanEntity.setDoctorId(0);
         }
 
+
+        if (oldmanEntity.getId() != null) {
+            oldmanRepository.dynamicUpdateByPkId(oldmanEntity);
+            oldmanAttrRepository.deleteByType(oldmanEntity.getId(), allType);
+        } else {
+            //添加
+            UserBo userBo = UserUtils.getUser();
+            oldmanEntity.setUserId(userBo.getId());
+            oldmanEntity = oldmanRepository.saveAndReturn(oldmanEntity);
+            for (OldmanAttrEntity item : oldmanAttrEntityList) {
+                item.setOldmanId(oldmanEntity.getId());
+                item.setIdCard(oldmanEntity.getIdCard());
+            }
+        }
     }
 
     @Transactional
@@ -524,6 +535,42 @@ public class OldmanService {
             }
         });
         oldmanAttrRepository.batchInsert(oldmanAttrBoList.stream().filter(item->item.getOldmanId()!=null).collect(Collectors.toList()));
+        return Lists.newArrayList();
+    }
+
+    @Transactional
+    public List<CheckResultBo> addHomeDoctor(Pair<List<String>, List<List<String>>> excelData) {
+        List<List<List<String>>> data = Lists.partition(excelData.getSecond(),300);
+        data.forEach(colDatas->{
+            // key: idCard
+            Map<String,HomeDoctorBo> map = Maps.newHashMap();
+            for(int i=0; i<colDatas.size();i++){
+                List<String> colData = colDatas.get(i);
+                String idCard = colData.get(3);
+                String doctorName = colData.get(6);
+                String organ = colData.get(7);
+                HomeDoctorBo homeDoctorBo = new HomeDoctorBo();
+                homeDoctorBo.setName(doctorName);
+                homeDoctorBo.setOrgan(organ);
+//                if (StringUtils.isNotBlank(organId)) {
+//                    homeDoctorBo.setOrganId(Integer.valueOf(organId));
+//                }
+                map.put(idCard,homeDoctorBo);
+            }
+            Map<String,OldmanBo> oldmanMap = oldmanRepository.getByIdCards(Lists.newArrayList(map.keySet())).stream().collect(Collectors.toMap(OldmanBo::getIdCard,item->item));
+            List<HomeDoctorBo> saveList = Lists.newArrayList();
+            map.forEach((k,v)->{
+                OldmanBo oldmanBo = oldmanMap.get(k);
+                if (oldmanBo!=null){
+                    v.setOldmanId(oldmanBo.getId());
+                    saveList.add(v);
+                }
+            });
+            if (CollectionUtils.isNotEmpty(saveList)){
+                homeDoctorRepository.batchInsert(saveList);
+                //todo 同步 老人表 doctor_id
+            }
+        });
         return Lists.newArrayList();
     }
 }

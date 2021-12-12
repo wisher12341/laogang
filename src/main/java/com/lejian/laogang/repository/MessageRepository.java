@@ -30,7 +30,7 @@ public class MessageRepository extends AbstractSpecificationRepository<MessageBo
     }
 
     @Override
-    protected String getTableName() {
+    public String getTableName() {
         return "message";
     }
 }

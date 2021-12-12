@@ -33,7 +33,7 @@ public class HomeDoctorRepository extends AbstractSpecificationRepository<HomeDo
     }
 
     @Override
-    protected String getTableName() {
+    public String getTableName() {
         return "home_doctor";
     }
 

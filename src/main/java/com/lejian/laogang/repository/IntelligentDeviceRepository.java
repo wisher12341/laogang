@@ -30,7 +30,7 @@ public class IntelligentDeviceRepository extends AbstractSpecificationRepository
     }
 
     @Override
-    protected String getTableName() {
+    public String getTableName() {
         return "intelligent_device";
     }
 

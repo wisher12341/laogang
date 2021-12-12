@@ -83,6 +83,9 @@ function loadOldman() {
             }
         });
     }
+
+    $("#DataTables_Table_0_info").parent().addClass("span6");
+
 }
 
 function finishChange(oldmanId,finish) {

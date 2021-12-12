@@ -30,7 +30,7 @@ public class OrganOldmanRepository extends AbstractSpecificationRepository<Organ
     }
 
     @Override
-    protected String getTableName() {
+    public String getTableName() {
         return "organ_oldman";
     }
 }

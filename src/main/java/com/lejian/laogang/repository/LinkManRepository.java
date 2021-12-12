@@ -30,7 +30,7 @@ public class LinkManRepository extends AbstractSpecificationRepository<LinkManBo
     }
 
     @Override
-    protected String getTableName() {
+    public String getTableName() {
         return "linkman";
     }
 }

@@ -30,7 +30,7 @@ public class PolicyRepository extends AbstractSpecificationRepository<PolicyBo, 
     }
 
     @Override
-    protected String getTableName() {
+    public String getTableName() {
         return "policy";
     }
 }

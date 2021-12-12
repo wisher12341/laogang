@@ -8,7 +8,7 @@ public class TrendUtils {
     public static double Oldman_Inreasement = 0.05;
 
     public static Long getTrendData(Long lastCount){
-        double factor = Increase[LocalDate.now().getMonthValue()];
+        double factor = Increase[LocalDate.now().getMonthValue()-1];
         Integer one = 1;
         double temp =lastCount * (factor * Oldman_Inreasement + Long.parseLong(one.toString()));
         temp = Math.ceil(temp);

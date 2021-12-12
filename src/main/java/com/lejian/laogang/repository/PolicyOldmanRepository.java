@@ -32,7 +32,7 @@ public class PolicyOldmanRepository extends AbstractSpecificationRepository<Poli
     }
 
     @Override
-    protected String getTableName() {
+    public String getTableName() {
         return "policy_oldman";
     }
 

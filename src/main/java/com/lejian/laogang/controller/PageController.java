@@ -120,6 +120,12 @@ public class PageController {
         return mv;
     }
 
+    @GetMapping("/home/account")
+    public ModelAndView home_account(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/home/account");
+        return mv;
+    }
 
     @GetMapping("/home/message")
     public ModelAndView home_message(){

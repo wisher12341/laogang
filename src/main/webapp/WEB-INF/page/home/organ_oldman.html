@@ -50,19 +50,17 @@
 
                                 </div>
                                 <div class="btn-group pull-right">
-                                    <button data-toggle="dropdown" class="btn dropdown-toggle">Tools <span
+                                    <button data-toggle="dropdown" class="btn dropdown-toggle">工具 <span
                                             class="caret"></span></button>
                                     <ul class="dropdown-menu">
-                                        <li><a href="javascript:void(0)">Print</a></li>
-                                        <li><a href="javascript:void(0)">Save as PDF</a></li>
-                                        <li><a href="javascript:void(0)">Export to Excel</a></li>
+                                        <li><a href="javascript:void(0)">导出至Excel</a></li>
                                     </ul>
                                 </div>
                             </div>
                             <table class="table table-striped table-bordered table-hover dataTables-example">
                                 <thead>
                                 <tr>
-                                    <th style="width:15px;"><input type='checkbox' class="checktd"/></th>
+                                    <th style="width:15px;"><input type='checkbox' class="checktd" onclick="tableAllCheck(this)"/></th>
                                     <th>姓名</th>
                                     <th>身份证</th>
                                     <th>床位</th>
@@ -83,7 +81,6 @@
             </div>
         </div>
     </div>
-    <hr>
 </div>
 <!--/.fluid-container-->
 
@@ -91,6 +88,7 @@
 <script type="text/javascript" src="/static/js/laogang/home/organ_oldman.js" charset="UTF-8"></script>
 
 <script src="/static/home/assets/scripts.js"></script>
+<script src="/static/js/laogang/common/laogang_common.js"></script>
 
 </body>
 

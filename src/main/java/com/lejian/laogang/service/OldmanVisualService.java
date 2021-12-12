@@ -291,9 +291,11 @@ public class OldmanVisualService {
                 Map<String,Long> result1 = oldmanRepository.getOldmanBaseGroupByAttr("male", typeList, jpaSpecBo);
                 Map<String, Long> voResult1 = Maps.newHashMap();
                 result1.forEach((k, v) -> {
-                    BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
-                    if (BusinessEnum.DefaultValue.NULL!=businessEnum){
-                        voResult1.put(businessEnum.getDesc(),v);
+                    if (StringUtils.isNotBlank(k) && !"null".equals(k)) {
+                        BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
+                        if (BusinessEnum.DefaultValue.NULL != businessEnum) {
+                            voResult1.put(businessEnum.getDesc(), v);
+                        }
                     }
                 });
                 res.put("60-69", voResult1);
@@ -303,9 +305,11 @@ public class OldmanVisualService {
                 Map<String,Long> result2 = oldmanRepository.getOldmanBaseGroupByAttr("male", typeList, jpaSpecBo);
                 Map<String, Long> voResult2 = Maps.newHashMap();
                 result2.forEach((k, v) -> {
-                    BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
-                    if (BusinessEnum.DefaultValue.NULL!=businessEnum){
-                        voResult2.put(businessEnum.getDesc(),v);
+                    if (StringUtils.isNotBlank(k) && !"null".equals(k)) {
+                        BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
+                        if (BusinessEnum.DefaultValue.NULL != businessEnum) {
+                            voResult2.put(businessEnum.getDesc(), v);
+                        }
                     }
                 });
                 res.put("70-79", voResult2);
@@ -314,9 +318,11 @@ public class OldmanVisualService {
                 Map<String,Long> result3 = oldmanRepository.getOldmanBaseGroupByAttr("male", typeList, jpaSpecBo);
                 Map<String, Long> voResult3 = Maps.newHashMap();
                 result3.forEach((k, v) -> {
-                    BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
-                    if (BusinessEnum.DefaultValue.NULL!=businessEnum){
-                        voResult3.put(businessEnum.getDesc(),v);
+                    if (StringUtils.isNotBlank(k) && !"null".equals(k)) {
+                        BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
+                        if (BusinessEnum.DefaultValue.NULL != businessEnum) {
+                            voResult3.put(businessEnum.getDesc(), v);
+                        }
                     }
                 });
                 res.put("80-89", voResult3);
@@ -326,9 +332,11 @@ public class OldmanVisualService {
                 Map<String,Long> result4 = oldmanRepository.getOldmanBaseGroupByAttr("male", typeList, jpaSpecBo);
                 Map<String, Long> voResult4 = Maps.newHashMap();
                 result4.forEach((k, v) -> {
-                    BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
-                    if (BusinessEnum.DefaultValue.NULL!=businessEnum){
-                        voResult4.put(businessEnum.getDesc(),v);
+                    if (StringUtils.isNotBlank(k) && !"null".equals(k)) {
+                        BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
+                        if (BusinessEnum.DefaultValue.NULL != businessEnum) {
+                            voResult4.put(businessEnum.getDesc(), v);
+                        }
                     }
                 });
                 res.put("90-99", voResult4);
@@ -337,9 +345,11 @@ public class OldmanVisualService {
                 Map<String,Long> result5 = oldmanRepository.getOldmanBaseGroupByAttr("male", typeList, jpaSpecBo);
                 Map<String, Long> voResult5 = Maps.newHashMap();
                 result5.forEach((k, v) -> {
-                    BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
-                    if (BusinessEnum.DefaultValue.NULL!=businessEnum){
-                        voResult5.put(businessEnum.getDesc(),v);
+                    if (StringUtils.isNotBlank(k) && !"null".equals(k)) {
+                        BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), OldmanEnum.Male.class);
+                        if (BusinessEnum.DefaultValue.NULL != businessEnum) {
+                            voResult5.put(businessEnum.getDesc(), v);
+                        }
                     }
                 });
                 res.put("100-", voResult5);
@@ -349,11 +359,11 @@ public class OldmanVisualService {
                 Map<String, Long> a = oldmanRepository.getOldmanBaseGroupByAttr(item, typeList, jpaSpecBo);
                 Map<String, Long> res = Maps.newHashMap();
                 a.forEach((k, v) -> {
-                    BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), item);
-                    if (businessEnum != null) {
-                        res.put(businessEnum.getDesc(), v);
-                    } else {
-                        res.put(k, v);
+                    if (StringUtils.isNotBlank(k) && !"null".equals(k)) {
+                        BusinessEnum businessEnum = BusinessEnum.find(Integer.valueOf(k), item);
+                        if (businessEnum!=null && businessEnum != BusinessEnum.DefaultValue.NULL) {
+                            res.put(businessEnum.getDesc(), v);
+                        }
                     }
                 });
                 map.put(item, res);

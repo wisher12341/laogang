@@ -25,7 +25,7 @@ public class UserRepository extends AbstractSpecificationRepository<UserBo,UserE
     }
 
     @Override
-    protected String getTableName() {
+    public String getTableName() {
         return "user";
     }
 

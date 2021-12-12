@@ -36,7 +36,7 @@ public class OrganRepository extends AbstractSpecificationRepository<OrganBo, Or
     }
 
     @Override
-    protected String getTableName() {
+    public String getTableName() {
         return "organ";
     }
 }

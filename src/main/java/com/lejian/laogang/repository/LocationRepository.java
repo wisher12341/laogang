@@ -38,7 +38,7 @@ public class LocationRepository extends AbstractSpecificationRepository<Location
     }
 
     @Override
-    protected String getTableName() {
+    public String getTableName() {
         return "location";
     }
 

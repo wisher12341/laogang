@@ -104,7 +104,7 @@ public class HistoryJob {
                     historyEntity.setCount(y);
                     historyEntity.setType(102);
                     historyEntity.setValue(x);
-                    historyEntity.setTime(LocalDate.now().format(DateUtils.YY_MM_DD));
+                    historyEntity.setTime(LocalDate.now().format(DateUtils.YY_MM));
                     historyEntityList.add(historyEntity);
                 });
             }
@@ -116,7 +116,7 @@ public class HistoryJob {
                         historyEntity.setCount(y);
                         historyEntity.setType(100);
                         historyEntity.setValue(x);
-                        historyEntity.setTime(LocalDate.now().format(DateUtils.YY_MM_DD));
+                        historyEntity.setTime(LocalDate.now().format(DateUtils.YY_MM));
                         historyEntityList.add(historyEntity);
                     }
                 });
@@ -129,7 +129,7 @@ public class HistoryJob {
                         historyEntity.setCount(y);
                         historyEntity.setType(101);
                         historyEntity.setValue(x);
-                        historyEntity.setTime(LocalDate.now().format(DateUtils.YY_MM_DD));
+                        historyEntity.setTime(LocalDate.now().format(DateUtils.YY_MM));
                         historyEntityList.add(historyEntity);
                     }
                 });
@@ -138,7 +138,7 @@ public class HistoryJob {
             historyEntity1.setAreaVillage(k);
             historyEntity1.setCount(v.getSizSum());
             historyEntity1.setType(103);
-            historyEntity1.setTime(LocalDate.now().format(DateUtils.YY_MM_DD));
+            historyEntity1.setTime(LocalDate.now().format(DateUtils.YY_MM));
             historyEntityList.add(historyEntity1);
 
             if (MapUtils.isNotEmpty(v.getFamily())){
@@ -149,7 +149,7 @@ public class HistoryJob {
                         historyEntity.setCount(y);
                         historyEntity.setType(2);
                         historyEntity.setValue(x);
-                        historyEntity.setTime(LocalDate.now().format(DateUtils.YY_MM_DD));
+                        historyEntity.setTime(LocalDate.now().format(DateUtils.YY_MM));
                         historyEntityList.add(historyEntity);
                     }
                 });
@@ -162,7 +162,7 @@ public class HistoryJob {
                         historyEntity.setCount(y);
                         historyEntity.setType(4);
                         historyEntity.setValue(x);
-                        historyEntity.setTime(LocalDate.now().format(DateUtils.YY_MM_DD));
+                        historyEntity.setTime(LocalDate.now().format(DateUtils.YY_MM));
                         historyEntityList.add(historyEntity);
                     }
                 });
@@ -175,7 +175,7 @@ public class HistoryJob {
                         historyEntity.setCount(y);
                         historyEntity.setType(999);
                         historyEntity.setValue(x);
-                        historyEntity.setTime(LocalDate.now().format(DateUtils.YY_MM_DD));
+                        historyEntity.setTime(LocalDate.now().format(DateUtils.YY_MM));
                         historyEntityList.add(historyEntity);
                     }
                 });

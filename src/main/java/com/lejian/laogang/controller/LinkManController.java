@@ -3,10 +3,7 @@ package com.lejian.laogang.controller;
 
 import com.google.common.collect.Lists;
 import com.lejian.laogang.controller.contract.request.*;
-import com.lejian.laogang.controller.contract.response.GetLinkManResponse;
-import com.lejian.laogang.controller.contract.response.GetOldmanResponse;
-import com.lejian.laogang.controller.contract.response.GetPolicyResponse;
-import com.lejian.laogang.controller.contract.response.SuccessResponse;
+import com.lejian.laogang.controller.contract.response.*;
 import com.lejian.laogang.service.LinkManService;
 import com.lejian.laogang.service.PolicyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +27,9 @@ public class LinkManController {
 
     @ResponseBody
     @RequestMapping("/add")
-    public SuccessResponse add(@RequestBody AddLinkManParam request){
-        SuccessResponse response = new SuccessResponse();
-        service.add(request);
+    public ValueResponse add(@RequestBody AddLinkManParam request){
+        ValueResponse response = new ValueResponse();
+        response.setValue(service.add(request));
         return response;
     }
 

@@ -43,7 +43,7 @@ public class OldmanAttrRepository extends AbstractSpecificationRepository<Oldman
     }
 
     @Override
-    protected String getTableName() {
+    public String getTableName() {
         return "oldman_attr";
     }
 

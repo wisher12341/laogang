@@ -340,5 +340,5 @@ public abstract class AbstractRepository<Bo extends BaseBo,Entity> {
         return Maps.newHashMap();
     }
 
-    protected abstract String getTableName();
+    public abstract String getTableName();
 }

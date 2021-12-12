@@ -77,6 +77,8 @@ public class OldmanController {
                 checkResultBoList=service.addHealth(excelData);
             }else if(file.getOriginalFilename().contains("居家养老")){
                 checkResultBoList=service.addJujia(excelData);
+            }else if(file.getOriginalFilename().contains("家庭医生")){
+                checkResultBoList=service.addHomeDoctor(excelData);
             }else{
                 checkResultBoList=service.addOldmanByExcel(excelData);
             }

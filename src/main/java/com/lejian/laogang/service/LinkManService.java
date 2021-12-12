@@ -7,6 +7,7 @@ import com.lejian.laogang.pojo.vo.OldmanVo;
 import com.lejian.laogang.pojo.vo.PolicyVo;
 import com.lejian.laogang.repository.*;
 import com.lejian.laogang.repository.entity.LinkManEntity;
+import com.lejian.laogang.util.UserUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,8 @@ public class LinkManService {
 
     @Autowired
     private LinkManRepository linkManRepository;
+    @Autowired
+    private OldmanRepository oldmanRepository;
 
 
 
@@ -32,9 +35,24 @@ public class LinkManService {
         return linkManRepository.countWithSpec(linkManParam.convert());
     }
 
-    public void add(AddLinkManParam request) {
+    /**
+     * 返回 老人id 针对新增老人场景
+     * @param request
+     * @return
+     */
+    public Integer add(AddLinkManParam request) {
+        if (request.getOldmanId()==null){
+            OldmanBo oldmanBo = new OldmanBo();
+            UserBo userBo = UserUtils.getUser();
+            oldmanBo.setUserId(userBo.getId());
+            OldmanBo result = oldmanRepository.saveAndReturn(oldmanBo);
+            if (result !=null){
+                request.setOldmanId(result.getId());
+            }
+        }
         LinkManEntity entity = request.convert();
         linkManRepository.save(entity);
+        return request.getOldmanId();
     }
 
     @Transactional

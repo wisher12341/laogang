@@ -52,5 +52,11 @@
 }
 body{
     padding-top: 0;
-    background-color: white
+    background-color: white;
+}
+body > div{
+    margin-top: 15px;
+}
+.dataTables_processing{
+    display: none;
 }

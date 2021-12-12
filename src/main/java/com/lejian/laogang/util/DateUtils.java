@@ -17,6 +17,7 @@ public final class DateUtils {
     public final static DateTimeFormatter YYMMDDHHMMSS_1 = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     public final static DateTimeFormatter YYMMDD = DateTimeFormatter.ofPattern("yyyyMMdd");
     public final static DateTimeFormatter YY_MM_DD = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public final static DateTimeFormatter YY_MM = DateTimeFormatter.ofPattern("yyyy-MM");
 
 
     /**

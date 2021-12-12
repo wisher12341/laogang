@@ -100,7 +100,8 @@ $(document).ready(function(){
                     "search":$("input[name='search']").val(),
                     "areaVillageList":$("select[name='areaVillage']").val(),
                     "jujiaList":$("select[name='jujia']").val(),
-                    "rh":$("select[name='rh']").val()
+                    "rh":$("select[name='rh']").val(),
+                    "haveDoctor":$("select[name='haveDoctor']").val()
                 }
             }),
             type: 'post',
@@ -113,6 +114,7 @@ $(document).ready(function(){
                     "aaData":result.oldmanVoList
                 };
                 fnCallback(data);//把返回的数据传给这个方法就可以了,datatable会自动绑定数据的
+                $("#spinner",window.parent.document).hide();
             },
             error:function(XMLHttpRequest, textStatus, errorThrown) {
                 // alert("status:"+XMLHttpRequest.status+",readyState:"+XMLHttpRequest.readyState+",textStatus:"+textStatus);
@@ -120,8 +122,15 @@ $(document).ready(function(){
         });
     }
 
+    // var select = $("#DataTables_Table_0_length label select");
+    // $("#DataTables_Table_0_length label").text("");
+    // $("#DataTables_Table_0_length label").append(select);
+
+    //bootstrap 版本问题 col- 不生效， 需要手动设置 表格下面的配置的 css
+    $("#DataTables_Table_0_info").parent().addClass("span6");
 
     $('#search').click(function () {
+        $("#spinner",window.parent.document).show();
         table.fnFilter();
         $(".lll").html("标签：");
         $(".sxx select").each(function () {
@@ -184,10 +193,12 @@ function deleteOldman(oid) {
 }
 
 function searchOldman() {
+    $("#spinner",window.parent.document).show();
     table.fnFilter();
 }
 
 function searchReset() {
+    $("#spinner",window.parent.document).show();
     $("#searchDiv input[type!='button']").val("");
     $("#searchDiv select option:first").prop("selected", 'selected');
     table.fnFilter();
@@ -271,6 +282,7 @@ function savePolicy() {
 }
 
 function searchReset1() {
+    $("#spinner",window.parent.document).show();
     $("input[name='search']").val("");
     $("#sear input[name]").val("");
     $("#sear select[name]").each(function () {

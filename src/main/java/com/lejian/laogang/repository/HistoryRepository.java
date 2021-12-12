@@ -37,7 +37,7 @@ public class HistoryRepository extends AbstractSpecificationRepository<HistoryBo
     }
 
     @Override
-    protected String getTableName() {
+    public String getTableName() {
         return "history";
     }
 

@@ -40,7 +40,7 @@ public class OldmanViewRepository extends AbstractSpecificationRepository<Oldman
     }
 
     @Override
-    protected String getTableName() {
+    public String getTableName() {
         return "oldman_view";
     }
 }
