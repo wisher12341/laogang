@@ -263,7 +263,7 @@ function init3() {
             "age": "60-","areaVillage":village
         }, {
             "age": "80-","areaVillage":village
-        }, {"isZd": true,"areaVillage":village}]),
+        }, {"isZd": 1,"areaVillage":village}]),
         contentType: "application/json;charset=UTF-8",
         success: function (result) {
             var map = result.map;
@@ -272,73 +272,75 @@ function init3() {
             if(village===""){
                 oldsum=(map["2"]*100/34556).toFixed(0);
                 $("#sum").html(34556);
-                $("#sixSum").html(11280);
-                $("#eightSum").html(1876);
-                gauge1("老年人占比", (11280*100/34556).toFixed(0), "oldmanSum", null, null,12);
+                // $("#sixSum").html(11280);
+                // $("#eightSum").html(1876);
+                // gauge1("老年人占比", (11280*100/34556).toFixed(0), "oldmanSum", null, null,12);
             }else if (village ==="牛肚村"){
                 oldsum=(map["2"]*100/5029).toFixed(0);
                 $("#sum").html(5029);
-                $("#sixSum").html(1614);
-                $("#eightSum").html(283);
-                gauge1("老年人占比", (1614*100/5029).toFixed(0), "oldmanSum", null, null,12);
+                // $("#sixSum").html(1614);
+                // $("#eightSum").html(283);
+                // gauge1("老年人占比", (1614*100/5029).toFixed(0), "oldmanSum", null, null,12);
             }else if (village ==="中港村"){
                 oldsum= (map["2"]*100/4926).toFixed(0);
                 $("#sum").html(4926);
-                $("#sixSum").html(1621);
-                $("#eightSum").html(240);
-                gauge1("老年人占比", (1621*100/4926).toFixed(0), "oldmanSum", null, null,12);
+                // $("#sixSum").html(1621);
+                // $("#eightSum").html(240);
+                // gauge1("老年人占比", (1621*100/4926).toFixed(0), "oldmanSum", null, null,12);
             }else if (village ==="成日村"){
                 oldsum=(map["2"]*100/4174).toFixed(0);
                 $("#sum").html(4174);
-                $("#sixSum").html(1388);
-                $("#eightSum").html(252);
-                gauge1("老年人占比", (1388*100/4174).toFixed(0), "oldmanSum", null, null,12);
+                // $("#sixSum").html(1388);
+                // $("#eightSum").html(252);
+                // gauge1("老年人占比", (1388*100/4174).toFixed(0), "oldmanSum", null, null,12);
             }else if (village ==="建港村"){
                 oldsum= (map["2"]*100/5219).toFixed(0);
                 $("#sum").html(5219);
-                $("#sixSum").html(1692);
-                $("#eightSum").html(267);
-                gauge1("老年人占比", (1692*100/5219).toFixed(0), "oldmanSum", null, null,12);
+                // $("#sixSum").html(1692);
+                // $("#eightSum").html(267);
+                // gauge1("老年人占比", (1692*100/5219).toFixed(0), "oldmanSum", null, null,12);
             }else if (village ==="东河村"){
                 oldsum=(map["2"]*100/5487).toFixed(0);
                 $("#sum").html(5487);
-                $("#sixSum").html(1596);
-                $("#eightSum").html(280);
-                gauge1("老年人占比", (1596*100/5487).toFixed(0), "oldmanSum", null, null,12);
+                // $("#sixSum").html(1596);
+                // $("#eightSum").html(280);
+                // gauge1("老年人占比", (1596*100/5487).toFixed(0), "oldmanSum", null, null,12);
             }else if (village ==="大河村"){
                 oldsum=(map["2"]*100/3597).toFixed(0);
                 $("#sum").html(3597);
-                $("#sixSum").html(1221);
-                $("#eightSum").html(238);
-                gauge1("老年人占比", (1221*100/3597).toFixed(0), "oldmanSum", null, null,12);
+                // $("#sixSum").html(1221);
+                // $("#eightSum").html(238);
+                // gauge1("老年人占比", (1221*100/3597).toFixed(0), "oldmanSum", null, null,12);
             }else if (village ==="欣河村"){
                 oldsum=(map["2"]*100/3684).toFixed(0);
                 $("#sum").html(3684);
-                $("#sixSum").html(1326);
-                $("#eightSum").html(241);
-                gauge1("老年人占比", (1326*100/3684).toFixed(0), "oldmanSum", null, null,12);
+                // $("#sixSum").html(1326);
+                // $("#eightSum").html(241);
+                // gauge1("老年人占比", (1326*100/3684).toFixed(0), "oldmanSum", null, null,12);
             }else if (village ==="老港居委"){
                 oldsum=(map["2"]*100/256).toFixed(0);
                 $("#sum").html(256);
-                $("#sixSum").html(147);
-                $("#eightSum").html(23);
-                gauge1("老年人占比", (147*100/256).toFixed(0), "oldmanSum", null, null,12);
+                // $("#sixSum").html(147);
+                // $("#eightSum").html(23);
+                // gauge1("老年人占比", (147*100/256).toFixed(0), "oldmanSum", null, null,12);
             }else if (village ==="滨海居委"){
                 oldsum=(map["2"]*100/1826).toFixed(0);
                 $("#sum").html(1826);
-                $("#sixSum").html(637);
-                $("#eightSum").html(46);
-                gauge1("老年人占比", (637*100/1826).toFixed(0), "oldmanSum", null, null,12);
+                // $("#sixSum").html(637);
+                // $("#eightSum").html(46);
+                // gauge1("老年人占比", (637*100/1826).toFixed(0), "oldmanSum", null, null,12);
             }else if (village ==="宏港苑居委"){
                 oldsum= (map["2"]*100/134).toFixed(0);
                 $("#sum").html(134);
-                $("#sixSum").html(38);
-                $("#eightSum").html(6);
-                gauge1("老年人占比", (38*100/134).toFixed(0), "oldmanSum", null, null,12);
+                // $("#sixSum").html(38);
+                // $("#eightSum").html(6);
+                // gauge1("老年人占比", (38*100/134).toFixed(0), "oldmanSum", null, null,12);
             }
             // $("#sum").html(map["1"]);
-            // $("#sixSum").html(map["2"]);
-            // $("#eightSum").html(map["3"]);
+            $("#sixSum").html(map["2"]);
+            $("#eightSum").html(map["3"]);
+            gauge1("老年人占比", oldsum, "oldmanSum", null, null,12);
+
             createHeightAndWidthFromSourceDoc("b", "zdOldman", 0.95, 0.48);
             gauge1("重点老人占比", 10, "zdOldman", null, null,12);
 
@@ -423,6 +425,9 @@ function init31() {
         dataType: 'json',
         data: JSON.stringify({
             "fieldNameList": ["area_village"],
+            "oldmanParam":{
+                "age":"60-"
+            }
         }),
         contentType: "application/json;charset=UTF-8",
         success: function (result) {
@@ -612,7 +617,7 @@ function initOldman() {
 
 function oldmanInfo(id) {
     $("#oldmanInfo").hide();
-    $("#oldmanInfo").attr("src", "/home/oldman/detail?id=" + id + "&view=true");
+    $("#oldmanInfo").attr("src", "/home/oldman/info?id=" + id + "&view=true");
     $("#oldmanInfo").load(function () {                             //  等iframe加载完毕
         $("#oldmanInfo").show();
     });

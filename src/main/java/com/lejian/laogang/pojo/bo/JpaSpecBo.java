@@ -73,12 +73,15 @@ public class JpaSpecBo {
             Iterator iterator = notEqualMap.keySet().iterator();
             String key = (String) iterator.next();
             String convertKey =  StringUtils.camelToUnderline(key);
-            whereCase.append(prex+convertKey).append("!='").append(equalMap.get(key)).append("'");
+            if (whereCase.length()>0){
+                whereCase.append(" and ");
+            }
+            whereCase.append(prex+convertKey).append("!='").append(notEqualMap.get(key)).append("'");
             while (iterator.hasNext()) {
                 whereCase.append(" and ");
                 key = (String) iterator.next();
                 convertKey = StringUtils.camelToUnderline(key);
-                whereCase.append(prex+convertKey).append("!='").append(equalMap.get(key)).append("'");
+                whereCase.append(prex+convertKey).append("!='").append(notEqualMap.get(key)).append("'");
             }
         }
         if (MapUtils.isNotEmpty(lessEMap)) {

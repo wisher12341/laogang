@@ -43,7 +43,7 @@ public class OldmanParam {
     /**
      * 重点老人
      */
-    private Boolean isZd;
+    private String isZd;
     private String rh;
 
     private List<String> labelIdList;
@@ -148,8 +148,8 @@ public class OldmanParam {
             }
         }
 
-        if (this.isZd != null && this.isZd) {
-            jpaSpecBo.getEqualMap().put("isZd", "1");
+        if (StringUtils.isNotBlank(isZd)) {
+            jpaSpecBo.getEqualMap().put("isZd", isZd);
         }
         if (haveDoctor!=null){
             if (haveDoctor==1){

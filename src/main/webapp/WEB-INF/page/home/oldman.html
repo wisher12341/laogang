@@ -142,7 +142,7 @@
                                     <button data-toggle="dropdown" class="btn dropdown-toggle">工具 <span
                                             class="caret"></span></button>
                                     <ul class="dropdown-menu">
-                                        <li><a href="javascript:void(0)">导出至Excel</a></li>
+                                        <li><a href="javascript:void(0)" onclick=onclick=$("#exportForm").submit()>导出至Excel</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -176,133 +176,135 @@
                                         <button class="btn btn-warning" onclick="searchReset1()">重置</button>
                                     </a>
                                 </div>
-                                <div class="control-group sx1 sxx" style="margin-top: 1%;display: none" >
-                                    <div class="controls">
-                                        <input class="input-xlarge" style="width: 7%" name="ageStart" type="number" placeholder ="年龄起"> -
-                                        <input class="input-xlarge" style="width: 7%" name="ageEnd" type="number" placeholder ="年龄止">
-                                        <select  class="chzn-select" name="male" style="width: 8%">
-                                            <option value="">性别</option>
-                                            <option>男</option>
-                                            <option>女</option>
-                                        </select>
-                                        <select  class="chzn-select" name="idZd" style="width: 14%">
-                                            <option value="">重点老人</option>
-                                            <option value="1">是</option>
-                                            <option value="2">否</option>
-                                        </select>
-                                        <select  class="chzn-select" name="huji" style="width: 14%">
-                                            <option value="">户籍</option>
-                                            <option value="1">本镇</option>
-                                            <option value="2">非本镇</option>
-                                        </select>
-                                        <select class="chzn-select" name="rh" style="width: 14%">
-                                            <option value="">人户情况</option>
-                                            <option value="1">人户一致</option>
-                                            <option value="2">人户分离</option>
-                                            <option value="3">查无此人</option>
-                                        </select>
+                                <form action="/oldman/exportExcel" id="exportForm" method="post" enctype="multipart/form-data">
+                                    <div class="control-group sx1 sxx" style="margin-top: 1%;display: none" >
+                                        <div class="controls">
+                                            <input class="input-xlarge" style="width: 7%" name="ageStart" type="number" placeholder ="年龄起"> -
+                                            <input class="input-xlarge" style="width: 7%" name="ageEnd" type="number" placeholder ="年龄止">
+                                            <select  class="chzn-select" name="male" style="width: 8%">
+                                                <option value="">性别</option>
+                                                <option>男</option>
+                                                <option>女</option>
+                                            </select>
+                                            <select  class="chzn-select" name="isZd" style="width: 14%">
+                                                <option value="">重点老人</option>
+                                                <option value="1">是</option>
+                                                <option value="2">否</option>
+                                            </select>
+                                            <select  class="chzn-select" name="huji" style="width: 14%">
+                                                <option value="">户籍</option>
+                                                <option value="1">本镇</option>
+                                                <option value="2">非本镇</option>
+                                            </select>
+                                            <select class="chzn-select" name="rh" style="width: 14%">
+                                                <option value="">人户情况</option>
+                                                <option value="1">人户一致</option>
+                                                <option value="2">人户分离</option>
+                                                <option value="3">查无此人</option>
+                                            </select>
 
-                                        <select name="politics" class="politics selectpicker bla bla bli" multiple data-live-search="true" >
-                                            <option value="1">群众</option>
-                                            <option value="2">中共党员</option>
-                                            <option value="3">民主党派</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="control-group sx2 sxx" style="margin-top: 1%;display: none" >
-                                    <div class="controls">
-                                        <select name="jkzk" class="jkzk selectpicker bla bla bli" multiple data-live-search="true">
-                                            <option value="10">有慢病</option>
-                                            <option value="8">有失能情况</option>
-                                            <option value="9">有药物过敏史</option>
-                                            <option value="11">有肿瘤史</option>
-                                            <option value="12">有病情既往史</option>
-                                        </select>
-                                        <select name="eyesight" class="eyesight selectpicker bla bla bli" multiple data-live-search="true">
-                                            <option value="3">正常</option>
-                                            <option value="1">失明</option>
-                                            <option value="2">弱视</option>
-                                        </select>
-                                        <select name="psychosis" class="psychosis selectpicker bla bla bli" multiple data-live-search="true">
-                                            <option value="1">正常</option>
-                                            <option value="2">痴呆</option>
-                                            <option value="3">智障</option>
-                                        </select>
-                                        <select name="haveDoctor" class="chzn-select">
-                                            <option value="">是否有家庭医生</option>
-                                            <option value="1">有</option>
-                                            <option value="2">没有</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="control-group sx3 sxx" style="margin-top: 1%;display: none" >
-                                    <div class="controls">
-                                        <select name="family" class="family selectpicker bla bla bli" multiple data-live-search="true">
-                                            <option value="1">纯老</option>
-                                            <option value="2">独居</option>
-                                            <option value="3">失独</option>
-                                            <option value="4">孤老</option>
-                                            <option value="5">一老养一老</option>
-                                            <option value="6">三支人员</option>
-                                            <option value="7">三峽移民</option>
-                                            <option value="0">其他</option>
-                                        </select>
-                                        <select name="familyType" class="familyType selectpicker bla bla bli" multiple data-live-search="true">
-                                            <option value="1">独生子女家庭</option>
-                                            <option value="2">退伍军人</option>
-                                            <option value="3">烈士家属</option>
-                                            <option value="4">军属</option>
-                                            <option value="5">侨属</option>
-                                            <option value="6">其他</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="control-group sx4 sxx" style="margin-top: 1%;display: none" >
-                                    <div class="controls">
-                                        <select name="income" class="income selectpicker bla bla bli" multiple data-live-search="true">
-                                            <option value="1">子女赡养</option>
-                                            <option value="2">低收入</option>
-                                            <option value="3">低保</option>
-                                            <option value="4">帮困</option>
-                                            <option value="5">退休金</option>
-                                            <option value="6">其他</option>
-                                            <option value="7">重残无业</option>
-                                            <option value="8">特困供养人员</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="control-group sx5 sxx" style="margin-top: 1%;display: none" >
-                                    <div class="controls">
-                                        <select name="serviceStatus" class="selectpicker bla bla bli serviceStatus"  multiple data-live-search="true" onchange="serviceStatusChange(this)" style="width: 14%">
-                                            <option value="1">机构养老</option>
-                                            <option value="2">社区养老</option>
-                                            <option value="3">居家养老</option>
-                                        </select>
-                                        <div id="jujia" style="display:none;">
-                                            <select name="jujia"  class="jujia selectpicker bla bla bli" multiple data-live-search="true">
-                                                <option value="2">居家养老(民政局)</option>
-                                                <option value="3">居家养老(镇级)</option>
-                                                <option value="1">长护险</option>
+                                            <select name="politics" class="politics selectpicker bla bla bli" multiple data-live-search="true" >
+                                                <option value="1">群众</option>
+                                                <option value="2">中共党员</option>
+                                                <option value="3">民主党派</option>
                                             </select>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="control-group sx6 sxx" style="margin-top: 1%;display: none" >
-                                    <div class="controls">
-                                        <select name="areaVillage" class="areaVillage selectpicker bla bla bli" multiple data-live-search="true">
-                                            <option value="牛肚村">牛肚村</option>
-                                            <option value="中港村">中港村</option>
-                                            <option value="成日村">成日村</option>
-                                            <option value="建港村">建港村</option>
-                                            <option value="东河村">东河村</option>
-                                            <option value="大河村">大河村</option>
-                                            <option value="欣河村">欣河村</option>
-                                            <option value="老港居委">老港居委</option>
-                                            <option value="滨海居委">滨海居委</option>
-                                            <option value="宏港苑居委">宏港苑居委</option>
-                                        </select>
+                                    <div class="control-group sx2 sxx" style="margin-top: 1%;display: none" >
+                                        <div class="controls">
+                                            <select name="jkzk" class="jkzk selectpicker bla bla bli" multiple data-live-search="true">
+                                                <option value="10">有慢病</option>
+                                                <option value="8">有失能情况</option>
+                                                <option value="9">有药物过敏史</option>
+                                                <option value="11">有肿瘤史</option>
+                                                <option value="12">有病情既往史</option>
+                                            </select>
+                                            <select name="eyesight" class="eyesight selectpicker bla bla bli" multiple data-live-search="true">
+                                                <option value="3">正常</option>
+                                                <option value="1">失明</option>
+                                                <option value="2">弱视</option>
+                                            </select>
+                                            <select name="psychosis" class="psychosis selectpicker bla bla bli" multiple data-live-search="true">
+                                                <option value="1">正常</option>
+                                                <option value="2">痴呆</option>
+                                                <option value="3">智障</option>
+                                            </select>
+                                            <select name="haveDoctor" class="chzn-select">
+                                                <option value="">是否有家庭医生</option>
+                                                <option value="1">有</option>
+                                                <option value="2">没有</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="control-group sx3 sxx" style="margin-top: 1%;display: none" >
+                                        <div class="controls">
+                                            <select name="family" class="family selectpicker bla bla bli" multiple data-live-search="true">
+                                                <option value="1">纯老</option>
+                                                <option value="2">独居</option>
+                                                <option value="3">失独</option>
+                                                <option value="4">孤老</option>
+                                                <option value="5">一老养一老</option>
+                                                <option value="6">三支人员</option>
+                                                <option value="7">三峽移民</option>
+                                                <option value="0">其他</option>
+                                            </select>
+                                            <select name="familyType" class="familyType selectpicker bla bla bli" multiple data-live-search="true">
+                                                <option value="1">独生子女家庭</option>
+                                                <option value="2">退伍军人</option>
+                                                <option value="3">烈士家属</option>
+                                                <option value="4">军属</option>
+                                                <option value="5">侨属</option>
+                                                <option value="6">其他</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group sx4 sxx" style="margin-top: 1%;display: none" >
+                                        <div class="controls">
+                                            <select name="income" class="income selectpicker bla bla bli" multiple data-live-search="true">
+                                                <option value="1">子女赡养</option>
+                                                <option value="2">低收入</option>
+                                                <option value="3">低保</option>
+                                                <option value="4">帮困</option>
+                                                <option value="5">退休金</option>
+                                                <option value="6">其他</option>
+                                                <option value="7">重残无业</option>
+                                                <option value="8">特困供养人员</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group sx5 sxx" style="margin-top: 1%;display: none" >
+                                        <div class="controls">
+                                            <select name="serviceStatus" class="selectpicker bla bla bli serviceStatus"  multiple data-live-search="true" onchange="serviceStatusChange(this)" style="width: 14%">
+                                                <option value="1">机构养老</option>
+                                                <option value="2">社区养老</option>
+                                                <option value="3">居家养老</option>
+                                            </select>
+                                            <div id="jujia" style="display:none;">
+                                                <select name="jujia"  class="jujia selectpicker bla bla bli" multiple data-live-search="true">
+                                                    <option value="2">居家养老(民政局)</option>
+                                                    <option value="3">居家养老(镇级)</option>
+                                                    <option value="1">长护险</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group sx6 sxx" style="margin-top: 1%;display: none" >
+                                        <div class="controls">
+                                            <select name="areaVillage" class="areaVillage selectpicker bla bla bli" multiple data-live-search="true">
+                                                <option value="牛肚村">牛肚村</option>
+                                                <option value="中港村">中港村</option>
+                                                <option value="成日村">成日村</option>
+                                                <option value="建港村">建港村</option>
+                                                <option value="东河村">东河村</option>
+                                                <option value="大河村">大河村</option>
+                                                <option value="欣河村">欣河村</option>
+                                                <option value="老港居委">老港居委</option>
+                                                <option value="滨海居委">滨海居委</option>
+                                                <option value="宏港苑居委">宏港苑居委</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                             <table class="table table-striped table-bordered table-hover dataTables-example">
                                 <thead>

@@ -263,7 +263,7 @@ function init3() {
             "age": "60-","areaVillage":village
         }, {
             "age": "80-","areaVillage":village
-        }, {"isZd": true,"areaVillage":village}]),
+        }, {"isZd": 1,"areaVillage":village}]),
         contentType: "application/json;charset=UTF-8",
         success: function (result) {
             var map = result.map;

@@ -114,7 +114,7 @@ public class EditOldmanParam {
                         }
                         list.add(entity);
                     });
-                }else{
+                } else{
                     OldmanAttrEntity entity = new OldmanAttrEntity();
                     entity.setType(Integer.valueOf(type));
                     entity.setOldmanId(id);

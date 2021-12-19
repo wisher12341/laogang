@@ -5,12 +5,14 @@ import com.lejian.laogang.check.bo.CheckResultBo;
 import com.lejian.laogang.controller.contract.request.EditOldmanParam;
 import com.lejian.laogang.controller.contract.request.GetByIdRequest;
 import com.lejian.laogang.controller.contract.request.GetOldmanRequest;
+import com.lejian.laogang.controller.contract.request.OldmanParam;
 import com.lejian.laogang.controller.contract.response.GetOldmanResponse;
 import com.lejian.laogang.controller.contract.response.SuccessResponse;
 import com.lejian.laogang.handler.ExcelHandler;
 import com.lejian.laogang.pojo.bo.UserBo;
 import com.lejian.laogang.pojo.vo.OldmanVo;
 import com.lejian.laogang.service.OldmanService;
+import com.lejian.laogang.util.StringUtils;
 import com.lejian.laogang.util.UserUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,5 +88,45 @@ public class OldmanController {
         ModelAndView mv=new ModelAndView("/oldman");
         mv.addObject("check",checkResultBoList);
         return mv;
+    }
+
+    @RequestMapping(value = "/exportExcel",method = RequestMethod.POST)
+    public void eportExcel(@RequestParam(value = "ageStart",required = false) String ageStart,
+                           @RequestParam(value = "ageEnd",required = false) String ageEnd,
+                           @RequestParam(value = "male",required = false) String male,
+                           @RequestParam(value = "isZd",required = false) String isZd,
+                           @RequestParam(value = "huji",required = false) String huji,
+                           @RequestParam(value = "rh",required = false) String rh,
+                           @RequestParam(value = "politics",required = false) List<String> politics,
+                           @RequestParam(value = "jkzk",required = false) List<String> jkzk,
+                           @RequestParam(value = "eyesight",required = false) List<String> eyesight,
+                           @RequestParam(value = "psychosis",required = false) List<String> psychosis,
+                           @RequestParam(value = "haveDoctor",required = false) Integer haveDoctor,
+                           @RequestParam(value = "family",required = false) List<String> family,
+                           @RequestParam(value = "familyType",required = false) List<String> familyType,
+                           @RequestParam(value = "income",required = false) List<String> income,
+                           @RequestParam(value = "serviceStatus",required = false) List<String> serviceStatus,
+                           @RequestParam(value = "jujia",required = false) List<String> jujia,
+                           @RequestParam(value = "areaVillage",required = false) List<String> areaVillage) {
+        OldmanParam param = new OldmanParam();
+        param.setMale(male);
+        param.setIsZd(isZd);
+        param.setHuiji(huji);
+        param.setRh(rh);
+        param.setPoliticsList(politics);
+        param.setJkzkList(jkzk);
+        param.setEyesightList(eyesight);
+        param.setPsychosisList(psychosis);
+        param.setHaveDoctor(haveDoctor);
+        param.setFamilyList(family);
+        param.setFamilyTypeList(familyType);
+        param.setIncomeList(income);
+        param.setServiceStatusList(serviceStatus);
+        param.setJujiaList(jujia);
+        param.setAreaVillageList(areaVillage);
+        if (StringUtils.isNotBlank(ageStart) || StringUtils.isNotBlank(ageEnd)){
+            param.setAge(ageStart+"-"+ageEnd);
+        }
+        service.exportOldman(param);
     }
 }

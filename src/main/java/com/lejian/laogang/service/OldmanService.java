@@ -7,6 +7,7 @@ import com.lejian.laogang.controller.contract.request.EditOldmanParam;
 import com.lejian.laogang.controller.contract.request.OldmanParam;
 import com.lejian.laogang.controller.contract.request.PageParam;
 import com.lejian.laogang.enums.*;
+import com.lejian.laogang.handler.ExcelHandler;
 import com.lejian.laogang.pojo.bo.*;
 import com.lejian.laogang.pojo.vo.IntelligentDeviceVo;
 import com.lejian.laogang.pojo.vo.OldmanVo;
@@ -58,6 +59,8 @@ public class OldmanService {
     private HomeDoctorRepository homeDoctorRepository;
     @Autowired
     private OrganRepository organRepository;
+    @Autowired
+    private ExcelHandler excelHandler;
 
     @Transactional
     public List<CheckResultBo> addOldmanByExcel(Pair<List<String>, List<List<String>>> excelData) {
@@ -363,6 +366,28 @@ public class OldmanService {
         HomeDoctorEntity homeDoctorEntity = request.convertHomeDoctor();
         List<Integer> allType = oldmanAttrEntityList.stream().map(OldmanAttrEntity::getType).distinct().collect(Collectors.toList());
         oldmanAttrEntityList = oldmanAttrEntityList.stream().filter(item -> item.getValue() != null).collect(Collectors.toList());
+        //养老状态
+        OldmanAttrEntity oldmanAttrEntity = oldmanAttrEntityList.stream().filter(item->item.getType()==14).findFirst().orElse(null);
+        if (oldmanAttrEntity!=null || homeBedEntity!=null || homeDoctorEntity!=null){
+            OldmanAttrEntity entity = new OldmanAttrEntity();
+            entity.setType(13);
+            entity.setOldmanId(oldmanEntity.getId());
+            entity.setIdCard(oldmanEntity.getIdCard());
+            entity.setValue(OldmanAttrEnum.ServiceStatus.JJ.getValue());
+            oldmanAttrEntityList.add(entity);
+        }else{
+            OldmanAttrEntity jj = oldmanAttrEntityList.stream().filter(item->item.getType()==13 && item.getValue().intValue() == OldmanAttrEnum.ServiceStatus.JJ.getValue()).findFirst().orElse(null);
+
+            //没有居家养老项目 && 家庭医生 && 家庭病床
+            if (jj!=null){
+                oldmanAttrEntityList.remove(jj);
+            }
+        }
+
+
+        if (oldmanEntity.getId()!=null && CollectionUtils.isNotEmpty(allType)){
+            oldmanAttrRepository.deleteByType(oldmanEntity.getId(), allType);
+        }
 
         if (!CollectionUtils.isEmpty(oldmanAttrEntityList)) {
             oldmanAttrRepository.batchInsertEntity(oldmanAttrEntityList);
@@ -400,7 +425,6 @@ public class OldmanService {
 
         if (oldmanEntity.getId() != null) {
             oldmanRepository.dynamicUpdateByPkId(oldmanEntity);
-            oldmanAttrRepository.deleteByType(oldmanEntity.getId(), allType);
         } else {
             //添加
             UserBo userBo = UserUtils.getUser();
@@ -572,5 +596,29 @@ public class OldmanService {
             }
         });
         return Lists.newArrayList();
+    }
+
+    public void exportOldman(OldmanParam param) {
+        UserBo userBo = UserUtils.getUser();
+        int page =0;
+        List<OldmanVo> allOldman = Lists.newArrayList();
+
+        List<OldmanVo> oldmanVoList = oldmanRepository.findByPage(page++, 150, param.getSql(userBo)).stream().map(OldmanBo::convertVo).collect(Collectors.toList());;
+        while (CollectionUtils.isNotEmpty(oldmanVoList)){
+            allOldman.addAll(oldmanVoList);
+            oldmanVoList = oldmanRepository.findByPage(page++, 150, param.getSql(userBo)).stream().map(OldmanBo::convertVo).collect(Collectors.toList());;
+        }
+
+        String[] title = {"姓名","性别","身份证号","年龄","村/居委"};
+        String[][] content = new String[allOldman.size()][title.length];
+        for (int i = 0; i < allOldman.size(); i++) {
+            content[i][0] = allOldman.get(i).getName();
+            content[i][1] = allOldman.get(i).getMale();
+            content[i][2] = allOldman.get(i).getIdCard();
+            content[i][3] = allOldman.get(i).getAge()+"";
+            content[i][4] = allOldman.get(i).getAreaVillage();
+        }
+
+        excelHandler.export("oldman",title,content);
     }
 }
