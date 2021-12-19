@@ -240,14 +240,6 @@ function savePolicy() {
     $.ajax({
         url: "/policy/add",//这个就是请求地址对应sAjaxSource
         data :JSON.stringify({
-            "policyParam":{
-                "name":$("input[name='policyName']").val(),
-                "wh":$("input[name='policyWh']").val(),
-                "content":$("input[name='policyContent']").val(),
-                "type":$("select[name='policyType']").val(),
-                "startTime":$("input[name='policyStartTime']").val(),
-                "endTime":$("input[name='policyEndTime']").val()
-            },
             "oldmanParam":{
                 "age":($("input[name='ageStart']").val().length>0 || $("input[name='ageEnd']").val().length>0)?$("input[name='ageStart']").val()+"-"+$("input[name='ageEnd']").val():null,
                 "male":$("select[name='male']").val(),
@@ -268,12 +260,7 @@ function savePolicy() {
         dataType: 'json',
         contentType: "application/json;charset=UTF-8",
         success: function (result) {
-            var data ={
-                "iTotalRecords":result.count,
-                "iTotalDisplayRecords":result.count,
-                "aaData":result.oldmanVoList
-            };
-            fnCallback(data);//把返回的数据传给这个方法就可以了,datatable会自动绑定数据的
+            $("iframe",window.parent.document).attr("src","/home/policy/info");
         },
         error:function(XMLHttpRequest, textStatus, errorThrown) {
             // alert("status:"+XMLHttpRequest.status+",readyState:"+XMLHttpRequest.readyState+",textStatus:"+textStatus);

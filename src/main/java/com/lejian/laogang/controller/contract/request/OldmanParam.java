@@ -21,6 +21,9 @@ import java.util.stream.Collectors;
 
 @Data
 public class OldmanParam {
+    //是否是政策生成的
+    private Boolean isPolicy;
+
     private String search;
     private String name;
     private String idCard;

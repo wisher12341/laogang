@@ -16,4 +16,11 @@ public class UserUtils {
         return userRepository.getByUsername(user.getUsername());
     }
 
+    public static String getUsername(){
+        User user = UserContext.getLoginUser();
+        if (user == null){
+            return "";
+        }
+        return user.getUsername();
+    }
 }

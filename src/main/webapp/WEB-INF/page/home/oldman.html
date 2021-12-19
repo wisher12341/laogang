@@ -9,7 +9,6 @@
     <link href="/static/home/assets/styles.css" rel="stylesheet" media="screen">
 
     <link href="/static/css/common.css" rel="stylesheet">
-    <!--<link href="/static/css/style.min.css?v=4.0.0" rel="stylesheet">-->
     <link href="/static/home/assets/DT_bootstrap.css" rel="stylesheet" media="screen">
     <link href="/static/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
     <link href="/static/css/bootstrap-select.min.css" rel="stylesheet">
@@ -62,81 +61,11 @@
                                     <a href="javascript:void(0)" class="add">
                                         <button class="btn btn-success" onclick="deleteTable('oldman')" style="margin-right: 5px">删除<i class="icon-minus icon-white"></i></button>
                                     </a>
-                                    <a href="#myModal" data-toggle="modal" id="policy" style="display: none" class="btn btn-success">政策下发</a>
+                                    <a href="javascript:void(0)" class="add" id="policy"  style="display: none">
+                                        <button class="btn btn-success" onclick="savePolicy()" style="margin-right: 5px">政策下发</button></a>
 
                                     <input style="position: relative;top: 5px;left: 5px;" name="search" class="input-xlarge focused" placeholder="姓名/身份证" type="text" onchange="searchOldman()">
 
-                                    <div id="myModal" class="modal hide">
-                                        <div class="modal-header">
-                                            <button data-dismiss="modal" class="close" type="button">&times;</button>
-                                            <h3>政策生成</h3>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row-fluid" style="font-size: 18px">
-                                                <!-- block -->
-                                                <div class="block">
-                                                    <div class="navbar navbar-inner block-header">
-                                                        <div class="muted pull-left lll">标签：
-                                                        </div>
-                                                    </div>
-                                                    <div class="block-content collapse in">
-                                                        <div class="span12">
-                                                            <form class="form-horizontal">
-                                                                <fieldset>
-                                                                    <div class="control-group">
-                                                                        <label class="control-label" for="focusedInput1">名称</label>
-                                                                        <div class="controls">
-                                                                            <input name="policyName" class="input-xlarge focused" id="focusedInput1" type="text">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="control-group">
-                                                                        <label class="control-label" for="focusedInput2">内容</label>
-                                                                        <div class="controls">
-                                                                            <input name="policyContent" class="input-xlarge focused" id="focusedInput2" type="text">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="control-group">
-                                                                        <label class="control-label" for="focusedInput3">文号</label>
-                                                                        <div class="controls">
-                                                                            <input name="policyWh" class="input-xlarge focused" id="focusedInput3" type="text">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="control-group">
-                                                                        <label class="control-label" for="select01">类型</label>
-                                                                        <div class="controls">
-                                                                            <select name="policyType" id="select01" class="chzn-select">
-                                                                                <option value="1">小区职位</option>
-                                                                                <option value="2">养老补贴</option>
-                                                                                <option value="3">关爱服务</option>
-                                                                                <option value="4">走访帮困</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="control-group">
-                                                                        <label class="control-label" for="focusedInput4">开始时间</label>
-                                                                        <div class="controls">
-                                                                            <input name="policyStartTime" class="input-xlarge focused" id="focusedInput4" type="date">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="control-group">
-                                                                        <label class="control-label" for="focusedInput5">结束时间</label>
-                                                                        <div class="controls">
-                                                                            <input name="policyEndTime" class="input-xlarge focused" id="focusedInput5" type="date">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="control-group">
-                                                                        <button type="submit" class="btn btn-primary" onclick="savePolicy()" style="margin-left: 35%">生成</button>
-                                                                    </div>
-                                                                </fieldset>
-                                                            </form>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- /block -->
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="btn-group pull-right">
                                     <button data-toggle="dropdown" class="btn dropdown-toggle">工具 <span

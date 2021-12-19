@@ -12,6 +12,8 @@ import com.lejian.laogang.handler.ExcelHandler;
 import com.lejian.laogang.pojo.bo.UserBo;
 import com.lejian.laogang.pojo.vo.OldmanVo;
 import com.lejian.laogang.service.OldmanService;
+import com.lejian.laogang.util.LaogangContext;
+import com.lejian.laogang.util.LaogangUserContext;
 import com.lejian.laogang.util.StringUtils;
 import com.lejian.laogang.util.UserUtils;
 import org.apache.commons.collections4.CollectionUtils;
@@ -40,6 +42,9 @@ public class OldmanController {
     @RequestMapping("/getByPage")
     public GetOldmanResponse getByPage(@RequestBody GetOldmanRequest request){
         GetOldmanResponse response = new GetOldmanResponse();
+        if (request.getOldmanParam()!=null && request.getOldmanParam().getIsPolicy()!=null && request.getOldmanParam().getIsPolicy()){
+            request.setOldmanParam(LaogangUserContext.get("policyOldmanParam"));
+        }
         UserBo userBo = UserUtils.getUser();
         response.setOldmanVoList(service.getByPage(request.getOldmanParam(),request.getPageParam(),userBo));
         response.setCount(service.getOldmanCount(request.getOldmanParam(),userBo));

@@ -35,6 +35,8 @@ function loadOrganInfo() {
                 var value =eval("data."+field);
                 $(this).val(value);
             });
+            $("#spinner",window.parent.document).hide();
+
         }
     });
 }

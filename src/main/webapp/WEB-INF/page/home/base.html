@@ -8,7 +8,7 @@
     <link href="/static/home/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
     <link href="/static/home/assets/styles.css" rel="stylesheet" media="screen">
 
-    <!--<link href="/static/css/style.min.css?v=4.0.0" rel="stylesheet">-->
+    <link href="/static/css/style.min.css?v=4.0.0" rel="stylesheet">
     <link href="/static/home/assets/DT_bootstrap.css" rel="stylesheet" media="screen">
     <!--[if lte IE 8]>
     <script language="javascript" type="text/javascript" src="/static/home/vendors/flot/excanvas.min.js"></script><![endif]-->
@@ -140,7 +140,7 @@
     <hr>
 </div>
 <!--/.fluid-container-->
-<div class="ibox-content" id="spinner" style="display: none">
+<div class="ibox-content" id="spinner" >
     <div class="spiner-example">
         <div class="sk-spinner sk-spinner-fading-circle">
             <div class="sk-circle1 sk-circle"></div>
@@ -163,6 +163,7 @@
         $("li.active").removeClass("active");
         $(obj).addClass("active")
         $("iframe").attr("src",url);
+        $("#spinner",window.parent.document).show();
     }
     $(function () {
         var username = [[${username}]];
@@ -188,7 +189,6 @@
 </script>
 
 <script src="/static/home/assets/scripts.js"></script>
-<script src="/static/home/assets/DT_bootstrap.js"></script>
 
 </body>
 

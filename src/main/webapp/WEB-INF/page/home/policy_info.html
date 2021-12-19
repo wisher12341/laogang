@@ -27,6 +27,22 @@
     <script src="/static/js/plugins/dataTables/dataTables.bootstrap.js"></script>
     <script src="/static/js/bootstrap-select.min.js"></script>
     <link href="/static/css/common.css.min.css" rel="stylesheet">
+    <script src="/static/js/plugins/summernote/summernote.min.js"></script>
+    <script src="/static/js/plugins/summernote/summernote-zh-CN.js"></script>
+    <link href="/static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="/static/css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="/static/css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+    <!--<link href="/static/css/style.min.css?v=4.0.0" rel="stylesheet">-->
+    <style>
+        .note-editor {
+            height: auto!important;
+            min-height: 100px;
+            border: solid 1px #e5e6e7;
+        }
+        #DataTables_Table_0_wrapper .col-sm-6:last-child{
+            float: right;
+        }
+    </style>
 </head>
 
 <body>
@@ -46,9 +62,11 @@
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label" for="focusedInput2">内容</label>
+                                <label class="control-label" >内容</label>
                                 <div class="controls">
-                                    <input class="input-xxlarge focused" name="content" id="focusedInput2" type="text" >
+                                                    <div class="summernote"  id="content" >
+                                                    </div>
+                                    <input name="content" type="hidden" >
                                 </div>
                             </div>
                             <div class="control-group">
@@ -123,18 +141,23 @@
     </div>
 </div>
 
-<script type="text/javascript" src="/static/js/laogang/home/policy_info.js" charset="UTF-8"></script>
-
 <script>
+    var role;
     $(function () {
         var role ="[[${role}]]";
         if (role!=="1"){
             $("#info input").attr("disabled","disabled");
             $("#info button").attr("disabled","disabled");
             $("#info select").attr("disabled","disabled");
+        }else{
+            $(".summernote").summernote({
+                lang:"zh-CN"
+            });
         }
     });
 </script>
+<script type="text/javascript" src="/static/js/laogang/home/policy_info.js" charset="UTF-8"></script>
+
 <script src="/static/home/assets/scripts.js"></script>
 <script src="/static/js/laogang/common/laogang_common.js"></script>
 

@@ -8,6 +8,8 @@ import com.lejian.laogang.controller.contract.response.SuccessResponse;
 import com.lejian.laogang.pojo.bo.UserBo;
 import com.lejian.laogang.pojo.vo.PolicyVo;
 import com.lejian.laogang.service.PolicyService;
+import com.lejian.laogang.util.LaogangContext;
+import com.lejian.laogang.util.LaogangUserContext;
 import com.lejian.laogang.util.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,7 +32,12 @@ public class PolicyController {
     @RequestMapping("/add")
     public SuccessResponse add(@RequestBody PolicyAddRequest request){
         SuccessResponse response = new SuccessResponse();
-        service.add(request.getPolicyParam(),request.getOldmanParam());
+        if (request.getPolicyParam()!=null) {
+            request.setOldmanParam(LaogangUserContext.get("policyOldmanParam"));
+            service.add(request.getPolicyParam(), request.getOldmanParam());
+        }else{
+            LaogangUserContext.set("policyOldmanParam",request.getOldmanParam());
+        }
         return response;
     }
 

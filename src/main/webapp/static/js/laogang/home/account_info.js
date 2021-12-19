@@ -1,5 +1,7 @@
 $(document).ready(function(){
     $("input[name='username']").val($("#username",window.parent.document).text().split("(")[0]);
+    $("#spinner",window.parent.document).hide();
+
 });
 
 function submitUser() {
