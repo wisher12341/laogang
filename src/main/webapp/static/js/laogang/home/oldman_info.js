@@ -7,6 +7,8 @@ $(document).ready(function () {
     view = getQueryVariable("view");
     if(view==="true"){
         $("#view").css("display","none");
+        $("button").hide();
+        $("[class='btn btn-success']").hide();
     }
     id = getQueryVariable("id");
     $('#rootwizard').bootstrapWizard({

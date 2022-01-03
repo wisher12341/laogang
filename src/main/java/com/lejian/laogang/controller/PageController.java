@@ -8,13 +8,18 @@ import com.lejian.laogang.pojo.bo.UserBo;
 import com.lejian.laogang.pojo.vo.MenuVo;
 import com.lejian.laogang.pojo.vo.UserVo;
 import com.lejian.laogang.security.annotation.BackOldmanAuth;
+import com.lejian.laogang.security.annotation.BackOrganAuth;
 import com.lejian.laogang.security.annotation.VisualAuth;
 import com.lejian.laogang.util.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -68,6 +73,7 @@ public class PageController {
         return mv;
     }
 
+
     @BackOldmanAuth
     @GetMapping("/home/oldman")
     public ModelAndView home_query(){
@@ -80,6 +86,7 @@ public class PageController {
         return mv;
     }
 
+    @BackOrganAuth
     @GetMapping("/home/organ/info")
     public ModelAndView home_organ_info(){
         ModelAndView mv = new ModelAndView();
@@ -134,13 +141,8 @@ public class PageController {
         return mv;
     }
 
-    @GetMapping("/home/oldman/detail")
-    public ModelAndView home_query_detail(){
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("/home/oldman_detail");
-        return mv;
-    }
-//    @BackOldmanAuth
+
+    @BackOldmanAuth
     @GetMapping("/home/oldman/info")
     public ModelAndView home_query_info(){
         ModelAndView mv = new ModelAndView();
@@ -157,12 +159,6 @@ public class PageController {
         return mv;
     }
 
-    @GetMapping("/home/organ/detail")
-    public ModelAndView home_organ_detail(){
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("/home/organ_detail");
-        return mv;
-    }
 
     @GetMapping("/home/policy")
     public ModelAndView home_policy(){

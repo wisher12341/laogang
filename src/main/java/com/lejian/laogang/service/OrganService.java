@@ -32,10 +32,14 @@ public class OrganService {
         return organRepository.getByPkId(id).convertVo();
     }
 
-    public OrganVo getByUser() {
-        UserBo userBo = UserUtils.getUser();
+    public OrganVo getByUser(Integer id) {
         JpaSpecBo jpaSpecBo = new JpaSpecBo();
-        jpaSpecBo.getEqualMap().put("userId",userBo.getId());
+        if (id!=null){
+            jpaSpecBo.getEqualMap().put("id", id);
+        }else {
+            UserBo userBo = UserUtils.getUser();
+            jpaSpecBo.getEqualMap().put("userId", userBo.getId());
+        }
         return organRepository.findWithSpec(jpaSpecBo).stream().map(OrganBo::convertVo).findFirst().orElse(null);
     }
 

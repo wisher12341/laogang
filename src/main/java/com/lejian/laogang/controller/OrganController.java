@@ -48,8 +48,8 @@ public class OrganController {
 
     @ResponseBody
     @RequestMapping("/getByUser")
-    public OrganVo getByUser(){
-        return service.getByUser();
+    public OrganVo getByUser(@RequestBody GetByIdRequest request){
+        return service.getByUser(request.getId());
     }
 
     @ResponseBody

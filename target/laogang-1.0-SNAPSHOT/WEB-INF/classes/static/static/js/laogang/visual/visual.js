@@ -827,7 +827,7 @@ function getOrgan(type) {
                     marker.id= data[i].id;
                     marker.addEventListener('click', function () {
                         $("#organInfo").hide();
-                        $("#organInfo").attr("src", "/home/organ/detail?id=" + this.id +"&view=true");
+                        $("#organInfo").attr("src", "/home/organ/info?id=" + this.id+"&view=true");
                         $("#organInfo").load(function () {                             //  等iframe加载完毕
                             $("#organInfo").show();
                         });

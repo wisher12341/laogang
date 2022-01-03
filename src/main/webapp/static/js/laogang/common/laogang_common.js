@@ -1,3 +1,9 @@
+var referrer = document.referrer;
+var url = location.pathname;
+if (url !=="/home/base" && url!=="/" && referrer.indexOf("login")>=0){
+    location.href = "/home/base"
+}
+
 function tableAllCheck(obj) {
     tableAllCheckWithId(obj,"id");
 }
