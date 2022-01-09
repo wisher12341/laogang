@@ -12,6 +12,9 @@ import org.springframework.beans.BeanUtils;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class OrganParam {
@@ -29,6 +32,7 @@ public class OrganParam {
     private String rzyq;
     private Integer bedNumber;
     private Integer id;
+    private List<Integer> serviceType;
 
     public JpaSpecBo convert() {
         JpaSpecBo jpaSpecBo = new JpaSpecBo();
@@ -38,7 +42,9 @@ public class OrganParam {
         if (this.type!=null){
             jpaSpecBo.getEqualMap().put("type", this.type);
         }
-
+        if (CollectionUtils.isNotEmpty(this.serviceType)){
+            jpaSpecBo.getInMap().put("serviceType", new ArrayList<>(serviceType));
+        }
         return jpaSpecBo;
     }
 

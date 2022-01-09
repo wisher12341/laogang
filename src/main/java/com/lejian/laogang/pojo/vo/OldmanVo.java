@@ -68,4 +68,5 @@ public class OldmanVo {
     private String finish;
     //id_finish
     private String idFinish;
+    private String status;
 }

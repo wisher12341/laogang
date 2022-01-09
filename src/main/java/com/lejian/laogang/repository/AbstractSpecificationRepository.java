@@ -199,6 +199,11 @@ public abstract class AbstractSpecificationRepository<Bo extends BaseBo,Entity> 
                 orPredicateList.add(criteriaBuilder.notEqual(root.get(k), v));
             }
         });
+        jpaSpecBo.getOrLikeMap().forEach((k,v)->{
+            if(!ObjectUtils.isEmpty(v)) {
+                orPredicateList.add(criteriaBuilder.like(root.get(k), (String)v));
+            }
+        });
         if(CollectionUtils.isNotEmpty(orPredicateList)){
             Predicate[] predicates=new Predicate[orPredicateList.size()];
             predicateList.add(criteriaBuilder.or(orPredicateList.toArray(predicates)));

@@ -107,6 +107,7 @@ function deleteOldman(oid) {
 }
 
 function searchOldman() {
+    $("#spinner",window.parent.document).show();
     table.fnFilter();
 }
 

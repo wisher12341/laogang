@@ -128,6 +128,9 @@ public class OldmanBo extends BaseBo {
         if (income!=null) vo.setIncome(income.getDesc());
         if (psychosis!=null) vo.setPsychosis(psychosis.getDesc());
         if (rh!=null) vo.setRh(rh.getDesc());
+        if (status!=null) {
+            vo.setStatus(status == 0 ? "正常" : status == 2 ? "死亡" : "");
+        }
         return vo;
     }
 

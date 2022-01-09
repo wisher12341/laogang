@@ -50,4 +50,7 @@ public class OrganEntity {
     private Integer status;
     @Column(name = "user_id")
     private Integer userId;
+
+    @Column(name = "service_type")
+    private Integer serviceType;
 }

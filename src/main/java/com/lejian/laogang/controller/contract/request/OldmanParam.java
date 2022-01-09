@@ -73,6 +73,8 @@ public class OldmanParam {
     private List<String> areaVillageList;
     private List<String> jujiaList;
     private List<String> serviceStatusList;
+    private List<String> shequList;
+    private List<String> jigouList;
 
     //是否有家庭医生 1有 2没有
     private Integer haveDoctor;
@@ -241,7 +243,8 @@ public class OldmanParam {
 
         }
         //养老状态 和 居家养老项目
-        if (CollectionUtils.isNotEmpty(serviceStatusList) || CollectionUtils.isNotEmpty(jujiaList)){
+        if (CollectionUtils.isNotEmpty(serviceStatusList) || CollectionUtils.isNotEmpty(jujiaList)
+                || CollectionUtils.isNotEmpty(shequList) || CollectionUtils.isNotEmpty(jigouList)){
             if (attr.length()>0){
                 attr.append(" and ");
             }
@@ -259,6 +262,24 @@ public class OldmanParam {
                         attr.append(" and ");
                     }
                     attr.append(" oa.type ").append(" like ").append("'%").append("@14_").append(jujiaList.get(i)).append("_%'");
+                }
+            }
+            if (CollectionUtils.isNotEmpty(jigouList)) {
+                attr.append(" and ");
+                for (int i = 0; i < jigouList.size(); i++) {
+                    if (i != 0) {
+                        attr.append(" and ");
+                    }
+                    attr.append(" oa.type ").append(" like ").append("'%").append("@13_1_").append(jigouList.get(i)).append("%'");
+                }
+            }
+            if (CollectionUtils.isNotEmpty(shequList)) {
+                attr.append(" and ");
+                for (int i = 0; i < shequList.size(); i++) {
+                    if (i != 0) {
+                        attr.append(" and ");
+                    }
+                    attr.append(" oa.type ").append(" like ").append("'%").append("@13_2_").append(shequList.get(i)).append("%'");
                 }
             }
             attr.append(")");

@@ -78,6 +78,7 @@ public class EditOldmanParam {
 
     private String address;
     private Integer rh;
+    private Integer status;
 
     public OldmanEntity convertEntity() {
         OldmanEntity oldmanEntity = new OldmanEntity();

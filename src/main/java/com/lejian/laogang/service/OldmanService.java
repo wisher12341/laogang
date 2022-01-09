@@ -11,6 +11,7 @@ import com.lejian.laogang.handler.ExcelHandler;
 import com.lejian.laogang.pojo.bo.*;
 import com.lejian.laogang.pojo.vo.IntelligentDeviceVo;
 import com.lejian.laogang.pojo.vo.OldmanVo;
+import com.lejian.laogang.pojo.vo.OrganOldmanVo;
 import com.lejian.laogang.repository.*;
 import com.lejian.laogang.repository.entity.*;
 import com.lejian.laogang.util.DateUtils;
@@ -465,7 +466,9 @@ public class OldmanService {
             if (map.containsKey(item.getIdCard())) {
                 item.setOldmanId(map.get(item.getIdCard()).getId());
                 //todo优化 改成批量删除
-                oldmanAttrRepository.deleteByType(item.getOldmanId(), Lists.newArrayList(item.getType().getValue()));
+//                oldmanAttrRepository.deleteByType(item.getOldmanId(), Lists.newArrayList(item.getType().getValue()));
+            }else{
+
             }
         });
         oldmanAttrRepository.batchInsert(oldmanAttrBoList.stream().filter(item->item.getOldmanId()!=null).collect(Collectors.toList()));
@@ -508,10 +511,12 @@ public class OldmanService {
         List<OldmanAttrBo> oldmanAttrBoList = Lists.newArrayList();
         for (int i = 0; i < excelData.getSecond().size(); i++) {
             String idCard = excelData.getSecond().get(i).get(2);
+            if (idCard.startsWith("'")){
+                idCard = idCard.substring(1);
+            }
             BusinessEnum type =  OldmanAttrEnum.OldmanAttrType.A14;
             boolean has = false;
-            if(StringUtils.isNotBlank(excelData.getSecond().get(i).get(3))
-                    && !excelData.getSecond().get(i).get(3).equals("0")){
+            if(StringUtils.isNotBlank(excelData.getSecond().get(i).get(3))){
                 OldmanAttrBo oldmanAttrBo = new OldmanAttrBo();
                 oldmanAttrBo.setIdCard(idCard);
                 oldmanAttrBo.setType(type);
@@ -520,8 +525,7 @@ public class OldmanService {
                 oldmanAttrBoList.add(oldmanAttrBo);
                 has = true;
             }
-            if(StringUtils.isNotBlank(excelData.getSecond().get(i).get(4))
-                    && !excelData.getSecond().get(i).get(4).equals("0")){
+            if(StringUtils.isNotBlank(excelData.getSecond().get(i).get(4))){
                 OldmanAttrBo oldmanAttrBo = new OldmanAttrBo();
                 oldmanAttrBo.setIdCard(idCard);
                 oldmanAttrBo.setType(type);
@@ -530,8 +534,7 @@ public class OldmanService {
                 oldmanAttrBoList.add(oldmanAttrBo);
                 has = true;
             }
-            if(StringUtils.isNotBlank(excelData.getSecond().get(i).get(5))
-                    && !excelData.getSecond().get(i).get(5).equals("0")){
+            if(StringUtils.isNotBlank(excelData.getSecond().get(i).get(5))){
                 OldmanAttrBo oldmanAttrBo = new OldmanAttrBo();
                 oldmanAttrBo.setIdCard(idCard);
                 oldmanAttrBo.setType(type);
@@ -548,7 +551,7 @@ public class OldmanService {
                 oldmanAttrBoList.add(map13);
             }
         }
-        List<String> idCardList = oldmanAttrBoList.stream().map(OldmanAttrBo::getIdCard).collect(Collectors.toList());
+        List<String> idCardList = oldmanAttrBoList.stream().map(OldmanAttrBo::getIdCard).distinct().collect(Collectors.toList());
         Map<String,OldmanBo> map = oldmanRepository.getByIdCards(idCardList).stream().collect(Collectors.toMap(OldmanBo::getIdCard,Function.identity()));
 
         oldmanAttrBoList.forEach(item->{
@@ -621,4 +624,5 @@ public class OldmanService {
 
         excelHandler.export("oldman",title,content);
     }
+
 }

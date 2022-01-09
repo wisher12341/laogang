@@ -60,7 +60,6 @@ public class OrganController {
         return response;
     }
 
-
     @ResponseBody
     @RequestMapping("/getOldmanByPage")
     public GetOrganOldmanResponse getOldmanByPage(@RequestBody GetOrganOldmanRequest request){

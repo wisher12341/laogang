@@ -7,16 +7,26 @@ import com.lejian.laogang.controller.contract.request.GetByIdRequest;
 import com.lejian.laogang.controller.contract.request.GetOldmanRequest;
 import com.lejian.laogang.controller.contract.request.OldmanParam;
 import com.lejian.laogang.controller.contract.response.GetOldmanResponse;
+import com.lejian.laogang.controller.contract.response.GetOrganOldmanResponse;
 import com.lejian.laogang.controller.contract.response.SuccessResponse;
 import com.lejian.laogang.handler.ExcelHandler;
+import com.lejian.laogang.pojo.bo.JpaSpecBo;
+import com.lejian.laogang.pojo.bo.OldmanAttrBo;
+import com.lejian.laogang.pojo.bo.OldmanBo;
 import com.lejian.laogang.pojo.bo.UserBo;
 import com.lejian.laogang.pojo.vo.OldmanVo;
+import com.lejian.laogang.repository.OldmanAttrRepository;
+import com.lejian.laogang.repository.OldmanRepository;
+import com.lejian.laogang.repository.OrganOldmanRepository;
+import com.lejian.laogang.repository.entity.OldmanAttrEntity;
+import com.lejian.laogang.repository.entity.OrganOldmanEntity;
 import com.lejian.laogang.service.OldmanService;
 import com.lejian.laogang.util.LaogangContext;
 import com.lejian.laogang.util.LaogangUserContext;
 import com.lejian.laogang.util.StringUtils;
 import com.lejian.laogang.util.UserUtils;
 import org.apache.commons.collections4.CollectionUtils;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Controller;
@@ -25,6 +35,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/oldman")
@@ -66,6 +79,13 @@ public class OldmanController {
         return new SuccessResponse();
     }
 
+
+//    @Autowired
+//    OrganOldmanRepository repository;
+//    @Autowired
+//    OldmanAttrRepository oldmanAttrRepository;
+//    @Autowired
+//    OldmanRepository oldmanRepository;
     /**
      * excel导入
      * 没有的添加  有的更新
@@ -75,6 +95,23 @@ public class OldmanController {
     //todo 限制  数量限制 一次1000？ 参数限制
     @RequestMapping(value = "/importExcel",method = RequestMethod.POST)
     public ModelAndView importExcel(@RequestParam MultipartFile file) {
+//        JpaSpecBo jpaSpecBo = new JpaSpecBo();
+//        jpaSpecBo.getEqualMap().put("organId","4");
+//        List<OrganOldmanEntity> data =repository.findEntityWithSpec(jpaSpecBo);
+//
+//        List<String> idCardList = data.stream().map(item->item.getIdCard().trim()).distinct().collect(Collectors.toList());
+//        Map<String,OldmanBo> map = oldmanRepository.getByIdCards(idCardList).stream().collect(Collectors.toMap(OldmanBo::getIdCard, Function.identity()));
+//        data.stream().filter(item->map.containsKey(item.getIdCard().trim())).forEach(item->{
+//            OldmanAttrEntity entity = new OldmanAttrEntity();
+//            entity.setOldmanId(map.get(item.getIdCard().trim()).getId());
+//            entity.setIdCard(item.getIdCard().trim());
+//            entity.setType(13);
+//            entity.setValue(2);
+//
+//            oldmanAttrRepository.save(entity);
+//        });
+
+
         Pair<List<String>,List<List<String>>> excelData=excelHandler.parse(file,1);
         List<CheckResultBo> checkResultBoList= Lists.newArrayList();
         if(CollectionUtils.isNotEmpty(excelData.getSecond())) {

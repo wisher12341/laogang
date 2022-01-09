@@ -9,6 +9,7 @@ import lombok.Data;
 import org.springframework.beans.BeanUtils;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static com.lejian.laogang.util.DateUtils.YY_MM_DD;
 
@@ -22,6 +23,7 @@ public class OrganOldmanParam {
     private String endTime;
     private String bed;
     private Integer organId;
+    private String search;
 
     public JpaSpecBo convert() {
         JpaSpecBo jpaSpecBo = new JpaSpecBo();
@@ -30,6 +32,10 @@ public class OrganOldmanParam {
 
         if (this.organId!=null){
             jpaSpecBo.getEqualMap().put("organId", this.organId);
+        }
+        if (StringUtils.isNotBlank(search)){
+            jpaSpecBo.getOrLikeMap().put("name","%"+search+"%");
+            jpaSpecBo.getOrLikeMap().put("idCard","%"+search+"%");
         }
 
         return jpaSpecBo;

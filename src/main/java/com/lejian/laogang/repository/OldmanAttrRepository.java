@@ -136,4 +136,18 @@ public class OldmanAttrRepository extends AbstractSpecificationRepository<Oldman
             REPOSITORY_ERROR.doThrowException("deleteByOldmanId",e);
         }
     }
+    @Transactional
+    public void deleteByType(String idCard, List<Integer> typeList) {
+        try {
+            if (CollectionUtils.isEmpty(typeList) || StringUtils.isNotBlank(idCard)){
+                return;
+            }
+            String where = StringUtils.join(typeList.stream().map(item->"'"+item+"'").collect(Collectors.toList()).toArray(),",");
+            String sql = String.format("delete from oldman_attr where id_card ='%s' and type in (%s)",idCard,where);
+            Query query =entityManager.createNativeQuery(sql);
+            query.executeUpdate();
+        }catch (Exception e){
+            REPOSITORY_ERROR.doThrowException("deleteByOldmanId",e);
+        }
+    }
 }

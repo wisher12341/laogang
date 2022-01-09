@@ -32,6 +32,8 @@ $(document).ready(function(){
         noneSelectedText : '养老状态'//默认显示内容
     });
 
+    loadOrgan();
+
     table =$(".dataTables-example").dataTable(
         {
             "sPaginationType": "full_numbers",
@@ -101,7 +103,9 @@ $(document).ready(function(){
                     "areaVillageList":$("select[name='areaVillage']").val(),
                     "jujiaList":$("select[name='jujia']").val(),
                     "rh":$("select[name='rh']").val(),
-                    "haveDoctor":$("select[name='haveDoctor']").val()
+                    "haveDoctor":$("select[name='haveDoctor']").val(),
+                    "shequList":$("select[name='shequ']").val(),
+                    "jigouList":$("select[name='jigou']").val()
                 }
             }),
             type: 'post',
@@ -165,14 +169,63 @@ $(document).ready(function(){
 
 });
 
+function loadOrgan() {
+    $.ajax({
+        url: "/organ/getByPage",
+        data: JSON.stringify({
+            "pageParam": {
+                "pageNo": 0,
+                "pageSize": 100
+            },
+            "organParam": {
+                "serviceType": [1,2]
+            }
+        }),
+        type: 'post',
+        dataType: 'json',
+        contentType: "application/json;charset=UTF-8",
+        success: function (result) {
+            var data = result.organVoList;
+            for (var i = 0; i < data.length; i++) {
+                var option = $("<option value='"+data[i].id+"'>"+data[i].name+"</option>")
+                if (data[i].serviceType===1){
+                    $(".jigou").append(option);
+                }
+                if (data[i].serviceType===2){
+                    $(".shequ").append(option);
+                }
+            }
+            $(".shequ").selectpicker({
+                noneSelectedText : '社区养老机构选择'//默认显示内容
+            });
+            $(".jigou").selectpicker({
+                noneSelectedText : '机构养老选择'//默认显示内容
+            });
+        }
+    });
+}
+
+
 function serviceStatusChange(obj) {
     var val = ""+$(obj).val();
+    $("#shequ").hide();
+    $(".shequ").val("");
+    $(".shequ").selectpicker("refresh");
+    $("#jigou").hide();
+    $(".jigou").val("");
+    $(".jigou").selectpicker("refresh");
+    $("#jujia").hide();
+    $(".jujia").val("");
+    $(".jujia").selectpicker("refresh");
+
     if(val.indexOf("3")>=0){
         $("#jujia").css("display","inline");
-    }else{
-        $("#jujia").hide();
-        $(".jujia").val("");
-        $(".jujia").selectpicker("refresh");
+    }
+    if(val.indexOf("2")>=0){
+        $("#shequ").css("display","inline");
+    }
+    if(val.indexOf("1")>=0){
+        $("#jigou").css("display","inline");
     }
 }
 

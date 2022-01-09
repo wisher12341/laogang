@@ -49,6 +49,12 @@ public class JpaSpecBo {
      */
     Map<String,Object> orNotEquipMap = new HashMap<>();
 
+    /**
+     * or (like)
+     * and ( or or or )
+     */
+    Map<String,Object> orLikeMap = new HashMap<>();
+
     List<String> viewLabelLike = Lists.newArrayList();
 
     public String getSql() {

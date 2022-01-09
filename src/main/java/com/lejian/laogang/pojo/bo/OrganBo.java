@@ -22,6 +22,7 @@ public class OrganBo extends BaseBo {
     private String gps;
     private Integer id;
     private Integer userId;
+    private Integer serviceType;
 
     @Override
     public OrganEntity convert() {
@@ -44,6 +45,7 @@ public class OrganBo extends BaseBo {
             vo.setLng(arr[0]);
             vo.setLat(arr[1]);
         }
+        vo.setServiceTypeStr(this.serviceType==1?"机构养老":(this.serviceType==2)?"社区养老":"");
         return vo;
     }
 }

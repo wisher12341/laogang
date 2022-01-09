@@ -19,4 +19,6 @@ public class OrganVo {
     private String lng;
     private String lat;
     private Integer id;
+    private Integer serviceType;
+    private String serviceTypeStr;
 }

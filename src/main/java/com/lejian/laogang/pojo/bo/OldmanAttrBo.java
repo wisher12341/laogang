@@ -19,6 +19,7 @@ public class OldmanAttrBo extends BaseBo{
     private String idCard;
 
 
+
     @Override
     public OldmanAttrEntity convert() {
         OldmanAttrEntity entity = new OldmanAttrEntity();
