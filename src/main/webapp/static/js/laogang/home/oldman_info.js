@@ -352,9 +352,9 @@ function deleteLinkman() {
 
 function checkSave() {
     //亲属
-    if(table===null || table.fnGetData().length===0){
-        return false;
-    }
+    // if(table===null || table.fnGetData().length===0){
+    //     return false;
+    // }
     return true;
 }
 
