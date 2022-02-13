@@ -80,12 +80,12 @@ public class OldmanController {
     }
 
 
-//    @Autowired
-//    OrganOldmanRepository repository;
-//    @Autowired
-//    OldmanAttrRepository oldmanAttrRepository;
-//    @Autowired
-//    OldmanRepository oldmanRepository;
+    @Autowired
+    OrganOldmanRepository repository;
+    @Autowired
+    OldmanAttrRepository oldmanAttrRepository;
+    @Autowired
+    OldmanRepository oldmanRepository;
     /**
      * excel导入
      * 没有的添加  有的更新
@@ -96,7 +96,7 @@ public class OldmanController {
     @RequestMapping(value = "/importExcel",method = RequestMethod.POST)
     public ModelAndView importExcel(@RequestParam MultipartFile file) {
 //        JpaSpecBo jpaSpecBo = new JpaSpecBo();
-//        jpaSpecBo.getEqualMap().put("organId","4");
+//        jpaSpecBo.getEqualMap().put("organId","1");
 //        List<OrganOldmanEntity> data =repository.findEntityWithSpec(jpaSpecBo);
 //
 //        List<String> idCardList = data.stream().map(item->item.getIdCard().trim()).distinct().collect(Collectors.toList());
@@ -106,7 +106,8 @@ public class OldmanController {
 //            entity.setOldmanId(map.get(item.getIdCard().trim()).getId());
 //            entity.setIdCard(item.getIdCard().trim());
 //            entity.setType(13);
-//            entity.setValue(2);
+//            entity.setValue(1);
+//            entity.setExt("1");
 //
 //            oldmanAttrRepository.save(entity);
 //        });

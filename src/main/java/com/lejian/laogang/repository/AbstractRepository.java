@@ -3,6 +3,7 @@ package com.lejian.laogang.repository;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.lejian.laogang.log.LogRecord;
 import com.lejian.laogang.pojo.bo.BaseBo;
 import com.lejian.laogang.pojo.bo.JpaSpecBo;
 import org.apache.commons.collections4.MapUtils;
@@ -97,6 +98,7 @@ public abstract class AbstractRepository<Bo extends BaseBo,Entity> {
         dynamicUpdate(bo,"id");
     }
 
+    @LogRecord
     @Transactional
     public void dynamicUpdateByPkId(Entity entity){
         dynamicUpdate(entity,"id");
