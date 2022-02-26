@@ -7,6 +7,7 @@ import com.lejian.laogang.enums.label.LabelBaseEnum;
 import com.lejian.laogang.pojo.bo.JpaSpecBo;
 import com.lejian.laogang.pojo.bo.LocationBo;
 import com.lejian.laogang.repository.entity.*;
+import com.lejian.laogang.util.AESUtils;
 import com.lejian.laogang.util.DateUtils;
 import lombok.Data;
 import org.apache.commons.collections4.CollectionUtils;
@@ -86,6 +87,7 @@ public class EditOldmanParam {
         if (StringUtils.isNotBlank(birthday)) {
             oldmanEntity.setBirthday(DateUtils.stringToLocalDate(birthday, YY_MM_DD));
         }
+        AESUtils.encode(oldmanEntity);
         return oldmanEntity;
     }
 
@@ -107,7 +109,7 @@ public class EditOldmanParam {
                         entity.setValue(Integer.valueOf(value));
                         entity.setType(Integer.valueOf(type));
                         entity.setOldmanId(id);
-                        entity.setIdCard(idCard);
+//                        entity.setIdCard(idCard);
                         if(ext.containsKey("type"+type+"_"+value)){
                             entity.setExt(ext.get("type"+type+"_"+value));
                         }else {
@@ -119,7 +121,7 @@ public class EditOldmanParam {
                     OldmanAttrEntity entity = new OldmanAttrEntity();
                     entity.setType(Integer.valueOf(type));
                     entity.setOldmanId(id);
-                    entity.setIdCard(idCard);
+//                    entity.setIdCard(idCard);
                     list.add(entity);
                 }
             });

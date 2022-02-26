@@ -23,7 +23,7 @@ public class OldmanAttrBo extends BaseBo{
     @Override
     public OldmanAttrEntity convert() {
         OldmanAttrEntity entity = new OldmanAttrEntity();
-        entity.setIdCard(this.idCard);
+//        entity.setIdCard(this.idCard);
         entity.setExt(this.ext);
         entity.setOldmanId(this.oldmanId);
         entity.setType(this.type.getValue());

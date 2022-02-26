@@ -2,23 +2,18 @@ package com.lejian.laogang.pojo.bo;
 
 import com.lejian.laogang.enums.BusinessEnum;
 import com.lejian.laogang.enums.OldmanEnum;
-import com.lejian.laogang.handler.BaiduMapHandler;
 import com.lejian.laogang.pojo.vo.OldmanVo;
 import com.lejian.laogang.repository.entity.OldmanEntity;
 import com.lejian.laogang.repository.entity.OldmanViewEntity;
+import com.lejian.laogang.util.AESUtils;
 import com.lejian.laogang.util.DateUtils;
 import lombok.Data;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
-import org.springframework.data.util.Pair;
 
-import javax.persistence.Column;
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 
-import static com.lejian.laogang.util.DateUtils.YYMMDDHHMMSS;
 import static com.lejian.laogang.util.DateUtils.YY_MM_DD;
 
 @Data
@@ -67,7 +62,9 @@ public class OldmanBo extends BaseBo {
     private BusinessEnum rh;
     private Integer userId;
 
+
     public static OldmanBo convert(OldmanEntity entity) {
+        AESUtils.decode(entity);
         OldmanBo oldmanBo = new OldmanBo();
         BeanUtils.copyProperties(entity,oldmanBo);
         oldmanBo.setMale(BusinessEnum.find(entity.getMale(), OldmanEnum.Male.class));
@@ -85,6 +82,7 @@ public class OldmanBo extends BaseBo {
     }
 
     public static OldmanBo convert(OldmanViewEntity entity) {
+        AESUtils.decode(entity);
         OldmanBo oldmanBo = new OldmanBo();
         BeanUtils.copyProperties(entity,oldmanBo);
         oldmanBo.setMale(BusinessEnum.find(entity.getMale(), OldmanEnum.Male.class));
@@ -106,6 +104,7 @@ public class OldmanBo extends BaseBo {
         if (income!=null) entity.setIncome(income.getValue());
         if (psychosis!=null) entity.setPsychosis(psychosis.getValue());
         if (rh!=null) entity.setRh(rh.getValue());
+        AESUtils.encode(entity);
         return entity;
     }
 

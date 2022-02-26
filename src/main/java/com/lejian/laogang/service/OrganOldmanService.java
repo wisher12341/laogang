@@ -79,7 +79,7 @@ public class OrganOldmanService {
             oldmanAttrEntity.setType(13);
             oldmanAttrEntity.setValue(organBo.getServiceType());
             oldmanAttrEntity.setExt(String.valueOf(organBo.getId()));
-            oldmanAttrEntity.setIdCard(oldmanBo.getIdCard());
+//            oldmanAttrEntity.setIdCard(oldmanBo.getIdCard());
             oldmanAttrEntity.setOldmanId(oldmanBo.getId());
             oldmanAttrRepository.deleteByType(idCard,Lists.newArrayList(13));
             oldmanAttrRepository.save(oldmanAttrEntity);

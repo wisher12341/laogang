@@ -6,6 +6,7 @@ import com.lejian.laogang.pojo.vo.OrganOldmanVo;
 import com.lejian.laogang.pojo.vo.OrganVo;
 import com.lejian.laogang.repository.entity.OrganEntity;
 import com.lejian.laogang.repository.entity.OrganOldmanEntity;
+import com.lejian.laogang.util.AESUtils;
 import com.lejian.laogang.util.StringUtils;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
@@ -32,10 +33,12 @@ public class OrganOldmanBo extends BaseBo {
     public OrganOldmanEntity convert() {
         OrganOldmanEntity entity = new OrganOldmanEntity();
         BeanUtils.copyProperties(this,entity);
+        AESUtils.encode(entity);
         return entity;
     }
 
     public static OrganOldmanBo convert(OrganOldmanEntity entity) {
+        AESUtils.decode(entity);
         OrganOldmanBo organBo = new OrganOldmanBo();
         BeanUtils.copyProperties(entity,organBo);
         return organBo;

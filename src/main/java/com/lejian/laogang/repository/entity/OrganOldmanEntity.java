@@ -1,5 +1,6 @@
 package com.lejian.laogang.repository.entity;
 
+import com.lejian.laogang.aop.CodeField;
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -20,6 +21,7 @@ public class OrganOldmanEntity {
     private Integer id;
     @Column
     private String name;
+    @CodeField
     @Column(name = "id_card")
     private String idCard;
     @Column

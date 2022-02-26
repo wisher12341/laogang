@@ -10,6 +10,7 @@ import com.lejian.laogang.pojo.bo.JpaSpecBo;
 import com.lejian.laogang.pojo.bo.OldmanBo;
 import com.lejian.laogang.repository.dao.OldmanDao;
 import com.lejian.laogang.repository.entity.OldmanEntity;
+import com.lejian.laogang.util.AESUtils;
 import com.lejian.laogang.util.DateUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,7 @@ public class OldmanRepository extends AbstractSpecificationRepository<OldmanBo, 
     }
 
     public List<OldmanBo> getByIdCards(List<String> idCardList) {
+        idCardList = idCardList.stream().map(AESUtils::encrypt).collect(Collectors.toList());
         return oldmanDao.findByIdCardIn(idCardList).stream().map(OldmanBo::convert).collect(Collectors.toList());
     }
 
@@ -135,7 +137,7 @@ public class OldmanRepository extends AbstractSpecificationRepository<OldmanBo, 
     }
 
     public List<OldmanBo> findByPage(Integer pageNo, Integer pageSize, Pair<String, String> whereSql) {
-        List<OldmanBo> oldmanBoList = Lists.newArrayList();
+        List<OldmanEntity> oldmanEntityList = Lists.newArrayList();
         try {
             String where = "";
             if (StringUtils.isNotBlank(whereSql.getFirst()) && StringUtils.isNotBlank(whereSql.getSecond())) {
@@ -161,10 +163,10 @@ public class OldmanRepository extends AbstractSpecificationRepository<OldmanBo, 
             Query query = entityManager.createNativeQuery(sql);
             query.getResultList().forEach(object -> {
                 Object[] cells = (Object[]) object;
-                OldmanBo oldmanBo = new OldmanBo();
+                OldmanEntity oldmanBo = new OldmanEntity();
                 oldmanBo.setId((Integer) cells[0]);
                 oldmanBo.setName((String) cells[1]);
-                oldmanBo.setMale(BusinessEnum.find((Integer) cells[2], OldmanEnum.Male.class));
+                oldmanBo.setMale((Integer) cells[2]);
                 if (cells[3]!=null) {
                     oldmanBo.setBirthday(((Date) cells[3]).toLocalDate());
                 }
@@ -172,13 +174,13 @@ public class OldmanRepository extends AbstractSpecificationRepository<OldmanBo, 
                 oldmanBo.setIdCard((String) cells[5]);
                 oldmanBo.setPhone((String) cells[6]);
                 oldmanBo.setUserId((Integer) cells[7]);
-                oldmanBoList.add(oldmanBo);
+                oldmanEntityList.add(oldmanBo);
             });
-            return oldmanBoList;
+            return oldmanEntityList.stream().map(OldmanBo::convert).collect(Collectors.toList());
         } catch (Exception e) {
             REPOSITORY_ERROR.doThrowException("findByPage", e);
         }
-        return oldmanBoList;
+        return Lists.newArrayList();
     }
 
     public Long count(Pair<String, String> whereSql) {

@@ -3,6 +3,7 @@ package com.lejian.laogang.controller.contract.request;
 import com.lejian.laogang.pojo.bo.JpaSpecBo;
 import com.lejian.laogang.repository.entity.OrganEntity;
 import com.lejian.laogang.repository.entity.OrganOldmanEntity;
+import com.lejian.laogang.util.AESUtils;
 import com.lejian.laogang.util.DateUtils;
 import com.lejian.laogang.util.StringUtils;
 import lombok.Data;
@@ -35,7 +36,7 @@ public class OrganOldmanParam {
         }
         if (StringUtils.isNotBlank(search)){
             jpaSpecBo.getOrLikeMap().put("name","%"+search+"%");
-            jpaSpecBo.getOrLikeMap().put("idCard","%"+search+"%");
+//            jpaSpecBo.getOrLikeMap().put("idCard","%"+search+"%");
         }
 
         return jpaSpecBo;
@@ -50,6 +51,7 @@ public class OrganOldmanParam {
         if (StringUtils.isNotBlank(this.endTime)) {
             entity.setEndTime(DateUtils.stringToLocalDate(this.endTime,YY_MM_DD));
         }
+        AESUtils.encode(entity);
         return entity;
     }
 }

@@ -2,6 +2,7 @@ package com.lejian.laogang.repository.entity;
 
 
 import com.google.common.collect.Lists;
+import com.lejian.laogang.aop.CodeField;
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -29,8 +30,10 @@ public class OldmanEntity {
     private Integer huji;
     @Column
     private LocalDate birthday;
+    @CodeField
     @Column
     private String residence;
+    @CodeField
     @Column(name = "huji_address")
     private String hujiAddress;
     @Column
@@ -39,10 +42,12 @@ public class OldmanEntity {
     private Integer houseType;
     @Column
     private Integer floor;
+    @CodeField
     @Column
     private String phone;
     @Column
     private String country;
+    @CodeField
     @Column(name = "id_card")
     private String idCard;
     @Column(name = "area_country")
@@ -57,6 +62,7 @@ public class OldmanEntity {
     private Integer politics;
     @Column
     private Integer education;
+    @CodeField
     @Column(name = "landline_number")
     private String landlineNumber;
     @Column
@@ -83,6 +89,7 @@ public class OldmanEntity {
     private Timestamp createTime;
     @Column(name = "is_zd")
     private Integer isZd;
+    @CodeField
     @Column
     private String address;
     @Column

@@ -3,6 +3,7 @@ package com.lejian.laogang.pojo.bo;
 
 import com.lejian.laogang.pojo.vo.LinkManVo;
 import com.lejian.laogang.repository.entity.LinkManEntity;
+import com.lejian.laogang.util.AESUtils;
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -30,10 +31,12 @@ public class LinkManBo  extends BaseBo {
     public LinkManEntity convert() {
         LinkManEntity entity = new LinkManEntity();
         BeanUtils.copyProperties(this,entity);
+        AESUtils.encode(entity);
         return entity;
     }
 
     public static LinkManBo convert(LinkManEntity entity) {
+        AESUtils.decode(entity);
         LinkManBo bo = new LinkManBo();
         BeanUtils.copyProperties(entity,bo);
         return bo;

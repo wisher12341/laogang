@@ -132,7 +132,7 @@ public class OldmanService {
                             BusinessEnum val = BusinessEnum.find(v, oldmanExcelEnum.getEnumType());
                             if (val != NULL) {
                                 OldmanAttrBo attrBo = new OldmanAttrBo();
-                                attrBo.setIdCard(idCard);
+//                                attrBo.setIdCard(idCard);
                                 attrBo.setType(BusinessEnum.find(Integer.valueOf(oldmanExcelEnum.getFieldName()), OldmanAttrEnum.OldmanAttrType.class));
                                 attrBo.setValue(val);
                                 attrBo.setExt(ext);
@@ -373,7 +373,7 @@ public class OldmanService {
             OldmanAttrEntity entity = new OldmanAttrEntity();
             entity.setType(13);
             entity.setOldmanId(oldmanEntity.getId());
-            entity.setIdCard(oldmanEntity.getIdCard());
+//            entity.setIdCard(oldmanEntity.getIdCard());
             entity.setValue(OldmanAttrEnum.ServiceStatus.JJ.getValue());
             oldmanAttrEntityList.add(entity);
         }else{
@@ -433,7 +433,7 @@ public class OldmanService {
             oldmanEntity = oldmanRepository.saveAndReturn(oldmanEntity);
             for (OldmanAttrEntity item : oldmanAttrEntityList) {
                 item.setOldmanId(oldmanEntity.getId());
-                item.setIdCard(oldmanEntity.getIdCard());
+//                item.setIdCard(oldmanEntity.getIdCard());
             }
         }
     }

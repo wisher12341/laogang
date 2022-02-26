@@ -179,7 +179,8 @@ public class OldmanParam {
             if (StringUtils.isNotBlank(oldman)){
                 oldman+=" and ";
             }
-            oldman+=" (o.name like '%"+search+"%' or o.id_card like '%"+search+"%' )";
+//            oldman+=" (o.name like '%"+search+"%' or o.id_card like '%"+search+"%' )";
+            oldman+=" (o.name like '%"+search+"%')";
         }
         StringBuilder attr = new StringBuilder();
         if (CollectionUtils.isNotEmpty(this.jkzkList)) {

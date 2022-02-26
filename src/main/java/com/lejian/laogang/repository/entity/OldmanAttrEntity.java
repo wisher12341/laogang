@@ -19,8 +19,8 @@ public class OldmanAttrEntity {
     private Integer id;
     @Column(name = "oldman_id")
     private Integer oldmanId;
-    @Column(name = "id_card")
-    private String idCard;
+//    @Column(name = "id_card")
+//    private String idCard;
     @Column
     private Integer type;
     @Column

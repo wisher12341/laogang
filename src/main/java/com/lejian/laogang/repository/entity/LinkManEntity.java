@@ -1,6 +1,7 @@
 package com.lejian.laogang.repository.entity;
 
 
+import com.lejian.laogang.aop.CodeField;
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -20,11 +21,13 @@ public class LinkManEntity {
     private Integer id;
     @Column
     private String name;
+    @CodeField
     @Column
     private String phone;
     @Column
     private String relation;
     @Column(name = "id_card")
+    @CodeField
     private String idCard;
     @Column(name = "oldman_id")
     private Integer oldmanId;

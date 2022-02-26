@@ -2,6 +2,7 @@ package com.lejian.laogang.repository.entity;
 
 
 import com.google.common.collect.Lists;
+import com.lejian.laogang.aop.CodeField;
 import com.lejian.laogang.pojo.bo.BaseBo;
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
@@ -31,6 +32,7 @@ public class OldmanViewEntity{
     private String country;
     @Id
     @Column(name = "id_card")
+    @CodeField
     private String idCard;
     @Column(name = "area_country")
     private String areaCountry;
