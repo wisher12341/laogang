@@ -9,7 +9,7 @@ class AESUtilsTest {
 
     @Test
     void encrypt() {
-        String encode = AESUtils.encrypt("测试");
+        String encode = AESUtils.encrypt("上海市闵行区");
         System.out.println(encode);
         System.out.println(AESUtils.decrypt(encode));
     }

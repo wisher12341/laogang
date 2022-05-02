@@ -3,6 +3,7 @@ package com.lejian.laogang.pojo.bo;
 import com.lejian.laogang.enums.BusinessEnum;
 import com.lejian.laogang.enums.OldmanEnum;
 import com.lejian.laogang.pojo.vo.OldmanVo;
+import com.lejian.laogang.repository.entity.LinkManEntity;
 import com.lejian.laogang.repository.entity.OldmanEntity;
 import com.lejian.laogang.repository.entity.OldmanViewEntity;
 import com.lejian.laogang.util.AESUtils;
@@ -64,28 +65,36 @@ public class OldmanBo extends BaseBo {
 
 
     public static OldmanBo convert(OldmanEntity entity) {
-        AESUtils.decode(entity);
+        //在事务中，查询到值后，set操作修改entity的值，会自动Update更新相关字段，所以我们要新New 一个entity避免这个问题
+        OldmanEntity newEntity = new OldmanEntity();
+        BeanUtils.copyProperties(entity,newEntity);
+        AESUtils.decode(newEntity);
+
         OldmanBo oldmanBo = new OldmanBo();
-        BeanUtils.copyProperties(entity,oldmanBo);
-        oldmanBo.setMale(BusinessEnum.find(entity.getMale(), OldmanEnum.Male.class));
-        if (entity.getHuji()!=null) oldmanBo.setHuji(BusinessEnum.find(entity.getHuji(), OldmanEnum.Huji.class));
-        if (entity.getHomeowner()!=null) oldmanBo.setHomeowner(BusinessEnum.find(entity.getHomeowner(), OldmanEnum.HOMEOWNER.class));
-        if (entity.getHouseType()!=null) oldmanBo.setHouseType(BusinessEnum.find(entity.getHouseType(), OldmanEnum.HOSE_TYPE.class));
-        if (entity.getEyesight()!=null) oldmanBo.setEyesight(BusinessEnum.find(entity.getEyesight(), OldmanEnum.eyesight.class));
-        if (entity.getFloor()!=null) oldmanBo.setFloor(entity.getFloor().toString());
-        if (entity.getPolitics()!=null) oldmanBo.setPolitics(BusinessEnum.find(entity.getPolitics(), OldmanEnum.politics.class));
-        if (entity.getEducation()!=null) oldmanBo.setEducation(BusinessEnum.find(entity.getEducation(), OldmanEnum.education.class));
-        if (entity.getIncome()!=null) oldmanBo.setIncome(BusinessEnum.find(entity.getIncome(), OldmanEnum.income.class));
-        if (entity.getPsychosis()!=null) oldmanBo.setPsychosis(BusinessEnum.find(entity.getPsychosis(), OldmanEnum.psychosis.class));
-        if (entity.getRh()!=null) oldmanBo.setRh(BusinessEnum.find(entity.getRh(),OldmanEnum.RH.class));
+        BeanUtils.copyProperties(newEntity,oldmanBo);
+        oldmanBo.setMale(BusinessEnum.find(newEntity.getMale(), OldmanEnum.Male.class));
+        if (newEntity.getHuji()!=null) oldmanBo.setHuji(BusinessEnum.find(newEntity.getHuji(), OldmanEnum.Huji.class));
+        if (newEntity.getHomeowner()!=null) oldmanBo.setHomeowner(BusinessEnum.find(newEntity.getHomeowner(), OldmanEnum.HOMEOWNER.class));
+        if (newEntity.getHouseType()!=null) oldmanBo.setHouseType(BusinessEnum.find(newEntity.getHouseType(), OldmanEnum.HOSE_TYPE.class));
+        if (newEntity.getEyesight()!=null) oldmanBo.setEyesight(BusinessEnum.find(newEntity.getEyesight(), OldmanEnum.eyesight.class));
+        if (newEntity.getFloor()!=null) oldmanBo.setFloor(newEntity.getFloor().toString());
+        if (newEntity.getPolitics()!=null) oldmanBo.setPolitics(BusinessEnum.find(newEntity.getPolitics(), OldmanEnum.politics.class));
+        if (newEntity.getEducation()!=null) oldmanBo.setEducation(BusinessEnum.find(newEntity.getEducation(), OldmanEnum.education.class));
+        if (newEntity.getIncome()!=null) oldmanBo.setIncome(BusinessEnum.find(newEntity.getIncome(), OldmanEnum.income.class));
+        if (newEntity.getPsychosis()!=null) oldmanBo.setPsychosis(BusinessEnum.find(newEntity.getPsychosis(), OldmanEnum.psychosis.class));
+        if (newEntity.getRh()!=null) oldmanBo.setRh(BusinessEnum.find(newEntity.getRh(),OldmanEnum.RH.class));
         return oldmanBo;
     }
 
     public static OldmanBo convert(OldmanViewEntity entity) {
-        AESUtils.decode(entity);
+        //在事务中，查询到值后，set操作修改entity的值，会自动Update更新相关字段，所以我们要新New 一个entity避免这个问题
+        OldmanViewEntity newEntity = new OldmanViewEntity();
+        BeanUtils.copyProperties(entity,newEntity);
+
+        AESUtils.decode(newEntity);
         OldmanBo oldmanBo = new OldmanBo();
-        BeanUtils.copyProperties(entity,oldmanBo);
-        oldmanBo.setMale(BusinessEnum.find(entity.getMale(), OldmanEnum.Male.class));
+        BeanUtils.copyProperties(newEntity,oldmanBo);
+        oldmanBo.setMale(BusinessEnum.find(newEntity.getMale(), OldmanEnum.Male.class));
         return oldmanBo;
     }
 

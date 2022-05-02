@@ -36,9 +36,12 @@ public class LinkManBo  extends BaseBo {
     }
 
     public static LinkManBo convert(LinkManEntity entity) {
-        AESUtils.decode(entity);
+        LinkManEntity newEntity = new LinkManEntity();
+        BeanUtils.copyProperties(entity,newEntity);
+
+        AESUtils.decode(newEntity);
         LinkManBo bo = new LinkManBo();
-        BeanUtils.copyProperties(entity,bo);
+        BeanUtils.copyProperties(newEntity,bo);
         return bo;
     }
 

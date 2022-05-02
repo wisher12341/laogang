@@ -38,9 +38,13 @@ public class OrganOldmanBo extends BaseBo {
     }
 
     public static OrganOldmanBo convert(OrganOldmanEntity entity) {
-        AESUtils.decode(entity);
+        //在事务中，查询到值后，set操作修改entity的值，会自动Update更新相关字段，所以我们要新New 一个entity避免这个问题
+        OrganOldmanEntity newEntity = new OrganOldmanEntity();
+        BeanUtils.copyProperties(entity,newEntity);
+
+        AESUtils.decode(newEntity);
         OrganOldmanBo organBo = new OrganOldmanBo();
-        BeanUtils.copyProperties(entity,organBo);
+        BeanUtils.copyProperties(newEntity,organBo);
         return organBo;
     }
 
