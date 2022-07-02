@@ -1,6 +1,10 @@
 package com.lejian.laogang.util;
 
+import com.google.gson.Gson;
+
 public final class StringUtils extends org.apache.commons.lang.StringUtils{
+
+    private static Gson gson = new Gson();
 
     /**
      * 驼峰转下划线
@@ -44,5 +48,9 @@ public final class StringUtils extends org.apache.commons.lang.StringUtils{
             sb.append("*");
         }
         return sb.toString();
+    }
+
+    public static <T> T fromGson(String str,Class<T> clazz){
+        return gson.fromJson(str, clazz);
     }
 }

@@ -98,7 +98,6 @@ public abstract class AbstractRepository<Bo extends BaseBo,Entity> {
         dynamicUpdate(bo,"id");
     }
 
-    @LogRecord
     @Transactional
     public void dynamicUpdateByPkId(Entity entity){
         dynamicUpdate(entity,"id");
@@ -153,6 +152,11 @@ public abstract class AbstractRepository<Bo extends BaseBo,Entity> {
         }
     }
 
+    /**
+     * 被内部方法 调用的话，aop不能拦截， 被外部调用 可以
+     * @param entity
+     * @param fieldName
+     */
     @Transactional
     public void dynamicUpdate(Entity entity,String fieldName){
         try {
@@ -207,15 +211,7 @@ public abstract class AbstractRepository<Bo extends BaseBo,Entity> {
         return getDao().count();
     }
 
-    /**
-     * 批量插入
-     * @param boList
-     */
-    public void batchAdd(List<Bo> boList) {
-        List<Entity> entityList = boList.stream().map(item->(Entity)item.convert()).collect(Collectors.toList());
-        //saveAll  也可以用于更新， 但是更新是 null值的属性  相应字段会更新成null
-        getDao().saveAll(entityList);
-    }
+
 
     /**
      * 批量更新
@@ -291,30 +287,6 @@ public abstract class AbstractRepository<Bo extends BaseBo,Entity> {
         getDao().deleteById(id);
     }
 
-    public void delete(Bo bo) {
-        Entity entity=bo.convert();
-        getDao().delete(entity);
-    }
-
-    /**
-     * 逻辑删除
-     * @param id
-     */
-    @Transactional
-    public void logicDeleteById(Integer id,String tableName){
-        try {
-            String sqlFormat = "update %s set is_delete=1 where id='%s'";
-
-            String sql = String.format(sqlFormat,
-                    tableName,id);
-
-            Query query =entityManager.createNativeQuery(sql);
-            query.executeUpdate();
-
-        }catch (Exception e){
-            REPOSITORY_ERROR.doThrowException("logicDeleteById,"+this.getClass().getSimpleName(),e);
-        }
-    }
 
     public Map<String,Long> getGroupCount(String field, JpaSpecBo jpaSpecBo) {
         try {

@@ -189,6 +189,7 @@ public class PageController {
         return mv;
     }
 
+    @BackOrganAuth
     @GetMapping("/oldman")
     public ModelAndView oldman(){
         ModelAndView mv = new ModelAndView();

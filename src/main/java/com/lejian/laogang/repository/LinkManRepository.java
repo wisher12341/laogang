@@ -1,6 +1,7 @@
 package com.lejian.laogang.repository;
 
 
+import com.lejian.laogang.log.LogRecord;
 import com.lejian.laogang.pojo.bo.LinkManBo;
 import com.lejian.laogang.pojo.bo.PolicyBo;
 import com.lejian.laogang.repository.dao.LinkmanDao;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+@LogRecord(table = "linkman")
 @Slf4j
 @Repository
 public class LinkManRepository extends AbstractSpecificationRepository<LinkManBo, LinkManEntity> {

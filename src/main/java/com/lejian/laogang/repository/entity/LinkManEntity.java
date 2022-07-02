@@ -2,6 +2,7 @@ package com.lejian.laogang.repository.entity;
 
 
 import com.lejian.laogang.aop.CodeField;
+import com.lejian.laogang.log.LogRecord;
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;

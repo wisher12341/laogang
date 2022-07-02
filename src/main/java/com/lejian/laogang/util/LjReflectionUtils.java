@@ -26,4 +26,19 @@ public class LjReflectionUtils {
         Field[] fields=clazz.getDeclaredFields();
         return Arrays.stream(fields).collect(Collectors.toMap(Field::getName, Function.identity()));
     }
+
+    public static Object getField(Object entity, String fieldName) {
+        Field[] fields=entity.getClass().getDeclaredFields();
+        for (Field field : fields){
+            if (field.getName().equals(fieldName)){
+                try {
+                    field.setAccessible(true);
+                    return field.get(entity);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
 }

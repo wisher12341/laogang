@@ -1,6 +1,7 @@
 package com.lejian.laogang.repository;
 
 
+import com.lejian.laogang.log.LogRecord;
 import com.lejian.laogang.pojo.bo.HomBedBo;
 import com.lejian.laogang.pojo.bo.IntelligentDeviceBo;
 import com.lejian.laogang.repository.dao.HomeBedDao;
@@ -11,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-
+@LogRecord(table = "intelligent_device")
 @Repository
 public class IntelligentDeviceRepository extends AbstractSpecificationRepository<IntelligentDeviceBo,IntelligentDeviceEntity> {
 

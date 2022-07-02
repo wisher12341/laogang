@@ -14,10 +14,7 @@ import com.lejian.laogang.pojo.vo.OldmanVo;
 import com.lejian.laogang.pojo.vo.OrganOldmanVo;
 import com.lejian.laogang.repository.*;
 import com.lejian.laogang.repository.entity.*;
-import com.lejian.laogang.util.DateUtils;
-import com.lejian.laogang.util.LjReflectionUtils;
-import com.lejian.laogang.util.StringUtils;
-import com.lejian.laogang.util.UserUtils;
+import com.lejian.laogang.util.*;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +28,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -370,12 +368,14 @@ public class OldmanService {
         //养老状态
         OldmanAttrEntity oldmanAttrEntity = oldmanAttrEntityList.stream().filter(item->item.getType()==14).findFirst().orElse(null);
         if (oldmanAttrEntity!=null || homeBedEntity!=null || homeDoctorEntity!=null){
-            OldmanAttrEntity entity = new OldmanAttrEntity();
-            entity.setType(13);
-            entity.setOldmanId(oldmanEntity.getId());
+            if (oldmanAttrEntityList.stream().filter(i->i.getType()==13 && i.getValue()==3).count()==0) {
+                OldmanAttrEntity entity = new OldmanAttrEntity();
+                entity.setType(13);
+                entity.setOldmanId(oldmanEntity.getId());
 //            entity.setIdCard(oldmanEntity.getIdCard());
-            entity.setValue(OldmanAttrEnum.ServiceStatus.JJ.getValue());
-            oldmanAttrEntityList.add(entity);
+                entity.setValue(OldmanAttrEnum.ServiceStatus.JJ.getValue());
+                oldmanAttrEntityList.add(entity);
+            }
         }else{
             OldmanAttrEntity jj = oldmanAttrEntityList.stream().filter(item->item.getType()==13 && item.getValue().intValue() == OldmanAttrEnum.ServiceStatus.JJ.getValue()).findFirst().orElse(null);
 
@@ -385,32 +385,6 @@ public class OldmanService {
             }
         }
 
-
-        if (oldmanEntity.getId()!=null && CollectionUtils.isNotEmpty(allType)){
-            oldmanAttrRepository.deleteByType(oldmanEntity.getId(), allType);
-        }
-
-        if (!CollectionUtils.isEmpty(oldmanAttrEntityList)) {
-            oldmanAttrRepository.batchInsertEntity(oldmanAttrEntityList);
-        }
-        if (intelligentDeviceEntity!=null) {
-            if (intelligentDeviceEntity.getId() != null) {
-                intelligentDeviceRepository.dynamicUpdateByPkId(intelligentDeviceEntity);
-            }else{
-                intelligentDeviceRepository.save(intelligentDeviceEntity);
-            }
-        }else if(request.getIdeviceId()!=null){
-            intelligentDeviceRepository.deleteById(request.getIdeviceId());
-        }
-        if (homeBedEntity!=null) {
-            if (homeBedEntity.getId() != null) {
-                homeBedRepository.dynamicUpdateByPkId(homeBedEntity);
-            }else{
-                homeBedRepository.save(homeBedEntity);
-            }
-        }else if(request.getHomeBedId()!=null){
-            homeBedRepository.deleteById(request.getHomeBedId());
-        }
         if(homeDoctorEntity!=null) {
             if (homeDoctorEntity.getId() != null) {
                 homeDoctorRepository.dynamicUpdateByPkId(homeDoctorEntity);
@@ -423,7 +397,6 @@ public class OldmanService {
             oldmanEntity.setDoctorId(0);
         }
 
-
         if (oldmanEntity.getId() != null) {
             oldmanRepository.dynamicUpdateByPkId(oldmanEntity);
         } else {
@@ -433,8 +406,35 @@ public class OldmanService {
             oldmanEntity = oldmanRepository.saveAndReturn(oldmanEntity);
             for (OldmanAttrEntity item : oldmanAttrEntityList) {
                 item.setOldmanId(oldmanEntity.getId());
-//                item.setIdCard(oldmanEntity.getIdCard());
             }
+        }
+
+        if (oldmanEntity.getId()!=null && CollectionUtils.isNotEmpty(allType)){
+            oldmanAttrRepository.deleteByType(oldmanEntity.getId(), allType);
+        }
+
+        if (!CollectionUtils.isEmpty(oldmanAttrEntityList)) {
+            oldmanAttrRepository.batchInsertEntity(oldmanAttrEntityList);
+        }
+        if (intelligentDeviceEntity!=null) {
+            if (intelligentDeviceEntity.getId() != null) {
+                intelligentDeviceRepository.dynamicUpdateByPkId(intelligentDeviceEntity);
+            }else{
+                intelligentDeviceEntity.setOldmanId(oldmanEntity.getId());
+                intelligentDeviceRepository.save(intelligentDeviceEntity);
+            }
+        }else if(request.getIdeviceId()!=null){
+            intelligentDeviceRepository.deleteById(request.getIdeviceId());
+        }
+        if (homeBedEntity!=null) {
+            if (homeBedEntity.getId() != null) {
+                homeBedRepository.dynamicUpdateByPkId(homeBedEntity);
+            }else{
+                homeBedEntity.setOldmanId(oldmanEntity.getId());
+                homeBedRepository.save(homeBedEntity);
+            }
+        }else if(request.getHomeBedId()!=null){
+            homeBedRepository.deleteById(request.getHomeBedId());
         }
     }
 

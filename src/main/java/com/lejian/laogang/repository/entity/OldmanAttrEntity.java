@@ -1,6 +1,7 @@
 package com.lejian.laogang.repository.entity;
 
 import com.lejian.laogang.enums.BusinessEnum;
+import com.lejian.laogang.log.LogRecord;
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -13,6 +14,7 @@ import java.sql.Timestamp;
 @Data
 @Entity
 @Table(name = "oldman_attr")
+@LogRecord("oldmanId")
 public class OldmanAttrEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

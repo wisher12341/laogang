@@ -6,6 +6,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.lejian.laogang.enums.BusinessEnum;
 import com.lejian.laogang.enums.OldmanEnum;
+import com.lejian.laogang.log.LogRecord;
 import com.lejian.laogang.pojo.bo.JpaSpecBo;
 import com.lejian.laogang.pojo.bo.OldmanBo;
 import com.lejian.laogang.repository.dao.OldmanDao;
@@ -31,7 +32,7 @@ import java.util.stream.Collectors;
 import static com.lejian.laogang.common.ComponentRespCode.REPOSITORY_ERROR;
 import static com.lejian.laogang.util.DateUtils.YYMMDDHHMMSS;
 
-
+@LogRecord(table = "oldman")
 @Repository
 public class OldmanRepository extends AbstractSpecificationRepository<OldmanBo, OldmanEntity> {
 

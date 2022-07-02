@@ -148,4 +148,27 @@ public class OldmanBo extends BaseBo {
         vo.setIdFinish(vo.getId()+"_"+policyOldmanBo.getFinish());
         return vo;
     }
+
+    public OldmanLogBo convertLogBo(){
+        OldmanLogBo vo = new OldmanLogBo();
+        BeanUtils.copyProperties(this,vo);
+        if (this.getBirthday()!=null) {
+            vo.setBirthday(this.getBirthday().format(YY_MM_DD));
+        }
+        if (male!=null) vo.setMale(male.getDesc());
+        if (huji!=null) vo.setHuji(huji.getDesc());
+        if (homeowner!=null) vo.setHomeowner(homeowner.getDesc());
+        if (houseType!=null) vo.setHouseType(houseType.getDesc());
+        if (eyesight!=null) vo.setEyesight(eyesight.getDesc());
+        if (StringUtils.isNotBlank(floor)) vo.setFloor(Integer.valueOf(floor));
+        if (politics!=null) vo.setPolitics(politics.getDesc());
+        if (education!=null) vo.setEducation(education.getDesc());
+        if (income!=null) vo.setIncome(income.getDesc());
+        if (psychosis!=null) vo.setPsychosis(psychosis.getDesc());
+        if (rh!=null) vo.setRh(rh.getDesc());
+        if (status!=null) {
+            vo.setStatus(status == 0 ? "正常" : status == 2 ? "死亡" : "");
+        }
+        return vo;
+    }
 }

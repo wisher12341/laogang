@@ -474,3 +474,68 @@ function saveLinkMan() {
         }
     });
 }
+
+
+function operationLog() {
+    if ($("#logData").text().trim().length > 0){
+        $("#log").show();
+        $("#info").hide();
+        $("#table12").hide();
+    }else{
+        $.ajax({
+            url: "/operation/log/oldman",
+            data: JSON.stringify({
+                "id": id
+            }),
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json;charset=UTF-8",
+            success: function (result) {
+                $("#log").show();
+                $("#info").hide();
+                $("#table12").hide();
+                var $div="";
+                for(var i=0;i<result.logGroupList.length;i++){
+                    var data = result.logGroupList[i];
+                    $div+= '<div class="row" style="margin-left: 0;">' +
+                        '                            <div class="span2">' +
+                        '                                <span>'+data.time+'</span>' +
+                        '                            </div>';
+                    if (i ===0){
+                        $div += '                            <div class="span7" style="margin-left: 0;padding-top: 5px">';
+                    }else{
+                        $div += '                            <div class="span7" style="margin-left: 0;border-top: 1px solid black;padding-top: 5px">';
+                    }
+                    for(var j=0;j<data.logDataList.length;j++){
+                        var item = data.logDataList[j];
+                        $div +=
+                            '                                <div class="row" style="margin-left: 0">' +
+                            '                                    <div class="span2" style="font-weight: bold;">'+item.field+'</div>' +
+                            '                                    <div class="span9" style="margin-left: 0">' +
+                            '                                        ';
+                        if (item.oldData === null){
+                            $div +="<span style='color: grey'>（空）</span>";
+                        }else{
+                            $div +=item.oldData;
+                        }
+                        $div +=' <i class="icon-arrow-right"></i> ';
+                        if (item.newData === null){
+                            $div +="<span style='color: grey'>（空）</span>";
+                        }else{
+                            $div +=item.newData;
+                        }
+                        $div +=
+                            '                                    </div>' +
+                            '                                </div>' ;
+                    }
+                    $div +=
+                        '                            </div>' +
+                        '                        </div>';
+                }
+                $("#logData").append($($div));
+
+            }
+        });
+
+    }
+}

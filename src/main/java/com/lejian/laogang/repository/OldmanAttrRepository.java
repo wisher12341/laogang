@@ -3,6 +3,7 @@ package com.lejian.laogang.repository;
 
 import com.google.common.collect.Maps;
 import com.lejian.laogang.controller.contract.request.OldmanParam;
+import com.lejian.laogang.log.LogRecord;
 import com.lejian.laogang.pojo.bo.JpaSpecBo;
 import com.lejian.laogang.pojo.bo.OldmanAttrBo;
 import com.lejian.laogang.pojo.bo.OldmanBo;
@@ -24,7 +25,7 @@ import java.util.stream.Collectors;
 
 import static com.lejian.laogang.common.ComponentRespCode.REPOSITORY_ERROR;
 
-
+@LogRecord(table = "oldman_arr")
 @Repository
 public class OldmanAttrRepository extends AbstractSpecificationRepository<OldmanAttrBo,OldmanAttrEntity> {
 

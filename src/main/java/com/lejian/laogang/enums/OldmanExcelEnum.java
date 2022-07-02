@@ -239,5 +239,4 @@ public enum OldmanExcelEnum implements ExcelEnum{
     private String columnName;
     private String fieldName;
     private Class<? extends BusinessEnum> enumType;
-
 }

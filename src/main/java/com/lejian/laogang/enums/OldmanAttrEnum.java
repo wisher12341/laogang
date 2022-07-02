@@ -63,6 +63,15 @@ public interface OldmanAttrEnum extends BusinessEnum {
             return null;
         }
 
+        public static OldmanAttrType find(Integer type){
+            for (OldmanAttrType item:OldmanAttrType.values()){
+                if (item.getValue()==type.intValue()){
+                    return item;
+                }
+            }
+            return null;
+        }
+
     }
 
 
@@ -141,7 +150,7 @@ public interface OldmanAttrEnum extends BusinessEnum {
     @AllArgsConstructor
     enum CommunityWork implements OldmanAttrEnum {
         B(2, "楼组长"),
-        C(3, "业务会成员"),
+        C(3, "业委会成员"),
         D(4,"村/居委"),
         E(5,"队/组"),
         F(6,"睦邻点负责人"),

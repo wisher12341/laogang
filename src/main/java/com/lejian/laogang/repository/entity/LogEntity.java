@@ -4,28 +4,30 @@ import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
-//@DynamicInsert
-//@DynamicUpdate
-//@Data
-//@Entity
-//@Table(name = "log")
+@DynamicInsert
+@DynamicUpdate
+@Data
+@Entity
+@Table(name = "log")
 public class LogEntity {
-    private Long id;
-    //操作类型 1插入 2编辑 3删除
-    private Integer type;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private Integer operation;
+    @Column(name = "table_name")
     private String table;
-    private Integer pk;
+    private String pk;
     @Column(name = "user_id")
     private Integer userId;
-    //批次
-    private String batchId;
+    @Column(name = "trace_id")
+    private String traceId;
     private String data;
     @Column(name = "create_time")
     private Timestamp createTime;
+    @Column(name = "pk_type")
+    private String pkType;
 
 }
